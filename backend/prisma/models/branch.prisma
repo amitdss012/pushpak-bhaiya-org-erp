@@ -1,0 +1,88 @@
+// ============================================
+// Branch — belongs to Organization
+// ============================================
+
+model Branch {
+  id                  String        @id @default(cuid())
+
+  // Foreign key to Organization
+  organizationId      String
+  organization        Organization  @relation(fields: [organizationId], references: [id])
+
+  // Branch Information
+  name                String
+  code                String        @unique
+  branchType          BranchType    @default(MAIN)
+  instituteType       InstituteType @default(COMPUTER)
+  academicYear        String
+  establishedYear     Int?
+  website             String?
+  description         String?       @db.Text
+
+  // Address Details
+  streetAddress       String        @db.Text
+  state               String
+  district            String
+  block               String?
+  city                String
+  pincode             String
+  latitude            Float?
+  longitude           Float?
+  country             String        @default("India")
+
+  // Contact Information
+  phone               String
+  altPhone            String?
+  whatsappNumber      String?
+  email               String        @unique
+
+  // Director Information
+  directorName        String
+  directorGender      Gender
+  directorDOB         DateTime
+  directorBloodGroup  String?
+  directorPhoto       String?
+  directorSignature   String?
+  directorAadharFront String?
+  directorAadharBack  String?
+
+  // Space & Facilities
+  numComputers        Int           @default(0)
+  numFaculty          Int           @default(0)
+  numRooms            Int           @default(0)
+
+  // Registration & Validity
+  registrationDate    DateTime
+  validDate           DateTime?
+  expiryDate          DateTime
+  renewalDate         DateTime?
+  referralCode        String?
+
+  // Branch Documents
+  branchMohar         String?
+  branchPhoto         String?
+  labPhoto            String?
+  statusDocument      String?
+
+  // Branch Settings
+  branchLogo          String?
+  isActive            Boolean       @default(true)
+  onlineEnrollment    Boolean       @default(true)
+  smsNotifications    Boolean       @default(false)
+  emailNotifications  Boolean       @default(true)
+
+  // Soft delete & timestamps
+  deletedAt           DateTime?
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+
+  // Relations
+  students            Student[]
+  users               User[]
+  roles               Role[]
+
+  @@index([organizationId])
+  @@index([code])
+  @@index([email])
+  @@map("branches")
+}

@@ -1,0 +1,64 @@
+// ============================================
+// Student — belongs to Branch, linked to User
+// ============================================
+
+model Student {
+  id                  String    @id @default(cuid())
+
+  // Foreign key to Branch
+  branchId            String
+  branch              Branch    @relation(fields: [branchId], references: [id])
+
+  // Link to User for authentication
+  userId              String    @unique
+  user                User      @relation(fields: [userId], references: [id])
+
+  // Personal Info
+  enrollmentNo        String    @unique
+  firstName           String
+  lastName            String
+  fatherName          String
+  motherName          String
+  gender              Gender
+  dateOfBirth         DateTime
+  bloodGroup          String?
+  category            String?
+  religion            String?
+  nationality         String    @default("Indian")
+
+  // Contact
+  phone               String
+  altPhone            String?
+  whatsappNumber      String?
+  email               String?
+
+  // Address
+  streetAddress       String    @db.Text
+  city                String
+  state               String
+  district            String
+  pincode             String
+  country             String    @default("India")
+
+  // Academic
+  admissionDate       DateTime  @default(now())
+
+  // Documents (URLs/paths)
+  photo               String?
+  aadharFront         String?
+  aadharBack          String?
+  aadharNumber        String?
+  tenthMarksheet      String?
+  twelfthMarksheet    String?
+  admissionForm       String?
+
+  // Status
+  isActive            Boolean   @default(true)
+  deletedAt           DateTime?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  @@index([branchId])
+  @@index([enrollmentNo])
+  @@map("students")
+}

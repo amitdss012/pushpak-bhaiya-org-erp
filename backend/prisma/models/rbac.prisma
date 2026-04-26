@@ -1,0 +1,72 @@
+// ============================================
+// RBAC — Role-Based Access Control
+// ============================================
+
+model Role {
+  id              String        @id @default(cuid())
+
+  name            String
+  description     String?
+  scope           RoleScope
+  isSystem        Boolean       @default(false)
+
+  // Scoping — role belongs to one org OR one branch
+  organizationId  String?
+  organization    Organization? @relation(fields: [organizationId], references: [id])
+
+  branchId        String?
+  branch          Branch?       @relation(fields: [branchId], references: [id])
+
+  // Relations
+  permissions     RolePermission[]
+  userRoles       UserRole[]
+
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@unique([name, organizationId, branchId])
+  @@index([scope])
+  @@map("roles")
+}
+
+model Permission {
+  id              String    @id @default(cuid())
+
+  module          String                    // e.g., "student", "branch", "fee", "exam"
+  action          String                    // e.g., "create", "read", "update", "delete"
+  description     String?
+
+  // Relations
+  rolePermissions RolePermission[]
+
+  @@unique([module, action])
+  @@map("permissions")
+}
+
+model RolePermission {
+  id              String      @id @default(cuid())
+
+  roleId          String
+  role            Role        @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  permissionId    String
+  permission      Permission  @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@unique([roleId, permissionId])
+  @@map("role_permissions")
+}
+
+model UserRole {
+  id              String    @id @default(cuid())
+
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  roleId          String
+  role            Role      @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  assignedAt      DateTime  @default(now())
+
+  @@unique([userId, roleId])
+  @@map("user_roles")
+}

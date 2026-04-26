@@ -1,0 +1,43 @@
+// ============================================
+// User — Unified authentication for all users
+// ============================================
+
+model User {
+  id              String    @id @default(cuid())
+
+  // Type & Identity
+  userType        UserType
+  name            String
+  email           String    @unique
+  phone           String?   @unique
+  username        String    @unique
+  password        String                     // Always store hashed
+  avatar          String?
+
+  // Scoping — which org/branch this user belongs to
+  organizationId  String?
+  organization    Organization? @relation(fields: [organizationId], references: [id])
+
+  branchId        String?
+  branch          Branch?   @relation(fields: [branchId], references: [id])
+
+  // Student profile link (only for UserType.STUDENT)
+  student         Student?
+
+  // RBAC
+  userRoles       UserRole[]
+
+  // Status & Audit
+  isActive        Boolean   @default(true)
+  lastLoginAt     DateTime?
+  deletedAt       DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([organizationId])
+  @@index([branchId])
+  @@index([userType])
+  @@map("users")
+}
+
+// write a message to this hr that shaw a job opening of react native developer and wanted to interview for that position write short and simple and impressive message that it should look that it's a Ai generate message the message should be shot and simple but professional 
