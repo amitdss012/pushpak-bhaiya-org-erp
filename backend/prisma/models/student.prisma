@@ -9,8 +9,8 @@ model Student {
   branchId            String
   branch              Branch    @relation(fields: [branchId], references: [id])
 
-  // Link to User for authentication
-  userId              String    @unique
+  // user id
+  userId              String @unique
   user                User      @relation(fields: [userId], references: [id])
 
   // Personal Info

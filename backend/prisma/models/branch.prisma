@@ -3,38 +3,42 @@
 // ============================================
 
 model Branch {
-  id                  String        @id @default(cuid())
+  id String @id @default(cuid())
 
   // Foreign key to Organization
-  organizationId      String
-  organization        Organization  @relation(fields: [organizationId], references: [id])
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  // user id
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
 
   // Branch Information
-  name                String
-  code                String        @unique
-  branchType          BranchType    @default(MAIN)
-  instituteType       InstituteType @default(COMPUTER)
-  academicYear        String
-  establishedYear     Int?
-  website             String?
-  description         String?       @db.Text
+  name            String
+  code            String        @unique
+  branchType      BranchType    @default(MAIN)
+  instituteType   InstituteType @default(COMPUTER)
+  academicYear    String
+  establishedYear Int?
+  website         String?
+  description     String?       @db.Text
 
   // Address Details
-  streetAddress       String        @db.Text
-  state               String
-  district            String
-  block               String?
-  city                String
-  pincode             String
-  latitude            Float?
-  longitude           Float?
-  country             String        @default("India")
+  streetAddress String  @db.Text
+  state         String
+  district      String
+  block         String?
+  city          String
+  pincode       String
+  latitude      Float?
+  longitude     Float?
+  country       String  @default("India")
 
   // Contact Information
-  phone               String
-  altPhone            String?
-  whatsappNumber      String?
-  email               String        @unique
+  phone          String
+  altPhone       String?
+  whatsappNumber String?
+  email          String  @unique
 
   // Director Information
   directorName        String
@@ -47,42 +51,370 @@ model Branch {
   directorAadharBack  String?
 
   // Space & Facilities
-  numComputers        Int           @default(0)
-  numFaculty          Int           @default(0)
-  numRooms            Int           @default(0)
+  numComputers Int @default(0)
+  numFaculty   Int @default(0)
+  numRooms     Int @default(0)
 
   // Registration & Validity
-  registrationDate    DateTime
-  validDate           DateTime?
-  expiryDate          DateTime
-  renewalDate         DateTime?
-  referralCode        String?
+  registrationDate DateTime
+  validDate        DateTime?
+  expiryDate       DateTime
+  renewalDate      DateTime?
+  referralCode     String?
 
   // Branch Documents
-  branchMohar         String?
-  branchPhoto         String?
-  labPhoto            String?
-  statusDocument      String?
+  branchMohar    String?
+  branchPhoto    String?
+  labPhoto       String?
+  statusDocument String?
 
   // Branch Settings
-  branchLogo          String?
-  isActive            Boolean       @default(true)
-  onlineEnrollment    Boolean       @default(true)
-  smsNotifications    Boolean       @default(false)
-  emailNotifications  Boolean       @default(true)
+  branchLogo         String?
+  isActive           Boolean @default(true)
+  onlineEnrollment   Boolean @default(true)
+  smsNotifications   Boolean @default(false)
+  emailNotifications Boolean @default(true)
 
   // Soft delete & timestamps
-  deletedAt           DateTime?
-  createdAt           DateTime      @default(now())
-  updatedAt           DateTime      @updatedAt
+  deletedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
   // Relations
-  students            Student[]
-  users               User[]
-  roles               Role[]
+  students       Student[]
+  visitEnquiries VisitEnquiry[]
+  itemDispatches ItemDispatch[]
+  itemReceived   ItemReceive[]
+
+  // Financial & Communication
+  wallet         BranchWallet?
+  settings       BranchSettings?
+  transactions   BranchTransaction[]
+  notices        BranchNotice[]
 
   @@index([organizationId])
   @@index([code])
   @@index([email])
   @@map("branches")
+}
+
+enum InstituteType {
+  COMPUTER
+  TYPING
+  PARAMEDICAL
+  OTHER
+}
+
+enum BranchType {
+  MAIN
+  SUB
+  FRANCHISE
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+// ============================================
+// Reception Module — Visit, Dispatch & Receive
+// ============================================
+
+model VisitEnquiry {
+  id              String         @id @default(cuid())
+  
+  // Relation to Branch
+  branchId        String
+  branch          Branch         @relation(fields: [branchId], references: [id])
+  
+  // Visitor Information
+  visitorName     String
+  phone           String
+  email           String?
+  idType          VisitorIdType  @default(AADHAR)
+  idNumber        String?
+  company         String?
+  address         String?        @db.Text
+  
+  // Visit Details
+  visitDate       DateTime
+  visitTime       String         // Store as "HH:mm"
+  purpose         VisitPurpose   @default(OTHER)
+  personToMeet    String
+  department      DepartmentType @default(ADMINISTRATION)
+  noOfPersons     Int            @default(1)
+  enquiryReason   String?        @db.Text
+  location        String?
+  remarks         String?        @db.Text
+  
+  // Follow-up Details
+  followUpDate    DateTime?
+  followUpTime    String?        // Store as "HH:mm"
+  followUpNotes   String?        @db.Text
+  
+  // Documents & Media
+  visitorPhoto    Json?          // Changed from String?
+  idDocument      Json?          // Changed from String?
+  
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@index([branchId])
+  @@map("visit_enquiries")
+}
+
+model ItemDispatch {
+  id               String         @id @default(cuid())
+  
+  // Relation to Branch
+  branchId         String
+  branch           Branch         @relation(fields: [branchId], references: [id])
+  
+  // Item Details
+  itemName         String
+  description      String?        @db.Text
+  quantity         Int
+  
+  // Recipient Details
+  recipientName    String
+  recipientPhone   String
+  recipientAddress String         @db.Text
+  
+  // Shipping Details
+  courierService   CourierService @default(SELF)
+  trackingNumber   String?
+  dispatchDate     DateTime
+  expectedDelivery DateTime?
+  
+  status           ItemStatus     @default(PENDING)
+  remarks          String?        @db.Text
+  
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@index([branchId])
+  @@map("item_dispatches")
+}
+
+model ItemReceive {
+  id               String         @id @default(cuid())
+  
+  // Relation to Branch
+  branchId         String
+  branch           Branch         @relation(fields: [branchId], references: [id])
+  
+  // Item Details
+  itemName         String
+  description      String?        @db.Text
+  quantity         Int
+  
+  // Sender Details
+  senderName       String
+  senderPhone      String?
+  senderAddress    String?        @db.Text
+  
+  // Shipping & Receiving Details
+  courierService   CourierService @default(HAND_DELIVERY)
+  trackingNumber   String?
+  receivedDate     DateTime
+  department       DepartmentType @default(ADMINISTRATION)
+  condition        ItemCondition  @default(GOOD)
+  receivedBy       String
+  
+  status           ItemStatus     @default(PENDING)
+  remarks          String?        @db.Text
+  attachments      Json?          // Changed from String?
+  
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@index([branchId])
+  @@map("item_received")
+}
+
+// ============================================
+// Reception Enums
+// ============================================
+
+enum VisitPurpose {
+  ADMISSION
+  FEE
+  MEETING
+  COMPLAINT
+  DELIVERY
+  INTERVIEW
+  OTHER
+}
+
+enum VisitorIdType {
+  AADHAR
+  PAN
+  DRIVING
+  PASSPORT
+  VOTER
+}
+
+enum DepartmentType {
+  ADMINISTRATION
+  ACADEMICS
+  ACCOUNTS
+  HR
+  IT
+  LIBRARY
+  SPORTS
+  LAB
+}
+
+enum ItemStatus {
+  PENDING
+  ACTIVE
+  COMPLETED
+}
+
+enum ItemCondition {
+  GOOD
+  DAMAGED
+  PARTIAL
+}
+
+enum CourierService {
+  BLUEDART
+  DTDC
+  FEDEX
+  DELHIVERY
+  INDIAPOST
+  SELF
+  HAND_DELIVERY
+}
+
+// ============================================
+// Financial & Communication Models
+// ============================================
+
+model BranchWallet {
+  id                String    @id @default(cuid())
+  
+  branchId          String    @unique
+  branch            Branch    @relation(fields: [branchId], references: [id])
+  
+  balance           Float     @default(0) // Using Float for simplicity, Decimal recommended for production
+  isActive          Boolean   @default(true)
+  
+  lastRechargeAmount Float?
+  lastRechargeDate   DateTime?
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@map("branch_wallets")
+}
+
+model BranchTransaction {
+  id              String            @id @default(cuid())
+  
+  branchId        String
+  branch          Branch            @relation(fields: [branchId], references: [id])
+  
+  amount          Float
+  type            TransactionType   @default(CREDIT)
+  category        String
+  description     String?           @db.Text
+  reference       String?           // External Transaction ID
+  status          TransactionStatus @default(COMPLETED)
+  paymentMethod   PaymentMethod     @default(UPI)
+  balanceAfter    Float
+  
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@index([branchId])
+  @@map("branch_transactions")
+}
+
+model BranchNotice {
+  id              String         @id @default(cuid())
+  
+  branchId        String?        // Nullable for "All Branches"
+  branch          Branch?        @relation(fields: [branchId], references: [id])
+  
+  title           String
+  content         String         @db.Text
+  type            NoticeType     @default(BRANCH)
+  batch           String?        // If type is BATCH
+  priority        NoticePriority @default(MEDIUM)
+  isPinned        Boolean        @default(false)
+  views           Int            @default(0)
+  
+  publishDate     DateTime       @default(now())
+  expiryDate      DateTime?
+  
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@index([branchId])
+  @@map("branch_notices")
+}
+
+model BranchSettings {
+  id              String    @id @default(cuid())
+  
+  branchId        String    @unique
+  branch          Branch    @relation(fields: [branchId], references: [id])
+  
+  // Website General
+  siteName        String?
+  tagline         String?
+  seoDescription  String?   @db.Text
+  seoKeywords     String?
+  
+  // Domain
+  primaryDomain   String?
+  subdomain       String?
+  enableSsl       Boolean   @default(true)
+  
+  // Media & Social
+  mediaAssets     Json?     // Logo, Favicon, Banner
+  socialLinks     Json?     // Facebook, WhatsApp, etc.
+  
+  // Feature Configuration
+  featureToggles  Json?     // Admissions, Fees, Portal access
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@map("branch_settings")
+}
+
+// ============================================
+// New Branch Enums
+// ============================================
+
+enum TransactionType {
+  CREDIT
+  DEBIT
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+enum PaymentMethod {
+  UPI
+  CARD
+  NET_BANKING
+  CASH
+}
+
+enum NoticeType {
+  BRANCH
+  BATCH
+}
+
+enum NoticePriority {
+  LOW
+  MEDIUM
+  HIGH
 }

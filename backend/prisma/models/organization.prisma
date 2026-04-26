@@ -5,6 +5,9 @@
 model Organization {
   id              String    @id @default(cuid())
 
+  userId          String @unique
+  user            User      @relation(fields: [userId], references: [id])
+
   // Basic Info
   name            String
   code            String    @unique
@@ -30,8 +33,6 @@ model Organization {
 
   // Relations
   branches        Branch[]
-  users           User[]
-  roles           Role[]
 
   @@index([code])
   @@map("organizations")
