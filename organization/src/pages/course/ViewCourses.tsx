@@ -5,6 +5,7 @@ import { StatusBadge } from "@/components/ui/StatusBadge";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Calendar, BookOpen } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface Course {
   id: string;
@@ -68,6 +69,7 @@ const columns: Column<Course>[] = [
 ];
 
 export default function ViewCourses() {
+  const navigate = useNavigate();
   const handleActions = (course: Course) => [
     { label: "View Details", onClick: () => console.log("View", course.id) },
     { label: "Edit Course", onClick: () => console.log("Edit", course.id) },
@@ -85,7 +87,7 @@ export default function ViewCourses() {
           { label: "View Courses" },
         ]}
         actions={
-          <Button className="gap-2">
+          <Button onClick={() => navigate("/course/create")} className="gap-2">
             <Plus className="h-4 w-4" />
             Create Course
           </Button>
