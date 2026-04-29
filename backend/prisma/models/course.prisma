@@ -1,0 +1,177 @@
+// ============================================
+// Course — Created by Organization
+// ============================================
+
+model Course {
+  id              String    @id @default(cuid())
+
+  // Relation to Organization (Org creates the course)
+  organizationId  String
+  organization    Organization @relation(fields: [organizationId], references: [id])
+
+  // Course Details
+  name            String
+  code            String    @unique // Unique course code e.g., ADCA-01
+  category        CourseCategory @default(COMPUTER)
+  description     String?   @db.Text
+  
+  // Duration
+  durationValue   Int
+  durationUnit    DurationUnit @default(MONTHS)
+  
+  // Fees (Base fees set by Organization)
+  baseFee         Float     @default(0)
+  registrationFee Float     @default(0)
+  examFee         Float     @default(0)
+  
+  // Content & Requirements
+  syllabus        Json?     // Array of modules or topics
+  eligibility     String?   // e.g., "10th Pass", "Graduation"
+  certification   String?   // Type of certificate awarded
+  
+  // Status & Timestamps
+  isActive        Boolean   @default(true)
+  deletedAt       DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relations
+  branchCourses   BranchCourse[]
+  students        Student[]
+  batches         Batch[]
+
+  @@index([organizationId])
+  @@index([code])
+  @@map("courses")
+}
+
+// ============================================
+// BranchCourse — Assignment of Course to Branch
+// ============================================
+
+model BranchCourse {
+  id              String    @id @default(cuid())
+
+  // Relation to Branch
+  branchId        String
+  branch          Branch    @relation(fields: [branchId], references: [id])
+
+  // Relation to Course
+  courseId        String
+  course          Course    @relation(fields: [courseId], references: [id])
+
+  // Branch-specific Overrides
+  // Organization might allow branches to have custom pricing
+  branchFee       Float?    // If null, use Course.baseFee
+  isOffered       Boolean   @default(true) // Branch can temporarily stop offering a course
+  
+  assignedAt      DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@unique([branchId, courseId])
+  @@index([branchId])
+  @@index([courseId])
+  @@map("branch_courses")
+}
+
+// ============================================
+// Course Enums
+// ============================================
+
+enum CourseCategory {
+  COMPUTER
+  VOCATIONAL
+  ACADEMIC
+  LANGUAGE
+  PROFESSIONAL
+  SKILL_DEVELOPMENT
+  OTHER
+}
+
+enum DurationUnit {
+  DAYS
+  WEEKS
+  MONTHS
+  YEARS
+}
+
+// ============================================
+// Batch — Specific instances of a Course in a Branch
+// ============================================
+
+model Batch {
+  id              String         @id @default(cuid())
+
+  // Relations
+  branchId        String
+  branch          Branch         @relation(fields: [branchId], references: [id])
+
+  courseId        String
+  course          Course         @relation(fields: [courseId], references: [id])
+
+  // Batch Details
+  name            String         // e.g., "Morning Batch A"
+  code            String         // e.g., ADCA-MORN-01
+  description     String?        @db.Text
+  
+  // Capacity & Schedule
+  maxSeats        Int?
+  startDate       DateTime
+  endDate         DateTime?
+  
+  // Status
+  status          BatchStatus    @default(UPCOMING)
+  isActive        Boolean        @default(true)
+  
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  // Relations
+  timings         BatchTiming[]
+  students        Student[]
+
+  @@index([branchId])
+  @@index([courseId])
+  @@index([code])
+  @@map("batches")
+}
+
+// ============================================
+// BatchTiming — Weekly schedule for a Batch
+// ============================================
+
+model BatchTiming {
+  id              String         @id @default(cuid())
+  
+  batchId         String
+  batch           Batch          @relation(fields: [batchId], references: [id], onDelete: Cascade)
+  
+  day             DayOfWeek
+  startTime       String         // "HH:mm" e.g., "09:00"
+  endTime         String         // "HH:mm" e.g., "11:00"
+  roomNo          String?        // Classroom reference
+
+  @@index([batchId])
+  @@map("batch_timings")
+}
+
+// ============================================
+// Batch Enums
+// ============================================
+
+enum BatchStatus {
+  UPCOMING
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum DayOfWeek {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}

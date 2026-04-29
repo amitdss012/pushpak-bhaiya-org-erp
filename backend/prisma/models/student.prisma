@@ -9,22 +9,27 @@ model Student {
   branchId            String
   branch              Branch    @relation(fields: [branchId], references: [id])
 
-  // user id
-  userId              String @unique
-  user                User      @relation(fields: [userId], references: [id])
+  // user id (Optional until admission is approved and user is created)
+  userId              String?   @unique
+  user                User?     @relation(fields: [userId], references: [id])
+
+  // Identification
+  enrollmentNo        String?   @unique // Generated after admission approval
+  applicationNo       String?   @unique // From admission form e.g., APP2024006
 
   // Personal Info
-  enrollmentNo        String    @unique
   firstName           String
+  middleName          String?
   lastName            String
-  fatherName          String
-  motherName          String
-  gender              Gender
   dateOfBirth         DateTime
+  gender              Gender
   bloodGroup          String?
   category            String?
   religion            String?
   nationality         String    @default("Indian")
+  
+  aadharNumber        String?
+  apaarNumber         String?
 
   // Contact
   phone               String
@@ -36,29 +41,82 @@ model Student {
   streetAddress       String    @db.Text
   city                String
   state               String
-  district            String
+  district            String?
   pincode             String
   country             String    @default("India")
 
   // Academic
   admissionDate       DateTime  @default(now())
+  academicYear        String?
+  courseId            String?
+  course              Course?   @relation(fields: [courseId], references: [id])
+  batchId             String?
+  batch               Batch?    @relation(fields: [batchId], references: [id])
 
-  // Documents (URLs/paths)
-  photo               String?
-  aadharFront         String?
-  aadharBack          String?
-  aadharNumber        String?
-  tenthMarksheet      String?
-  twelfthMarksheet    String?
-  admissionForm       String?
+  // Previous Education - 10th Standard
+  tenthSchoolName     String?
+  tenthBoard          String?
+  tenthYearOfPassing  Int?
+  tenthPercentage     String?
+  tenthRollNo         String?
+  tenthSubjects       String?
 
-  // Status
+  // Previous Education - 12th Standard
+  twelfthSchoolName   String?
+  twelfthBoard        String?
+  twelfthYearOfPassing Int?
+  twelfthPercentage   String?
+  twelfthStream       String?
+  twelfthSubjects     String?
+
+  // Father's Details
+  fatherName          String
+  fatherOccupation    String?
+  fatherPhone         String?
+  fatherEmail         String?
+  fatherAnnualIncome  String?
+
+  // Mother's Details
+  motherName          String
+  motherOccupation    String?
+  motherPhone         String?
+
+  // Local Guardian Details
+  localGuardianName    String?
+  localGuardianRelation String?
+  localGuardianPhone   String?
+  localGuardianAddress  String?    @db.Text
+
+  // Documents (URLs/paths to storage)
+  photo               Json?
+  aadharFront         Json?
+  aadharBack          Json?
+  tenthMarksheet      Json?
+  twelfthMarksheet    Json?
+  transferCertificate Json?
+  apaarCard           Json?
+  casteCertificate    Json?
+  admissionForm       Json?
+
+  // Status & Timestamps
+  admissionStatus     AdmissionStatus @default(DRAFT)
   isActive            Boolean   @default(true)
   deletedAt           DateTime?
   createdAt           DateTime  @default(now())
   updatedAt           DateTime  @updatedAt
 
   @@index([branchId])
+  @@index([courseId])
+  @@index([batchId])
   @@index([enrollmentNo])
+  @@index([applicationNo])
   @@map("students")
+}
+
+enum AdmissionStatus {
+  DRAFT
+  SUBMITTED
+  PENDING_PAYMENT
+  APPROVED
+  REJECTED
 }

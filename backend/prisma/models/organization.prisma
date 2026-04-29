@@ -33,6 +33,7 @@ model Organization {
 
   // Relations
   branches        Branch[]
+  courses         Course[]
 
   @@index([code])
   @@map("organizations")

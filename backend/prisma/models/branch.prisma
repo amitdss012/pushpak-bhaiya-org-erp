@@ -81,10 +81,12 @@ model Branch {
   updatedAt DateTime  @updatedAt
 
   // Relations
-  students       Student[]
-  visitEnquiries VisitEnquiry[]
-  itemDispatches ItemDispatch[]
-  itemReceived   ItemReceive[]
+  students        Student[]
+  visitEnquiries  VisitEnquiry[]
+  itemDispatches  ItemDispatch[]
+  itemReceived    ItemReceive[]
+  assignedCourses BranchCourse[]
+  batches         Batch[]
 
   // Financial & Communication
   wallet         BranchWallet?
