@@ -1,3 +1,5 @@
+import { Response } from "express";
+
 export class ErrorResponse extends Error {
   constructor(
     public message: string,
@@ -13,13 +15,16 @@ export class ErrorResponse extends Error {
 }
 
 export const SuccessResponse = (
+  res: Response,
   message: string,
   data: any = {},
   statusCode: number = 200,
   statusText: string = "OK",
 ) => {
-  return Response.json(
-    { message, data, success: true },
-    { status: statusCode, statusText },
-  );
+  return res.status(statusCode).json({
+    message,
+    data,
+    success: true,
+  });
 };
+

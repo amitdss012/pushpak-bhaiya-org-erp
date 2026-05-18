@@ -1,7 +1,9 @@
-import Elysia from "elysia";
+import { Router } from "express";
 
-const route = new Elysia({prefix: "/student"})
+const router = Router();
 
-route.get("/", () => "Hello World");
+router.get("/", (req, res) => {
+  res.send("Hello World");
+});
 
-export default route;
+export default router;

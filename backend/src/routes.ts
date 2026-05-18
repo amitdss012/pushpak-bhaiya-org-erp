@@ -1,8 +1,8 @@
-import Elysia from "elysia";
+import { Router } from "express";
 import studentRoutes from "./module/students/routes/student.routes";
 
-const route = new Elysia({ prefix: "/api/v1" });
+const router = Router();
 
-route.use(studentRoutes);
+router.use("/student", studentRoutes);
 
-export default route;
+export default router;

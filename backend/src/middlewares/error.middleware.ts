@@ -1,79 +1,85 @@
+import { Request, Response, NextFunction } from "express";
 import { ErrorResponse } from "../utils/response.utils";
 
-export const errorHandler = ({ code, error }: { code: any; error: any }) => {
+export const errorHandler = (
+  err: any,
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  // If headers have already been sent to the client, delegate to the default Express error handler
+  if (res.headersSent) {
+    return next(err);
+  }
+
+  const code = err.code || (err instanceof ErrorResponse ? "ERROR_RESPONSE" : "UNKNOWN");
+
+  if (err instanceof ErrorResponse) {
+    return res.status(err.statusCode).json({
+      message: err.message,
+      error: err.statusText || "Unknown Error",
+      success: false,
+    });
+  }
+
   if (code === "INTERNAL_SERVER_ERROR") {
-    return Response.json(
-      {
-        message: "Internal Server Error",
-        error: error.message,
-        success: false,
-      },
-      { status: 500, statusText: "Internal Server Error" },
-    );
+    return res.status(500).json({
+      message: "Internal Server Error",
+      error: err.message,
+      success: false,
+    });
   }
   if (code === "NOT_FOUND") {
-    return Response.json(
-      { message: "Not Found", error: error.message, success: false },
-      { status: 404, statusText: "Not Found" },
-    );
+    return res.status(404).json({
+      message: "Not Found",
+      error: err.message,
+      success: false,
+    });
   }
   if (code === "VALIDATION") {
     const errors: any = {};
-    error.all.forEach((err: any) => {
-      const path = err.path.replace("/", "");
-      if (path) {
-        errors[path] = err.summary;
-      }
-    });
+    if (err.all && Array.isArray(err.all)) {
+      err.all.forEach((e: any) => {
+        const path = e.path ? e.path.replace("/", "") : "";
+        if (path) {
+          errors[path] = e.summary || e.message;
+        }
+      });
+    }
 
-    return Response.json(
-      {
-        message: error.all[0].message,
-        error: errors,
-        success: false,
-      },
-      { status: 400, statusText: "Validation Error" },
-    );
+    return res.status(400).json({
+      message: (err.all && err.all[0] && err.all[0].message) || err.message || "Validation Error",
+      error: errors,
+      success: false,
+    });
   }
   if (code === "PARSE") {
-    return Response.json(
-      { message: "Parse Error", error: error.message, success: false },
-      { status: 400, statusText: "Parse Error" },
-    );
+    return res.status(400).json({
+      message: "Parse Error",
+      error: err.message,
+      success: false,
+    });
   }
   if (code === "INVALID_COOKIE_SIGNATURE") {
-    return Response.json(
-      {
-        message: "Invalid Cookie Signature",
-        error: error.message,
-        success: false,
-      },
-      { status: 400, statusText: "Invalid Cookie Signature" },
-    );
+    return res.status(400).json({
+      message: "Invalid Cookie Signature",
+      error: err.message,
+      success: false,
+    });
   }
   if (code === "INVALID_FILE_TYPE") {
-    return Response.json(
-      { message: "Invalid File Type", error: error.statusText, success: false },
-      { status: 400, statusText: "Invalid File Type" },
-    );
+    return res.status(400).json({
+      message: "Invalid File Type",
+      error: err.statusText || "Invalid File Type",
+      success: false,
+    });
   }
 
-  if (code === "UNKNOWN") {
-    return Response.json(
-      { message: error.message, error: error.statusText, success: false },
-      { status: error.statusCode || 500, statusText: error.statusText || "Unknown Error" },
-    );
-  }
-
-  if(error instanceof ErrorResponse){
-    return Response.json(
-      { message: error.message, error: error.statusText, success: false },
-      { status: error.statusCode, statusText: error.statusText || "Unknown Error" },
-    );
-  }
-
-  return Response.json(
-    { message: "Something went wrong", error: "INTERNAL_SERVER_ERROR", success: false },
-    { status: 500, statusText: "Internal Server Error" },
-  );
+  const statusCode = err.statusCode || err.status || 500;
+  return res.status(statusCode).json({
+    message: err.message || "Something went wrong",
+    error: err.statusText || "INTERNAL_SERVER_ERROR",
+    success: false,
+  });
 };
+
