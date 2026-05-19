@@ -9,13 +9,14 @@
 * 🟢 You can import this file directly.
 */
 
-export const Gender = {
-  MALE: 'MALE',
-  FEMALE: 'FEMALE',
+export const InstituteType = {
+  COMPUTER: 'COMPUTER',
+  TYPING: 'TYPING',
+  PARAMEDICAL: 'PARAMEDICAL',
   OTHER: 'OTHER'
 } as const
 
-export type Gender = (typeof Gender)[keyof typeof Gender]
+export type InstituteType = (typeof InstituteType)[keyof typeof InstituteType]
 
 
 export const BranchType = {
@@ -27,31 +28,189 @@ export const BranchType = {
 export type BranchType = (typeof BranchType)[keyof typeof BranchType]
 
 
-export const InstituteType = {
-  COMPUTER: 'COMPUTER',
-  TYPING: 'TYPING',
-  PARAMEDICAL: 'PARAMEDICAL',
+export const Gender = {
+  MALE: 'MALE',
+  FEMALE: 'FEMALE',
   OTHER: 'OTHER'
 } as const
 
-export type InstituteType = (typeof InstituteType)[keyof typeof InstituteType]
+export type Gender = (typeof Gender)[keyof typeof Gender]
+
+
+export const VisitPurpose = {
+  ADMISSION: 'ADMISSION',
+  FEE: 'FEE',
+  MEETING: 'MEETING',
+  COMPLAINT: 'COMPLAINT',
+  DELIVERY: 'DELIVERY',
+  INTERVIEW: 'INTERVIEW',
+  OTHER: 'OTHER'
+} as const
+
+export type VisitPurpose = (typeof VisitPurpose)[keyof typeof VisitPurpose]
+
+
+export const VisitorIdType = {
+  AADHAR: 'AADHAR',
+  PAN: 'PAN',
+  DRIVING: 'DRIVING',
+  PASSPORT: 'PASSPORT',
+  VOTER: 'VOTER'
+} as const
+
+export type VisitorIdType = (typeof VisitorIdType)[keyof typeof VisitorIdType]
+
+
+export const DepartmentType = {
+  ADMINISTRATION: 'ADMINISTRATION',
+  ACADEMICS: 'ACADEMICS',
+  ACCOUNTS: 'ACCOUNTS',
+  HR: 'HR',
+  IT: 'IT',
+  LIBRARY: 'LIBRARY',
+  SPORTS: 'SPORTS',
+  LAB: 'LAB'
+} as const
+
+export type DepartmentType = (typeof DepartmentType)[keyof typeof DepartmentType]
+
+
+export const ItemStatus = {
+  PENDING: 'PENDING',
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type ItemStatus = (typeof ItemStatus)[keyof typeof ItemStatus]
+
+
+export const ItemCondition = {
+  GOOD: 'GOOD',
+  DAMAGED: 'DAMAGED',
+  PARTIAL: 'PARTIAL'
+} as const
+
+export type ItemCondition = (typeof ItemCondition)[keyof typeof ItemCondition]
+
+
+export const CourierService = {
+  BLUEDART: 'BLUEDART',
+  DTDC: 'DTDC',
+  FEDEX: 'FEDEX',
+  DELHIVERY: 'DELHIVERY',
+  INDIAPOST: 'INDIAPOST',
+  SELF: 'SELF',
+  HAND_DELIVERY: 'HAND_DELIVERY'
+} as const
+
+export type CourierService = (typeof CourierService)[keyof typeof CourierService]
+
+
+export const TransactionType = {
+  CREDIT: 'CREDIT',
+  DEBIT: 'DEBIT'
+} as const
+
+export type TransactionType = (typeof TransactionType)[keyof typeof TransactionType]
+
+
+export const TransactionStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+} as const
+
+export type TransactionStatus = (typeof TransactionStatus)[keyof typeof TransactionStatus]
+
+
+export const PaymentMethod = {
+  UPI: 'UPI',
+  CARD: 'CARD',
+  NET_BANKING: 'NET_BANKING',
+  CASH: 'CASH'
+} as const
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
+
+
+export const NoticeType = {
+  BRANCH: 'BRANCH',
+  BATCH: 'BATCH'
+} as const
+
+export type NoticeType = (typeof NoticeType)[keyof typeof NoticeType]
+
+
+export const NoticePriority = {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH'
+} as const
+
+export type NoticePriority = (typeof NoticePriority)[keyof typeof NoticePriority]
+
+
+export const CourseCategory = {
+  COMPUTER: 'COMPUTER',
+  VOCATIONAL: 'VOCATIONAL',
+  ACADEMIC: 'ACADEMIC',
+  LANGUAGE: 'LANGUAGE',
+  PROFESSIONAL: 'PROFESSIONAL',
+  SKILL_DEVELOPMENT: 'SKILL_DEVELOPMENT',
+  OTHER: 'OTHER'
+} as const
+
+export type CourseCategory = (typeof CourseCategory)[keyof typeof CourseCategory]
+
+
+export const DurationUnit = {
+  DAYS: 'DAYS',
+  WEEKS: 'WEEKS',
+  MONTHS: 'MONTHS',
+  YEARS: 'YEARS'
+} as const
+
+export type DurationUnit = (typeof DurationUnit)[keyof typeof DurationUnit]
+
+
+export const BatchStatus = {
+  UPCOMING: 'UPCOMING',
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type BatchStatus = (typeof BatchStatus)[keyof typeof BatchStatus]
+
+
+export const DayOfWeek = {
+  MONDAY: 'MONDAY',
+  TUESDAY: 'TUESDAY',
+  WEDNESDAY: 'WEDNESDAY',
+  THURSDAY: 'THURSDAY',
+  FRIDAY: 'FRIDAY',
+  SATURDAY: 'SATURDAY',
+  SUNDAY: 'SUNDAY'
+} as const
+
+export type DayOfWeek = (typeof DayOfWeek)[keyof typeof DayOfWeek]
+
+
+export const AdmissionStatus = {
+  DRAFT: 'DRAFT',
+  SUBMITTED: 'SUBMITTED',
+  PENDING_PAYMENT: 'PENDING_PAYMENT',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type AdmissionStatus = (typeof AdmissionStatus)[keyof typeof AdmissionStatus]
 
 
 export const UserType = {
-  SUPER_ADMIN: 'SUPER_ADMIN',
-  ORG_ADMIN: 'ORG_ADMIN',
-  ORG_STAFF: 'ORG_STAFF',
-  BRANCH_ADMIN: 'BRANCH_ADMIN',
-  BRANCH_STAFF: 'BRANCH_STAFF',
+  ORGANIZATION: 'ORGANIZATION',
+  BRANCH: 'BRANCH',
   STUDENT: 'STUDENT'
 } as const
 
 export type UserType = (typeof UserType)[keyof typeof UserType]
-
-
-export const RoleScope = {
-  ORGANIZATION: 'ORGANIZATION',
-  BRANCH: 'BRANCH'
-} as const
-
-export type RoleScope = (typeof RoleScope)[keyof typeof RoleScope]

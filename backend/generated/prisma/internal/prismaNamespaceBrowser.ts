@@ -52,11 +52,22 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Branch: 'Branch',
+  VisitEnquiry: 'VisitEnquiry',
+  ItemDispatch: 'ItemDispatch',
+  ItemReceive: 'ItemReceive',
+  BranchWallet: 'BranchWallet',
+  BranchTransaction: 'BranchTransaction',
+  BranchNotice: 'BranchNotice',
+  BranchSettings: 'BranchSettings',
+  BranchDirector: 'BranchDirector',
+  BranchAddress: 'BranchAddress',
+  BranchLicense: 'BranchLicense',
+  BranchRenewalHistory: 'BranchRenewalHistory',
+  Course: 'Course',
+  BranchCourse: 'BranchCourse',
+  Batch: 'Batch',
+  BatchTiming: 'BatchTiming',
   Organization: 'Organization',
-  Role: 'Role',
-  Permission: 'Permission',
-  RolePermission: 'RolePermission',
-  UserRole: 'UserRole',
   Student: 'Student',
   User: 'User'
 } as const
@@ -80,6 +91,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const BranchScalarFieldEnum = {
   id: 'id',
   organizationId: 'organizationId',
+  userId: 'userId',
   name: 'name',
   code: 'code',
   branchType: 'branchType',
@@ -88,36 +100,13 @@ export const BranchScalarFieldEnum = {
   establishedYear: 'establishedYear',
   website: 'website',
   description: 'description',
-  streetAddress: 'streetAddress',
-  state: 'state',
-  district: 'district',
-  block: 'block',
-  city: 'city',
-  pincode: 'pincode',
-  latitude: 'latitude',
-  longitude: 'longitude',
-  country: 'country',
   phone: 'phone',
   altPhone: 'altPhone',
   whatsappNumber: 'whatsappNumber',
   email: 'email',
-  directorName: 'directorName',
-  directorGender: 'directorGender',
-  directorDOB: 'directorDOB',
-  directorBloodGroup: 'directorBloodGroup',
-  directorPhoto: 'directorPhoto',
-  directorSignature: 'directorSignature',
-  directorAadharFront: 'directorAadharFront',
-  directorAadharBack: 'directorAadharBack',
   numComputers: 'numComputers',
   numFaculty: 'numFaculty',
   numRooms: 'numRooms',
-  numFees: 'numFees',
-  registrationDate: 'registrationDate',
-  validDate: 'validDate',
-  expiryDate: 'expiryDate',
-  renewalDate: 'renewalDate',
-  referralCode: 'referralCode',
   branchMohar: 'branchMohar',
   branchPhoto: 'branchPhoto',
   labPhoto: 'labPhoto',
@@ -135,8 +124,291 @@ export const BranchScalarFieldEnum = {
 export type BranchScalarFieldEnum = (typeof BranchScalarFieldEnum)[keyof typeof BranchScalarFieldEnum]
 
 
+export const VisitEnquiryScalarFieldEnum = {
+  id: 'id',
+  branchId: 'branchId',
+  visitorName: 'visitorName',
+  phone: 'phone',
+  email: 'email',
+  idType: 'idType',
+  idNumber: 'idNumber',
+  company: 'company',
+  address: 'address',
+  visitDate: 'visitDate',
+  visitTime: 'visitTime',
+  purpose: 'purpose',
+  personToMeet: 'personToMeet',
+  department: 'department',
+  noOfPersons: 'noOfPersons',
+  enquiryReason: 'enquiryReason',
+  location: 'location',
+  remarks: 'remarks',
+  followUpDate: 'followUpDate',
+  followUpTime: 'followUpTime',
+  followUpNotes: 'followUpNotes',
+  visitorPhoto: 'visitorPhoto',
+  idDocument: 'idDocument',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VisitEnquiryScalarFieldEnum = (typeof VisitEnquiryScalarFieldEnum)[keyof typeof VisitEnquiryScalarFieldEnum]
+
+
+export const ItemDispatchScalarFieldEnum = {
+  id: 'id',
+  branchId: 'branchId',
+  itemName: 'itemName',
+  description: 'description',
+  quantity: 'quantity',
+  recipientName: 'recipientName',
+  recipientPhone: 'recipientPhone',
+  recipientAddress: 'recipientAddress',
+  courierService: 'courierService',
+  trackingNumber: 'trackingNumber',
+  dispatchDate: 'dispatchDate',
+  expectedDelivery: 'expectedDelivery',
+  status: 'status',
+  remarks: 'remarks',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ItemDispatchScalarFieldEnum = (typeof ItemDispatchScalarFieldEnum)[keyof typeof ItemDispatchScalarFieldEnum]
+
+
+export const ItemReceiveScalarFieldEnum = {
+  id: 'id',
+  branchId: 'branchId',
+  itemName: 'itemName',
+  description: 'description',
+  quantity: 'quantity',
+  senderName: 'senderName',
+  senderPhone: 'senderPhone',
+  senderAddress: 'senderAddress',
+  courierService: 'courierService',
+  trackingNumber: 'trackingNumber',
+  receivedDate: 'receivedDate',
+  department: 'department',
+  condition: 'condition',
+  receivedBy: 'receivedBy',
+  status: 'status',
+  remarks: 'remarks',
+  attachments: 'attachments',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ItemReceiveScalarFieldEnum = (typeof ItemReceiveScalarFieldEnum)[keyof typeof ItemReceiveScalarFieldEnum]
+
+
+export const BranchWalletScalarFieldEnum = {
+  id: 'id',
+  branchId: 'branchId',
+  balance: 'balance',
+  isActive: 'isActive',
+  lastRechargeAmount: 'lastRechargeAmount',
+  lastRechargeDate: 'lastRechargeDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BranchWalletScalarFieldEnum = (typeof BranchWalletScalarFieldEnum)[keyof typeof BranchWalletScalarFieldEnum]
+
+
+export const BranchTransactionScalarFieldEnum = {
+  id: 'id',
+  branchId: 'branchId',
+  amount: 'amount',
+  type: 'type',
+  category: 'category',
+  description: 'description',
+  reference: 'reference',
+  status: 'status',
+  paymentMethod: 'paymentMethod',
+  balanceAfter: 'balanceAfter',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BranchTransactionScalarFieldEnum = (typeof BranchTransactionScalarFieldEnum)[keyof typeof BranchTransactionScalarFieldEnum]
+
+
+export const BranchNoticeScalarFieldEnum = {
+  id: 'id',
+  branchId: 'branchId',
+  title: 'title',
+  content: 'content',
+  type: 'type',
+  batch: 'batch',
+  priority: 'priority',
+  isPinned: 'isPinned',
+  views: 'views',
+  publishDate: 'publishDate',
+  expiryDate: 'expiryDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BranchNoticeScalarFieldEnum = (typeof BranchNoticeScalarFieldEnum)[keyof typeof BranchNoticeScalarFieldEnum]
+
+
+export const BranchSettingsScalarFieldEnum = {
+  id: 'id',
+  branchId: 'branchId',
+  siteName: 'siteName',
+  tagline: 'tagline',
+  seoDescription: 'seoDescription',
+  seoKeywords: 'seoKeywords',
+  primaryDomain: 'primaryDomain',
+  subdomain: 'subdomain',
+  enableSsl: 'enableSsl',
+  mediaAssets: 'mediaAssets',
+  socialLinks: 'socialLinks',
+  featureToggles: 'featureToggles',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BranchSettingsScalarFieldEnum = (typeof BranchSettingsScalarFieldEnum)[keyof typeof BranchSettingsScalarFieldEnum]
+
+
+export const BranchDirectorScalarFieldEnum = {
+  id: 'id',
+  branchId: 'branchId',
+  name: 'name',
+  gender: 'gender',
+  dob: 'dob',
+  bloodGroup: 'bloodGroup',
+  photo: 'photo',
+  signature: 'signature',
+  aadharFront: 'aadharFront',
+  aadharBack: 'aadharBack',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BranchDirectorScalarFieldEnum = (typeof BranchDirectorScalarFieldEnum)[keyof typeof BranchDirectorScalarFieldEnum]
+
+
+export const BranchAddressScalarFieldEnum = {
+  id: 'id',
+  branchId: 'branchId',
+  streetAddress: 'streetAddress',
+  state: 'state',
+  district: 'district',
+  block: 'block',
+  city: 'city',
+  pincode: 'pincode',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  country: 'country',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BranchAddressScalarFieldEnum = (typeof BranchAddressScalarFieldEnum)[keyof typeof BranchAddressScalarFieldEnum]
+
+
+export const BranchLicenseScalarFieldEnum = {
+  id: 'id',
+  branchId: 'branchId',
+  registrationDate: 'registrationDate',
+  validDate: 'validDate',
+  expiryDate: 'expiryDate',
+  referralCode: 'referralCode',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BranchLicenseScalarFieldEnum = (typeof BranchLicenseScalarFieldEnum)[keyof typeof BranchLicenseScalarFieldEnum]
+
+
+export const BranchRenewalHistoryScalarFieldEnum = {
+  id: 'id',
+  licenseId: 'licenseId',
+  renewalDate: 'renewalDate',
+  previousExpiry: 'previousExpiry',
+  newExpiry: 'newExpiry',
+  amountPaid: 'amountPaid',
+  remarks: 'remarks',
+  createdAt: 'createdAt'
+} as const
+
+export type BranchRenewalHistoryScalarFieldEnum = (typeof BranchRenewalHistoryScalarFieldEnum)[keyof typeof BranchRenewalHistoryScalarFieldEnum]
+
+
+export const CourseScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  code: 'code',
+  category: 'category',
+  description: 'description',
+  durationValue: 'durationValue',
+  durationUnit: 'durationUnit',
+  baseFee: 'baseFee',
+  registrationFee: 'registrationFee',
+  examFee: 'examFee',
+  syllabus: 'syllabus',
+  eligibility: 'eligibility',
+  certification: 'certification',
+  isActive: 'isActive',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
+
+
+export const BranchCourseScalarFieldEnum = {
+  id: 'id',
+  branchId: 'branchId',
+  courseId: 'courseId',
+  branchFee: 'branchFee',
+  isOffered: 'isOffered',
+  assignedAt: 'assignedAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BranchCourseScalarFieldEnum = (typeof BranchCourseScalarFieldEnum)[keyof typeof BranchCourseScalarFieldEnum]
+
+
+export const BatchScalarFieldEnum = {
+  id: 'id',
+  branchId: 'branchId',
+  courseId: 'courseId',
+  name: 'name',
+  code: 'code',
+  description: 'description',
+  maxSeats: 'maxSeats',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  status: 'status',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BatchScalarFieldEnum = (typeof BatchScalarFieldEnum)[keyof typeof BatchScalarFieldEnum]
+
+
+export const BatchTimingScalarFieldEnum = {
+  id: 'id',
+  batchId: 'batchId',
+  day: 'day',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  roomNo: 'roomNo'
+} as const
+
+export type BatchTimingScalarFieldEnum = (typeof BatchTimingScalarFieldEnum)[keyof typeof BatchTimingScalarFieldEnum]
+
+
 export const OrganizationScalarFieldEnum = {
   id: 'id',
+  userId: 'userId',
   name: 'name',
   code: 'code',
   logo: 'logo',
@@ -159,65 +431,23 @@ export const OrganizationScalarFieldEnum = {
 export type OrganizationScalarFieldEnum = (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum]
 
 
-export const RoleScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  description: 'description',
-  scope: 'scope',
-  isSystem: 'isSystem',
-  organizationId: 'organizationId',
-  branchId: 'branchId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
-
-
-export const PermissionScalarFieldEnum = {
-  id: 'id',
-  module: 'module',
-  action: 'action',
-  description: 'description'
-} as const
-
-export type PermissionScalarFieldEnum = (typeof PermissionScalarFieldEnum)[keyof typeof PermissionScalarFieldEnum]
-
-
-export const RolePermissionScalarFieldEnum = {
-  id: 'id',
-  roleId: 'roleId',
-  permissionId: 'permissionId'
-} as const
-
-export type RolePermissionScalarFieldEnum = (typeof RolePermissionScalarFieldEnum)[keyof typeof RolePermissionScalarFieldEnum]
-
-
-export const UserRoleScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  roleId: 'roleId',
-  assignedAt: 'assignedAt'
-} as const
-
-export type UserRoleScalarFieldEnum = (typeof UserRoleScalarFieldEnum)[keyof typeof UserRoleScalarFieldEnum]
-
-
 export const StudentScalarFieldEnum = {
   id: 'id',
   branchId: 'branchId',
   userId: 'userId',
   enrollmentNo: 'enrollmentNo',
+  applicationNo: 'applicationNo',
   firstName: 'firstName',
+  middleName: 'middleName',
   lastName: 'lastName',
-  fatherName: 'fatherName',
-  motherName: 'motherName',
-  gender: 'gender',
   dateOfBirth: 'dateOfBirth',
+  gender: 'gender',
   bloodGroup: 'bloodGroup',
   category: 'category',
   religion: 'religion',
   nationality: 'nationality',
+  aadharNumber: 'aadharNumber',
+  apaarNumber: 'apaarNumber',
   phone: 'phone',
   altPhone: 'altPhone',
   whatsappNumber: 'whatsappNumber',
@@ -229,13 +459,43 @@ export const StudentScalarFieldEnum = {
   pincode: 'pincode',
   country: 'country',
   admissionDate: 'admissionDate',
+  academicYear: 'academicYear',
+  courseId: 'courseId',
+  batchId: 'batchId',
+  tenthSchoolName: 'tenthSchoolName',
+  tenthBoard: 'tenthBoard',
+  tenthYearOfPassing: 'tenthYearOfPassing',
+  tenthPercentage: 'tenthPercentage',
+  tenthRollNo: 'tenthRollNo',
+  tenthSubjects: 'tenthSubjects',
+  twelfthSchoolName: 'twelfthSchoolName',
+  twelfthBoard: 'twelfthBoard',
+  twelfthYearOfPassing: 'twelfthYearOfPassing',
+  twelfthPercentage: 'twelfthPercentage',
+  twelfthStream: 'twelfthStream',
+  twelfthSubjects: 'twelfthSubjects',
+  fatherName: 'fatherName',
+  fatherOccupation: 'fatherOccupation',
+  fatherPhone: 'fatherPhone',
+  fatherEmail: 'fatherEmail',
+  fatherAnnualIncome: 'fatherAnnualIncome',
+  motherName: 'motherName',
+  motherOccupation: 'motherOccupation',
+  motherPhone: 'motherPhone',
+  localGuardianName: 'localGuardianName',
+  localGuardianRelation: 'localGuardianRelation',
+  localGuardianPhone: 'localGuardianPhone',
+  localGuardianAddress: 'localGuardianAddress',
   photo: 'photo',
   aadharFront: 'aadharFront',
   aadharBack: 'aadharBack',
-  aadharNumber: 'aadharNumber',
   tenthMarksheet: 'tenthMarksheet',
   twelfthMarksheet: 'twelfthMarksheet',
+  transferCertificate: 'transferCertificate',
+  apaarCard: 'apaarCard',
+  casteCertificate: 'casteCertificate',
   admissionForm: 'admissionForm',
+  admissionStatus: 'admissionStatus',
   isActive: 'isActive',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
@@ -254,8 +514,6 @@ export const UserScalarFieldEnum = {
   username: 'username',
   password: 'password',
   avatar: 'avatar',
-  organizationId: 'organizationId',
-  branchId: 'branchId',
   isActive: 'isActive',
   lastLoginAt: 'lastLoginAt',
   deletedAt: 'deletedAt',
@@ -274,12 +532,29 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 export const NullsOrder = {

@@ -3,89 +3,89 @@
 // ============================================
 
 model Student {
-  id                  String    @id @default(cuid())
+  id String @id @default(cuid())
 
   // Foreign key to Branch
-  branchId            String
-  branch              Branch    @relation(fields: [branchId], references: [id])
+  branchId String
+  branch   Branch @relation(fields: [branchId], references: [id])
 
   // user id (Optional until admission is approved and user is created)
-  userId              String?   @unique
-  user                User?     @relation(fields: [userId], references: [id])
+  userId String? @unique
+  user   User?   @relation(fields: [userId], references: [id])
 
   // Identification
-  enrollmentNo        String?   @unique // Generated after admission approval
-  applicationNo       String?   @unique // From admission form e.g., APP2024006
+  enrollmentNo  String? @unique // Generated after admission approval
+  applicationNo String? @unique // From admission form e.g., APP2024006
 
   // Personal Info
-  firstName           String
-  middleName          String?
-  lastName            String
-  dateOfBirth         DateTime
-  gender              Gender
-  bloodGroup          String?
-  category            String?
-  religion            String?
-  nationality         String    @default("Indian")
-  
-  aadharNumber        String?
-  apaarNumber         String?
+  firstName   String
+  middleName  String?
+  lastName    String
+  dateOfBirth DateTime
+  gender      Gender
+  bloodGroup  String?
+  category    String?
+  religion    String?
+  nationality String   @default("Indian")
+
+  aadharNumber String?
+  apaarNumber  String?
 
   // Contact
-  phone               String
-  altPhone            String?
-  whatsappNumber      String?
-  email               String?
+  phone          String
+  altPhone       String?
+  whatsappNumber String?
+  email          String?
 
   // Address
-  streetAddress       String    @db.Text
-  city                String
-  state               String
-  district            String?
-  pincode             String
-  country             String    @default("India")
+  streetAddress String  @db.Text
+  city          String
+  state         String
+  district      String?
+  pincode       String
+  country       String  @default("India")
 
   // Academic
-  admissionDate       DateTime  @default(now())
-  academicYear        String?
-  courseId            String?
-  course              Course?   @relation(fields: [courseId], references: [id])
-  batchId             String?
-  batch               Batch?    @relation(fields: [batchId], references: [id])
+  admissionDate DateTime @default(now())
+  academicYear  String?
+  courseId      String?
+  course        Course?  @relation(fields: [courseId], references: [id])
+  batchId       String?
+  batch         Batch?   @relation(fields: [batchId], references: [id])
 
   // Previous Education - 10th Standard
-  tenthSchoolName     String?
-  tenthBoard          String?
-  tenthYearOfPassing  Int?
-  tenthPercentage     String?
-  tenthRollNo         String?
-  tenthSubjects       String?
+  tenthSchoolName    String?
+  tenthBoard         String?
+  tenthYearOfPassing Int?
+  tenthPercentage    String?
+  tenthRollNo        String?
+  tenthSubjects      String?
 
   // Previous Education - 12th Standard
-  twelfthSchoolName   String?
-  twelfthBoard        String?
+  twelfthSchoolName    String?
+  twelfthBoard         String?
   twelfthYearOfPassing Int?
-  twelfthPercentage   String?
-  twelfthStream       String?
-  twelfthSubjects     String?
+  twelfthPercentage    String?
+  twelfthStream        String?
+  twelfthSubjects      String?
 
   // Father's Details
-  fatherName          String
-  fatherOccupation    String?
-  fatherPhone         String?
-  fatherEmail         String?
-  fatherAnnualIncome  String?
+  fatherName         String
+  fatherOccupation   String?
+  fatherPhone        String?
+  fatherEmail        String?
+  fatherAnnualIncome String?
 
   // Mother's Details
-  motherName          String
-  motherOccupation    String?
-  motherPhone         String?
+  motherName       String
+  motherOccupation String?
+  motherPhone      String?
 
   // Local Guardian Details
-  localGuardianName    String?
+  localGuardianName     String?
   localGuardianRelation String?
-  localGuardianPhone   String?
-  localGuardianAddress  String?    @db.Text
+  localGuardianPhone    String?
+  localGuardianAddress  String? @db.Text
 
   // Documents (URLs/paths to storage)
   photo               Json?
@@ -99,11 +99,11 @@ model Student {
   admissionForm       Json?
 
   // Status & Timestamps
-  admissionStatus     AdmissionStatus @default(DRAFT)
-  isActive            Boolean   @default(true)
-  deletedAt           DateTime?
-  createdAt           DateTime  @default(now())
-  updatedAt           DateTime  @updatedAt
+  admissionStatus AdmissionStatus @default(DRAFT)
+  isActive        Boolean         @default(true)
+  deletedAt       DateTime?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
 
   @@index([branchId])
   @@index([courseId])

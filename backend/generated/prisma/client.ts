@@ -47,30 +47,85 @@ export { Prisma }
  */
 export type Branch = Prisma.BranchModel
 /**
+ * Model VisitEnquiry
+ * 
+ */
+export type VisitEnquiry = Prisma.VisitEnquiryModel
+/**
+ * Model ItemDispatch
+ * 
+ */
+export type ItemDispatch = Prisma.ItemDispatchModel
+/**
+ * Model ItemReceive
+ * 
+ */
+export type ItemReceive = Prisma.ItemReceiveModel
+/**
+ * Model BranchWallet
+ * 
+ */
+export type BranchWallet = Prisma.BranchWalletModel
+/**
+ * Model BranchTransaction
+ * 
+ */
+export type BranchTransaction = Prisma.BranchTransactionModel
+/**
+ * Model BranchNotice
+ * 
+ */
+export type BranchNotice = Prisma.BranchNoticeModel
+/**
+ * Model BranchSettings
+ * 
+ */
+export type BranchSettings = Prisma.BranchSettingsModel
+/**
+ * Model BranchDirector
+ * 
+ */
+export type BranchDirector = Prisma.BranchDirectorModel
+/**
+ * Model BranchAddress
+ * 
+ */
+export type BranchAddress = Prisma.BranchAddressModel
+/**
+ * Model BranchLicense
+ * 
+ */
+export type BranchLicense = Prisma.BranchLicenseModel
+/**
+ * Model BranchRenewalHistory
+ * 
+ */
+export type BranchRenewalHistory = Prisma.BranchRenewalHistoryModel
+/**
+ * Model Course
+ * 
+ */
+export type Course = Prisma.CourseModel
+/**
+ * Model BranchCourse
+ * 
+ */
+export type BranchCourse = Prisma.BranchCourseModel
+/**
+ * Model Batch
+ * 
+ */
+export type Batch = Prisma.BatchModel
+/**
+ * Model BatchTiming
+ * 
+ */
+export type BatchTiming = Prisma.BatchTimingModel
+/**
  * Model Organization
  * 
  */
 export type Organization = Prisma.OrganizationModel
-/**
- * Model Role
- * 
- */
-export type Role = Prisma.RoleModel
-/**
- * Model Permission
- * 
- */
-export type Permission = Prisma.PermissionModel
-/**
- * Model RolePermission
- * 
- */
-export type RolePermission = Prisma.RolePermissionModel
-/**
- * Model UserRole
- * 
- */
-export type UserRole = Prisma.UserRoleModel
 /**
  * Model Student
  * 

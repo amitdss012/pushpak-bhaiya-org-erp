@@ -11,7 +11,7 @@ model Organization {
   // Basic Info
   name            String
   code            String    @unique
-  logo            String?
+  logo            Json?
   email           String    @unique
   phone           String
   website         String?

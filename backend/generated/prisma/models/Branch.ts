@@ -28,27 +28,22 @@ export type AggregateBranch = {
 
 export type BranchAvgAggregateOutputType = {
   establishedYear: number | null
-  latitude: number | null
-  longitude: number | null
   numComputers: number | null
   numFaculty: number | null
   numRooms: number | null
-  numFees: number | null
 }
 
 export type BranchSumAggregateOutputType = {
   establishedYear: number | null
-  latitude: number | null
-  longitude: number | null
   numComputers: number | null
   numFaculty: number | null
   numRooms: number | null
-  numFees: number | null
 }
 
 export type BranchMinAggregateOutputType = {
   id: string | null
   organizationId: string | null
+  userId: string | null
   name: string | null
   code: string | null
   branchType: $Enums.BranchType | null
@@ -57,41 +52,13 @@ export type BranchMinAggregateOutputType = {
   establishedYear: number | null
   website: string | null
   description: string | null
-  streetAddress: string | null
-  state: string | null
-  district: string | null
-  block: string | null
-  city: string | null
-  pincode: string | null
-  latitude: number | null
-  longitude: number | null
-  country: string | null
   phone: string | null
   altPhone: string | null
   whatsappNumber: string | null
   email: string | null
-  directorName: string | null
-  directorGender: $Enums.Gender | null
-  directorDOB: Date | null
-  directorBloodGroup: string | null
-  directorPhoto: string | null
-  directorSignature: string | null
-  directorAadharFront: string | null
-  directorAadharBack: string | null
   numComputers: number | null
   numFaculty: number | null
   numRooms: number | null
-  numFees: number | null
-  registrationDate: Date | null
-  validDate: Date | null
-  expiryDate: Date | null
-  renewalDate: Date | null
-  referralCode: string | null
-  branchMohar: string | null
-  branchPhoto: string | null
-  labPhoto: string | null
-  statusDocument: string | null
-  branchLogo: string | null
   isActive: boolean | null
   onlineEnrollment: boolean | null
   smsNotifications: boolean | null
@@ -104,6 +71,7 @@ export type BranchMinAggregateOutputType = {
 export type BranchMaxAggregateOutputType = {
   id: string | null
   organizationId: string | null
+  userId: string | null
   name: string | null
   code: string | null
   branchType: $Enums.BranchType | null
@@ -112,41 +80,13 @@ export type BranchMaxAggregateOutputType = {
   establishedYear: number | null
   website: string | null
   description: string | null
-  streetAddress: string | null
-  state: string | null
-  district: string | null
-  block: string | null
-  city: string | null
-  pincode: string | null
-  latitude: number | null
-  longitude: number | null
-  country: string | null
   phone: string | null
   altPhone: string | null
   whatsappNumber: string | null
   email: string | null
-  directorName: string | null
-  directorGender: $Enums.Gender | null
-  directorDOB: Date | null
-  directorBloodGroup: string | null
-  directorPhoto: string | null
-  directorSignature: string | null
-  directorAadharFront: string | null
-  directorAadharBack: string | null
   numComputers: number | null
   numFaculty: number | null
   numRooms: number | null
-  numFees: number | null
-  registrationDate: Date | null
-  validDate: Date | null
-  expiryDate: Date | null
-  renewalDate: Date | null
-  referralCode: string | null
-  branchMohar: string | null
-  branchPhoto: string | null
-  labPhoto: string | null
-  statusDocument: string | null
-  branchLogo: string | null
   isActive: boolean | null
   onlineEnrollment: boolean | null
   smsNotifications: boolean | null
@@ -159,6 +99,7 @@ export type BranchMaxAggregateOutputType = {
 export type BranchCountAggregateOutputType = {
   id: number
   organizationId: number
+  userId: number
   name: number
   code: number
   branchType: number
@@ -167,36 +108,13 @@ export type BranchCountAggregateOutputType = {
   establishedYear: number
   website: number
   description: number
-  streetAddress: number
-  state: number
-  district: number
-  block: number
-  city: number
-  pincode: number
-  latitude: number
-  longitude: number
-  country: number
   phone: number
   altPhone: number
   whatsappNumber: number
   email: number
-  directorName: number
-  directorGender: number
-  directorDOB: number
-  directorBloodGroup: number
-  directorPhoto: number
-  directorSignature: number
-  directorAadharFront: number
-  directorAadharBack: number
   numComputers: number
   numFaculty: number
   numRooms: number
-  numFees: number
-  registrationDate: number
-  validDate: number
-  expiryDate: number
-  renewalDate: number
-  referralCode: number
   branchMohar: number
   branchPhoto: number
   labPhoto: number
@@ -215,27 +133,22 @@ export type BranchCountAggregateOutputType = {
 
 export type BranchAvgAggregateInputType = {
   establishedYear?: true
-  latitude?: true
-  longitude?: true
   numComputers?: true
   numFaculty?: true
   numRooms?: true
-  numFees?: true
 }
 
 export type BranchSumAggregateInputType = {
   establishedYear?: true
-  latitude?: true
-  longitude?: true
   numComputers?: true
   numFaculty?: true
   numRooms?: true
-  numFees?: true
 }
 
 export type BranchMinAggregateInputType = {
   id?: true
   organizationId?: true
+  userId?: true
   name?: true
   code?: true
   branchType?: true
@@ -244,41 +157,13 @@ export type BranchMinAggregateInputType = {
   establishedYear?: true
   website?: true
   description?: true
-  streetAddress?: true
-  state?: true
-  district?: true
-  block?: true
-  city?: true
-  pincode?: true
-  latitude?: true
-  longitude?: true
-  country?: true
   phone?: true
   altPhone?: true
   whatsappNumber?: true
   email?: true
-  directorName?: true
-  directorGender?: true
-  directorDOB?: true
-  directorBloodGroup?: true
-  directorPhoto?: true
-  directorSignature?: true
-  directorAadharFront?: true
-  directorAadharBack?: true
   numComputers?: true
   numFaculty?: true
   numRooms?: true
-  numFees?: true
-  registrationDate?: true
-  validDate?: true
-  expiryDate?: true
-  renewalDate?: true
-  referralCode?: true
-  branchMohar?: true
-  branchPhoto?: true
-  labPhoto?: true
-  statusDocument?: true
-  branchLogo?: true
   isActive?: true
   onlineEnrollment?: true
   smsNotifications?: true
@@ -291,6 +176,7 @@ export type BranchMinAggregateInputType = {
 export type BranchMaxAggregateInputType = {
   id?: true
   organizationId?: true
+  userId?: true
   name?: true
   code?: true
   branchType?: true
@@ -299,41 +185,13 @@ export type BranchMaxAggregateInputType = {
   establishedYear?: true
   website?: true
   description?: true
-  streetAddress?: true
-  state?: true
-  district?: true
-  block?: true
-  city?: true
-  pincode?: true
-  latitude?: true
-  longitude?: true
-  country?: true
   phone?: true
   altPhone?: true
   whatsappNumber?: true
   email?: true
-  directorName?: true
-  directorGender?: true
-  directorDOB?: true
-  directorBloodGroup?: true
-  directorPhoto?: true
-  directorSignature?: true
-  directorAadharFront?: true
-  directorAadharBack?: true
   numComputers?: true
   numFaculty?: true
   numRooms?: true
-  numFees?: true
-  registrationDate?: true
-  validDate?: true
-  expiryDate?: true
-  renewalDate?: true
-  referralCode?: true
-  branchMohar?: true
-  branchPhoto?: true
-  labPhoto?: true
-  statusDocument?: true
-  branchLogo?: true
   isActive?: true
   onlineEnrollment?: true
   smsNotifications?: true
@@ -346,6 +204,7 @@ export type BranchMaxAggregateInputType = {
 export type BranchCountAggregateInputType = {
   id?: true
   organizationId?: true
+  userId?: true
   name?: true
   code?: true
   branchType?: true
@@ -354,36 +213,13 @@ export type BranchCountAggregateInputType = {
   establishedYear?: true
   website?: true
   description?: true
-  streetAddress?: true
-  state?: true
-  district?: true
-  block?: true
-  city?: true
-  pincode?: true
-  latitude?: true
-  longitude?: true
-  country?: true
   phone?: true
   altPhone?: true
   whatsappNumber?: true
   email?: true
-  directorName?: true
-  directorGender?: true
-  directorDOB?: true
-  directorBloodGroup?: true
-  directorPhoto?: true
-  directorSignature?: true
-  directorAadharFront?: true
-  directorAadharBack?: true
   numComputers?: true
   numFaculty?: true
   numRooms?: true
-  numFees?: true
-  registrationDate?: true
-  validDate?: true
-  expiryDate?: true
-  renewalDate?: true
-  referralCode?: true
   branchMohar?: true
   branchPhoto?: true
   labPhoto?: true
@@ -488,6 +324,7 @@ export type BranchGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 export type BranchGroupByOutputType = {
   id: string
   organizationId: string
+  userId: string
   name: string
   code: string
   branchType: $Enums.BranchType
@@ -496,41 +333,18 @@ export type BranchGroupByOutputType = {
   establishedYear: number | null
   website: string | null
   description: string | null
-  streetAddress: string
-  state: string
-  district: string
-  block: string | null
-  city: string
-  pincode: string
-  latitude: number | null
-  longitude: number | null
-  country: string
   phone: string
   altPhone: string | null
   whatsappNumber: string | null
   email: string
-  directorName: string
-  directorGender: $Enums.Gender
-  directorDOB: Date
-  directorBloodGroup: string | null
-  directorPhoto: string | null
-  directorSignature: string | null
-  directorAadharFront: string | null
-  directorAadharBack: string | null
   numComputers: number
   numFaculty: number
   numRooms: number
-  numFees: number
-  registrationDate: Date
-  validDate: Date | null
-  expiryDate: Date
-  renewalDate: Date | null
-  referralCode: string | null
-  branchMohar: string | null
-  branchPhoto: string | null
-  labPhoto: string | null
-  statusDocument: string | null
-  branchLogo: string | null
+  branchMohar: runtime.JsonValue | null
+  branchPhoto: runtime.JsonValue | null
+  labPhoto: runtime.JsonValue | null
+  statusDocument: runtime.JsonValue | null
+  branchLogo: runtime.JsonValue | null
   isActive: boolean
   onlineEnrollment: boolean
   smsNotifications: boolean
@@ -566,6 +380,7 @@ export type BranchWhereInput = {
   NOT?: Prisma.BranchWhereInput | Prisma.BranchWhereInput[]
   id?: Prisma.StringFilter<"Branch"> | string
   organizationId?: Prisma.StringFilter<"Branch"> | string
+  userId?: Prisma.StringFilter<"Branch"> | string
   name?: Prisma.StringFilter<"Branch"> | string
   code?: Prisma.StringFilter<"Branch"> | string
   branchType?: Prisma.EnumBranchTypeFilter<"Branch"> | $Enums.BranchType
@@ -574,41 +389,18 @@ export type BranchWhereInput = {
   establishedYear?: Prisma.IntNullableFilter<"Branch"> | number | null
   website?: Prisma.StringNullableFilter<"Branch"> | string | null
   description?: Prisma.StringNullableFilter<"Branch"> | string | null
-  streetAddress?: Prisma.StringFilter<"Branch"> | string
-  state?: Prisma.StringFilter<"Branch"> | string
-  district?: Prisma.StringFilter<"Branch"> | string
-  block?: Prisma.StringNullableFilter<"Branch"> | string | null
-  city?: Prisma.StringFilter<"Branch"> | string
-  pincode?: Prisma.StringFilter<"Branch"> | string
-  latitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
-  longitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
-  country?: Prisma.StringFilter<"Branch"> | string
   phone?: Prisma.StringFilter<"Branch"> | string
   altPhone?: Prisma.StringNullableFilter<"Branch"> | string | null
   whatsappNumber?: Prisma.StringNullableFilter<"Branch"> | string | null
   email?: Prisma.StringFilter<"Branch"> | string
-  directorName?: Prisma.StringFilter<"Branch"> | string
-  directorGender?: Prisma.EnumGenderFilter<"Branch"> | $Enums.Gender
-  directorDOB?: Prisma.DateTimeFilter<"Branch"> | Date | string
-  directorBloodGroup?: Prisma.StringNullableFilter<"Branch"> | string | null
-  directorPhoto?: Prisma.StringNullableFilter<"Branch"> | string | null
-  directorSignature?: Prisma.StringNullableFilter<"Branch"> | string | null
-  directorAadharFront?: Prisma.StringNullableFilter<"Branch"> | string | null
-  directorAadharBack?: Prisma.StringNullableFilter<"Branch"> | string | null
   numComputers?: Prisma.IntFilter<"Branch"> | number
   numFaculty?: Prisma.IntFilter<"Branch"> | number
   numRooms?: Prisma.IntFilter<"Branch"> | number
-  numFees?: Prisma.IntFilter<"Branch"> | number
-  registrationDate?: Prisma.DateTimeFilter<"Branch"> | Date | string
-  validDate?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
-  expiryDate?: Prisma.DateTimeFilter<"Branch"> | Date | string
-  renewalDate?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
-  referralCode?: Prisma.StringNullableFilter<"Branch"> | string | null
-  branchMohar?: Prisma.StringNullableFilter<"Branch"> | string | null
-  branchPhoto?: Prisma.StringNullableFilter<"Branch"> | string | null
-  labPhoto?: Prisma.StringNullableFilter<"Branch"> | string | null
-  statusDocument?: Prisma.StringNullableFilter<"Branch"> | string | null
-  branchLogo?: Prisma.StringNullableFilter<"Branch"> | string | null
+  branchMohar?: Prisma.JsonNullableFilter<"Branch">
+  branchPhoto?: Prisma.JsonNullableFilter<"Branch">
+  labPhoto?: Prisma.JsonNullableFilter<"Branch">
+  statusDocument?: Prisma.JsonNullableFilter<"Branch">
+  branchLogo?: Prisma.JsonNullableFilter<"Branch">
   isActive?: Prisma.BoolFilter<"Branch"> | boolean
   onlineEnrollment?: Prisma.BoolFilter<"Branch"> | boolean
   smsNotifications?: Prisma.BoolFilter<"Branch"> | boolean
@@ -617,14 +409,26 @@ export type BranchWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   students?: Prisma.StudentListRelationFilter
-  users?: Prisma.UserListRelationFilter
-  roles?: Prisma.RoleListRelationFilter
+  visitEnquiries?: Prisma.VisitEnquiryListRelationFilter
+  itemDispatches?: Prisma.ItemDispatchListRelationFilter
+  itemReceived?: Prisma.ItemReceiveListRelationFilter
+  assignedCourses?: Prisma.BranchCourseListRelationFilter
+  batches?: Prisma.BatchListRelationFilter
+  wallet?: Prisma.XOR<Prisma.BranchWalletNullableScalarRelationFilter, Prisma.BranchWalletWhereInput> | null
+  settings?: Prisma.XOR<Prisma.BranchSettingsNullableScalarRelationFilter, Prisma.BranchSettingsWhereInput> | null
+  transactions?: Prisma.BranchTransactionListRelationFilter
+  notices?: Prisma.BranchNoticeListRelationFilter
+  director?: Prisma.XOR<Prisma.BranchDirectorNullableScalarRelationFilter, Prisma.BranchDirectorWhereInput> | null
+  address?: Prisma.XOR<Prisma.BranchAddressNullableScalarRelationFilter, Prisma.BranchAddressWhereInput> | null
+  license?: Prisma.XOR<Prisma.BranchLicenseNullableScalarRelationFilter, Prisma.BranchLicenseWhereInput> | null
 }
 
 export type BranchOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
   branchType?: Prisma.SortOrder
@@ -633,36 +437,13 @@ export type BranchOrderByWithRelationInput = {
   establishedYear?: Prisma.SortOrderInput | Prisma.SortOrder
   website?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  streetAddress?: Prisma.SortOrder
-  state?: Prisma.SortOrder
-  district?: Prisma.SortOrder
-  block?: Prisma.SortOrderInput | Prisma.SortOrder
-  city?: Prisma.SortOrder
-  pincode?: Prisma.SortOrder
-  latitude?: Prisma.SortOrderInput | Prisma.SortOrder
-  longitude?: Prisma.SortOrderInput | Prisma.SortOrder
-  country?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   altPhone?: Prisma.SortOrderInput | Prisma.SortOrder
   whatsappNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
-  directorName?: Prisma.SortOrder
-  directorGender?: Prisma.SortOrder
-  directorDOB?: Prisma.SortOrder
-  directorBloodGroup?: Prisma.SortOrderInput | Prisma.SortOrder
-  directorPhoto?: Prisma.SortOrderInput | Prisma.SortOrder
-  directorSignature?: Prisma.SortOrderInput | Prisma.SortOrder
-  directorAadharFront?: Prisma.SortOrderInput | Prisma.SortOrder
-  directorAadharBack?: Prisma.SortOrderInput | Prisma.SortOrder
   numComputers?: Prisma.SortOrder
   numFaculty?: Prisma.SortOrder
   numRooms?: Prisma.SortOrder
-  numFees?: Prisma.SortOrder
-  registrationDate?: Prisma.SortOrder
-  validDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  expiryDate?: Prisma.SortOrder
-  renewalDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  referralCode?: Prisma.SortOrderInput | Prisma.SortOrder
   branchMohar?: Prisma.SortOrderInput | Prisma.SortOrder
   branchPhoto?: Prisma.SortOrderInput | Prisma.SortOrder
   labPhoto?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -676,13 +457,25 @@ export type BranchOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   organization?: Prisma.OrganizationOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
   students?: Prisma.StudentOrderByRelationAggregateInput
-  users?: Prisma.UserOrderByRelationAggregateInput
-  roles?: Prisma.RoleOrderByRelationAggregateInput
+  visitEnquiries?: Prisma.VisitEnquiryOrderByRelationAggregateInput
+  itemDispatches?: Prisma.ItemDispatchOrderByRelationAggregateInput
+  itemReceived?: Prisma.ItemReceiveOrderByRelationAggregateInput
+  assignedCourses?: Prisma.BranchCourseOrderByRelationAggregateInput
+  batches?: Prisma.BatchOrderByRelationAggregateInput
+  wallet?: Prisma.BranchWalletOrderByWithRelationInput
+  settings?: Prisma.BranchSettingsOrderByWithRelationInput
+  transactions?: Prisma.BranchTransactionOrderByRelationAggregateInput
+  notices?: Prisma.BranchNoticeOrderByRelationAggregateInput
+  director?: Prisma.BranchDirectorOrderByWithRelationInput
+  address?: Prisma.BranchAddressOrderByWithRelationInput
+  license?: Prisma.BranchLicenseOrderByWithRelationInput
 }
 
 export type BranchWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  userId?: string
   code?: string
   email?: string
   AND?: Prisma.BranchWhereInput | Prisma.BranchWhereInput[]
@@ -696,40 +489,17 @@ export type BranchWhereUniqueInput = Prisma.AtLeast<{
   establishedYear?: Prisma.IntNullableFilter<"Branch"> | number | null
   website?: Prisma.StringNullableFilter<"Branch"> | string | null
   description?: Prisma.StringNullableFilter<"Branch"> | string | null
-  streetAddress?: Prisma.StringFilter<"Branch"> | string
-  state?: Prisma.StringFilter<"Branch"> | string
-  district?: Prisma.StringFilter<"Branch"> | string
-  block?: Prisma.StringNullableFilter<"Branch"> | string | null
-  city?: Prisma.StringFilter<"Branch"> | string
-  pincode?: Prisma.StringFilter<"Branch"> | string
-  latitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
-  longitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
-  country?: Prisma.StringFilter<"Branch"> | string
   phone?: Prisma.StringFilter<"Branch"> | string
   altPhone?: Prisma.StringNullableFilter<"Branch"> | string | null
   whatsappNumber?: Prisma.StringNullableFilter<"Branch"> | string | null
-  directorName?: Prisma.StringFilter<"Branch"> | string
-  directorGender?: Prisma.EnumGenderFilter<"Branch"> | $Enums.Gender
-  directorDOB?: Prisma.DateTimeFilter<"Branch"> | Date | string
-  directorBloodGroup?: Prisma.StringNullableFilter<"Branch"> | string | null
-  directorPhoto?: Prisma.StringNullableFilter<"Branch"> | string | null
-  directorSignature?: Prisma.StringNullableFilter<"Branch"> | string | null
-  directorAadharFront?: Prisma.StringNullableFilter<"Branch"> | string | null
-  directorAadharBack?: Prisma.StringNullableFilter<"Branch"> | string | null
   numComputers?: Prisma.IntFilter<"Branch"> | number
   numFaculty?: Prisma.IntFilter<"Branch"> | number
   numRooms?: Prisma.IntFilter<"Branch"> | number
-  numFees?: Prisma.IntFilter<"Branch"> | number
-  registrationDate?: Prisma.DateTimeFilter<"Branch"> | Date | string
-  validDate?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
-  expiryDate?: Prisma.DateTimeFilter<"Branch"> | Date | string
-  renewalDate?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
-  referralCode?: Prisma.StringNullableFilter<"Branch"> | string | null
-  branchMohar?: Prisma.StringNullableFilter<"Branch"> | string | null
-  branchPhoto?: Prisma.StringNullableFilter<"Branch"> | string | null
-  labPhoto?: Prisma.StringNullableFilter<"Branch"> | string | null
-  statusDocument?: Prisma.StringNullableFilter<"Branch"> | string | null
-  branchLogo?: Prisma.StringNullableFilter<"Branch"> | string | null
+  branchMohar?: Prisma.JsonNullableFilter<"Branch">
+  branchPhoto?: Prisma.JsonNullableFilter<"Branch">
+  labPhoto?: Prisma.JsonNullableFilter<"Branch">
+  statusDocument?: Prisma.JsonNullableFilter<"Branch">
+  branchLogo?: Prisma.JsonNullableFilter<"Branch">
   isActive?: Prisma.BoolFilter<"Branch"> | boolean
   onlineEnrollment?: Prisma.BoolFilter<"Branch"> | boolean
   smsNotifications?: Prisma.BoolFilter<"Branch"> | boolean
@@ -738,14 +508,26 @@ export type BranchWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   students?: Prisma.StudentListRelationFilter
-  users?: Prisma.UserListRelationFilter
-  roles?: Prisma.RoleListRelationFilter
-}, "id" | "code" | "email">
+  visitEnquiries?: Prisma.VisitEnquiryListRelationFilter
+  itemDispatches?: Prisma.ItemDispatchListRelationFilter
+  itemReceived?: Prisma.ItemReceiveListRelationFilter
+  assignedCourses?: Prisma.BranchCourseListRelationFilter
+  batches?: Prisma.BatchListRelationFilter
+  wallet?: Prisma.XOR<Prisma.BranchWalletNullableScalarRelationFilter, Prisma.BranchWalletWhereInput> | null
+  settings?: Prisma.XOR<Prisma.BranchSettingsNullableScalarRelationFilter, Prisma.BranchSettingsWhereInput> | null
+  transactions?: Prisma.BranchTransactionListRelationFilter
+  notices?: Prisma.BranchNoticeListRelationFilter
+  director?: Prisma.XOR<Prisma.BranchDirectorNullableScalarRelationFilter, Prisma.BranchDirectorWhereInput> | null
+  address?: Prisma.XOR<Prisma.BranchAddressNullableScalarRelationFilter, Prisma.BranchAddressWhereInput> | null
+  license?: Prisma.XOR<Prisma.BranchLicenseNullableScalarRelationFilter, Prisma.BranchLicenseWhereInput> | null
+}, "id" | "userId" | "code" | "email">
 
 export type BranchOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
   branchType?: Prisma.SortOrder
@@ -754,36 +536,13 @@ export type BranchOrderByWithAggregationInput = {
   establishedYear?: Prisma.SortOrderInput | Prisma.SortOrder
   website?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  streetAddress?: Prisma.SortOrder
-  state?: Prisma.SortOrder
-  district?: Prisma.SortOrder
-  block?: Prisma.SortOrderInput | Prisma.SortOrder
-  city?: Prisma.SortOrder
-  pincode?: Prisma.SortOrder
-  latitude?: Prisma.SortOrderInput | Prisma.SortOrder
-  longitude?: Prisma.SortOrderInput | Prisma.SortOrder
-  country?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   altPhone?: Prisma.SortOrderInput | Prisma.SortOrder
   whatsappNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
-  directorName?: Prisma.SortOrder
-  directorGender?: Prisma.SortOrder
-  directorDOB?: Prisma.SortOrder
-  directorBloodGroup?: Prisma.SortOrderInput | Prisma.SortOrder
-  directorPhoto?: Prisma.SortOrderInput | Prisma.SortOrder
-  directorSignature?: Prisma.SortOrderInput | Prisma.SortOrder
-  directorAadharFront?: Prisma.SortOrderInput | Prisma.SortOrder
-  directorAadharBack?: Prisma.SortOrderInput | Prisma.SortOrder
   numComputers?: Prisma.SortOrder
   numFaculty?: Prisma.SortOrder
   numRooms?: Prisma.SortOrder
-  numFees?: Prisma.SortOrder
-  registrationDate?: Prisma.SortOrder
-  validDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  expiryDate?: Prisma.SortOrder
-  renewalDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  referralCode?: Prisma.SortOrderInput | Prisma.SortOrder
   branchMohar?: Prisma.SortOrderInput | Prisma.SortOrder
   branchPhoto?: Prisma.SortOrderInput | Prisma.SortOrder
   labPhoto?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -809,6 +568,7 @@ export type BranchScalarWhereWithAggregatesInput = {
   NOT?: Prisma.BranchScalarWhereWithAggregatesInput | Prisma.BranchScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Branch"> | string
   organizationId?: Prisma.StringWithAggregatesFilter<"Branch"> | string
+  userId?: Prisma.StringWithAggregatesFilter<"Branch"> | string
   name?: Prisma.StringWithAggregatesFilter<"Branch"> | string
   code?: Prisma.StringWithAggregatesFilter<"Branch"> | string
   branchType?: Prisma.EnumBranchTypeWithAggregatesFilter<"Branch"> | $Enums.BranchType
@@ -817,41 +577,18 @@ export type BranchScalarWhereWithAggregatesInput = {
   establishedYear?: Prisma.IntNullableWithAggregatesFilter<"Branch"> | number | null
   website?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
-  streetAddress?: Prisma.StringWithAggregatesFilter<"Branch"> | string
-  state?: Prisma.StringWithAggregatesFilter<"Branch"> | string
-  district?: Prisma.StringWithAggregatesFilter<"Branch"> | string
-  block?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
-  city?: Prisma.StringWithAggregatesFilter<"Branch"> | string
-  pincode?: Prisma.StringWithAggregatesFilter<"Branch"> | string
-  latitude?: Prisma.FloatNullableWithAggregatesFilter<"Branch"> | number | null
-  longitude?: Prisma.FloatNullableWithAggregatesFilter<"Branch"> | number | null
-  country?: Prisma.StringWithAggregatesFilter<"Branch"> | string
   phone?: Prisma.StringWithAggregatesFilter<"Branch"> | string
   altPhone?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
   whatsappNumber?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
   email?: Prisma.StringWithAggregatesFilter<"Branch"> | string
-  directorName?: Prisma.StringWithAggregatesFilter<"Branch"> | string
-  directorGender?: Prisma.EnumGenderWithAggregatesFilter<"Branch"> | $Enums.Gender
-  directorDOB?: Prisma.DateTimeWithAggregatesFilter<"Branch"> | Date | string
-  directorBloodGroup?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
-  directorPhoto?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
-  directorSignature?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
-  directorAadharFront?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
-  directorAadharBack?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
   numComputers?: Prisma.IntWithAggregatesFilter<"Branch"> | number
   numFaculty?: Prisma.IntWithAggregatesFilter<"Branch"> | number
   numRooms?: Prisma.IntWithAggregatesFilter<"Branch"> | number
-  numFees?: Prisma.IntWithAggregatesFilter<"Branch"> | number
-  registrationDate?: Prisma.DateTimeWithAggregatesFilter<"Branch"> | Date | string
-  validDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Branch"> | Date | string | null
-  expiryDate?: Prisma.DateTimeWithAggregatesFilter<"Branch"> | Date | string
-  renewalDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Branch"> | Date | string | null
-  referralCode?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
-  branchMohar?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
-  branchPhoto?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
-  labPhoto?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
-  statusDocument?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
-  branchLogo?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
+  branchMohar?: Prisma.JsonNullableWithAggregatesFilter<"Branch">
+  branchPhoto?: Prisma.JsonNullableWithAggregatesFilter<"Branch">
+  labPhoto?: Prisma.JsonNullableWithAggregatesFilter<"Branch">
+  statusDocument?: Prisma.JsonNullableWithAggregatesFilter<"Branch">
+  branchLogo?: Prisma.JsonNullableWithAggregatesFilter<"Branch">
   isActive?: Prisma.BoolWithAggregatesFilter<"Branch"> | boolean
   onlineEnrollment?: Prisma.BoolWithAggregatesFilter<"Branch"> | boolean
   smsNotifications?: Prisma.BoolWithAggregatesFilter<"Branch"> | boolean
@@ -871,41 +608,18 @@ export type BranchCreateInput = {
   establishedYear?: number | null
   website?: string | null
   description?: string | null
-  streetAddress: string
-  state: string
-  district: string
-  block?: string | null
-  city: string
-  pincode: string
-  latitude?: number | null
-  longitude?: number | null
-  country?: string
   phone: string
   altPhone?: string | null
   whatsappNumber?: string | null
   email: string
-  directorName: string
-  directorGender: $Enums.Gender
-  directorDOB: Date | string
-  directorBloodGroup?: string | null
-  directorPhoto?: string | null
-  directorSignature?: string | null
-  directorAadharFront?: string | null
-  directorAadharBack?: string | null
   numComputers?: number
   numFaculty?: number
   numRooms?: number
-  numFees?: number
-  registrationDate: Date | string
-  validDate?: Date | string | null
-  expiryDate: Date | string
-  renewalDate?: Date | string | null
-  referralCode?: string | null
-  branchMohar?: string | null
-  branchPhoto?: string | null
-  labPhoto?: string | null
-  statusDocument?: string | null
-  branchLogo?: string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   onlineEnrollment?: boolean
   smsNotifications?: boolean
@@ -914,14 +628,26 @@ export type BranchCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
+  user: Prisma.UserCreateNestedOneWithoutBranchInput
   students?: Prisma.StudentCreateNestedManyWithoutBranchInput
-  users?: Prisma.UserCreateNestedManyWithoutBranchInput
-  roles?: Prisma.RoleCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseCreateNestedOneWithoutBranchInput
 }
 
 export type BranchUncheckedCreateInput = {
   id?: string
   organizationId: string
+  userId: string
   name: string
   code: string
   branchType?: $Enums.BranchType
@@ -930,41 +656,18 @@ export type BranchUncheckedCreateInput = {
   establishedYear?: number | null
   website?: string | null
   description?: string | null
-  streetAddress: string
-  state: string
-  district: string
-  block?: string | null
-  city: string
-  pincode: string
-  latitude?: number | null
-  longitude?: number | null
-  country?: string
   phone: string
   altPhone?: string | null
   whatsappNumber?: string | null
   email: string
-  directorName: string
-  directorGender: $Enums.Gender
-  directorDOB: Date | string
-  directorBloodGroup?: string | null
-  directorPhoto?: string | null
-  directorSignature?: string | null
-  directorAadharFront?: string | null
-  directorAadharBack?: string | null
   numComputers?: number
   numFaculty?: number
   numRooms?: number
-  numFees?: number
-  registrationDate: Date | string
-  validDate?: Date | string | null
-  expiryDate: Date | string
-  renewalDate?: Date | string | null
-  referralCode?: string | null
-  branchMohar?: string | null
-  branchPhoto?: string | null
-  labPhoto?: string | null
-  statusDocument?: string | null
-  branchLogo?: string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   onlineEnrollment?: boolean
   smsNotifications?: boolean
@@ -973,8 +676,18 @@ export type BranchUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutBranchInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveUncheckedCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletUncheckedCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsUncheckedCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionUncheckedCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeUncheckedCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorUncheckedCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressUncheckedCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseUncheckedCreateNestedOneWithoutBranchInput
 }
 
 export type BranchUpdateInput = {
@@ -987,41 +700,18 @@ export type BranchUpdateInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  streetAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  country?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  directorName?: Prisma.StringFieldUpdateOperationsInput | string
-  directorGender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  directorDOB?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharFront?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharBack?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   numComputers?: Prisma.IntFieldUpdateOperationsInput | number
   numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
   numRooms?: Prisma.IntFieldUpdateOperationsInput | number
-  numFees?: Prisma.IntFieldUpdateOperationsInput | number
-  registrationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchMohar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  labPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  statusDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchLogo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1030,14 +720,26 @@ export type BranchUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBranchNestedInput
   students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
-  users?: Prisma.UserUpdateManyWithoutBranchNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUpdateOneWithoutBranchNestedInput
 }
 
 export type BranchUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
@@ -1046,41 +748,18 @@ export type BranchUncheckedUpdateInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  streetAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  country?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  directorName?: Prisma.StringFieldUpdateOperationsInput | string
-  directorGender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  directorDOB?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharFront?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharBack?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   numComputers?: Prisma.IntFieldUpdateOperationsInput | number
   numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
   numRooms?: Prisma.IntFieldUpdateOperationsInput | number
-  numFees?: Prisma.IntFieldUpdateOperationsInput | number
-  registrationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchMohar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  labPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  statusDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchLogo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1089,13 +768,24 @@ export type BranchUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
-  users?: Prisma.UserUncheckedUpdateManyWithoutBranchNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUncheckedUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUncheckedUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUncheckedUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUncheckedUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUncheckedUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUncheckedUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUncheckedUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUncheckedUpdateOneWithoutBranchNestedInput
 }
 
 export type BranchCreateManyInput = {
   id?: string
   organizationId: string
+  userId: string
   name: string
   code: string
   branchType?: $Enums.BranchType
@@ -1104,41 +794,18 @@ export type BranchCreateManyInput = {
   establishedYear?: number | null
   website?: string | null
   description?: string | null
-  streetAddress: string
-  state: string
-  district: string
-  block?: string | null
-  city: string
-  pincode: string
-  latitude?: number | null
-  longitude?: number | null
-  country?: string
   phone: string
   altPhone?: string | null
   whatsappNumber?: string | null
   email: string
-  directorName: string
-  directorGender: $Enums.Gender
-  directorDOB: Date | string
-  directorBloodGroup?: string | null
-  directorPhoto?: string | null
-  directorSignature?: string | null
-  directorAadharFront?: string | null
-  directorAadharBack?: string | null
   numComputers?: number
   numFaculty?: number
   numRooms?: number
-  numFees?: number
-  registrationDate: Date | string
-  validDate?: Date | string | null
-  expiryDate: Date | string
-  renewalDate?: Date | string | null
-  referralCode?: string | null
-  branchMohar?: string | null
-  branchPhoto?: string | null
-  labPhoto?: string | null
-  statusDocument?: string | null
-  branchLogo?: string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   onlineEnrollment?: boolean
   smsNotifications?: boolean
@@ -1158,41 +825,18 @@ export type BranchUpdateManyMutationInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  streetAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  country?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  directorName?: Prisma.StringFieldUpdateOperationsInput | string
-  directorGender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  directorDOB?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharFront?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharBack?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   numComputers?: Prisma.IntFieldUpdateOperationsInput | number
   numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
   numRooms?: Prisma.IntFieldUpdateOperationsInput | number
-  numFees?: Prisma.IntFieldUpdateOperationsInput | number
-  registrationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchMohar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  labPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  statusDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchLogo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1205,6 +849,7 @@ export type BranchUpdateManyMutationInput = {
 export type BranchUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
@@ -1213,41 +858,18 @@ export type BranchUncheckedUpdateManyInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  streetAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  country?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  directorName?: Prisma.StringFieldUpdateOperationsInput | string
-  directorGender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  directorDOB?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharFront?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharBack?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   numComputers?: Prisma.IntFieldUpdateOperationsInput | number
   numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
   numRooms?: Prisma.IntFieldUpdateOperationsInput | number
-  numFees?: Prisma.IntFieldUpdateOperationsInput | number
-  registrationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchMohar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  labPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  statusDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchLogo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1260,6 +882,7 @@ export type BranchUncheckedUpdateManyInput = {
 export type BranchCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
   branchType?: Prisma.SortOrder
@@ -1268,36 +891,13 @@ export type BranchCountOrderByAggregateInput = {
   establishedYear?: Prisma.SortOrder
   website?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  streetAddress?: Prisma.SortOrder
-  state?: Prisma.SortOrder
-  district?: Prisma.SortOrder
-  block?: Prisma.SortOrder
-  city?: Prisma.SortOrder
-  pincode?: Prisma.SortOrder
-  latitude?: Prisma.SortOrder
-  longitude?: Prisma.SortOrder
-  country?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   altPhone?: Prisma.SortOrder
   whatsappNumber?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  directorName?: Prisma.SortOrder
-  directorGender?: Prisma.SortOrder
-  directorDOB?: Prisma.SortOrder
-  directorBloodGroup?: Prisma.SortOrder
-  directorPhoto?: Prisma.SortOrder
-  directorSignature?: Prisma.SortOrder
-  directorAadharFront?: Prisma.SortOrder
-  directorAadharBack?: Prisma.SortOrder
   numComputers?: Prisma.SortOrder
   numFaculty?: Prisma.SortOrder
   numRooms?: Prisma.SortOrder
-  numFees?: Prisma.SortOrder
-  registrationDate?: Prisma.SortOrder
-  validDate?: Prisma.SortOrder
-  expiryDate?: Prisma.SortOrder
-  renewalDate?: Prisma.SortOrder
-  referralCode?: Prisma.SortOrder
   branchMohar?: Prisma.SortOrder
   branchPhoto?: Prisma.SortOrder
   labPhoto?: Prisma.SortOrder
@@ -1314,17 +914,15 @@ export type BranchCountOrderByAggregateInput = {
 
 export type BranchAvgOrderByAggregateInput = {
   establishedYear?: Prisma.SortOrder
-  latitude?: Prisma.SortOrder
-  longitude?: Prisma.SortOrder
   numComputers?: Prisma.SortOrder
   numFaculty?: Prisma.SortOrder
   numRooms?: Prisma.SortOrder
-  numFees?: Prisma.SortOrder
 }
 
 export type BranchMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
   branchType?: Prisma.SortOrder
@@ -1333,41 +931,13 @@ export type BranchMaxOrderByAggregateInput = {
   establishedYear?: Prisma.SortOrder
   website?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  streetAddress?: Prisma.SortOrder
-  state?: Prisma.SortOrder
-  district?: Prisma.SortOrder
-  block?: Prisma.SortOrder
-  city?: Prisma.SortOrder
-  pincode?: Prisma.SortOrder
-  latitude?: Prisma.SortOrder
-  longitude?: Prisma.SortOrder
-  country?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   altPhone?: Prisma.SortOrder
   whatsappNumber?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  directorName?: Prisma.SortOrder
-  directorGender?: Prisma.SortOrder
-  directorDOB?: Prisma.SortOrder
-  directorBloodGroup?: Prisma.SortOrder
-  directorPhoto?: Prisma.SortOrder
-  directorSignature?: Prisma.SortOrder
-  directorAadharFront?: Prisma.SortOrder
-  directorAadharBack?: Prisma.SortOrder
   numComputers?: Prisma.SortOrder
   numFaculty?: Prisma.SortOrder
   numRooms?: Prisma.SortOrder
-  numFees?: Prisma.SortOrder
-  registrationDate?: Prisma.SortOrder
-  validDate?: Prisma.SortOrder
-  expiryDate?: Prisma.SortOrder
-  renewalDate?: Prisma.SortOrder
-  referralCode?: Prisma.SortOrder
-  branchMohar?: Prisma.SortOrder
-  branchPhoto?: Prisma.SortOrder
-  labPhoto?: Prisma.SortOrder
-  statusDocument?: Prisma.SortOrder
-  branchLogo?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   onlineEnrollment?: Prisma.SortOrder
   smsNotifications?: Prisma.SortOrder
@@ -1380,6 +950,7 @@ export type BranchMaxOrderByAggregateInput = {
 export type BranchMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   code?: Prisma.SortOrder
   branchType?: Prisma.SortOrder
@@ -1388,41 +959,13 @@ export type BranchMinOrderByAggregateInput = {
   establishedYear?: Prisma.SortOrder
   website?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  streetAddress?: Prisma.SortOrder
-  state?: Prisma.SortOrder
-  district?: Prisma.SortOrder
-  block?: Prisma.SortOrder
-  city?: Prisma.SortOrder
-  pincode?: Prisma.SortOrder
-  latitude?: Prisma.SortOrder
-  longitude?: Prisma.SortOrder
-  country?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   altPhone?: Prisma.SortOrder
   whatsappNumber?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  directorName?: Prisma.SortOrder
-  directorGender?: Prisma.SortOrder
-  directorDOB?: Prisma.SortOrder
-  directorBloodGroup?: Prisma.SortOrder
-  directorPhoto?: Prisma.SortOrder
-  directorSignature?: Prisma.SortOrder
-  directorAadharFront?: Prisma.SortOrder
-  directorAadharBack?: Prisma.SortOrder
   numComputers?: Prisma.SortOrder
   numFaculty?: Prisma.SortOrder
   numRooms?: Prisma.SortOrder
-  numFees?: Prisma.SortOrder
-  registrationDate?: Prisma.SortOrder
-  validDate?: Prisma.SortOrder
-  expiryDate?: Prisma.SortOrder
-  renewalDate?: Prisma.SortOrder
-  referralCode?: Prisma.SortOrder
-  branchMohar?: Prisma.SortOrder
-  branchPhoto?: Prisma.SortOrder
-  labPhoto?: Prisma.SortOrder
-  statusDocument?: Prisma.SortOrder
-  branchLogo?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   onlineEnrollment?: Prisma.SortOrder
   smsNotifications?: Prisma.SortOrder
@@ -1434,12 +977,19 @@ export type BranchMinOrderByAggregateInput = {
 
 export type BranchSumOrderByAggregateInput = {
   establishedYear?: Prisma.SortOrder
-  latitude?: Prisma.SortOrder
-  longitude?: Prisma.SortOrder
   numComputers?: Prisma.SortOrder
   numFaculty?: Prisma.SortOrder
   numRooms?: Prisma.SortOrder
-  numFees?: Prisma.SortOrder
+}
+
+export type BranchScalarRelationFilter = {
+  is?: Prisma.BranchWhereInput
+  isNot?: Prisma.BranchWhereInput
+}
+
+export type BranchNullableScalarRelationFilter = {
+  is?: Prisma.BranchWhereInput | null
+  isNot?: Prisma.BranchWhereInput | null
 }
 
 export type BranchListRelationFilter = {
@@ -1450,16 +1000,6 @@ export type BranchListRelationFilter = {
 
 export type BranchOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type BranchNullableScalarRelationFilter = {
-  is?: Prisma.BranchWhereInput | null
-  isNot?: Prisma.BranchWhereInput | null
-}
-
-export type BranchScalarRelationFilter = {
-  is?: Prisma.BranchWhereInput
-  isNot?: Prisma.BranchWhereInput
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -1486,22 +1026,6 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
-export type NullableFloatFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
-export type EnumGenderFieldUpdateOperationsInput = {
-  set?: $Enums.Gender
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
-}
-
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
@@ -1510,12 +1034,186 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
+}
+
+export type BranchCreateNestedOneWithoutVisitEnquiriesInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutVisitEnquiriesInput, Prisma.BranchUncheckedCreateWithoutVisitEnquiriesInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutVisitEnquiriesInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutVisitEnquiriesNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutVisitEnquiriesInput, Prisma.BranchUncheckedCreateWithoutVisitEnquiriesInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutVisitEnquiriesInput
+  upsert?: Prisma.BranchUpsertWithoutVisitEnquiriesInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutVisitEnquiriesInput, Prisma.BranchUpdateWithoutVisitEnquiriesInput>, Prisma.BranchUncheckedUpdateWithoutVisitEnquiriesInput>
+}
+
+export type BranchCreateNestedOneWithoutItemDispatchesInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutItemDispatchesInput, Prisma.BranchUncheckedCreateWithoutItemDispatchesInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutItemDispatchesInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutItemDispatchesNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutItemDispatchesInput, Prisma.BranchUncheckedCreateWithoutItemDispatchesInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutItemDispatchesInput
+  upsert?: Prisma.BranchUpsertWithoutItemDispatchesInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutItemDispatchesInput, Prisma.BranchUpdateWithoutItemDispatchesInput>, Prisma.BranchUncheckedUpdateWithoutItemDispatchesInput>
+}
+
+export type BranchCreateNestedOneWithoutItemReceivedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutItemReceivedInput, Prisma.BranchUncheckedCreateWithoutItemReceivedInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutItemReceivedInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutItemReceivedNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutItemReceivedInput, Prisma.BranchUncheckedCreateWithoutItemReceivedInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutItemReceivedInput
+  upsert?: Prisma.BranchUpsertWithoutItemReceivedInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutItemReceivedInput, Prisma.BranchUpdateWithoutItemReceivedInput>, Prisma.BranchUncheckedUpdateWithoutItemReceivedInput>
+}
+
+export type BranchCreateNestedOneWithoutWalletInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutWalletInput, Prisma.BranchUncheckedCreateWithoutWalletInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutWalletInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutWalletNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutWalletInput, Prisma.BranchUncheckedCreateWithoutWalletInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutWalletInput
+  upsert?: Prisma.BranchUpsertWithoutWalletInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutWalletInput, Prisma.BranchUpdateWithoutWalletInput>, Prisma.BranchUncheckedUpdateWithoutWalletInput>
+}
+
+export type BranchCreateNestedOneWithoutTransactionsInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutTransactionsInput, Prisma.BranchUncheckedCreateWithoutTransactionsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutTransactionsInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutTransactionsInput, Prisma.BranchUncheckedCreateWithoutTransactionsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutTransactionsInput
+  upsert?: Prisma.BranchUpsertWithoutTransactionsInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutTransactionsInput, Prisma.BranchUpdateWithoutTransactionsInput>, Prisma.BranchUncheckedUpdateWithoutTransactionsInput>
+}
+
+export type BranchCreateNestedOneWithoutNoticesInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutNoticesInput, Prisma.BranchUncheckedCreateWithoutNoticesInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutNoticesInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneWithoutNoticesNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutNoticesInput, Prisma.BranchUncheckedCreateWithoutNoticesInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutNoticesInput
+  upsert?: Prisma.BranchUpsertWithoutNoticesInput
+  disconnect?: Prisma.BranchWhereInput | boolean
+  delete?: Prisma.BranchWhereInput | boolean
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutNoticesInput, Prisma.BranchUpdateWithoutNoticesInput>, Prisma.BranchUncheckedUpdateWithoutNoticesInput>
+}
+
+export type BranchCreateNestedOneWithoutSettingsInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutSettingsInput, Prisma.BranchUncheckedCreateWithoutSettingsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutSettingsInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutSettingsNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutSettingsInput, Prisma.BranchUncheckedCreateWithoutSettingsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutSettingsInput
+  upsert?: Prisma.BranchUpsertWithoutSettingsInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutSettingsInput, Prisma.BranchUpdateWithoutSettingsInput>, Prisma.BranchUncheckedUpdateWithoutSettingsInput>
+}
+
+export type BranchCreateNestedOneWithoutDirectorInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutDirectorInput, Prisma.BranchUncheckedCreateWithoutDirectorInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutDirectorInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutDirectorNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutDirectorInput, Prisma.BranchUncheckedCreateWithoutDirectorInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutDirectorInput
+  upsert?: Prisma.BranchUpsertWithoutDirectorInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutDirectorInput, Prisma.BranchUpdateWithoutDirectorInput>, Prisma.BranchUncheckedUpdateWithoutDirectorInput>
+}
+
+export type BranchCreateNestedOneWithoutAddressInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutAddressInput, Prisma.BranchUncheckedCreateWithoutAddressInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutAddressInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutAddressNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutAddressInput, Prisma.BranchUncheckedCreateWithoutAddressInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutAddressInput
+  upsert?: Prisma.BranchUpsertWithoutAddressInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutAddressInput, Prisma.BranchUpdateWithoutAddressInput>, Prisma.BranchUncheckedUpdateWithoutAddressInput>
+}
+
+export type BranchCreateNestedOneWithoutLicenseInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutLicenseInput, Prisma.BranchUncheckedCreateWithoutLicenseInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutLicenseInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutLicenseNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutLicenseInput, Prisma.BranchUncheckedCreateWithoutLicenseInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutLicenseInput
+  upsert?: Prisma.BranchUpsertWithoutLicenseInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutLicenseInput, Prisma.BranchUpdateWithoutLicenseInput>, Prisma.BranchUncheckedUpdateWithoutLicenseInput>
+}
+
+export type BranchCreateNestedOneWithoutAssignedCoursesInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutAssignedCoursesInput, Prisma.BranchUncheckedCreateWithoutAssignedCoursesInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutAssignedCoursesInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutAssignedCoursesNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutAssignedCoursesInput, Prisma.BranchUncheckedCreateWithoutAssignedCoursesInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutAssignedCoursesInput
+  upsert?: Prisma.BranchUpsertWithoutAssignedCoursesInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutAssignedCoursesInput, Prisma.BranchUpdateWithoutAssignedCoursesInput>, Prisma.BranchUncheckedUpdateWithoutAssignedCoursesInput>
+}
+
+export type BranchCreateNestedOneWithoutBatchesInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutBatchesInput, Prisma.BranchUncheckedCreateWithoutBatchesInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutBatchesInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutBatchesNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutBatchesInput, Prisma.BranchUncheckedCreateWithoutBatchesInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutBatchesInput
+  upsert?: Prisma.BranchUpsertWithoutBatchesInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutBatchesInput, Prisma.BranchUpdateWithoutBatchesInput>, Prisma.BranchUncheckedUpdateWithoutBatchesInput>
 }
 
 export type BranchCreateNestedManyWithoutOrganizationInput = {
@@ -1560,22 +1258,6 @@ export type BranchUncheckedUpdateManyWithoutOrganizationNestedInput = {
   deleteMany?: Prisma.BranchScalarWhereInput | Prisma.BranchScalarWhereInput[]
 }
 
-export type BranchCreateNestedOneWithoutRolesInput = {
-  create?: Prisma.XOR<Prisma.BranchCreateWithoutRolesInput, Prisma.BranchUncheckedCreateWithoutRolesInput>
-  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutRolesInput
-  connect?: Prisma.BranchWhereUniqueInput
-}
-
-export type BranchUpdateOneWithoutRolesNestedInput = {
-  create?: Prisma.XOR<Prisma.BranchCreateWithoutRolesInput, Prisma.BranchUncheckedCreateWithoutRolesInput>
-  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutRolesInput
-  upsert?: Prisma.BranchUpsertWithoutRolesInput
-  disconnect?: Prisma.BranchWhereInput | boolean
-  delete?: Prisma.BranchWhereInput | boolean
-  connect?: Prisma.BranchWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutRolesInput, Prisma.BranchUpdateWithoutRolesInput>, Prisma.BranchUncheckedUpdateWithoutRolesInput>
-}
-
 export type BranchCreateNestedOneWithoutStudentsInput = {
   create?: Prisma.XOR<Prisma.BranchCreateWithoutStudentsInput, Prisma.BranchUncheckedCreateWithoutStudentsInput>
   connectOrCreate?: Prisma.BranchCreateOrConnectWithoutStudentsInput
@@ -1590,20 +1272,2388 @@ export type BranchUpdateOneRequiredWithoutStudentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutStudentsInput, Prisma.BranchUpdateWithoutStudentsInput>, Prisma.BranchUncheckedUpdateWithoutStudentsInput>
 }
 
-export type BranchCreateNestedOneWithoutUsersInput = {
-  create?: Prisma.XOR<Prisma.BranchCreateWithoutUsersInput, Prisma.BranchUncheckedCreateWithoutUsersInput>
-  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutUsersInput
+export type BranchCreateNestedOneWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutUserInput, Prisma.BranchUncheckedCreateWithoutUserInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutUserInput
   connect?: Prisma.BranchWhereUniqueInput
 }
 
-export type BranchUpdateOneWithoutUsersNestedInput = {
-  create?: Prisma.XOR<Prisma.BranchCreateWithoutUsersInput, Prisma.BranchUncheckedCreateWithoutUsersInput>
-  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutUsersInput
-  upsert?: Prisma.BranchUpsertWithoutUsersInput
+export type BranchUncheckedCreateNestedOneWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutUserInput, Prisma.BranchUncheckedCreateWithoutUserInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutUserInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutUserInput, Prisma.BranchUncheckedCreateWithoutUserInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutUserInput
+  upsert?: Prisma.BranchUpsertWithoutUserInput
   disconnect?: Prisma.BranchWhereInput | boolean
   delete?: Prisma.BranchWhereInput | boolean
   connect?: Prisma.BranchWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutUsersInput, Prisma.BranchUpdateWithoutUsersInput>, Prisma.BranchUncheckedUpdateWithoutUsersInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutUserInput, Prisma.BranchUpdateWithoutUserInput>, Prisma.BranchUncheckedUpdateWithoutUserInput>
+}
+
+export type BranchUncheckedUpdateOneWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutUserInput, Prisma.BranchUncheckedCreateWithoutUserInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutUserInput
+  upsert?: Prisma.BranchUpsertWithoutUserInput
+  disconnect?: Prisma.BranchWhereInput | boolean
+  delete?: Prisma.BranchWhereInput | boolean
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutUserInput, Prisma.BranchUpdateWithoutUserInput>, Prisma.BranchUncheckedUpdateWithoutUserInput>
+}
+
+export type BranchCreateWithoutVisitEnquiriesInput = {
+  id?: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
+  user: Prisma.UserCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseCreateNestedOneWithoutBranchInput
+}
+
+export type BranchUncheckedCreateWithoutVisitEnquiriesInput = {
+  id?: string
+  organizationId: string
+  userId: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveUncheckedCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletUncheckedCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsUncheckedCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionUncheckedCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeUncheckedCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorUncheckedCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressUncheckedCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseUncheckedCreateNestedOneWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutVisitEnquiriesInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutVisitEnquiriesInput, Prisma.BranchUncheckedCreateWithoutVisitEnquiriesInput>
+}
+
+export type BranchUpsertWithoutVisitEnquiriesInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutVisitEnquiriesInput, Prisma.BranchUncheckedUpdateWithoutVisitEnquiriesInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutVisitEnquiriesInput, Prisma.BranchUncheckedCreateWithoutVisitEnquiriesInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutVisitEnquiriesInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutVisitEnquiriesInput, Prisma.BranchUncheckedUpdateWithoutVisitEnquiriesInput>
+}
+
+export type BranchUpdateWithoutVisitEnquiriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBranchNestedInput
+  students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutVisitEnquiriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUncheckedUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUncheckedUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUncheckedUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUncheckedUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUncheckedUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUncheckedUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUncheckedUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUncheckedUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchCreateWithoutItemDispatchesInput = {
+  id?: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
+  user: Prisma.UserCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseCreateNestedOneWithoutBranchInput
+}
+
+export type BranchUncheckedCreateWithoutItemDispatchesInput = {
+  id?: string
+  organizationId: string
+  userId: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveUncheckedCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletUncheckedCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsUncheckedCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionUncheckedCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeUncheckedCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorUncheckedCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressUncheckedCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseUncheckedCreateNestedOneWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutItemDispatchesInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutItemDispatchesInput, Prisma.BranchUncheckedCreateWithoutItemDispatchesInput>
+}
+
+export type BranchUpsertWithoutItemDispatchesInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutItemDispatchesInput, Prisma.BranchUncheckedUpdateWithoutItemDispatchesInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutItemDispatchesInput, Prisma.BranchUncheckedCreateWithoutItemDispatchesInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutItemDispatchesInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutItemDispatchesInput, Prisma.BranchUncheckedUpdateWithoutItemDispatchesInput>
+}
+
+export type BranchUpdateWithoutItemDispatchesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBranchNestedInput
+  students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutItemDispatchesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUncheckedUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUncheckedUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUncheckedUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUncheckedUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUncheckedUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUncheckedUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUncheckedUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUncheckedUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchCreateWithoutItemReceivedInput = {
+  id?: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
+  user: Prisma.UserCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseCreateNestedOneWithoutBranchInput
+}
+
+export type BranchUncheckedCreateWithoutItemReceivedInput = {
+  id?: string
+  organizationId: string
+  userId: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletUncheckedCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsUncheckedCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionUncheckedCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeUncheckedCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorUncheckedCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressUncheckedCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseUncheckedCreateNestedOneWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutItemReceivedInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutItemReceivedInput, Prisma.BranchUncheckedCreateWithoutItemReceivedInput>
+}
+
+export type BranchUpsertWithoutItemReceivedInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutItemReceivedInput, Prisma.BranchUncheckedUpdateWithoutItemReceivedInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutItemReceivedInput, Prisma.BranchUncheckedCreateWithoutItemReceivedInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutItemReceivedInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutItemReceivedInput, Prisma.BranchUncheckedUpdateWithoutItemReceivedInput>
+}
+
+export type BranchUpdateWithoutItemReceivedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBranchNestedInput
+  students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutItemReceivedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUncheckedUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUncheckedUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUncheckedUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUncheckedUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUncheckedUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUncheckedUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUncheckedUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchCreateWithoutWalletInput = {
+  id?: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
+  user: Prisma.UserCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  settings?: Prisma.BranchSettingsCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseCreateNestedOneWithoutBranchInput
+}
+
+export type BranchUncheckedCreateWithoutWalletInput = {
+  id?: string
+  organizationId: string
+  userId: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveUncheckedCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  settings?: Prisma.BranchSettingsUncheckedCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionUncheckedCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeUncheckedCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorUncheckedCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressUncheckedCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseUncheckedCreateNestedOneWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutWalletInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutWalletInput, Prisma.BranchUncheckedCreateWithoutWalletInput>
+}
+
+export type BranchUpsertWithoutWalletInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutWalletInput, Prisma.BranchUncheckedUpdateWithoutWalletInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutWalletInput, Prisma.BranchUncheckedCreateWithoutWalletInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutWalletInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutWalletInput, Prisma.BranchUncheckedUpdateWithoutWalletInput>
+}
+
+export type BranchUpdateWithoutWalletInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBranchNestedInput
+  students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutWalletInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUncheckedUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUncheckedUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUncheckedUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUncheckedUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUncheckedUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUncheckedUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUncheckedUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchCreateWithoutTransactionsInput = {
+  id?: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
+  user: Prisma.UserCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsCreateNestedOneWithoutBranchInput
+  notices?: Prisma.BranchNoticeCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseCreateNestedOneWithoutBranchInput
+}
+
+export type BranchUncheckedCreateWithoutTransactionsInput = {
+  id?: string
+  organizationId: string
+  userId: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveUncheckedCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletUncheckedCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsUncheckedCreateNestedOneWithoutBranchInput
+  notices?: Prisma.BranchNoticeUncheckedCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorUncheckedCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressUncheckedCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseUncheckedCreateNestedOneWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutTransactionsInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutTransactionsInput, Prisma.BranchUncheckedCreateWithoutTransactionsInput>
+}
+
+export type BranchUpsertWithoutTransactionsInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutTransactionsInput, Prisma.BranchUncheckedUpdateWithoutTransactionsInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutTransactionsInput, Prisma.BranchUncheckedCreateWithoutTransactionsInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutTransactionsInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutTransactionsInput, Prisma.BranchUncheckedUpdateWithoutTransactionsInput>
+}
+
+export type BranchUpdateWithoutTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBranchNestedInput
+  students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUpdateOneWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUncheckedUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUncheckedUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUncheckedUpdateOneWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUncheckedUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUncheckedUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUncheckedUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUncheckedUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchCreateWithoutNoticesInput = {
+  id?: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
+  user: Prisma.UserCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseCreateNestedOneWithoutBranchInput
+}
+
+export type BranchUncheckedCreateWithoutNoticesInput = {
+  id?: string
+  organizationId: string
+  userId: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveUncheckedCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletUncheckedCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsUncheckedCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionUncheckedCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorUncheckedCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressUncheckedCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseUncheckedCreateNestedOneWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutNoticesInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutNoticesInput, Prisma.BranchUncheckedCreateWithoutNoticesInput>
+}
+
+export type BranchUpsertWithoutNoticesInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutNoticesInput, Prisma.BranchUncheckedUpdateWithoutNoticesInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutNoticesInput, Prisma.BranchUncheckedCreateWithoutNoticesInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutNoticesInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutNoticesInput, Prisma.BranchUncheckedUpdateWithoutNoticesInput>
+}
+
+export type BranchUpdateWithoutNoticesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBranchNestedInput
+  students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutNoticesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUncheckedUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUncheckedUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUncheckedUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUncheckedUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUncheckedUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUncheckedUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUncheckedUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchCreateWithoutSettingsInput = {
+  id?: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
+  user: Prisma.UserCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseCreateNestedOneWithoutBranchInput
+}
+
+export type BranchUncheckedCreateWithoutSettingsInput = {
+  id?: string
+  organizationId: string
+  userId: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveUncheckedCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletUncheckedCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionUncheckedCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeUncheckedCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorUncheckedCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressUncheckedCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseUncheckedCreateNestedOneWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutSettingsInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutSettingsInput, Prisma.BranchUncheckedCreateWithoutSettingsInput>
+}
+
+export type BranchUpsertWithoutSettingsInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutSettingsInput, Prisma.BranchUncheckedUpdateWithoutSettingsInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutSettingsInput, Prisma.BranchUncheckedCreateWithoutSettingsInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutSettingsInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutSettingsInput, Prisma.BranchUncheckedUpdateWithoutSettingsInput>
+}
+
+export type BranchUpdateWithoutSettingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBranchNestedInput
+  students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutSettingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUncheckedUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUncheckedUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUncheckedUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUncheckedUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUncheckedUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUncheckedUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUncheckedUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchCreateWithoutDirectorInput = {
+  id?: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
+  user: Prisma.UserCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeCreateNestedManyWithoutBranchInput
+  address?: Prisma.BranchAddressCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseCreateNestedOneWithoutBranchInput
+}
+
+export type BranchUncheckedCreateWithoutDirectorInput = {
+  id?: string
+  organizationId: string
+  userId: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveUncheckedCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletUncheckedCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsUncheckedCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionUncheckedCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeUncheckedCreateNestedManyWithoutBranchInput
+  address?: Prisma.BranchAddressUncheckedCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseUncheckedCreateNestedOneWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutDirectorInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutDirectorInput, Prisma.BranchUncheckedCreateWithoutDirectorInput>
+}
+
+export type BranchUpsertWithoutDirectorInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutDirectorInput, Prisma.BranchUncheckedUpdateWithoutDirectorInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutDirectorInput, Prisma.BranchUncheckedCreateWithoutDirectorInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutDirectorInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutDirectorInput, Prisma.BranchUncheckedUpdateWithoutDirectorInput>
+}
+
+export type BranchUpdateWithoutDirectorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBranchNestedInput
+  students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUpdateManyWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutDirectorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUncheckedUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUncheckedUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUncheckedUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUncheckedUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUncheckedUpdateManyWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUncheckedUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUncheckedUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchCreateWithoutAddressInput = {
+  id?: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
+  user: Prisma.UserCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseCreateNestedOneWithoutBranchInput
+}
+
+export type BranchUncheckedCreateWithoutAddressInput = {
+  id?: string
+  organizationId: string
+  userId: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveUncheckedCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletUncheckedCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsUncheckedCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionUncheckedCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeUncheckedCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorUncheckedCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseUncheckedCreateNestedOneWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutAddressInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutAddressInput, Prisma.BranchUncheckedCreateWithoutAddressInput>
+}
+
+export type BranchUpsertWithoutAddressInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutAddressInput, Prisma.BranchUncheckedUpdateWithoutAddressInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutAddressInput, Prisma.BranchUncheckedCreateWithoutAddressInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutAddressInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutAddressInput, Prisma.BranchUncheckedUpdateWithoutAddressInput>
+}
+
+export type BranchUpdateWithoutAddressInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBranchNestedInput
+  students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutAddressInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUncheckedUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUncheckedUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUncheckedUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUncheckedUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUncheckedUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUncheckedUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUncheckedUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchCreateWithoutLicenseInput = {
+  id?: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
+  user: Prisma.UserCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressCreateNestedOneWithoutBranchInput
+}
+
+export type BranchUncheckedCreateWithoutLicenseInput = {
+  id?: string
+  organizationId: string
+  userId: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveUncheckedCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletUncheckedCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsUncheckedCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionUncheckedCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeUncheckedCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorUncheckedCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressUncheckedCreateNestedOneWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutLicenseInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutLicenseInput, Prisma.BranchUncheckedCreateWithoutLicenseInput>
+}
+
+export type BranchUpsertWithoutLicenseInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutLicenseInput, Prisma.BranchUncheckedUpdateWithoutLicenseInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutLicenseInput, Prisma.BranchUncheckedCreateWithoutLicenseInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutLicenseInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutLicenseInput, Prisma.BranchUncheckedUpdateWithoutLicenseInput>
+}
+
+export type BranchUpdateWithoutLicenseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBranchNestedInput
+  students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutLicenseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUncheckedUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUncheckedUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUncheckedUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUncheckedUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUncheckedUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUncheckedUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUncheckedUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchCreateWithoutAssignedCoursesInput = {
+  id?: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
+  user: Prisma.UserCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseCreateNestedOneWithoutBranchInput
+}
+
+export type BranchUncheckedCreateWithoutAssignedCoursesInput = {
+  id?: string
+  organizationId: string
+  userId: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletUncheckedCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsUncheckedCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionUncheckedCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeUncheckedCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorUncheckedCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressUncheckedCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseUncheckedCreateNestedOneWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutAssignedCoursesInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutAssignedCoursesInput, Prisma.BranchUncheckedCreateWithoutAssignedCoursesInput>
+}
+
+export type BranchUpsertWithoutAssignedCoursesInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutAssignedCoursesInput, Prisma.BranchUncheckedUpdateWithoutAssignedCoursesInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutAssignedCoursesInput, Prisma.BranchUncheckedCreateWithoutAssignedCoursesInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutAssignedCoursesInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutAssignedCoursesInput, Prisma.BranchUncheckedUpdateWithoutAssignedCoursesInput>
+}
+
+export type BranchUpdateWithoutAssignedCoursesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBranchNestedInput
+  students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutAssignedCoursesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUncheckedUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUncheckedUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUncheckedUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUncheckedUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUncheckedUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUncheckedUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUncheckedUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchCreateWithoutBatchesInput = {
+  id?: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
+  user: Prisma.UserCreateNestedOneWithoutBranchInput
+  students?: Prisma.StudentCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseCreateNestedOneWithoutBranchInput
+}
+
+export type BranchUncheckedCreateWithoutBatchesInput = {
+  id?: string
+  organizationId: string
+  userId: string
+  name: string
+  code: string
+  branchType?: $Enums.BranchType
+  instituteType?: $Enums.InstituteType
+  academicYear: string
+  establishedYear?: number | null
+  website?: string | null
+  description?: string | null
+  phone: string
+  altPhone?: string | null
+  whatsappNumber?: string | null
+  email: string
+  numComputers?: number
+  numFaculty?: number
+  numRooms?: number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveUncheckedCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseUncheckedCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletUncheckedCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsUncheckedCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionUncheckedCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeUncheckedCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorUncheckedCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressUncheckedCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseUncheckedCreateNestedOneWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutBatchesInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutBatchesInput, Prisma.BranchUncheckedCreateWithoutBatchesInput>
+}
+
+export type BranchUpsertWithoutBatchesInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutBatchesInput, Prisma.BranchUncheckedUpdateWithoutBatchesInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutBatchesInput, Prisma.BranchUncheckedCreateWithoutBatchesInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutBatchesInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutBatchesInput, Prisma.BranchUncheckedUpdateWithoutBatchesInput>
+}
+
+export type BranchUpdateWithoutBatchesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBranchNestedInput
+  students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUpdateOneWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutBatchesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
+  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
+  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
+  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUncheckedUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUncheckedUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUncheckedUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUncheckedUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUncheckedUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUncheckedUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUncheckedUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUncheckedUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUncheckedUpdateOneWithoutBranchNestedInput
 }
 
 export type BranchCreateWithoutOrganizationInput = {
@@ -1616,41 +3666,18 @@ export type BranchCreateWithoutOrganizationInput = {
   establishedYear?: number | null
   website?: string | null
   description?: string | null
-  streetAddress: string
-  state: string
-  district: string
-  block?: string | null
-  city: string
-  pincode: string
-  latitude?: number | null
-  longitude?: number | null
-  country?: string
   phone: string
   altPhone?: string | null
   whatsappNumber?: string | null
   email: string
-  directorName: string
-  directorGender: $Enums.Gender
-  directorDOB: Date | string
-  directorBloodGroup?: string | null
-  directorPhoto?: string | null
-  directorSignature?: string | null
-  directorAadharFront?: string | null
-  directorAadharBack?: string | null
   numComputers?: number
   numFaculty?: number
   numRooms?: number
-  numFees?: number
-  registrationDate: Date | string
-  validDate?: Date | string | null
-  expiryDate: Date | string
-  renewalDate?: Date | string | null
-  referralCode?: string | null
-  branchMohar?: string | null
-  branchPhoto?: string | null
-  labPhoto?: string | null
-  statusDocument?: string | null
-  branchLogo?: string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   onlineEnrollment?: boolean
   smsNotifications?: boolean
@@ -1658,13 +3685,25 @@ export type BranchCreateWithoutOrganizationInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutBranchInput
   students?: Prisma.StudentCreateNestedManyWithoutBranchInput
-  users?: Prisma.UserCreateNestedManyWithoutBranchInput
-  roles?: Prisma.RoleCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseCreateNestedOneWithoutBranchInput
 }
 
 export type BranchUncheckedCreateWithoutOrganizationInput = {
   id?: string
+  userId: string
   name: string
   code: string
   branchType?: $Enums.BranchType
@@ -1673,41 +3712,18 @@ export type BranchUncheckedCreateWithoutOrganizationInput = {
   establishedYear?: number | null
   website?: string | null
   description?: string | null
-  streetAddress: string
-  state: string
-  district: string
-  block?: string | null
-  city: string
-  pincode: string
-  latitude?: number | null
-  longitude?: number | null
-  country?: string
   phone: string
   altPhone?: string | null
   whatsappNumber?: string | null
   email: string
-  directorName: string
-  directorGender: $Enums.Gender
-  directorDOB: Date | string
-  directorBloodGroup?: string | null
-  directorPhoto?: string | null
-  directorSignature?: string | null
-  directorAadharFront?: string | null
-  directorAadharBack?: string | null
   numComputers?: number
   numFaculty?: number
   numRooms?: number
-  numFees?: number
-  registrationDate: Date | string
-  validDate?: Date | string | null
-  expiryDate: Date | string
-  renewalDate?: Date | string | null
-  referralCode?: string | null
-  branchMohar?: string | null
-  branchPhoto?: string | null
-  labPhoto?: string | null
-  statusDocument?: string | null
-  branchLogo?: string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   onlineEnrollment?: boolean
   smsNotifications?: boolean
@@ -1716,8 +3732,18 @@ export type BranchUncheckedCreateWithoutOrganizationInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutBranchInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveUncheckedCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletUncheckedCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsUncheckedCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionUncheckedCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeUncheckedCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorUncheckedCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressUncheckedCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseUncheckedCreateNestedOneWithoutBranchInput
 }
 
 export type BranchCreateOrConnectWithoutOrganizationInput = {
@@ -1752,6 +3778,7 @@ export type BranchScalarWhereInput = {
   NOT?: Prisma.BranchScalarWhereInput | Prisma.BranchScalarWhereInput[]
   id?: Prisma.StringFilter<"Branch"> | string
   organizationId?: Prisma.StringFilter<"Branch"> | string
+  userId?: Prisma.StringFilter<"Branch"> | string
   name?: Prisma.StringFilter<"Branch"> | string
   code?: Prisma.StringFilter<"Branch"> | string
   branchType?: Prisma.EnumBranchTypeFilter<"Branch"> | $Enums.BranchType
@@ -1760,41 +3787,18 @@ export type BranchScalarWhereInput = {
   establishedYear?: Prisma.IntNullableFilter<"Branch"> | number | null
   website?: Prisma.StringNullableFilter<"Branch"> | string | null
   description?: Prisma.StringNullableFilter<"Branch"> | string | null
-  streetAddress?: Prisma.StringFilter<"Branch"> | string
-  state?: Prisma.StringFilter<"Branch"> | string
-  district?: Prisma.StringFilter<"Branch"> | string
-  block?: Prisma.StringNullableFilter<"Branch"> | string | null
-  city?: Prisma.StringFilter<"Branch"> | string
-  pincode?: Prisma.StringFilter<"Branch"> | string
-  latitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
-  longitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
-  country?: Prisma.StringFilter<"Branch"> | string
   phone?: Prisma.StringFilter<"Branch"> | string
   altPhone?: Prisma.StringNullableFilter<"Branch"> | string | null
   whatsappNumber?: Prisma.StringNullableFilter<"Branch"> | string | null
   email?: Prisma.StringFilter<"Branch"> | string
-  directorName?: Prisma.StringFilter<"Branch"> | string
-  directorGender?: Prisma.EnumGenderFilter<"Branch"> | $Enums.Gender
-  directorDOB?: Prisma.DateTimeFilter<"Branch"> | Date | string
-  directorBloodGroup?: Prisma.StringNullableFilter<"Branch"> | string | null
-  directorPhoto?: Prisma.StringNullableFilter<"Branch"> | string | null
-  directorSignature?: Prisma.StringNullableFilter<"Branch"> | string | null
-  directorAadharFront?: Prisma.StringNullableFilter<"Branch"> | string | null
-  directorAadharBack?: Prisma.StringNullableFilter<"Branch"> | string | null
   numComputers?: Prisma.IntFilter<"Branch"> | number
   numFaculty?: Prisma.IntFilter<"Branch"> | number
   numRooms?: Prisma.IntFilter<"Branch"> | number
-  numFees?: Prisma.IntFilter<"Branch"> | number
-  registrationDate?: Prisma.DateTimeFilter<"Branch"> | Date | string
-  validDate?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
-  expiryDate?: Prisma.DateTimeFilter<"Branch"> | Date | string
-  renewalDate?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
-  referralCode?: Prisma.StringNullableFilter<"Branch"> | string | null
-  branchMohar?: Prisma.StringNullableFilter<"Branch"> | string | null
-  branchPhoto?: Prisma.StringNullableFilter<"Branch"> | string | null
-  labPhoto?: Prisma.StringNullableFilter<"Branch"> | string | null
-  statusDocument?: Prisma.StringNullableFilter<"Branch"> | string | null
-  branchLogo?: Prisma.StringNullableFilter<"Branch"> | string | null
+  branchMohar?: Prisma.JsonNullableFilter<"Branch">
+  branchPhoto?: Prisma.JsonNullableFilter<"Branch">
+  labPhoto?: Prisma.JsonNullableFilter<"Branch">
+  statusDocument?: Prisma.JsonNullableFilter<"Branch">
+  branchLogo?: Prisma.JsonNullableFilter<"Branch">
   isActive?: Prisma.BoolFilter<"Branch"> | boolean
   onlineEnrollment?: Prisma.BoolFilter<"Branch"> | boolean
   smsNotifications?: Prisma.BoolFilter<"Branch"> | boolean
@@ -1802,250 +3806,6 @@ export type BranchScalarWhereInput = {
   deletedAt?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
-}
-
-export type BranchCreateWithoutRolesInput = {
-  id?: string
-  name: string
-  code: string
-  branchType?: $Enums.BranchType
-  instituteType?: $Enums.InstituteType
-  academicYear: string
-  establishedYear?: number | null
-  website?: string | null
-  description?: string | null
-  streetAddress: string
-  state: string
-  district: string
-  block?: string | null
-  city: string
-  pincode: string
-  latitude?: number | null
-  longitude?: number | null
-  country?: string
-  phone: string
-  altPhone?: string | null
-  whatsappNumber?: string | null
-  email: string
-  directorName: string
-  directorGender: $Enums.Gender
-  directorDOB: Date | string
-  directorBloodGroup?: string | null
-  directorPhoto?: string | null
-  directorSignature?: string | null
-  directorAadharFront?: string | null
-  directorAadharBack?: string | null
-  numComputers?: number
-  numFaculty?: number
-  numRooms?: number
-  numFees?: number
-  registrationDate: Date | string
-  validDate?: Date | string | null
-  expiryDate: Date | string
-  renewalDate?: Date | string | null
-  referralCode?: string | null
-  branchMohar?: string | null
-  branchPhoto?: string | null
-  labPhoto?: string | null
-  statusDocument?: string | null
-  branchLogo?: string | null
-  isActive?: boolean
-  onlineEnrollment?: boolean
-  smsNotifications?: boolean
-  emailNotifications?: boolean
-  deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
-  students?: Prisma.StudentCreateNestedManyWithoutBranchInput
-  users?: Prisma.UserCreateNestedManyWithoutBranchInput
-}
-
-export type BranchUncheckedCreateWithoutRolesInput = {
-  id?: string
-  organizationId: string
-  name: string
-  code: string
-  branchType?: $Enums.BranchType
-  instituteType?: $Enums.InstituteType
-  academicYear: string
-  establishedYear?: number | null
-  website?: string | null
-  description?: string | null
-  streetAddress: string
-  state: string
-  district: string
-  block?: string | null
-  city: string
-  pincode: string
-  latitude?: number | null
-  longitude?: number | null
-  country?: string
-  phone: string
-  altPhone?: string | null
-  whatsappNumber?: string | null
-  email: string
-  directorName: string
-  directorGender: $Enums.Gender
-  directorDOB: Date | string
-  directorBloodGroup?: string | null
-  directorPhoto?: string | null
-  directorSignature?: string | null
-  directorAadharFront?: string | null
-  directorAadharBack?: string | null
-  numComputers?: number
-  numFaculty?: number
-  numRooms?: number
-  numFees?: number
-  registrationDate: Date | string
-  validDate?: Date | string | null
-  expiryDate: Date | string
-  renewalDate?: Date | string | null
-  referralCode?: string | null
-  branchMohar?: string | null
-  branchPhoto?: string | null
-  labPhoto?: string | null
-  statusDocument?: string | null
-  branchLogo?: string | null
-  isActive?: boolean
-  onlineEnrollment?: boolean
-  smsNotifications?: boolean
-  emailNotifications?: boolean
-  deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutBranchInput
-}
-
-export type BranchCreateOrConnectWithoutRolesInput = {
-  where: Prisma.BranchWhereUniqueInput
-  create: Prisma.XOR<Prisma.BranchCreateWithoutRolesInput, Prisma.BranchUncheckedCreateWithoutRolesInput>
-}
-
-export type BranchUpsertWithoutRolesInput = {
-  update: Prisma.XOR<Prisma.BranchUpdateWithoutRolesInput, Prisma.BranchUncheckedUpdateWithoutRolesInput>
-  create: Prisma.XOR<Prisma.BranchCreateWithoutRolesInput, Prisma.BranchUncheckedCreateWithoutRolesInput>
-  where?: Prisma.BranchWhereInput
-}
-
-export type BranchUpdateToOneWithWhereWithoutRolesInput = {
-  where?: Prisma.BranchWhereInput
-  data: Prisma.XOR<Prisma.BranchUpdateWithoutRolesInput, Prisma.BranchUncheckedUpdateWithoutRolesInput>
-}
-
-export type BranchUpdateWithoutRolesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
-  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
-  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
-  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  streetAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  directorName?: Prisma.StringFieldUpdateOperationsInput | string
-  directorGender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  directorDOB?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharFront?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharBack?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
-  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
-  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
-  numFees?: Prisma.IntFieldUpdateOperationsInput | number
-  registrationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchMohar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  labPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  statusDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchLogo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
-  students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
-  users?: Prisma.UserUpdateManyWithoutBranchNestedInput
-}
-
-export type BranchUncheckedUpdateWithoutRolesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
-  instituteType?: Prisma.EnumInstituteTypeFieldUpdateOperationsInput | $Enums.InstituteType
-  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
-  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  streetAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  directorName?: Prisma.StringFieldUpdateOperationsInput | string
-  directorGender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  directorDOB?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharFront?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharBack?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  numComputers?: Prisma.IntFieldUpdateOperationsInput | number
-  numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
-  numRooms?: Prisma.IntFieldUpdateOperationsInput | number
-  numFees?: Prisma.IntFieldUpdateOperationsInput | number
-  registrationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchMohar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  labPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  statusDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchLogo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
-  users?: Prisma.UserUncheckedUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchCreateWithoutStudentsInput = {
@@ -2058,41 +3818,18 @@ export type BranchCreateWithoutStudentsInput = {
   establishedYear?: number | null
   website?: string | null
   description?: string | null
-  streetAddress: string
-  state: string
-  district: string
-  block?: string | null
-  city: string
-  pincode: string
-  latitude?: number | null
-  longitude?: number | null
-  country?: string
   phone: string
   altPhone?: string | null
   whatsappNumber?: string | null
   email: string
-  directorName: string
-  directorGender: $Enums.Gender
-  directorDOB: Date | string
-  directorBloodGroup?: string | null
-  directorPhoto?: string | null
-  directorSignature?: string | null
-  directorAadharFront?: string | null
-  directorAadharBack?: string | null
   numComputers?: number
   numFaculty?: number
   numRooms?: number
-  numFees?: number
-  registrationDate: Date | string
-  validDate?: Date | string | null
-  expiryDate: Date | string
-  renewalDate?: Date | string | null
-  referralCode?: string | null
-  branchMohar?: string | null
-  branchPhoto?: string | null
-  labPhoto?: string | null
-  statusDocument?: string | null
-  branchLogo?: string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   onlineEnrollment?: boolean
   smsNotifications?: boolean
@@ -2101,13 +3838,25 @@ export type BranchCreateWithoutStudentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
-  users?: Prisma.UserCreateNestedManyWithoutBranchInput
-  roles?: Prisma.RoleCreateNestedManyWithoutBranchInput
+  user: Prisma.UserCreateNestedOneWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseCreateNestedOneWithoutBranchInput
 }
 
 export type BranchUncheckedCreateWithoutStudentsInput = {
   id?: string
   organizationId: string
+  userId: string
   name: string
   code: string
   branchType?: $Enums.BranchType
@@ -2116,41 +3865,18 @@ export type BranchUncheckedCreateWithoutStudentsInput = {
   establishedYear?: number | null
   website?: string | null
   description?: string | null
-  streetAddress: string
-  state: string
-  district: string
-  block?: string | null
-  city: string
-  pincode: string
-  latitude?: number | null
-  longitude?: number | null
-  country?: string
   phone: string
   altPhone?: string | null
   whatsappNumber?: string | null
   email: string
-  directorName: string
-  directorGender: $Enums.Gender
-  directorDOB: Date | string
-  directorBloodGroup?: string | null
-  directorPhoto?: string | null
-  directorSignature?: string | null
-  directorAadharFront?: string | null
-  directorAadharBack?: string | null
   numComputers?: number
   numFaculty?: number
   numRooms?: number
-  numFees?: number
-  registrationDate: Date | string
-  validDate?: Date | string | null
-  expiryDate: Date | string
-  renewalDate?: Date | string | null
-  referralCode?: string | null
-  branchMohar?: string | null
-  branchPhoto?: string | null
-  labPhoto?: string | null
-  statusDocument?: string | null
-  branchLogo?: string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   onlineEnrollment?: boolean
   smsNotifications?: boolean
@@ -2158,8 +3884,18 @@ export type BranchUncheckedCreateWithoutStudentsInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutBranchInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveUncheckedCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletUncheckedCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsUncheckedCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionUncheckedCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeUncheckedCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorUncheckedCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressUncheckedCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseUncheckedCreateNestedOneWithoutBranchInput
 }
 
 export type BranchCreateOrConnectWithoutStudentsInput = {
@@ -2188,41 +3924,18 @@ export type BranchUpdateWithoutStudentsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  streetAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  country?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  directorName?: Prisma.StringFieldUpdateOperationsInput | string
-  directorGender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  directorDOB?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharFront?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharBack?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   numComputers?: Prisma.IntFieldUpdateOperationsInput | number
   numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
   numRooms?: Prisma.IntFieldUpdateOperationsInput | number
-  numFees?: Prisma.IntFieldUpdateOperationsInput | number
-  registrationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchMohar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  labPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  statusDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchLogo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2231,13 +3944,25 @@ export type BranchUpdateWithoutStudentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
-  users?: Prisma.UserUpdateManyWithoutBranchNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutBranchNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUpdateOneWithoutBranchNestedInput
 }
 
 export type BranchUncheckedUpdateWithoutStudentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
@@ -2246,41 +3971,18 @@ export type BranchUncheckedUpdateWithoutStudentsInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  streetAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  country?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  directorName?: Prisma.StringFieldUpdateOperationsInput | string
-  directorGender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  directorDOB?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharFront?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharBack?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   numComputers?: Prisma.IntFieldUpdateOperationsInput | number
   numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
   numRooms?: Prisma.IntFieldUpdateOperationsInput | number
-  numFees?: Prisma.IntFieldUpdateOperationsInput | number
-  registrationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchMohar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  labPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  statusDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchLogo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2288,11 +3990,21 @@ export type BranchUncheckedUpdateWithoutStudentsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutBranchNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUncheckedUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUncheckedUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUncheckedUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUncheckedUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUncheckedUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUncheckedUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUncheckedUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUncheckedUpdateOneWithoutBranchNestedInput
 }
 
-export type BranchCreateWithoutUsersInput = {
+export type BranchCreateWithoutUserInput = {
   id?: string
   name: string
   code: string
@@ -2302,41 +4014,18 @@ export type BranchCreateWithoutUsersInput = {
   establishedYear?: number | null
   website?: string | null
   description?: string | null
-  streetAddress: string
-  state: string
-  district: string
-  block?: string | null
-  city: string
-  pincode: string
-  latitude?: number | null
-  longitude?: number | null
-  country?: string
   phone: string
   altPhone?: string | null
   whatsappNumber?: string | null
   email: string
-  directorName: string
-  directorGender: $Enums.Gender
-  directorDOB: Date | string
-  directorBloodGroup?: string | null
-  directorPhoto?: string | null
-  directorSignature?: string | null
-  directorAadharFront?: string | null
-  directorAadharBack?: string | null
   numComputers?: number
   numFaculty?: number
   numRooms?: number
-  numFees?: number
-  registrationDate: Date | string
-  validDate?: Date | string | null
-  expiryDate: Date | string
-  renewalDate?: Date | string | null
-  referralCode?: string | null
-  branchMohar?: string | null
-  branchPhoto?: string | null
-  labPhoto?: string | null
-  statusDocument?: string | null
-  branchLogo?: string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   onlineEnrollment?: boolean
   smsNotifications?: boolean
@@ -2346,10 +4035,21 @@ export type BranchCreateWithoutUsersInput = {
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
   students?: Prisma.StudentCreateNestedManyWithoutBranchInput
-  roles?: Prisma.RoleCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseCreateNestedOneWithoutBranchInput
 }
 
-export type BranchUncheckedCreateWithoutUsersInput = {
+export type BranchUncheckedCreateWithoutUserInput = {
   id?: string
   organizationId: string
   name: string
@@ -2360,41 +4060,18 @@ export type BranchUncheckedCreateWithoutUsersInput = {
   establishedYear?: number | null
   website?: string | null
   description?: string | null
-  streetAddress: string
-  state: string
-  district: string
-  block?: string | null
-  city: string
-  pincode: string
-  latitude?: number | null
-  longitude?: number | null
-  country?: string
   phone: string
   altPhone?: string | null
   whatsappNumber?: string | null
   email: string
-  directorName: string
-  directorGender: $Enums.Gender
-  directorDOB: Date | string
-  directorBloodGroup?: string | null
-  directorPhoto?: string | null
-  directorSignature?: string | null
-  directorAadharFront?: string | null
-  directorAadharBack?: string | null
   numComputers?: number
   numFaculty?: number
   numRooms?: number
-  numFees?: number
-  registrationDate: Date | string
-  validDate?: Date | string | null
-  expiryDate: Date | string
-  renewalDate?: Date | string | null
-  referralCode?: string | null
-  branchMohar?: string | null
-  branchPhoto?: string | null
-  labPhoto?: string | null
-  statusDocument?: string | null
-  branchLogo?: string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   onlineEnrollment?: boolean
   smsNotifications?: boolean
@@ -2403,26 +4080,37 @@ export type BranchUncheckedCreateWithoutUsersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutBranchInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedCreateNestedManyWithoutBranchInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedCreateNestedManyWithoutBranchInput
+  itemReceived?: Prisma.ItemReceiveUncheckedCreateNestedManyWithoutBranchInput
+  assignedCourses?: Prisma.BranchCourseUncheckedCreateNestedManyWithoutBranchInput
+  batches?: Prisma.BatchUncheckedCreateNestedManyWithoutBranchInput
+  wallet?: Prisma.BranchWalletUncheckedCreateNestedOneWithoutBranchInput
+  settings?: Prisma.BranchSettingsUncheckedCreateNestedOneWithoutBranchInput
+  transactions?: Prisma.BranchTransactionUncheckedCreateNestedManyWithoutBranchInput
+  notices?: Prisma.BranchNoticeUncheckedCreateNestedManyWithoutBranchInput
+  director?: Prisma.BranchDirectorUncheckedCreateNestedOneWithoutBranchInput
+  address?: Prisma.BranchAddressUncheckedCreateNestedOneWithoutBranchInput
+  license?: Prisma.BranchLicenseUncheckedCreateNestedOneWithoutBranchInput
 }
 
-export type BranchCreateOrConnectWithoutUsersInput = {
+export type BranchCreateOrConnectWithoutUserInput = {
   where: Prisma.BranchWhereUniqueInput
-  create: Prisma.XOR<Prisma.BranchCreateWithoutUsersInput, Prisma.BranchUncheckedCreateWithoutUsersInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutUserInput, Prisma.BranchUncheckedCreateWithoutUserInput>
 }
 
-export type BranchUpsertWithoutUsersInput = {
-  update: Prisma.XOR<Prisma.BranchUpdateWithoutUsersInput, Prisma.BranchUncheckedUpdateWithoutUsersInput>
-  create: Prisma.XOR<Prisma.BranchCreateWithoutUsersInput, Prisma.BranchUncheckedCreateWithoutUsersInput>
+export type BranchUpsertWithoutUserInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutUserInput, Prisma.BranchUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutUserInput, Prisma.BranchUncheckedCreateWithoutUserInput>
   where?: Prisma.BranchWhereInput
 }
 
-export type BranchUpdateToOneWithWhereWithoutUsersInput = {
+export type BranchUpdateToOneWithWhereWithoutUserInput = {
   where?: Prisma.BranchWhereInput
-  data: Prisma.XOR<Prisma.BranchUpdateWithoutUsersInput, Prisma.BranchUncheckedUpdateWithoutUsersInput>
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutUserInput, Prisma.BranchUncheckedUpdateWithoutUserInput>
 }
 
-export type BranchUpdateWithoutUsersInput = {
+export type BranchUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2432,41 +4120,18 @@ export type BranchUpdateWithoutUsersInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  streetAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  country?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  directorName?: Prisma.StringFieldUpdateOperationsInput | string
-  directorGender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  directorDOB?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharFront?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharBack?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   numComputers?: Prisma.IntFieldUpdateOperationsInput | number
   numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
   numRooms?: Prisma.IntFieldUpdateOperationsInput | number
-  numFees?: Prisma.IntFieldUpdateOperationsInput | number
-  registrationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchMohar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  labPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  statusDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchLogo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2476,10 +4141,21 @@ export type BranchUpdateWithoutUsersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
   students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUpdateOneWithoutBranchNestedInput
 }
 
-export type BranchUncheckedUpdateWithoutUsersInput = {
+export type BranchUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2490,41 +4166,18 @@ export type BranchUncheckedUpdateWithoutUsersInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  streetAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  country?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  directorName?: Prisma.StringFieldUpdateOperationsInput | string
-  directorGender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  directorDOB?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharFront?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharBack?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   numComputers?: Prisma.IntFieldUpdateOperationsInput | number
   numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
   numRooms?: Prisma.IntFieldUpdateOperationsInput | number
-  numFees?: Prisma.IntFieldUpdateOperationsInput | number
-  registrationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchMohar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  labPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  statusDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchLogo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2533,11 +4186,23 @@ export type BranchUncheckedUpdateWithoutUsersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUncheckedUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUncheckedUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUncheckedUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUncheckedUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUncheckedUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUncheckedUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUncheckedUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUncheckedUpdateOneWithoutBranchNestedInput
 }
 
 export type BranchCreateManyOrganizationInput = {
   id?: string
+  userId: string
   name: string
   code: string
   branchType?: $Enums.BranchType
@@ -2546,41 +4211,18 @@ export type BranchCreateManyOrganizationInput = {
   establishedYear?: number | null
   website?: string | null
   description?: string | null
-  streetAddress: string
-  state: string
-  district: string
-  block?: string | null
-  city: string
-  pincode: string
-  latitude?: number | null
-  longitude?: number | null
-  country?: string
   phone: string
   altPhone?: string | null
   whatsappNumber?: string | null
   email: string
-  directorName: string
-  directorGender: $Enums.Gender
-  directorDOB: Date | string
-  directorBloodGroup?: string | null
-  directorPhoto?: string | null
-  directorSignature?: string | null
-  directorAadharFront?: string | null
-  directorAadharBack?: string | null
   numComputers?: number
   numFaculty?: number
   numRooms?: number
-  numFees?: number
-  registrationDate: Date | string
-  validDate?: Date | string | null
-  expiryDate: Date | string
-  renewalDate?: Date | string | null
-  referralCode?: string | null
-  branchMohar?: string | null
-  branchPhoto?: string | null
-  labPhoto?: string | null
-  statusDocument?: string | null
-  branchLogo?: string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   onlineEnrollment?: boolean
   smsNotifications?: boolean
@@ -2600,41 +4242,18 @@ export type BranchUpdateWithoutOrganizationInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  streetAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  country?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  directorName?: Prisma.StringFieldUpdateOperationsInput | string
-  directorGender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  directorDOB?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharFront?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharBack?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   numComputers?: Prisma.IntFieldUpdateOperationsInput | number
   numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
   numRooms?: Prisma.IntFieldUpdateOperationsInput | number
-  numFees?: Prisma.IntFieldUpdateOperationsInput | number
-  registrationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchMohar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  labPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  statusDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchLogo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2642,13 +4261,25 @@ export type BranchUpdateWithoutOrganizationInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutBranchNestedInput
   students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
-  users?: Prisma.UserUpdateManyWithoutBranchNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUpdateOneWithoutBranchNestedInput
 }
 
 export type BranchUncheckedUpdateWithoutOrganizationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
@@ -2657,41 +4288,18 @@ export type BranchUncheckedUpdateWithoutOrganizationInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  streetAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  country?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  directorName?: Prisma.StringFieldUpdateOperationsInput | string
-  directorGender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  directorDOB?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharFront?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharBack?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   numComputers?: Prisma.IntFieldUpdateOperationsInput | number
   numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
   numRooms?: Prisma.IntFieldUpdateOperationsInput | number
-  numFees?: Prisma.IntFieldUpdateOperationsInput | number
-  registrationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchMohar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  labPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  statusDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchLogo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2700,12 +4308,23 @@ export type BranchUncheckedUpdateWithoutOrganizationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
-  users?: Prisma.UserUncheckedUpdateManyWithoutBranchNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutBranchNestedInput
+  visitEnquiries?: Prisma.VisitEnquiryUncheckedUpdateManyWithoutBranchNestedInput
+  itemDispatches?: Prisma.ItemDispatchUncheckedUpdateManyWithoutBranchNestedInput
+  itemReceived?: Prisma.ItemReceiveUncheckedUpdateManyWithoutBranchNestedInput
+  assignedCourses?: Prisma.BranchCourseUncheckedUpdateManyWithoutBranchNestedInput
+  batches?: Prisma.BatchUncheckedUpdateManyWithoutBranchNestedInput
+  wallet?: Prisma.BranchWalletUncheckedUpdateOneWithoutBranchNestedInput
+  settings?: Prisma.BranchSettingsUncheckedUpdateOneWithoutBranchNestedInput
+  transactions?: Prisma.BranchTransactionUncheckedUpdateManyWithoutBranchNestedInput
+  notices?: Prisma.BranchNoticeUncheckedUpdateManyWithoutBranchNestedInput
+  director?: Prisma.BranchDirectorUncheckedUpdateOneWithoutBranchNestedInput
+  address?: Prisma.BranchAddressUncheckedUpdateOneWithoutBranchNestedInput
+  license?: Prisma.BranchLicenseUncheckedUpdateOneWithoutBranchNestedInput
 }
 
 export type BranchUncheckedUpdateManyWithoutOrganizationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   branchType?: Prisma.EnumBranchTypeFieldUpdateOperationsInput | $Enums.BranchType
@@ -2714,41 +4333,18 @@ export type BranchUncheckedUpdateManyWithoutOrganizationInput = {
   establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  streetAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
-  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  country?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsappNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  directorName?: Prisma.StringFieldUpdateOperationsInput | string
-  directorGender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  directorDOB?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharFront?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  directorAadharBack?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   numComputers?: Prisma.IntFieldUpdateOperationsInput | number
   numFaculty?: Prisma.IntFieldUpdateOperationsInput | number
   numRooms?: Prisma.IntFieldUpdateOperationsInput | number
-  numFees?: Prisma.IntFieldUpdateOperationsInput | number
-  registrationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchMohar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  labPhoto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  statusDocument?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  branchLogo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchMohar?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  labPhoto?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  statusDocument?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  branchLogo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2765,14 +4361,24 @@ export type BranchUncheckedUpdateManyWithoutOrganizationInput = {
 
 export type BranchCountOutputType = {
   students: number
-  users: number
-  roles: number
+  visitEnquiries: number
+  itemDispatches: number
+  itemReceived: number
+  assignedCourses: number
+  batches: number
+  transactions: number
+  notices: number
 }
 
 export type BranchCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   students?: boolean | BranchCountOutputTypeCountStudentsArgs
-  users?: boolean | BranchCountOutputTypeCountUsersArgs
-  roles?: boolean | BranchCountOutputTypeCountRolesArgs
+  visitEnquiries?: boolean | BranchCountOutputTypeCountVisitEnquiriesArgs
+  itemDispatches?: boolean | BranchCountOutputTypeCountItemDispatchesArgs
+  itemReceived?: boolean | BranchCountOutputTypeCountItemReceivedArgs
+  assignedCourses?: boolean | BranchCountOutputTypeCountAssignedCoursesArgs
+  batches?: boolean | BranchCountOutputTypeCountBatchesArgs
+  transactions?: boolean | BranchCountOutputTypeCountTransactionsArgs
+  notices?: boolean | BranchCountOutputTypeCountNoticesArgs
 }
 
 /**
@@ -2795,21 +4401,57 @@ export type BranchCountOutputTypeCountStudentsArgs<ExtArgs extends runtime.Types
 /**
  * BranchCountOutputType without action
  */
-export type BranchCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserWhereInput
+export type BranchCountOutputTypeCountVisitEnquiriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VisitEnquiryWhereInput
 }
 
 /**
  * BranchCountOutputType without action
  */
-export type BranchCountOutputTypeCountRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.RoleWhereInput
+export type BranchCountOutputTypeCountItemDispatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ItemDispatchWhereInput
+}
+
+/**
+ * BranchCountOutputType without action
+ */
+export type BranchCountOutputTypeCountItemReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ItemReceiveWhereInput
+}
+
+/**
+ * BranchCountOutputType without action
+ */
+export type BranchCountOutputTypeCountAssignedCoursesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BranchCourseWhereInput
+}
+
+/**
+ * BranchCountOutputType without action
+ */
+export type BranchCountOutputTypeCountBatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BatchWhereInput
+}
+
+/**
+ * BranchCountOutputType without action
+ */
+export type BranchCountOutputTypeCountTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BranchTransactionWhereInput
+}
+
+/**
+ * BranchCountOutputType without action
+ */
+export type BranchCountOutputTypeCountNoticesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BranchNoticeWhereInput
 }
 
 
 export type BranchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   organizationId?: boolean
+  userId?: boolean
   name?: boolean
   code?: boolean
   branchType?: boolean
@@ -2818,36 +4460,13 @@ export type BranchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   establishedYear?: boolean
   website?: boolean
   description?: boolean
-  streetAddress?: boolean
-  state?: boolean
-  district?: boolean
-  block?: boolean
-  city?: boolean
-  pincode?: boolean
-  latitude?: boolean
-  longitude?: boolean
-  country?: boolean
   phone?: boolean
   altPhone?: boolean
   whatsappNumber?: boolean
   email?: boolean
-  directorName?: boolean
-  directorGender?: boolean
-  directorDOB?: boolean
-  directorBloodGroup?: boolean
-  directorPhoto?: boolean
-  directorSignature?: boolean
-  directorAadharFront?: boolean
-  directorAadharBack?: boolean
   numComputers?: boolean
   numFaculty?: boolean
   numRooms?: boolean
-  numFees?: boolean
-  registrationDate?: boolean
-  validDate?: boolean
-  expiryDate?: boolean
-  renewalDate?: boolean
-  referralCode?: boolean
   branchMohar?: boolean
   branchPhoto?: boolean
   labPhoto?: boolean
@@ -2861,15 +4480,27 @@ export type BranchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   createdAt?: boolean
   updatedAt?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   students?: boolean | Prisma.Branch$studentsArgs<ExtArgs>
-  users?: boolean | Prisma.Branch$usersArgs<ExtArgs>
-  roles?: boolean | Prisma.Branch$rolesArgs<ExtArgs>
+  visitEnquiries?: boolean | Prisma.Branch$visitEnquiriesArgs<ExtArgs>
+  itemDispatches?: boolean | Prisma.Branch$itemDispatchesArgs<ExtArgs>
+  itemReceived?: boolean | Prisma.Branch$itemReceivedArgs<ExtArgs>
+  assignedCourses?: boolean | Prisma.Branch$assignedCoursesArgs<ExtArgs>
+  batches?: boolean | Prisma.Branch$batchesArgs<ExtArgs>
+  wallet?: boolean | Prisma.Branch$walletArgs<ExtArgs>
+  settings?: boolean | Prisma.Branch$settingsArgs<ExtArgs>
+  transactions?: boolean | Prisma.Branch$transactionsArgs<ExtArgs>
+  notices?: boolean | Prisma.Branch$noticesArgs<ExtArgs>
+  director?: boolean | Prisma.Branch$directorArgs<ExtArgs>
+  address?: boolean | Prisma.Branch$addressArgs<ExtArgs>
+  license?: boolean | Prisma.Branch$licenseArgs<ExtArgs>
   _count?: boolean | Prisma.BranchCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["branch"]>
 
 export type BranchSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   organizationId?: boolean
+  userId?: boolean
   name?: boolean
   code?: boolean
   branchType?: boolean
@@ -2878,36 +4509,13 @@ export type BranchSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   establishedYear?: boolean
   website?: boolean
   description?: boolean
-  streetAddress?: boolean
-  state?: boolean
-  district?: boolean
-  block?: boolean
-  city?: boolean
-  pincode?: boolean
-  latitude?: boolean
-  longitude?: boolean
-  country?: boolean
   phone?: boolean
   altPhone?: boolean
   whatsappNumber?: boolean
   email?: boolean
-  directorName?: boolean
-  directorGender?: boolean
-  directorDOB?: boolean
-  directorBloodGroup?: boolean
-  directorPhoto?: boolean
-  directorSignature?: boolean
-  directorAadharFront?: boolean
-  directorAadharBack?: boolean
   numComputers?: boolean
   numFaculty?: boolean
   numRooms?: boolean
-  numFees?: boolean
-  registrationDate?: boolean
-  validDate?: boolean
-  expiryDate?: boolean
-  renewalDate?: boolean
-  referralCode?: boolean
   branchMohar?: boolean
   branchPhoto?: boolean
   labPhoto?: boolean
@@ -2921,11 +4529,13 @@ export type BranchSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   createdAt?: boolean
   updatedAt?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["branch"]>
 
 export type BranchSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   organizationId?: boolean
+  userId?: boolean
   name?: boolean
   code?: boolean
   branchType?: boolean
@@ -2934,36 +4544,13 @@ export type BranchSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   establishedYear?: boolean
   website?: boolean
   description?: boolean
-  streetAddress?: boolean
-  state?: boolean
-  district?: boolean
-  block?: boolean
-  city?: boolean
-  pincode?: boolean
-  latitude?: boolean
-  longitude?: boolean
-  country?: boolean
   phone?: boolean
   altPhone?: boolean
   whatsappNumber?: boolean
   email?: boolean
-  directorName?: boolean
-  directorGender?: boolean
-  directorDOB?: boolean
-  directorBloodGroup?: boolean
-  directorPhoto?: boolean
-  directorSignature?: boolean
-  directorAadharFront?: boolean
-  directorAadharBack?: boolean
   numComputers?: boolean
   numFaculty?: boolean
   numRooms?: boolean
-  numFees?: boolean
-  registrationDate?: boolean
-  validDate?: boolean
-  expiryDate?: boolean
-  renewalDate?: boolean
-  referralCode?: boolean
   branchMohar?: boolean
   branchPhoto?: boolean
   labPhoto?: boolean
@@ -2977,11 +4564,13 @@ export type BranchSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   createdAt?: boolean
   updatedAt?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["branch"]>
 
 export type BranchSelectScalar = {
   id?: boolean
   organizationId?: boolean
+  userId?: boolean
   name?: boolean
   code?: boolean
   branchType?: boolean
@@ -2990,36 +4579,13 @@ export type BranchSelectScalar = {
   establishedYear?: boolean
   website?: boolean
   description?: boolean
-  streetAddress?: boolean
-  state?: boolean
-  district?: boolean
-  block?: boolean
-  city?: boolean
-  pincode?: boolean
-  latitude?: boolean
-  longitude?: boolean
-  country?: boolean
   phone?: boolean
   altPhone?: boolean
   whatsappNumber?: boolean
   email?: boolean
-  directorName?: boolean
-  directorGender?: boolean
-  directorDOB?: boolean
-  directorBloodGroup?: boolean
-  directorPhoto?: boolean
-  directorSignature?: boolean
-  directorAadharFront?: boolean
-  directorAadharBack?: boolean
   numComputers?: boolean
   numFaculty?: boolean
   numRooms?: boolean
-  numFees?: boolean
-  registrationDate?: boolean
-  validDate?: boolean
-  expiryDate?: boolean
-  renewalDate?: boolean
-  referralCode?: boolean
   branchMohar?: boolean
   branchPhoto?: boolean
   labPhoto?: boolean
@@ -3034,32 +4600,57 @@ export type BranchSelectScalar = {
   updatedAt?: boolean
 }
 
-export type BranchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "name" | "code" | "branchType" | "instituteType" | "academicYear" | "establishedYear" | "website" | "description" | "streetAddress" | "state" | "district" | "block" | "city" | "pincode" | "latitude" | "longitude" | "country" | "phone" | "altPhone" | "whatsappNumber" | "email" | "directorName" | "directorGender" | "directorDOB" | "directorBloodGroup" | "directorPhoto" | "directorSignature" | "directorAadharFront" | "directorAadharBack" | "numComputers" | "numFaculty" | "numRooms" | "numFees" | "registrationDate" | "validDate" | "expiryDate" | "renewalDate" | "referralCode" | "branchMohar" | "branchPhoto" | "labPhoto" | "statusDocument" | "branchLogo" | "isActive" | "onlineEnrollment" | "smsNotifications" | "emailNotifications" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["branch"]>
+export type BranchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "userId" | "name" | "code" | "branchType" | "instituteType" | "academicYear" | "establishedYear" | "website" | "description" | "phone" | "altPhone" | "whatsappNumber" | "email" | "numComputers" | "numFaculty" | "numRooms" | "branchMohar" | "branchPhoto" | "labPhoto" | "statusDocument" | "branchLogo" | "isActive" | "onlineEnrollment" | "smsNotifications" | "emailNotifications" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["branch"]>
 export type BranchInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   students?: boolean | Prisma.Branch$studentsArgs<ExtArgs>
-  users?: boolean | Prisma.Branch$usersArgs<ExtArgs>
-  roles?: boolean | Prisma.Branch$rolesArgs<ExtArgs>
+  visitEnquiries?: boolean | Prisma.Branch$visitEnquiriesArgs<ExtArgs>
+  itemDispatches?: boolean | Prisma.Branch$itemDispatchesArgs<ExtArgs>
+  itemReceived?: boolean | Prisma.Branch$itemReceivedArgs<ExtArgs>
+  assignedCourses?: boolean | Prisma.Branch$assignedCoursesArgs<ExtArgs>
+  batches?: boolean | Prisma.Branch$batchesArgs<ExtArgs>
+  wallet?: boolean | Prisma.Branch$walletArgs<ExtArgs>
+  settings?: boolean | Prisma.Branch$settingsArgs<ExtArgs>
+  transactions?: boolean | Prisma.Branch$transactionsArgs<ExtArgs>
+  notices?: boolean | Prisma.Branch$noticesArgs<ExtArgs>
+  director?: boolean | Prisma.Branch$directorArgs<ExtArgs>
+  address?: boolean | Prisma.Branch$addressArgs<ExtArgs>
+  license?: boolean | Prisma.Branch$licenseArgs<ExtArgs>
   _count?: boolean | Prisma.BranchCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BranchIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type BranchIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $BranchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Branch"
   objects: {
     organization: Prisma.$OrganizationPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs>
     students: Prisma.$StudentPayload<ExtArgs>[]
-    users: Prisma.$UserPayload<ExtArgs>[]
-    roles: Prisma.$RolePayload<ExtArgs>[]
+    visitEnquiries: Prisma.$VisitEnquiryPayload<ExtArgs>[]
+    itemDispatches: Prisma.$ItemDispatchPayload<ExtArgs>[]
+    itemReceived: Prisma.$ItemReceivePayload<ExtArgs>[]
+    assignedCourses: Prisma.$BranchCoursePayload<ExtArgs>[]
+    batches: Prisma.$BatchPayload<ExtArgs>[]
+    wallet: Prisma.$BranchWalletPayload<ExtArgs> | null
+    settings: Prisma.$BranchSettingsPayload<ExtArgs> | null
+    transactions: Prisma.$BranchTransactionPayload<ExtArgs>[]
+    notices: Prisma.$BranchNoticePayload<ExtArgs>[]
+    director: Prisma.$BranchDirectorPayload<ExtArgs> | null
+    address: Prisma.$BranchAddressPayload<ExtArgs> | null
+    license: Prisma.$BranchLicensePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     organizationId: string
+    userId: string
     name: string
     code: string
     branchType: $Enums.BranchType
@@ -3068,41 +4659,18 @@ export type $BranchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     establishedYear: number | null
     website: string | null
     description: string | null
-    streetAddress: string
-    state: string
-    district: string
-    block: string | null
-    city: string
-    pincode: string
-    latitude: number | null
-    longitude: number | null
-    country: string
     phone: string
     altPhone: string | null
     whatsappNumber: string | null
     email: string
-    directorName: string
-    directorGender: $Enums.Gender
-    directorDOB: Date
-    directorBloodGroup: string | null
-    directorPhoto: string | null
-    directorSignature: string | null
-    directorAadharFront: string | null
-    directorAadharBack: string | null
     numComputers: number
     numFaculty: number
     numRooms: number
-    numFees: number
-    registrationDate: Date
-    validDate: Date | null
-    expiryDate: Date
-    renewalDate: Date | null
-    referralCode: string | null
-    branchMohar: string | null
-    branchPhoto: string | null
-    labPhoto: string | null
-    statusDocument: string | null
-    branchLogo: string | null
+    branchMohar: runtime.JsonValue | null
+    branchPhoto: runtime.JsonValue | null
+    labPhoto: runtime.JsonValue | null
+    statusDocument: runtime.JsonValue | null
+    branchLogo: runtime.JsonValue | null
     isActive: boolean
     onlineEnrollment: boolean
     smsNotifications: boolean
@@ -3505,9 +5073,20 @@ readonly fields: BranchFieldRefs;
 export interface Prisma__BranchClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   organization<T extends Prisma.OrganizationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   students<T extends Prisma.Branch$studentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$studentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StudentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  users<T extends Prisma.Branch$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  roles<T extends Prisma.Branch$rolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  visitEnquiries<T extends Prisma.Branch$visitEnquiriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$visitEnquiriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitEnquiryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  itemDispatches<T extends Prisma.Branch$itemDispatchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$itemDispatchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ItemDispatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  itemReceived<T extends Prisma.Branch$itemReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$itemReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ItemReceivePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  assignedCourses<T extends Prisma.Branch$assignedCoursesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$assignedCoursesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BranchCoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  batches<T extends Prisma.Branch$batchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$batchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  wallet<T extends Prisma.Branch$walletArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$walletArgs<ExtArgs>>): Prisma.Prisma__BranchWalletClient<runtime.Types.Result.GetResult<Prisma.$BranchWalletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  settings<T extends Prisma.Branch$settingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$settingsArgs<ExtArgs>>): Prisma.Prisma__BranchSettingsClient<runtime.Types.Result.GetResult<Prisma.$BranchSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  transactions<T extends Prisma.Branch$transactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BranchTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notices<T extends Prisma.Branch$noticesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$noticesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BranchNoticePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  director<T extends Prisma.Branch$directorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$directorArgs<ExtArgs>>): Prisma.Prisma__BranchDirectorClient<runtime.Types.Result.GetResult<Prisma.$BranchDirectorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  address<T extends Prisma.Branch$addressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$addressArgs<ExtArgs>>): Prisma.Prisma__BranchAddressClient<runtime.Types.Result.GetResult<Prisma.$BranchAddressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  license<T extends Prisma.Branch$licenseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$licenseArgs<ExtArgs>>): Prisma.Prisma__BranchLicenseClient<runtime.Types.Result.GetResult<Prisma.$BranchLicensePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3539,6 +5118,7 @@ export interface Prisma__BranchClient<T, Null = never, ExtArgs extends runtime.T
 export interface BranchFieldRefs {
   readonly id: Prisma.FieldRef<"Branch", 'String'>
   readonly organizationId: Prisma.FieldRef<"Branch", 'String'>
+  readonly userId: Prisma.FieldRef<"Branch", 'String'>
   readonly name: Prisma.FieldRef<"Branch", 'String'>
   readonly code: Prisma.FieldRef<"Branch", 'String'>
   readonly branchType: Prisma.FieldRef<"Branch", 'BranchType'>
@@ -3547,41 +5127,18 @@ export interface BranchFieldRefs {
   readonly establishedYear: Prisma.FieldRef<"Branch", 'Int'>
   readonly website: Prisma.FieldRef<"Branch", 'String'>
   readonly description: Prisma.FieldRef<"Branch", 'String'>
-  readonly streetAddress: Prisma.FieldRef<"Branch", 'String'>
-  readonly state: Prisma.FieldRef<"Branch", 'String'>
-  readonly district: Prisma.FieldRef<"Branch", 'String'>
-  readonly block: Prisma.FieldRef<"Branch", 'String'>
-  readonly city: Prisma.FieldRef<"Branch", 'String'>
-  readonly pincode: Prisma.FieldRef<"Branch", 'String'>
-  readonly latitude: Prisma.FieldRef<"Branch", 'Float'>
-  readonly longitude: Prisma.FieldRef<"Branch", 'Float'>
-  readonly country: Prisma.FieldRef<"Branch", 'String'>
   readonly phone: Prisma.FieldRef<"Branch", 'String'>
   readonly altPhone: Prisma.FieldRef<"Branch", 'String'>
   readonly whatsappNumber: Prisma.FieldRef<"Branch", 'String'>
   readonly email: Prisma.FieldRef<"Branch", 'String'>
-  readonly directorName: Prisma.FieldRef<"Branch", 'String'>
-  readonly directorGender: Prisma.FieldRef<"Branch", 'Gender'>
-  readonly directorDOB: Prisma.FieldRef<"Branch", 'DateTime'>
-  readonly directorBloodGroup: Prisma.FieldRef<"Branch", 'String'>
-  readonly directorPhoto: Prisma.FieldRef<"Branch", 'String'>
-  readonly directorSignature: Prisma.FieldRef<"Branch", 'String'>
-  readonly directorAadharFront: Prisma.FieldRef<"Branch", 'String'>
-  readonly directorAadharBack: Prisma.FieldRef<"Branch", 'String'>
   readonly numComputers: Prisma.FieldRef<"Branch", 'Int'>
   readonly numFaculty: Prisma.FieldRef<"Branch", 'Int'>
   readonly numRooms: Prisma.FieldRef<"Branch", 'Int'>
-  readonly numFees: Prisma.FieldRef<"Branch", 'Int'>
-  readonly registrationDate: Prisma.FieldRef<"Branch", 'DateTime'>
-  readonly validDate: Prisma.FieldRef<"Branch", 'DateTime'>
-  readonly expiryDate: Prisma.FieldRef<"Branch", 'DateTime'>
-  readonly renewalDate: Prisma.FieldRef<"Branch", 'DateTime'>
-  readonly referralCode: Prisma.FieldRef<"Branch", 'String'>
-  readonly branchMohar: Prisma.FieldRef<"Branch", 'String'>
-  readonly branchPhoto: Prisma.FieldRef<"Branch", 'String'>
-  readonly labPhoto: Prisma.FieldRef<"Branch", 'String'>
-  readonly statusDocument: Prisma.FieldRef<"Branch", 'String'>
-  readonly branchLogo: Prisma.FieldRef<"Branch", 'String'>
+  readonly branchMohar: Prisma.FieldRef<"Branch", 'Json'>
+  readonly branchPhoto: Prisma.FieldRef<"Branch", 'Json'>
+  readonly labPhoto: Prisma.FieldRef<"Branch", 'Json'>
+  readonly statusDocument: Prisma.FieldRef<"Branch", 'Json'>
+  readonly branchLogo: Prisma.FieldRef<"Branch", 'Json'>
   readonly isActive: Prisma.FieldRef<"Branch", 'Boolean'>
   readonly onlineEnrollment: Prisma.FieldRef<"Branch", 'Boolean'>
   readonly smsNotifications: Prisma.FieldRef<"Branch", 'Boolean'>
@@ -4014,51 +5571,266 @@ export type Branch$studentsArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * Branch.users
+ * Branch.visitEnquiries
  */
-export type Branch$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Branch$visitEnquiriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the User
+   * Select specific fields to fetch from the VisitEnquiry
    */
-  select?: Prisma.UserSelect<ExtArgs> | null
+  select?: Prisma.VisitEnquirySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the User
+   * Omit specific fields from the VisitEnquiry
    */
-  omit?: Prisma.UserOmit<ExtArgs> | null
+  omit?: Prisma.VisitEnquiryOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
-  cursor?: Prisma.UserWhereUniqueInput
+  include?: Prisma.VisitEnquiryInclude<ExtArgs> | null
+  where?: Prisma.VisitEnquiryWhereInput
+  orderBy?: Prisma.VisitEnquiryOrderByWithRelationInput | Prisma.VisitEnquiryOrderByWithRelationInput[]
+  cursor?: Prisma.VisitEnquiryWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+  distinct?: Prisma.VisitEnquiryScalarFieldEnum | Prisma.VisitEnquiryScalarFieldEnum[]
 }
 
 /**
- * Branch.roles
+ * Branch.itemDispatches
  */
-export type Branch$rolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Branch$itemDispatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Role
+   * Select specific fields to fetch from the ItemDispatch
    */
-  select?: Prisma.RoleSelect<ExtArgs> | null
+  select?: Prisma.ItemDispatchSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Role
+   * Omit specific fields from the ItemDispatch
    */
-  omit?: Prisma.RoleOmit<ExtArgs> | null
+  omit?: Prisma.ItemDispatchOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.RoleInclude<ExtArgs> | null
-  where?: Prisma.RoleWhereInput
-  orderBy?: Prisma.RoleOrderByWithRelationInput | Prisma.RoleOrderByWithRelationInput[]
-  cursor?: Prisma.RoleWhereUniqueInput
+  include?: Prisma.ItemDispatchInclude<ExtArgs> | null
+  where?: Prisma.ItemDispatchWhereInput
+  orderBy?: Prisma.ItemDispatchOrderByWithRelationInput | Prisma.ItemDispatchOrderByWithRelationInput[]
+  cursor?: Prisma.ItemDispatchWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.RoleScalarFieldEnum | Prisma.RoleScalarFieldEnum[]
+  distinct?: Prisma.ItemDispatchScalarFieldEnum | Prisma.ItemDispatchScalarFieldEnum[]
+}
+
+/**
+ * Branch.itemReceived
+ */
+export type Branch$itemReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ItemReceive
+   */
+  select?: Prisma.ItemReceiveSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ItemReceive
+   */
+  omit?: Prisma.ItemReceiveOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ItemReceiveInclude<ExtArgs> | null
+  where?: Prisma.ItemReceiveWhereInput
+  orderBy?: Prisma.ItemReceiveOrderByWithRelationInput | Prisma.ItemReceiveOrderByWithRelationInput[]
+  cursor?: Prisma.ItemReceiveWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ItemReceiveScalarFieldEnum | Prisma.ItemReceiveScalarFieldEnum[]
+}
+
+/**
+ * Branch.assignedCourses
+ */
+export type Branch$assignedCoursesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BranchCourse
+   */
+  select?: Prisma.BranchCourseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BranchCourse
+   */
+  omit?: Prisma.BranchCourseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BranchCourseInclude<ExtArgs> | null
+  where?: Prisma.BranchCourseWhereInput
+  orderBy?: Prisma.BranchCourseOrderByWithRelationInput | Prisma.BranchCourseOrderByWithRelationInput[]
+  cursor?: Prisma.BranchCourseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BranchCourseScalarFieldEnum | Prisma.BranchCourseScalarFieldEnum[]
+}
+
+/**
+ * Branch.batches
+ */
+export type Branch$batchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Batch
+   */
+  select?: Prisma.BatchSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Batch
+   */
+  omit?: Prisma.BatchOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BatchInclude<ExtArgs> | null
+  where?: Prisma.BatchWhereInput
+  orderBy?: Prisma.BatchOrderByWithRelationInput | Prisma.BatchOrderByWithRelationInput[]
+  cursor?: Prisma.BatchWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BatchScalarFieldEnum | Prisma.BatchScalarFieldEnum[]
+}
+
+/**
+ * Branch.wallet
+ */
+export type Branch$walletArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BranchWallet
+   */
+  select?: Prisma.BranchWalletSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BranchWallet
+   */
+  omit?: Prisma.BranchWalletOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BranchWalletInclude<ExtArgs> | null
+  where?: Prisma.BranchWalletWhereInput
+}
+
+/**
+ * Branch.settings
+ */
+export type Branch$settingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BranchSettings
+   */
+  select?: Prisma.BranchSettingsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BranchSettings
+   */
+  omit?: Prisma.BranchSettingsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BranchSettingsInclude<ExtArgs> | null
+  where?: Prisma.BranchSettingsWhereInput
+}
+
+/**
+ * Branch.transactions
+ */
+export type Branch$transactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BranchTransaction
+   */
+  select?: Prisma.BranchTransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BranchTransaction
+   */
+  omit?: Prisma.BranchTransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BranchTransactionInclude<ExtArgs> | null
+  where?: Prisma.BranchTransactionWhereInput
+  orderBy?: Prisma.BranchTransactionOrderByWithRelationInput | Prisma.BranchTransactionOrderByWithRelationInput[]
+  cursor?: Prisma.BranchTransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BranchTransactionScalarFieldEnum | Prisma.BranchTransactionScalarFieldEnum[]
+}
+
+/**
+ * Branch.notices
+ */
+export type Branch$noticesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BranchNotice
+   */
+  select?: Prisma.BranchNoticeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BranchNotice
+   */
+  omit?: Prisma.BranchNoticeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BranchNoticeInclude<ExtArgs> | null
+  where?: Prisma.BranchNoticeWhereInput
+  orderBy?: Prisma.BranchNoticeOrderByWithRelationInput | Prisma.BranchNoticeOrderByWithRelationInput[]
+  cursor?: Prisma.BranchNoticeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BranchNoticeScalarFieldEnum | Prisma.BranchNoticeScalarFieldEnum[]
+}
+
+/**
+ * Branch.director
+ */
+export type Branch$directorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BranchDirector
+   */
+  select?: Prisma.BranchDirectorSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BranchDirector
+   */
+  omit?: Prisma.BranchDirectorOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BranchDirectorInclude<ExtArgs> | null
+  where?: Prisma.BranchDirectorWhereInput
+}
+
+/**
+ * Branch.address
+ */
+export type Branch$addressArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BranchAddress
+   */
+  select?: Prisma.BranchAddressSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BranchAddress
+   */
+  omit?: Prisma.BranchAddressOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BranchAddressInclude<ExtArgs> | null
+  where?: Prisma.BranchAddressWhereInput
+}
+
+/**
+ * Branch.license
+ */
+export type Branch$licenseArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BranchLicense
+   */
+  select?: Prisma.BranchLicenseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BranchLicense
+   */
+  omit?: Prisma.BranchLicenseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BranchLicenseInclude<ExtArgs> | null
+  where?: Prisma.BranchLicenseWhereInput
 }
 
 /**

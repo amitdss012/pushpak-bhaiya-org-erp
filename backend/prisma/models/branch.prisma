@@ -23,53 +23,25 @@ model Branch {
   website         String?
   description     String?       @db.Text
 
-  // Address Details
-  streetAddress String  @db.Text
-  state         String
-  district      String
-  block         String?
-  city          String
-  pincode       String
-  latitude      Float?
-  longitude     Float?
-  country       String  @default("India")
-
   // Contact Information
   phone          String
   altPhone       String?
   whatsappNumber String?
   email          String  @unique
 
-  // Director Information
-  directorName        String
-  directorGender      Gender
-  directorDOB         DateTime
-  directorBloodGroup  String?
-  directorPhoto       String?
-  directorSignature   String?
-  directorAadharFront String?
-  directorAadharBack  String?
-
   // Space & Facilities
   numComputers Int @default(0)
   numFaculty   Int @default(0)
   numRooms     Int @default(0)
 
-  // Registration & Validity
-  registrationDate DateTime
-  validDate        DateTime?
-  expiryDate       DateTime
-  renewalDate      DateTime?
-  referralCode     String?
-
   // Branch Documents
-  branchMohar    String?
-  branchPhoto    String?
-  labPhoto       String?
-  statusDocument String?
+  branchMohar    Json?
+  branchPhoto    Json?
+  labPhoto       Json?
+  statusDocument Json?
 
   // Branch Settings
-  branchLogo         String?
+  branchLogo         Json?
   isActive           Boolean @default(true)
   onlineEnrollment   Boolean @default(true)
   smsNotifications   Boolean @default(false)
@@ -93,6 +65,11 @@ model Branch {
   settings       BranchSettings?
   transactions   BranchTransaction[]
   notices        BranchNotice[]
+
+  // Normalized Relations
+  director       BranchDirector?
+  address        BranchAddress?
+  license        BranchLicense?
 
   @@index([organizationId])
   @@index([code])
@@ -419,4 +396,83 @@ enum NoticePriority {
   LOW
   MEDIUM
   HIGH
+}
+
+// ============================================
+// Normalized Branch Relations
+// ============================================
+
+model BranchDirector {
+  id             String   @id @default(cuid())
+  branchId       String   @unique
+  branch         Branch   @relation(fields: [branchId], references: [id], onDelete: Cascade)
+
+  name           String
+  gender         Gender
+  dob            DateTime
+  bloodGroup     String?
+  photo          Json?
+  signature      Json?
+  aadharFront    Json?
+  aadharBack     Json?
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("branch_directors")
+}
+
+model BranchAddress {
+  id            String  @id @default(cuid())
+  branchId      String  @unique
+  branch        Branch  @relation(fields: [branchId], references: [id], onDelete: Cascade)
+
+  streetAddress String  @db.Text
+  state         String
+  district      String
+  block         String?
+  city          String
+  pincode       String
+  latitude      Float?
+  longitude     Float?
+  country       String  @default("India")
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("branch_addresses")
+}
+
+model BranchLicense {
+  id               String                 @id @default(cuid())
+  branchId         String                 @unique
+  branch           Branch                 @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  
+  registrationDate DateTime
+  validDate        DateTime?
+  expiryDate       DateTime
+  referralCode     String?
+
+  renewals         BranchRenewalHistory[]
+
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+
+  @@map("branch_licenses")
+}
+
+model BranchRenewalHistory {
+  id              String        @id @default(cuid())
+  licenseId       String
+  license         BranchLicense @relation(fields: [licenseId], references: [id], onDelete: Cascade)
+
+  renewalDate     DateTime
+  previousExpiry  DateTime
+  newExpiry       DateTime
+  amountPaid      Float?
+  remarks         String?       @db.Text
+
+  createdAt       DateTime      @default(now())
+
+  @@map("branch_renewal_history")
 }

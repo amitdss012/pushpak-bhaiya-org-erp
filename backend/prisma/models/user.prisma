@@ -11,8 +11,8 @@ model User {
   email           String    @unique
   phone           String?   @unique
   username        String    @unique
-  password        String                     // Always store hashed
-  avatar          String?
+  password        String    @db.Text                     // Always store hashed
+  avatar          Json?
 
   // Status & Audit
   isActive        Boolean   @default(true)
