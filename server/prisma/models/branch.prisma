@@ -1,0 +1,56 @@
+/**
+ * Branch
+ *
+ * A sub-unit of an organization. Each branch gets
+ * its own panel with independent users and roles.
+ *
+ * The slug is unique within the parent organization
+ * (not globally), enforced via @@unique composite.
+ *
+ * The number of branches an org can create is
+ * governed by SubscriptionPlan.maxBranches.
+ */
+
+/// Lifecycle states for a branch.
+enum BranchStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+model Branch {
+  id              String       @id @default(uuid()) @db.Uuid
+  organizationId  String       @db.Uuid
+
+  name            String
+  slug            String                                  // unique within org
+  code            String?                                 // internal branch code (e.g., "BR-001")
+  email           String?
+  phone           String?
+
+  /* Address */
+  address         String?
+  city            String?
+  state           String?
+  country         String?      @default("IN") @db.VarChar(2)
+  pincode         String?      @db.VarChar(10)
+
+  status          BranchStatus @default(ACTIVE)
+
+  /* Timestamps */
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  deletedAt       DateTime?                               // soft delete
+
+  /* Relations */
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  users           User[]
+  roles           Role[]
+  auditLogs       AuditLog[]
+
+  @@unique([organizationId, slug])                        // slug unique per org
+  @@index([organizationId])
+  @@index([status])
+  @@index([deletedAt])
+  @@map("branches")
+}

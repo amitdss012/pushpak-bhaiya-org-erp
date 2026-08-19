@@ -1,0 +1,402 @@
+/**
+ * User — Users, Roles, Permissions, Tokens & Audit
+ *
+ * All user-related entities: authentication, RBAC
+ * (roles, permissions, assignments), token management
+ * (refresh tokens, password reset, email verification),
+ * and immutable audit logging.
+ */
+
+/// Determines whether an entity (User, Role) belongs
+/// to the organization-level panel or a branch-level panel.
+enum Scope {
+  ORGANIZATION
+  BRANCH
+}
+
+/// Lifecycle states for a user account.
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  INVITED
+}
+
+/// Types of tokens stored in the RefreshToken table.
+enum TokenType {
+  REFRESH
+  PASSWORD_RESET
+  EMAIL_VERIFICATION
+}
+
+/// Actions tracked in the immutable AuditLog.
+enum AuditAction {
+  LOGIN
+  LOGOUT
+  LOGIN_FAILED
+  PASSWORD_CHANGE
+  PASSWORD_RESET_REQUEST
+  ROLE_ASSIGNED
+  ROLE_REVOKED
+  USER_CREATED
+  USER_UPDATED
+  USER_SUSPENDED
+  PERMISSION_CHANGED
+}
+
+/// Device category for session tracking.
+enum DeviceType {
+  DESKTOP
+  MOBILE
+  TABLET
+  UNKNOWN
+}
+
+/**
+ * User
+ *
+ * Central authentication entity. Every user belongs
+ * to exactly one organization and optionally one branch.
+ *
+ * Scope determines panel access:
+ *   ORGANIZATION + branchId=null → org-level panel
+ *   BRANCH + branchId=<id>      → branch-level panel
+ *
+ * Email is unique per organization (@@unique composite),
+ * allowing the same email across different tenants.
+ *
+ * Password is stored as a bcrypt hash — never store
+ * plaintext passwords.
+ */
+model User {
+  id              String     @id @default(uuid()) @db.Uuid
+  organizationId  String     @db.Uuid
+  branchId        String?    @db.Uuid                     // null = org-level user
+
+  /* Scope */
+  scope           Scope      @default(ORGANIZATION)
+
+  /* Auth Credentials */
+  email           String @unique
+  passwordHash    String                                  // bcrypt hash
+
+  /* Profile */
+  firstName       String
+  lastName        String?
+  phone           String?
+  avatar          String?                                 // URL to profile picture
+
+  status          UserStatus @default(INVITED)
+
+  emailVerifiedAt DateTime?
+  lastLoginAt     DateTime?
+
+  /* Timestamps */
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  deletedAt       DateTime?                               // soft delete
+
+  /* Relations */
+  organization    Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  branch          Branch?        @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  userRoles       UserRole[]
+  refreshTokens   RefreshToken[]
+  auditLogs       AuditLog[]
+
+  // Email unique per organization (not globally)
+  @@unique([organizationId, email])
+  @@index([organizationId, scope])
+  @@index([branchId])
+  @@index([status])
+  @@index([deletedAt])
+  @@map("users")
+}
+
+/**
+ * Permission
+ *
+ * System-defined atomic permissions. These are seeded
+ * at deploy time and are NOT created by organizations
+ * or branches. Orgs/branches only compose roles from
+ * this master list.
+ *
+ * The key follows "module:action" convention:
+ *   "user:create", "branch:read", "role:assign"
+ *
+ * allowedScopes controls where the permission can be
+ * used — e.g., "branch:create" only makes sense at
+ * the ORGANIZATION scope, not at the BRANCH scope.
+ */
+model Permission {
+  id            String   @id @default(uuid()) @db.Uuid
+
+  /* Hierarchical Key */
+  key           String   @unique                          // "user:create", "branch:read"
+  name          String                                    // Human-readable: "Create User"
+  description   String?
+
+  /* Grouping */
+  module        String                                    // "user", "branch", "role", "dashboard"
+  action        String                                    // "create", "read", "update", "delete"
+
+  /**
+   * Scope Applicability
+   * Which scope(s) this permission is valid for.
+   * [ORGANIZATION] — org panel only
+   * [BRANCH] — branch panel only
+   * [ORGANIZATION, BRANCH] — both panels
+   */
+  allowedScopes Scope[]
+
+  /* Timestamps */
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  /* Relations */
+  rolePermissions RolePermission[]
+
+  @@index([module])
+  @@map("permissions")
+}
+
+/**
+ * Role
+ *
+ * Named role scoped to either the organization-level
+ * panel or a specific branch-level panel.
+ *
+ * Scope logic mirrors User:
+ *   ORGANIZATION + branchId=null → org-wide role
+ *   BRANCH + branchId=<id>      → branch-specific role
+ *
+ * The slug is unique within its scope boundary,
+ * enforced via @@unique([organizationId, branchId, slug]).
+ *
+ * System roles (isSystemRole=true) like "Owner" are
+ * auto-created during org registration and cannot be
+ * deleted by users.
+ */
+model Role {
+  id              String   @id @default(uuid()) @db.Uuid
+  organizationId  String   @db.Uuid
+  branchId        String?  @db.Uuid                       // null = org-level role
+
+  scope           Scope    @default(ORGANIZATION)
+
+  name            String                                  // "Admin", "Manager", "Staff"
+  slug            String                                  // "admin", "manager", "staff"
+  description     String?
+
+  isSystemRole    Boolean  @default(false)                // true = undeletable (e.g., "Owner")
+
+  /* Timestamps */
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  deletedAt       DateTime?                               // soft delete
+
+  /* Relations */
+  organization    Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  branch          Branch?          @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  rolePermissions RolePermission[]
+  userRoles       UserRole[]
+
+  // Role slug unique within its scope (org-level or per-branch)
+  @@unique([organizationId, branchId, slug])
+  @@index([organizationId, scope])
+  @@index([branchId])
+  @@index([deletedAt])
+  @@map("roles")
+}
+
+/**
+ * Role ↔ Permission (Many-to-Many Join)
+ *
+ * Associates permissions with roles. A role can have
+ * many permissions, and a permission can be assigned
+ * to many roles.
+ *
+ * The @@unique([roleId, permissionId]) constraint
+ * prevents duplicate permission assignments to the
+ * same role.
+ *
+ * Cascades on both sides: deleting a role or
+ * permission automatically cleans up this join table.
+ */
+model RolePermission {
+  id           String     @id @default(uuid()) @db.Uuid
+  roleId       String     @db.Uuid
+  permissionId String     @db.Uuid
+
+  assignedAt   DateTime   @default(now())
+
+  /* Relations */
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@unique([roleId, permissionId])                        // no duplicates
+  @@index([roleId])
+  @@index([permissionId])
+  @@map("role_permissions")
+}
+
+/**
+ * User ↔ Role (Many-to-Many Join)
+ *
+ * Associates roles with users. A user can have
+ * multiple roles, and a role can be assigned to
+ * multiple users.
+ *
+ * Scope matching is enforced at the application layer:
+ *   - ORGANIZATION-scoped users → only ORGANIZATION-scoped roles
+ *   - BRANCH-scoped users → only BRANCH-scoped roles
+ *     within the same branch
+ *
+ * The @@unique([userId, roleId]) constraint prevents
+ * duplicate role assignments to the same user.
+ */
+model UserRole {
+  id         String   @id @default(uuid()) @db.Uuid
+  userId     String   @db.Uuid
+  roleId     String   @db.Uuid
+
+  assignedAt DateTime @default(now())
+
+  /* Relations */
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role       Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, roleId])                              // no duplicates
+  @@index([userId])
+  @@index([roleId])
+  @@map("user_roles")
+}
+
+/**
+ * Refresh Token (Device Session Management)
+ *
+ * Each non-revoked, non-expired RefreshToken represents
+ * one active device session. This model serves as the
+ * single source of truth for:
+ *   - JWT token rotation (refresh + access token hashes)
+ *   - Active device/session tracking per user
+ *   - "View all logged-in devices" UI
+ *   - "Logout from specific device" / "Logout all others"
+ *
+ * Token rotation workflow:
+ *   1. User logs in → issue access + refresh token
+ *   2. Access token expires → client sends refresh token
+ *   3. Server verifies hash, issues new pair, revokes old
+ *   4. Old token's replacedByTokenId points to the new one
+ *   5. lastActiveAt is updated on each successful refresh
+ *
+ * If a revoked token is reused (replay attack),
+ * the entire token family is invalidated by walking
+ * the replacedByTokenId chain.
+ *
+ * Session queries:
+ *   All devices:      WHERE userId=? AND revokedAt IS NULL AND expiresAt > NOW()
+ *   Logout one:        UPDATE SET revokedAt=NOW(), revokeReason='manual_logout' WHERE id=?
+ *   Logout all others: UPDATE SET revokedAt=NOW(), revokeReason='logout_all_devices' WHERE userId=? AND id!=current AND revokedAt IS NULL
+ *   Logout everywhere: UPDATE SET revokedAt=NOW(), revokeReason='password_change' WHERE userId=? AND revokedAt IS NULL
+ *
+ * Also used for PASSWORD_RESET and EMAIL_VERIFICATION
+ * flows via the TokenType enum.
+ */
+model RefreshToken {
+  id                  String     @id @default(uuid()) @db.Uuid
+  userId              String     @db.Uuid
+
+  /* Token Hashes */
+  refreshTokenHash    String     @unique                   // SHA-256 hash of refresh token
+  accessTokenHash     String?                              // SHA-256 hash of current access token (for invalidation on logout)
+  type                TokenType  @default(REFRESH)
+
+  /* Device Identification */
+  deviceId            String?                              // unique device fingerprint (from client SDK or generated)
+  deviceType          DeviceType @default(UNKNOWN)         // DESKTOP, MOBILE, TABLET, UNKNOWN
+  deviceName          String?                              // human-readable: "Chrome on Windows 11"
+
+  /* Parsed User-Agent Details */
+  browser             String?                              // "Chrome", "Firefox", "Safari"
+  browserVersion      String?                              // "125.0.6422"
+  os                  String?                              // "Windows", "macOS", "Android", "iOS"
+  osVersion           String?                              // "11", "14.5"
+  userAgent           String?                              // raw user-agent string (kept for audit)
+
+  /* Network Info */
+  ipAddress           String?    @db.VarChar(45)           // supports IPv6
+  location            String?                              // geo-resolved: "Mumbai, India"
+
+  /* Session Lifecycle */
+  loginAt             DateTime   @default(now())           // when user authenticated
+  lastActiveAt        DateTime   @default(now())           // updated on each token refresh
+  expiresAt           DateTime
+  revokedAt           DateTime?                            // null = active session
+  revokeReason        String?                              // "manual_logout", "logout_all_devices", "password_change", "token_reuse", "admin_logout", "expired"
+
+  /* Token Rotation Chain */
+  replacedByTokenId   String?    @db.Uuid                  // points to successor token (for rotation tracking)
+
+  createdAt           DateTime   @default(now())
+
+  /* Relations */
+  user                User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, revokedAt])                             // fast "active sessions for user" queries
+  @@index([userId])
+  @@index([expiresAt])
+  @@index([type])
+  @@index([accessTokenHash])                               // fast access token blacklist check
+  @@map("refresh_tokens")
+}
+
+/**
+ * Audit Log
+ *
+ * Immutable, append-only log of authentication and
+ * RBAC events. This table has NO updatedAt and NO
+ * deletedAt — audit records are permanent.
+ *
+ * Every significant auth action (login, role change,
+ * user creation, permission change) is recorded here
+ * with full context: who, what, when, from where.
+ *
+ * The metadata JSON field stores before/after values
+ * for change tracking (e.g., { oldRole: "...", newRole: "..." }).
+ */
+model AuditLog {
+  id              String      @id @default(uuid()) @db.Uuid
+  organizationId  String      @db.Uuid
+  branchId        String?     @db.Uuid
+  userId          String?     @db.Uuid                    // null for failed logins by unknown users
+
+  action          AuditAction
+
+  /* Target Entity */
+  targetEntity    String?                                 // "User", "Role", "Permission"
+  targetEntityId  String?     @db.Uuid
+
+  /* Request Metadata */
+  ipAddress       String?     @db.VarChar(45)             // supports IPv6
+  userAgent       String?
+
+  /**
+   * Change Context
+   * Stores additional context as JSON.
+   * Example: { "oldValues": { "status": "ACTIVE" }, "newValues": { "status": "SUSPENDED" } }
+   */
+  metadata        Json?
+
+  createdAt       DateTime    @default(now())
+
+  /* Relations (No updatedAt, no deletedAt — audit logs are immutable) */
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  branch          Branch?      @relation(fields: [branchId], references: [id], onDelete: SetNull)
+  user            User?        @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, createdAt])
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
+  @@map("audit_logs")
+}

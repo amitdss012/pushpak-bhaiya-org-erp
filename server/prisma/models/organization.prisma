@@ -1,0 +1,53 @@
+/**
+ * Organization
+ *
+ * Top-level tenant entity. Every branch, user, role,
+ * and subscription belongs to exactly one organization.
+ *
+ * The slug field provides a URL-safe unique identifier
+ * (e.g., "acme-corp") used in API routes and panel URLs.
+ *
+ * Soft-deleted via deletedAt — never hard-delete an
+ * org to preserve audit trails and billing history.
+ */
+
+/// Lifecycle states for an organization.
+enum OrgStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+model Organization {
+  id        String    @id @default(uuid()) @db.Uuid
+  name      String
+  slug      String    @unique                             // URL-safe: "acme-corp"
+  email     String?
+  phone     String?
+
+  /* Branding & Address */
+  logo      String?                                       // URL to uploaded logo
+  address   String?
+  city      String?
+  state     String?
+  country   String?   @default("IN") @db.VarChar(2)       // ISO 3166-1 alpha-2
+  pincode   String?   @db.VarChar(10)
+
+  status    OrgStatus @default(ACTIVE)
+
+  /* Timestamps */
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?                                     // soft delete
+
+  /* Relations */
+  branches      Branch[]
+  users         User[]
+  roles         Role[]
+  subscriptions Subscription[]
+  auditLogs     AuditLog[]
+
+  @@index([status])
+  @@index([deletedAt])
+  @@map("organizations")
+}

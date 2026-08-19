@@ -1,0 +1,151 @@
+/**
+ * Platform — Subscription Plans & Subscriptions
+ *
+ * Platform-level entities managed by the SaaS platform
+ * itself, not by individual organizations. Includes
+ * subscription tiers, pricing, feature limits, and
+ * the subscription lifecycle for each organization.
+ */
+
+/// Lifecycle states for a subscription.
+enum SubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+  EXPIRED
+  TRIALING
+}
+
+/// Billing frequency for subscriptions.
+enum BillingCycle {
+  MONTHLY
+  QUARTERLY
+  YEARLY
+}
+
+/**
+ * Subscription Plan
+ *
+ * Defines the available subscription tiers that
+ * organizations can subscribe to. Feature limits
+ * here govern how many branches, users, and roles
+ * an org can create under that plan.
+ *
+ * Plans are managed by the platform admin, not by
+ * individual organizations.
+ */
+model SubscriptionPlan {
+  id            String   @id @default(uuid()) @db.Uuid
+  name          String   @unique                          // "Free", "Pro", "Enterprise"
+  slug          String   @unique                          // "free", "pro", "enterprise"
+  description   String?
+
+  /* Pricing */
+  priceMonthly  Decimal  @default(0) @db.Decimal(10, 2)
+  priceYearly   Decimal  @default(0) @db.Decimal(10, 2)
+  currency      String   @default("INR") @db.VarChar(3)
+
+  /* Feature Limits */
+  maxBranches        Int @default(1)
+  maxUsersPerOrg     Int @default(5)
+  maxUsersPerBranch  Int @default(5)
+  maxRolesPerOrg     Int @default(3)
+  maxRolesPerBranch  Int @default(3)
+
+  /**
+   * Feature Flags
+   * Flexible JSON for plan-specific feature toggles.
+   * Example: { "customBranding": true, "apiAccess": false }
+   */
+  features      Json     @default("{}")
+
+  isActive      Boolean  @default(true)
+  sortOrder     Int      @default(0)                      // display ordering
+
+  /* Timestamps */
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  /* Relations */
+  subscriptions Subscription[]
+
+  @@map("subscription_plans")
+}
+
+/**
+ * Subscription
+ *
+ * Tracks an organization's subscription lifecycle.
+ * Each org can have multiple subscription records
+ * over time (upgrades, renewals, cancellations)
+ * but only one should be ACTIVE or TRIALING at
+ * any given time — enforced at the application layer.
+ *
+ * The externalId field stores the payment gateway's
+ * subscription identifier (Razorpay/Stripe) for
+ * webhook reconciliation.
+ */
+model Subscription {
+  id                   String             @id @default(uuid()) @db.Uuid
+  organizationId       String             @db.Uuid
+  planId               String             @db.Uuid
+
+  status               SubscriptionStatus @default(TRIALING)
+  billingCycle         BillingCycle       @default(MONTHLY)
+
+  /* Billing Period */
+  currentPeriodStart   DateTime
+  currentPeriodEnd     DateTime
+  trialEndsAt          DateTime?
+  cancelledAt          DateTime?
+
+  /**
+   * Payment Gateway
+   * Razorpay subscription ID / Stripe subscription ID
+   */
+  externalId           String?            @unique
+
+  /* Timestamps */
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  /* Relations */
+  organization         Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  plan                 SubscriptionPlan   @relation(fields: [planId], references: [id], onDelete: Restrict)
+
+  @@index([organizationId])
+  @@index([status])
+  @@index([currentPeriodEnd])
+  @@map("subscriptions")
+}
+
+/**
+ * Platform Admin
+ *
+ * Standalone admin account for the SaaS platform panel.
+ * Used to manage subscription plans, organizations,
+ * and platform-wide settings.
+ *
+ * No relations to any other table — fully independent
+ * entity separate from organization/branch users.
+ */
+model PlatformAdmin {
+  id            String   @id @default(uuid()) @db.Uuid
+
+  name          String
+  email         String   @unique
+  passwordHash  String                                    // bcrypt hash
+  phone         String?
+  avatar        String?                                   // URL to profile picture
+
+  isActive      Boolean  @default(true)
+
+  emailVerifiedAt DateTime?
+  lastLoginAt     DateTime?
+
+  /* Timestamps */
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("platform_admins")
+}
