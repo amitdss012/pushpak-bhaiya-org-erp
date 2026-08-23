@@ -1,431 +1,775 @@
+# Flutter SaaS Web App — Production-Grade Implementation Prompt
 
-generator client {
-  provider = "prisma-client-js"
-}
+## Objective
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
+Build the initial Flutter application for my SaaS product using a **production-grade, scalable, maintainable, and industry-standard Flutter architecture**.
 
-//////////////////////////////////////////////////////////////
-// ENUMS
-//////////////////////////////////////////////////////////////
+The product is a SaaS platform for organizations that need to manage multiple branches from a centralized organization panel.
 
-enum UserStatus {
-  ACTIVE
-  INACTIVE
-  SUSPENDED
-}
+The application should initially contain **two routes/pages**:
 
-enum SessionStatus {
-  ACTIVE
-  REVOKED
-  EXPIRED
-}
+1. `/` — Public SaaS landing/showcase page
+2. `/login` — Authentication/login page
 
-enum BranchStatus {
-  ACTIVE
-  INACTIVE
-}
+Use **GoRouter** for navigation and structure the project so it can scale significantly as more modules are added later.
 
-enum StudentStatus {
-  ACTIVE
-  INACTIVE
-  GRADUATED
-  SUSPENDED
-}
+---
 
-//////////////////////////////////////////////////////////////
-// USER
-//////////////////////////////////////////////////////////////
+# Product Context
 
-model User {
+The SaaS product allows an organization to manage multiple branches.
 
-  id String @id @default(cuid())
+### Organization-level functionality
 
-  email String @unique
+An organization will eventually be able to:
 
-  passwordHash String
+* Create and manage branches
+* View all branches
+* Manage branch-level information
+* Monitor branch activity
+* Manage organization-level settings
+* Manage users/staff across branches
+* Access centralized organization analytics
 
-  firstName String
+### Branch-level functionality
 
-  lastName String?
+Each branch will eventually have its own management panel where it can manage things such as:
 
-  phone String?
+* Students
+* Staff
+* Courses
+* Classes
+* Attendance
+* Fees
+* Academic information
+* Branch settings
+* Reports
+* Other branch-specific operations
 
-  avatarUrl String?
+Do **not** implement these modules yet.
 
-  status UserStatus @default(ACTIVE)
+For now, only create the foundation and the two requested pages while designing the architecture so these modules can be added cleanly later.
 
-  emailVerified Boolean @default(false)
+---
 
-  lastLoginAt DateTime?
+# Required Routes
 
-  createdAt DateTime @default(now())
+Use **GoRouter**.
 
-  updatedAt DateTime @updatedAt
+```text
+/
+└── Landing / Product Showcase
 
-  sessions Session[]
+/login
+└── Login
+```
 
-  organizationMemberships OrganizationMember[]
+The routing architecture should be designed so that authenticated application routes can later be added without restructuring the entire application.
 
-  branchMemberships BranchMember[]
+For example, the architecture should be ready for future routes such as:
 
-  student Student?
+```text
+/organization
+/organization/branches
+/organization/settings
 
-  @@index([email])
+/branch
+/branch/students
+/branch/staff
+/branch/courses
+/branch/settings
+```
 
-  @@index([status])
+Do not implement these routes now.
 
-}
+---
 
-//////////////////////////////////////////////////////////////
-// SESSION
-//////////////////////////////////////////////////////////////
+# Page 1 — `/`
 
-model Session {
+Create a professional SaaS landing/showcase page.
 
-  id String @id @default(cuid())
+The purpose of this page is to clearly communicate what the product does and make it look like a real modern SaaS product rather than a basic Flutter demo.
 
-  userId String
+## Landing page should include
 
-  refreshTokenHash String @unique
+### Hero section
 
-  ipAddress String?
+Clearly communicate:
 
-  userAgent String?
+* What the product is
+* Who it is for
+* The primary value proposition
 
-  expiresAt DateTime
+Example messaging direction:
 
-  status SessionStatus @default(ACTIVE)
+> Manage your entire organization and every branch from one powerful platform.
 
-  createdAt DateTime @default(now())
+Include:
 
-  updatedAt DateTime @updatedAt
+* Strong headline
+* Supporting description
+* Primary CTA
+* Secondary CTA if appropriate
 
-  user User
-  @relation(fields:[userId],references:[id],onDelete:Cascade)
+Primary CTA:
 
-  @@index([userId])
+```text
+Get Started
+```
 
-  @@index([expiresAt])
+Secondary CTA:
 
-}
+```text
+Sign In
+```
 
-//////////////////////////////////////////////////////////////
-// ORGANIZATION
-//////////////////////////////////////////////////////////////
+The CTA should navigate using GoRouter.
 
-model Organization {
+`Get Started` can temporarily navigate to `/login` unless a better route is required by the architecture.
 
-  id String @id @default(cuid())
+`Sign In` must navigate to:
 
-  name String
+```text
+/login
+```
 
-  code String @unique
+---
 
-  logoUrl String?
+## Product showcase
 
-  email String?
+Show the core concept visually:
 
-  phone String?
+```text
+Organization
+      │
+      ├── Branch 1
+      │     ├── Students
+      │     ├── Staff
+      │     ├── Courses
+      │     └── Management
+      │
+      ├── Branch 2
+      │     ├── Students
+      │     ├── Staff
+      │     ├── Courses
+      │     └── Management
+      │
+      └── Branch 3
+            ├── Students
+            ├── Staff
+            ├── Courses
+            └── Management
+```
 
-  website String?
+Present this concept in a visually polished SaaS-oriented way.
 
-  isActive Boolean @default(true)
+Avoid making the landing page look like a generic Flutter template.
 
-  createdAt DateTime @default(now())
+---
 
-  updatedAt DateTime @updatedAt
+## Features section
 
-  branches Branch[]
+Create a clean feature section communicating concepts such as:
 
-  members OrganizationMember[]
+* Multi-branch management
+* Centralized organization control
+* Branch-level management
+* Student management
+* Staff management
+* Course management
+* Analytics and reporting
+* Secure access
 
-  roles Role[]
+These are showcase/marketing elements only.
 
-}
+Do not implement actual functionality for these modules.
 
-//////////////////////////////////////////////////////////////
-// BRANCH
-//////////////////////////////////////////////////////////////
+---
 
-model Branch {
+## Architecture/value section
 
-  id String @id @default(cuid())
+Include a section explaining the platform concept:
 
-  organizationId String
+### One organization. Multiple branches. One platform.
 
-  name String
+Explain that organizations can centrally manage their branches while each branch can independently manage its daily operations.
 
-  code String
+---
 
-  email String?
+## Final CTA
 
-  phone String?
+Add a professional CTA near the bottom of the page encouraging users to get started.
 
-  address String?
+---
 
-  status BranchStatus @default(ACTIVE)
+# Page 2 — `/login`
 
-  createdAt DateTime @default(now())
+Create a professional login screen.
 
-  updatedAt DateTime @updatedAt
+The screen should include:
 
-  organization Organization
-  @relation(fields:[organizationId],references:[id],onDelete:Cascade)
+* Product branding/logo area
+* Welcome heading
+* Email field
+* Password field
+* Show/hide password functionality
+* Remember me
+* Forgot password
+* Login button
+* Appropriate validation/error states
 
-  students Student[]
+Authentication itself does not need to be connected to a backend yet.
 
-  members BranchMember[]
+However, structure the code so that authentication can later be connected to an API without rewriting the UI.
 
-  @@unique([organizationId,code])
+Create an abstraction such as an authentication repository/service rather than putting API logic directly inside widgets.
 
-  @@index([organizationId])
+---
 
-  @@index([status])
+# Theme Requirements
 
-}
+The application **must fully support both light mode and dark mode**.
 
-//////////////////////////////////////////////////////////////
-// STUDENT
-//////////////////////////////////////////////////////////////
+The UI must automatically follow the system theme.
 
-model Student {
+### Light mode
 
-  id String @id @default(cuid())
+When the operating system is using light mode:
 
-  userId String @unique
+```text
+App → Light Theme
+```
 
-  branchId String
+### Dark mode
 
-  admissionNumber String
+When the operating system is using dark mode:
 
-  rollNumber String?
+```text
+App → Dark Theme
+```
 
-  status StudentStatus @default(ACTIVE)
+Use:
 
-  joinedAt DateTime @default(now())
+```dart
+ThemeMode.system
+```
 
-  createdAt DateTime @default(now())
+Do not hardcode the application to light or dark mode.
 
-  updatedAt DateTime @updatedAt
+Create proper centralized theme definitions:
 
-  user User
-  @relation(fields:[userId],references:[id],onDelete:Cascade)
+```text
+lightTheme
+darkTheme
+```
 
-  branch Branch
-  @relation(fields:[branchId],references:[id],onDelete:Cascade)
+Use Material 3.
 
-  @@unique([branchId,admissionNumber])
+Avoid scattering colors throughout widgets.
 
-  @@unique([branchId,rollNumber])
+Instead, define reusable design tokens/theme configuration for:
 
-  @@index([branchId])
+* Colors
+* Typography
+* Spacing
+* Border radius
+* Shadows
+* Component styling
 
-  @@index([status])
+The UI should look intentional in both themes.
 
-}
+Do not simply invert colors for dark mode.
 
+Dark mode should be properly designed with appropriate surfaces, contrast, borders, typography, and elevation.
 
+---
 
+# Architecture
 
-//////////////////////////////////////////////////////////////
-// ORGANIZATION MEMBER
-//////////////////////////////////////////////////////////////
+Use a **production-grade feature-oriented Flutter architecture**.
 
-model OrganizationMember {
+Do not put everything inside:
 
-  id String @id @default(cuid())
+```text
+lib/
+  screens/
+  widgets/
+```
 
-  organizationId String
+with hundreds of unrelated files.
 
-  userId String
+Use clear separation between:
 
-  isOwner Boolean @default(false)
+* Presentation
+* Domain/business logic
+* Data
+* Core/shared infrastructure
 
-  joinedAt DateTime @default(now())
+A recommended structure is:
 
-  createdAt DateTime @default(now())
+```text
+lib/
+├── app/
+│   ├── app.dart
+│   ├── router/
+│   │   ├── app_router.dart
+│   │   └── route_names.dart
+│   └── theme/
+│       ├── app_theme.dart
+│       ├── app_colors.dart
+│       ├── app_typography.dart
+│       ├── app_spacing.dart
+│       └── app_radius.dart
+│
+├── core/
+│   ├── constants/
+│   ├── errors/
+│   ├── extensions/
+│   ├── utils/
+│   └── network/
+│
+├── features/
+│   ├── landing/
+│   │   ├── data/
+│   │   ├── domain/
+│   │   └── presentation/
+│   │       ├── screens/
+│   │       │   └── landing_screen.dart
+│   │       └── widgets/
+│   │           ├── hero_section.dart
+│   │           ├── feature_section.dart
+│   │           ├── product_showcase.dart
+│   │           ├── organization_structure.dart
+│   │           └── final_cta_section.dart
+│   │
+│   └── authentication/
+│       ├── data/
+│       │   ├── datasources/
+│       │   ├── models/
+│       │   └── repositories/
+│       ├── domain/
+│       │   ├── entities/
+│       │   ├── repositories/
+│       │   └── usecases/
+│       └── presentation/
+│           ├── screens/
+│           │   └── login_screen.dart
+│           ├── widgets/
+│           │   ├── login_form.dart
+│           │   ├── email_field.dart
+│           │   ├── password_field.dart
+│           │   └── auth_header.dart
+│           └── controllers/
+│
+├── shared/
+│   ├── widgets/
+│   ├── buttons/
+│   ├── inputs/
+│   ├── layouts/
+│   └── responsive/
+│
+└── main.dart
+```
 
-  updatedAt DateTime @updatedAt
+You may improve this structure if there is a better industry-standard approach.
 
-  organization Organization
-    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+The important requirement is **clear separation of responsibility and scalability**.
 
-  user User
-    @relation(fields: [userId], references: [id], onDelete: Cascade)
+---
 
-  roles OrganizationMemberRole[]
+# Screen vs Widget Responsibility
 
-  @@unique([organizationId, userId])
+Follow this rule strictly:
 
-  @@index([organizationId])
+### Screens
 
-  @@index([userId])
+Screens should primarily:
 
-}
+* Compose the page
+* Handle page-level layout
+* Connect presentation logic
+* Coordinate widgets
 
-//////////////////////////////////////////////////////////////
-// BRANCH MEMBER
-//////////////////////////////////////////////////////////////
+Screens should NOT contain hundreds of lines of UI implementation.
 
-model BranchMember {
+### Widgets
 
-  id String @id @default(cuid())
+Break meaningful UI sections into dedicated widgets.
 
-  branchId String
+For example:
 
-  userId String
+```text
+HeroSection
+FeatureSection
+ProductShowcase
+OrganizationStructure
+FinalCtaSection
+```
 
-  joinedAt DateTime @default(now())
+Avoid both extremes:
 
-  createdAt DateTime @default(now())
+### Bad
 
-  updatedAt DateTime @updatedAt
+One 800-line `LandingScreen`.
 
-  branch Branch
-    @relation(fields: [branchId], references: [id], onDelete: Cascade)
+### Also bad
 
-  user User
-    @relation(fields: [userId], references: [id], onDelete: Cascade)
+Creating dozens of meaningless one-line widgets.
 
-  roles BranchMemberRole[]
+Only extract components when they represent a meaningful reusable or logically isolated UI section.
 
-  @@unique([branchId, userId])
+---
 
-  @@index([branchId])
+# Responsive Design
 
-  @@index([userId])
+The application must work well across:
 
-}
+* Desktop
+* Tablet
+* Mobile
 
-//////////////////////////////////////////////////////////////
-// ROLE
-//////////////////////////////////////////////////////////////
+The landing page should not simply overflow or become unusable on smaller screens.
 
-model Role {
+Use responsive layouts appropriately.
 
-  id String @id @default(cuid())
+For example:
 
-  organizationId String
+```text
+Desktop
+Hero:
+[Text] [Product Visualization]
 
-  name String
+Mobile
+[Text]
+[Product Visualization]
+```
 
-  description String?
+Feature grids should adapt based on available width.
 
-  isSystem Boolean @default(false)
+Login should also be responsive.
 
-  createdAt DateTime @default(now())
+The design should feel intentionally responsive rather than simply shrinking desktop components.
 
-  updatedAt DateTime @updatedAt
+---
 
-  organization Organization
-    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+# UI/UX Requirements
 
-  permissions RolePermission[]
+The visual design should feel like a modern premium SaaS product.
 
-  organizationMembers OrganizationMemberRole[]
+Prioritize:
 
-  branchMembers BranchMemberRole[]
+* Clean typography
+* Strong visual hierarchy
+* Generous whitespace
+* Consistent spacing
+* Subtle borders
+* Subtle shadows
+* Professional cards
+* Modern buttons
+* Proper hover states where applicable
+* Smooth transitions where useful
+* Consistent border radius
+* Strong alignment
+* Excellent responsive behavior
 
-  @@unique([organizationId, name])
+Avoid:
 
-  @@index([organizationId])
+* Generic Flutter demo styling
+* Excessive gradients
+* Excessive animations
+* Huge rounded containers everywhere
+* Random colors
+* Inconsistent spacing
+* Overly verbose UI
+* Unnecessary visual clutter
+* Hardcoded dimensions that break responsiveness
 
-}
+The design should look appropriate for a real B2B SaaS product.
 
-//////////////////////////////////////////////////////////////
-// PERMISSION
-//////////////////////////////////////////////////////////////
+---
 
-model Permission {
+# Navigation
 
-  id String @id @default(cuid())
+Use GoRouter properly.
 
-  key String @unique
+Do not navigate using ad-hoc `Navigator.push` calls for application routing.
 
-  name String
+Create centralized route definitions.
 
-  description String?
+For example:
 
-  createdAt DateTime @default(now())
+```dart
+GoRoute(
+  path: '/',
+  name: RouteNames.landing,
+  builder: ...
+),
+GoRoute(
+  path: '/login',
+  name: RouteNames.login,
+  builder: ...
+),
+```
 
-  updatedAt DateTime @updatedAt
+Prefer named navigation where appropriate.
 
-  roles RolePermission[]
+Prepare the router for future authentication guards.
 
-}
+For example, the architecture should make it straightforward to later implement:
 
-//////////////////////////////////////////////////////////////
-// ROLE PERMISSION
-//////////////////////////////////////////////////////////////
+```text
+Unauthenticated user
+        ↓
+/login
 
-model RolePermission {
+Authenticated user
+        ↓
+/organization or /branch
+```
 
-  roleId String
+Do not implement authentication guards yet unless necessary for the current two routes.
 
-  permissionId String
+---
 
-  role Role
-    @relation(fields: [roleId], references: [id], onDelete: Cascade)
+# State Management
 
-  permission Permission
-    @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+Do not introduce a heavy state-management architecture unless it is actually required.
 
-  @@id([roleId, permissionId])
+Keep the current implementation simple but scalable.
 
-  @@index([permissionId])
+If state management is needed, use a clean architecture that can later support:
 
-}
+* Authentication state
+* Organization state
+* Branch state
+* User state
 
-//////////////////////////////////////////////////////////////
-// ORGANIZATION MEMBER ROLE
-//////////////////////////////////////////////////////////////
+Do not put application/business state directly into UI widgets.
 
-model OrganizationMemberRole {
+---
 
-  organizationMemberId String
+# Authentication Architecture
 
-  roleId String
+Even though the login API is not being implemented yet, prepare the architecture for it.
 
-  assignedAt DateTime @default(now())
+A future API should be able to look conceptually like:
 
-  organizationMember OrganizationMember
-    @relation(fields: [organizationMemberId], references: [id], onDelete: Cascade)
+```text
+LoginScreen
+    ↓
+AuthController
+    ↓
+LoginUseCase
+    ↓
+AuthRepository
+    ↓
+AuthRemoteDataSource
+    ↓
+API
+```
 
-  role Role
-    @relation(fields: [roleId], references: [id], onDelete: Cascade)
+Do not directly call HTTP APIs from `LoginScreen`.
 
-  @@id([organizationMemberId, roleId])
+For now, use a mock/local implementation where necessary.
 
-  @@index([roleId])
+---
 
-}
+# Code Quality
 
-//////////////////////////////////////////////////////////////
-// BRANCH MEMBER ROLE
-//////////////////////////////////////////////////////////////
+Follow professional Dart/Flutter coding standards.
 
-model BranchMemberRole {
+Requirements:
 
-  branchMemberId String
+* Null safety
+* Strong typing
+* `const` constructors wherever possible
+* Immutable widgets where appropriate
+* Meaningful naming
+* Small focused classes
+* No unnecessary duplication
+* No magic numbers
+* No magic colors
+* No business logic inside presentation widgets
+* No unnecessary global state
+* No dead code
+* No unused imports
+* No placeholder architecture that serves no purpose
 
-  roleId String
+Use linting and formatting standards.
 
-  assignedAt DateTime @default(now())
+The project should pass:
 
-  branchMember BranchMember
-    @relation(fields: [branchMemberId], references: [id], onDelete: Cascade)
+```bash
+flutter analyze
+```
 
-  role Role
-    @relation(fields: [roleId], references: [id], onDelete: Cascade)
+and should be formatted using:
 
-  @@id([branchMemberId, roleId])
+```bash
+dart format .
+```
 
-  @@index([roleId])
+Avoid suppressing analyzer warnings unless there is a legitimate reason.
 
-}
+---
 
+# Accessibility
 
+Build the UI with accessibility in mind.
+
+Use:
+
+* Proper semantic labels where required
+* Sufficient contrast
+* Keyboard-friendly interactions on web/desktop
+* Reasonable touch target sizes
+* Meaningful button labels
+* Proper form field labels
+
+Do not rely solely on color to communicate state.
+
+---
+
+# Performance
+
+Avoid unnecessary rebuilds.
+
+Use:
+
+* `const` widgets where possible
+* Efficient lists/grids
+* Lazy construction where appropriate
+* Avoid unnecessary expensive operations during build
+
+Do not prematurely optimize.
+
+Focus on clean and predictable rendering.
+
+---
+
+# Dependencies
+
+Only introduce dependencies when they provide meaningful value.
+
+At minimum, use:
+
+```yaml
+go_router:
+```
+
+Do not add large numbers of packages simply for convenience.
+
+Before adding a package, consider whether Flutter/Dart already provides a clean solution.
+
+---
+
+# Error and Loading States
+
+The login UI should have proper visual states for:
+
+```text
+Idle
+Loading
+Success
+Error
+```
+
+Even though the API is not implemented, structure the presentation layer so these states can easily be connected later.
+
+For example:
+
+```text
+Login
+   ↓
+Loading
+   ↓
+Success → Navigate
+   OR
+Error → Show error
+```
+
+---
+
+# Deliverables
+
+Implement the complete initial Flutter application.
+
+The final implementation must include:
+
+### Routing
+
+```text
+/
+ /login
+```
+
+### Landing page
+
+* Hero
+* Product showcase
+* Organization → branches concept
+* Features
+* SaaS value proposition
+* CTA
+
+### Login page
+
+* Professional login UI
+* Email validation
+* Password validation
+* Password visibility toggle
+* Remember me
+* Forgot password UI
+* Loading state
+* Error state
+* Login CTA
+
+### Theme
+
+* System theme detection
+* Light theme
+* Dark theme
+* Material 3
+* Centralized theme tokens
+
+### Architecture
+
+* Feature-based structure
+* Presentation separation
+* Domain separation
+* Data separation
+* Reusable shared components
+* Scalable routing
+
+### Quality
+
+* Responsive
+* Accessible
+* Clean
+* Maintainable
+* Production-grade
+* `flutter analyze` passes
+* Proper formatting
+* No unnecessary technical debt
+
+---
+
+# Important Implementation Rules
+
+1. **Do not create a monolithic `main.dart`.**
+2. **Do not put all UI into one screen file.**
+3. **Do not put API/business logic inside widgets.**
+4. **Do not hardcode colors throughout the UI.**
+5. **Do not hardcode light/dark mode.**
+6. **Use `ThemeMode.system`.**
+7. **Use GoRouter for application navigation.**
+8. **Keep authentication architecture ready for a real backend.**
+9. **Keep the architecture scalable for future organization and branch modules.**
+10. **Use feature-based folders.**
+11. **Keep screens responsible for composition and widgets responsible for isolated UI sections.**
+12. **Make the design responsive from the beginning.**
+13. **Prefer simple, maintainable solutions over unnecessary abstractions.**
+14. **Do not implement future modules yet. Only establish the architecture required to support them.**
+15. **The final result should look like a real production SaaS application, not a tutorial/demo Flutter project.**
+
+Before finishing, review the entire implementation as a senior Flutter engineer and refactor anything that violates separation of concerns, scalability, readability, responsiveness, or Flutter best practices.
