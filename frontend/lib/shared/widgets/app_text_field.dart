@@ -18,6 +18,7 @@ class AppTextField extends StatelessWidget {
   final void Function(String)? onFieldSubmitted;
   final bool enabled;
   final bool autofocus;
+  final int maxLines;
 
   const AppTextField({
     super.key,
@@ -33,6 +34,7 @@ class AppTextField extends StatelessWidget {
     this.onFieldSubmitted,
     this.enabled = true,
     this.autofocus = false,
+    this.maxLines = 1,
   });
 
   @override
@@ -64,6 +66,7 @@ class AppTextField extends StatelessWidget {
           onFieldSubmitted: onFieldSubmitted,
           enabled: enabled,
           autofocus: autofocus,
+          maxLines: maxLines,
           style: AppTypography.bodyMedium.copyWith(
             color: isDark
                 ? AppColors.textPrimaryDark

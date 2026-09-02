@@ -16,3 +16,12 @@ for now write prompt for 2 pages there will be one page for showcasing about my 
 
 
 so basically i am building a big oragnization manageement software where there will be organization who has enrolled in our sass can login and 
+
+
+
+ /// Header keys and prefixes.
+  static const String authorizationHeader = 'Authorization';
+  static const String bearerPrefix = 'Bearer ';
+  static const String contentTypeHeader = 'Content-Type';
+  static const String acceptHeader = 'Accept';
+  static const String applicationJson = 'application/json';  no need of these contast becuase these things can be hardcoded becase that's not the very constant things

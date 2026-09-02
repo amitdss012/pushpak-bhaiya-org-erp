@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/auth/platform_auth_service.dart';
+import '../../core/auth/token_storage.dart';
 import '../../features/authentication/presentation/screens/login_screen.dart';
 import '../../features/branch/presentation/screens/branch_dashboard_screen.dart';
 import '../../features/landing/presentation/screens/landing_screen.dart';
@@ -72,6 +74,9 @@ import '../../features/organization/presentation/screens/student/online_admissio
 import '../../features/organization/presentation/screens/student/view_students/index.dart';
 import '../../features/platform/presentation/screens/platform_dashboard_screen.dart';
 import '../../features/platform/presentation/screens/platform_login_screen.dart';
+import '../../features/platform/presentation/screens/platform_organizations_screen.dart';
+import '../../features/platform/presentation/screens/platform_plans_screen.dart';
+import '../../features/platform/presentation/widgets/platform_shell.dart';
 import '../../features/student/presentation/screens/student_dashboard_screen.dart';
 import 'route_names.dart';
 
@@ -80,10 +85,57 @@ class AppRouter {
 
   static final rootNavigatorKey = GlobalKey<NavigatorState>();
   static final shellNavigatorKey = GlobalKey<NavigatorState>();
+  static final platformShellNavigatorKey = GlobalKey<NavigatorState>();
 
   static final GoRouter router = GoRouter(
     navigatorKey: rootNavigatorKey,
     initialLocation: RouteNames.dashboardPath,
+    refreshListenable: PlatformAuthService.instance,
+    redirect: (BuildContext context, GoRouterState state) {
+      final authService = PlatformAuthService.instance;
+      final location = state.matchedLocation;
+
+      // Platform Route Protection
+      final isPlatformRoute =
+          location.startsWith('/platform') || location.startsWith('/platfrom');
+      if (isPlatformRoute) {
+        final isPlatformLogin = location == RouteNames.platformLoginPath ||
+            location == '/platfrom/login';
+
+        // While initializing startup auth check:
+        if (authService.isInitializing) {
+          final hasToken = TokenStorage.getPlatformToken()?.isNotEmpty == true;
+          if (hasToken) {
+            // Persistent token exists, if on login page redirect to dashboard
+            if (isPlatformLogin) {
+              return RouteNames.platformDashboardPath;
+            }
+            // Keep requested route while fetching profile in background
+            return null;
+          } else {
+            // No token at all: if trying to access dashboard, redirect to login
+            if (!isPlatformLogin) {
+              return RouteNames.platformLoginPath;
+            }
+            return null;
+          }
+        }
+
+        final isAuthenticated = authService.isAuthenticated;
+
+        // If authenticated and trying to access login, redirect to dashboard
+        if (isAuthenticated && isPlatformLogin) {
+          return RouteNames.platformDashboardPath;
+        }
+
+        // If NOT authenticated and trying to access protected platform routes, redirect to login
+        if (!isAuthenticated && !isPlatformLogin) {
+          return RouteNames.platformLoginPath;
+        }
+      }
+
+      return null;
+    },
     debugLogDiagnostics: true,
     routes: [
       // Landing & Public Routes
@@ -98,7 +150,7 @@ class AppRouter {
         builder: (context, state) => const LoginScreen(),
       ),
 
-      // Platform Owner Panel Routes
+      // Platform Owner Panel Login Route (Standalone)
       GoRoute(
         path: RouteNames.platformLoginPath,
         name: RouteNames.platformLogin,
@@ -108,14 +160,43 @@ class AppRouter {
         path: '/platfrom/login',
         redirect: (context, state) => RouteNames.platformLoginPath,
       ),
-      GoRoute(
-        path: RouteNames.platformDashboardPath,
-        name: RouteNames.platformDashboard,
-        builder: (context, state) => const PlatformDashboardScreen(),
-      ),
-      GoRoute(
-        path: '/platfrom/dashboard',
-        redirect: (context, state) => RouteNames.platformDashboardPath,
+
+      // Platform Owner Authenticated Shell Routes (Sidebar on Desktop, Bottom Nav on Mobile/Tablet)
+      ShellRoute(
+        navigatorKey: platformShellNavigatorKey,
+        builder: (context, state, child) => PlatformShell(
+          currentPath: state.matchedLocation,
+          child: child,
+        ),
+        routes: [
+          GoRoute(
+            path: RouteNames.platformDashboardPath,
+            name: RouteNames.platformDashboard,
+            builder: (context, state) => const PlatformDashboardScreen(),
+          ),
+          GoRoute(
+            path: RouteNames.platformPlansPath,
+            name: RouteNames.platformPlans,
+            builder: (context, state) => const PlatformPlansScreen(),
+          ),
+          GoRoute(
+            path: RouteNames.platformOrganizationsPath,
+            name: RouteNames.platformOrganizations,
+            builder: (context, state) => const PlatformOrganizationsScreen(),
+          ),
+          GoRoute(
+            path: '/platfrom/dashboard',
+            redirect: (context, state) => RouteNames.platformDashboardPath,
+          ),
+          GoRoute(
+            path: '/platfrom/plans',
+            redirect: (context, state) => RouteNames.platformPlansPath,
+          ),
+          GoRoute(
+            path: '/platfrom/organizations',
+            redirect: (context, state) => RouteNames.platformOrganizationsPath,
+          ),
+        ],
       ),
 
       // Branch Panel Route (Standalone)

@@ -43,3 +43,6 @@ package-lock.json
 **/*.bun
 
 urban-calsses-backend
+
+/server/prisma/seed/
+/server/public/

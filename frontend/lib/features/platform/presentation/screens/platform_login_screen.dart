@@ -1,62 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../api/hooks/platfrom/use_platform_auth.dart';
+import '../../../../api/models/models.dart';
 import '../../../../app/router/route_names.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_radius.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/theme/app_typography.dart';
+import '../../../../core/auth/platform_auth_service.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/extensions/context_extensions.dart';
+import '../../../../core/utils/use_app_mutation.dart';
 import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/app_text_field.dart';
 
-class PlatformLoginScreen extends StatefulWidget {
+/// Platform Super-Admin / Owner authentication screen.
+class PlatformLoginScreen extends HookWidget {
   const PlatformLoginScreen({super.key});
-
-  @override
-  State<PlatformLoginScreen> createState() => _PlatformLoginScreenState();
-}
-
-class _PlatformLoginScreenState extends State<PlatformLoginScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  bool _obscurePassword = true;
-  bool _rememberMe = false;
-  bool _isLoading = false;
-  String? _errorMessage;
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
-  Future<void> _handleSubmit() async {
-    if (!_formKey.currentState!.validate()) return;
-
-    setState(() {
-      _isLoading = true;
-      _errorMessage = null;
-    });
-
-    // Simulate brief authentication network request
-    await Future.delayed(const Duration(milliseconds: 600));
-
-    if (!mounted) return;
-
-    setState(() {
-      _isLoading = false;
-    });
-
-    context.goNamed(RouteNames.platformDashboard);
-  }
 
   @override
   Widget build(BuildContext context) {
     final isDark = context.isDarkMode;
+    final formKey = useMemoized(() => GlobalKey<FormState>());
+    final emailController = useTextEditingController();
+    final passwordController = useTextEditingController();
+    final obscurePassword = useState(true);
+    final rememberMe = useState(false);
+
+    // Platform login mutation hook with auto-toast handling
+    final loginMutation = usePlatformLogin(
+      onSuccess: (response) {
+        PlatformAuthService.instance.login(response);
+        if (context.mounted) {
+          context.go(RouteNames.platformDashboardPath);
+        }
+      },
+    );
+
+    void handleSubmit() {
+      if (!formKey.currentState!.validate()) return;
+
+      loginMutation.mutate(
+        PlatformLoginRequest(
+          email: emailController.text.trim(),
+          password: passwordController.text,
+        ),
+      );
+    }
 
     return Scaffold(
       backgroundColor: isDark
@@ -290,8 +282,8 @@ class _PlatformLoginScreenState extends State<PlatformLoginScreen> {
                       ),
                       AppSpacing.vXl,
 
-                      // Error banner if any
-                      if (_errorMessage != null) ...[
+                      // Error banner if mutation failed
+                      if (loginMutation.errorMessage != null) ...[
                         Container(
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
@@ -311,7 +303,7 @@ class _PlatformLoginScreenState extends State<PlatformLoginScreen> {
                               AppSpacing.hSm,
                               Expanded(
                                 child: Text(
-                                  _errorMessage!,
+                                  loginMutation.errorMessage!,
                                   style: AppTypography.bodySmall.copyWith(
                                     color: isDark
                                         ? AppColors.errorLight
@@ -328,13 +320,13 @@ class _PlatformLoginScreenState extends State<PlatformLoginScreen> {
 
                       // Login Form
                       Form(
-                        key: _formKey,
+                        key: formKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             // Email Input
                             AppTextField(
-                              controller: _emailController,
+                              controller: emailController,
                               label: 'Platform Admin Email',
                               hint: 'admin@platform.com',
                               keyboardType: TextInputType.emailAddress,
@@ -343,7 +335,7 @@ class _PlatformLoginScreenState extends State<PlatformLoginScreen> {
                                 Icons.email_outlined,
                                 size: 20,
                               ),
-                              enabled: !_isLoading,
+                              enabled: !loginMutation.isPending,
                               validator: (val) {
                                 if (val == null || val.trim().isEmpty) {
                                   return 'Please enter your platform admin email.';
@@ -359,28 +351,27 @@ class _PlatformLoginScreenState extends State<PlatformLoginScreen> {
 
                             // Password Input
                             AppTextField(
-                              controller: _passwordController,
+                              controller: passwordController,
                               label: 'Password',
                               hint: '••••••••',
-                              obscureText: _obscurePassword,
+                              obscureText: obscurePassword.value,
                               textInputAction: TextInputAction.done,
-                              onFieldSubmitted: (_) => _handleSubmit(),
+                              onFieldSubmitted: (_) => handleSubmit(),
                               prefixIcon: const Icon(
                                 Icons.lock_outline_rounded,
                                 size: 20,
                               ),
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                  _obscurePassword
+                                  obscurePassword.value
                                       ? Icons.visibility_off_outlined
                                       : Icons.visibility_outlined,
                                   size: 20,
                                 ),
-                                onPressed: () => setState(
-                                  () => _obscurePassword = !_obscurePassword,
-                                ),
+                                onPressed: () => obscurePassword.value =
+                                    !obscurePassword.value,
                               ),
-                              enabled: !_isLoading,
+                              enabled: !loginMutation.isPending,
                               validator: (val) {
                                 if (val == null || val.isEmpty) {
                                   return 'Please enter your password.';
@@ -404,24 +395,23 @@ class _PlatformLoginScreenState extends State<PlatformLoginScreen> {
                                       width: 24,
                                       height: 24,
                                       child: Checkbox(
-                                        value: _rememberMe,
-                                        onChanged: _isLoading
+                                        value: rememberMe.value,
+                                        onChanged: loginMutation.isPending
                                             ? null
-                                            : (val) => setState(
-                                                () => _rememberMe = val ?? false,
-                                              ),
+                                            : (val) => rememberMe.value =
+                                                val ?? false,
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(4),
+                                          borderRadius:
+                                              BorderRadius.circular(4),
                                         ),
                                       ),
                                     ),
                                     AppSpacing.hSm,
                                     GestureDetector(
-                                      onTap: _isLoading
+                                      onTap: loginMutation.isPending
                                           ? null
-                                          : () => setState(
-                                              () => _rememberMe = !_rememberMe,
-                                            ),
+                                          : () => rememberMe.value =
+                                              !rememberMe.value,
                                       child: Text(
                                         'Remember session',
                                         style: AppTypography.bodySmall.copyWith(
@@ -447,8 +437,8 @@ class _PlatformLoginScreenState extends State<PlatformLoginScreen> {
                             // Submit Button
                             AppButton(
                               text: 'Sign In to Platform Panel',
-                              onPressed: _handleSubmit,
-                              isLoading: _isLoading,
+                              onPressed: handleSubmit,
+                              isLoading: loginMutation.isPending,
                               icon: Icons.login_rounded,
                               height: 48,
                             ),

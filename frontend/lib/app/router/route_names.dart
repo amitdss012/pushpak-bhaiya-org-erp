@@ -16,6 +16,12 @@ class RouteNames {
   static const String platformDashboard = 'platformDashboard';
   static const String platformDashboardPath = '/platform/dashboard';
 
+  static const String platformPlans = 'platformPlans';
+  static const String platformPlansPath = '/platform/plans';
+
+  static const String platformOrganizations = 'platformOrganizations';
+  static const String platformOrganizationsPath = '/platform/organizations';
+
   // Standalone Panel Routes
   static const String branchDashboard = 'branchDashboard';
   static const String branchDashboardPath = '/branch/dashboard';
