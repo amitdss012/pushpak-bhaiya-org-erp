@@ -46,11 +46,9 @@ model SubscriptionPlan {
   currency      String   @default("INR") @db.VarChar(3)
 
   /* Feature Limits */
-  maxBranches        Int @default(1)
-  maxUsersPerOrg     Int @default(5)
-  maxUsersPerBranch  Int @default(5)
-  maxRolesPerOrg     Int @default(3)
-  maxRolesPerBranch  Int @default(3)
+  maxBranches        Int
+  maxStudentsPerBranch Int
+  maxTeachersPerBranch Int
 
   /**
    * Feature Flags

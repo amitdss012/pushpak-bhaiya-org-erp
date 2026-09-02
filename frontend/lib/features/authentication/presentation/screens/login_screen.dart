@@ -220,14 +220,41 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       // Footer note
                       Center(
-                        child: Text(
-                          'Need access for your branch or organization? Contact your admin.',
-                          textAlign: TextAlign.center,
-                          style: AppTypography.bodySmall.copyWith(
-                            color: isDark
-                                ? AppColors.textMutedDark
-                                : AppColors.textMutedLight,
-                          ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'Need access for your branch or organization? Contact your admin.',
+                              textAlign: TextAlign.center,
+                              style: AppTypography.bodySmall.copyWith(
+                                color: isDark
+                                    ? AppColors.textMutedDark
+                                    : AppColors.textMutedLight,
+                              ),
+                            ),
+                            AppSpacing.vSm,
+                            TextButton.icon(
+                              onPressed: () =>
+                                  context.goNamed(RouteNames.platformLogin),
+                              icon: const Icon(
+                                Icons.admin_panel_settings_outlined,
+                                size: 16,
+                              ),
+                              label: const Text('Login as Platform Owner'),
+                              style: TextButton.styleFrom(
+                                foregroundColor: AppColors.primary,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 6,
+                                ),
+                                minimumSize: Size.zero,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                textStyle: AppTypography.labelMedium.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],

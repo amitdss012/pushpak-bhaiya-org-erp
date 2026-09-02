@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../core/extensions/context_extensions.dart';
-import '../widgets/branch_overview_table.dart';
-import '../widgets/dashboard_metrics_grid.dart';
-import '../widgets/dashboard_welcome_header.dart';
-import '../widgets/fee_collection_chart_card.dart';
-import '../widgets/quick_actions_grid.dart';
-import '../widgets/recent_activity_card.dart';
+import '../widgets/admission_trends_card.dart';
+import '../widgets/course_distribution_card.dart';
+import '../widgets/dashboard_page_header.dart';
+import '../widgets/dashboard_stats_grid.dart';
+import '../widgets/fee_collection_overview_card.dart';
+import '../widgets/recent_activity_feed_card.dart';
+import '../widgets/upcoming_events_card.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -25,52 +26,68 @@ class DashboardScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Header Greeting
-          const DashboardWelcomeHeader(),
+          // 1. Page Header
+          const DashboardPageHeader(),
           AppSpacing.vLg,
 
-          // 4 Metric Stats
-          const DashboardMetricsGrid(),
+          // 2. 4 Metric Stats Cards (Students, Courses, Fee Collection, Due Payments)
+          const DashboardStatsGrid(),
           AppSpacing.vXl,
 
-          // Quick Action Shortcuts
-          const QuickActionsGrid(),
-          AppSpacing.vXl,
-
-          // Main Multi-Column Section
+          // 3. Section 1: Admission Trends (2 cols) & Course Distribution (1 col)
           if (isDesktop)
             const Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Left Column: Branch Table & Financial Inflow (flex: 7)
                 Expanded(
-                  flex: 7,
-                  child: Column(
-                    children: [
-                      BranchOverviewTable(),
-                      AppSpacing.vXl,
-                      FeeCollectionChartCard(),
-                    ],
-                  ),
+                  flex: 2,
+                  child: AdmissionTrendsCard(),
                 ),
                 AppSpacing.hXl,
-                // Right Column: Live Audit Activity Feed (flex: 5)
                 Expanded(
-                  flex: 5,
-                  child: Column(children: [RecentActivityCard()]),
+                  flex: 1,
+                  child: CourseDistributionCard(),
                 ),
               ],
             )
           else
             const Column(
               children: [
-                BranchOverviewTable(),
+                AdmissionTrendsCard(),
                 AppSpacing.vLg,
-                FeeCollectionChartCard(),
-                AppSpacing.vLg,
-                RecentActivityCard(),
+                CourseDistributionCard(),
               ],
             ),
+          AppSpacing.vXl,
+
+          // 4. Section 2: Fee Collection Overview (2 cols) & Upcoming Events (1 col)
+          if (isDesktop)
+            const Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: FeeCollectionOverviewCard(),
+                ),
+                AppSpacing.hXl,
+                Expanded(
+                  flex: 1,
+                  child: UpcomingEventsCard(),
+                ),
+              ],
+            )
+          else
+            const Column(
+              children: [
+                FeeCollectionOverviewCard(),
+                AppSpacing.vLg,
+                UpcomingEventsCard(),
+              ],
+            ),
+          AppSpacing.vXl,
+
+          // 5. Section 3: Recent Activity (Full width)
+          const RecentActivityFeedCard(),
           AppSpacing.vXl,
         ],
       ),

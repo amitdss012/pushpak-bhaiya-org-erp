@@ -32,10 +32,8 @@ class _AppSidebarState extends State<AppSidebar> {
   }
 
   void _handleNavigate(String path) {
-    if (path == RouteNames.dashboardPath || path == '/dashboard') {
-      widget.onCloseDrawer?.call();
-      context.go(path);
-    }
+    widget.onCloseDrawer?.call();
+    context.go(path);
   }
 
   @override

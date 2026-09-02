@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import type { PlatformAdmin } from "../../../generated/prisma/client.js";
+import type { PlatformAdmin } from "../../../types/types.js";
 import type {
   PlatformAdminTokenPayload,
   SanitizedPlatformAdmin,

@@ -39,10 +39,8 @@ export type SubscriptionPlanAvgAggregateOutputType = {
   priceMonthly: runtime.Decimal | null
   priceYearly: runtime.Decimal | null
   maxBranches: number | null
-  maxUsersPerOrg: number | null
-  maxUsersPerBranch: number | null
-  maxRolesPerOrg: number | null
-  maxRolesPerBranch: number | null
+  maxStudentsPerBranch: number | null
+  maxTeachersPerBranch: number | null
   sortOrder: number | null
 }
 
@@ -50,10 +48,8 @@ export type SubscriptionPlanSumAggregateOutputType = {
   priceMonthly: runtime.Decimal | null
   priceYearly: runtime.Decimal | null
   maxBranches: number | null
-  maxUsersPerOrg: number | null
-  maxUsersPerBranch: number | null
-  maxRolesPerOrg: number | null
-  maxRolesPerBranch: number | null
+  maxStudentsPerBranch: number | null
+  maxTeachersPerBranch: number | null
   sortOrder: number | null
 }
 
@@ -66,10 +62,8 @@ export type SubscriptionPlanMinAggregateOutputType = {
   priceYearly: runtime.Decimal | null
   currency: string | null
   maxBranches: number | null
-  maxUsersPerOrg: number | null
-  maxUsersPerBranch: number | null
-  maxRolesPerOrg: number | null
-  maxRolesPerBranch: number | null
+  maxStudentsPerBranch: number | null
+  maxTeachersPerBranch: number | null
   isActive: boolean | null
   sortOrder: number | null
   createdAt: Date | null
@@ -85,10 +79,8 @@ export type SubscriptionPlanMaxAggregateOutputType = {
   priceYearly: runtime.Decimal | null
   currency: string | null
   maxBranches: number | null
-  maxUsersPerOrg: number | null
-  maxUsersPerBranch: number | null
-  maxRolesPerOrg: number | null
-  maxRolesPerBranch: number | null
+  maxStudentsPerBranch: number | null
+  maxTeachersPerBranch: number | null
   isActive: boolean | null
   sortOrder: number | null
   createdAt: Date | null
@@ -104,10 +96,8 @@ export type SubscriptionPlanCountAggregateOutputType = {
   priceYearly: number
   currency: number
   maxBranches: number
-  maxUsersPerOrg: number
-  maxUsersPerBranch: number
-  maxRolesPerOrg: number
-  maxRolesPerBranch: number
+  maxStudentsPerBranch: number
+  maxTeachersPerBranch: number
   features: number
   isActive: number
   sortOrder: number
@@ -121,10 +111,8 @@ export type SubscriptionPlanAvgAggregateInputType = {
   priceMonthly?: true
   priceYearly?: true
   maxBranches?: true
-  maxUsersPerOrg?: true
-  maxUsersPerBranch?: true
-  maxRolesPerOrg?: true
-  maxRolesPerBranch?: true
+  maxStudentsPerBranch?: true
+  maxTeachersPerBranch?: true
   sortOrder?: true
 }
 
@@ -132,10 +120,8 @@ export type SubscriptionPlanSumAggregateInputType = {
   priceMonthly?: true
   priceYearly?: true
   maxBranches?: true
-  maxUsersPerOrg?: true
-  maxUsersPerBranch?: true
-  maxRolesPerOrg?: true
-  maxRolesPerBranch?: true
+  maxStudentsPerBranch?: true
+  maxTeachersPerBranch?: true
   sortOrder?: true
 }
 
@@ -148,10 +134,8 @@ export type SubscriptionPlanMinAggregateInputType = {
   priceYearly?: true
   currency?: true
   maxBranches?: true
-  maxUsersPerOrg?: true
-  maxUsersPerBranch?: true
-  maxRolesPerOrg?: true
-  maxRolesPerBranch?: true
+  maxStudentsPerBranch?: true
+  maxTeachersPerBranch?: true
   isActive?: true
   sortOrder?: true
   createdAt?: true
@@ -167,10 +151,8 @@ export type SubscriptionPlanMaxAggregateInputType = {
   priceYearly?: true
   currency?: true
   maxBranches?: true
-  maxUsersPerOrg?: true
-  maxUsersPerBranch?: true
-  maxRolesPerOrg?: true
-  maxRolesPerBranch?: true
+  maxStudentsPerBranch?: true
+  maxTeachersPerBranch?: true
   isActive?: true
   sortOrder?: true
   createdAt?: true
@@ -186,10 +168,8 @@ export type SubscriptionPlanCountAggregateInputType = {
   priceYearly?: true
   currency?: true
   maxBranches?: true
-  maxUsersPerOrg?: true
-  maxUsersPerBranch?: true
-  maxRolesPerOrg?: true
-  maxRolesPerBranch?: true
+  maxStudentsPerBranch?: true
+  maxTeachersPerBranch?: true
   features?: true
   isActive?: true
   sortOrder?: true
@@ -293,10 +273,8 @@ export type SubscriptionPlanGroupByOutputType = {
   priceYearly: runtime.Decimal
   currency: string
   maxBranches: number
-  maxUsersPerOrg: number
-  maxUsersPerBranch: number
-  maxRolesPerOrg: number
-  maxRolesPerBranch: number
+  maxStudentsPerBranch: number
+  maxTeachersPerBranch: number
   features: runtime.JsonValue
   isActive: boolean
   sortOrder: number
@@ -336,10 +314,8 @@ export type SubscriptionPlanWhereInput = {
   priceYearly?: Prisma.DecimalFilter<"SubscriptionPlan"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.StringFilter<"SubscriptionPlan"> | string
   maxBranches?: Prisma.IntFilter<"SubscriptionPlan"> | number
-  maxUsersPerOrg?: Prisma.IntFilter<"SubscriptionPlan"> | number
-  maxUsersPerBranch?: Prisma.IntFilter<"SubscriptionPlan"> | number
-  maxRolesPerOrg?: Prisma.IntFilter<"SubscriptionPlan"> | number
-  maxRolesPerBranch?: Prisma.IntFilter<"SubscriptionPlan"> | number
+  maxStudentsPerBranch?: Prisma.IntFilter<"SubscriptionPlan"> | number
+  maxTeachersPerBranch?: Prisma.IntFilter<"SubscriptionPlan"> | number
   features?: Prisma.JsonFilter<"SubscriptionPlan">
   isActive?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean
   sortOrder?: Prisma.IntFilter<"SubscriptionPlan"> | number
@@ -357,10 +333,8 @@ export type SubscriptionPlanOrderByWithRelationInput = {
   priceYearly?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   maxBranches?: Prisma.SortOrder
-  maxUsersPerOrg?: Prisma.SortOrder
-  maxUsersPerBranch?: Prisma.SortOrder
-  maxRolesPerOrg?: Prisma.SortOrder
-  maxRolesPerBranch?: Prisma.SortOrder
+  maxStudentsPerBranch?: Prisma.SortOrder
+  maxTeachersPerBranch?: Prisma.SortOrder
   features?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
@@ -381,10 +355,8 @@ export type SubscriptionPlanWhereUniqueInput = Prisma.AtLeast<{
   priceYearly?: Prisma.DecimalFilter<"SubscriptionPlan"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.StringFilter<"SubscriptionPlan"> | string
   maxBranches?: Prisma.IntFilter<"SubscriptionPlan"> | number
-  maxUsersPerOrg?: Prisma.IntFilter<"SubscriptionPlan"> | number
-  maxUsersPerBranch?: Prisma.IntFilter<"SubscriptionPlan"> | number
-  maxRolesPerOrg?: Prisma.IntFilter<"SubscriptionPlan"> | number
-  maxRolesPerBranch?: Prisma.IntFilter<"SubscriptionPlan"> | number
+  maxStudentsPerBranch?: Prisma.IntFilter<"SubscriptionPlan"> | number
+  maxTeachersPerBranch?: Prisma.IntFilter<"SubscriptionPlan"> | number
   features?: Prisma.JsonFilter<"SubscriptionPlan">
   isActive?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean
   sortOrder?: Prisma.IntFilter<"SubscriptionPlan"> | number
@@ -402,10 +374,8 @@ export type SubscriptionPlanOrderByWithAggregationInput = {
   priceYearly?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   maxBranches?: Prisma.SortOrder
-  maxUsersPerOrg?: Prisma.SortOrder
-  maxUsersPerBranch?: Prisma.SortOrder
-  maxRolesPerOrg?: Prisma.SortOrder
-  maxRolesPerBranch?: Prisma.SortOrder
+  maxStudentsPerBranch?: Prisma.SortOrder
+  maxTeachersPerBranch?: Prisma.SortOrder
   features?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
@@ -430,10 +400,8 @@ export type SubscriptionPlanScalarWhereWithAggregatesInput = {
   priceYearly?: Prisma.DecimalWithAggregatesFilter<"SubscriptionPlan"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.StringWithAggregatesFilter<"SubscriptionPlan"> | string
   maxBranches?: Prisma.IntWithAggregatesFilter<"SubscriptionPlan"> | number
-  maxUsersPerOrg?: Prisma.IntWithAggregatesFilter<"SubscriptionPlan"> | number
-  maxUsersPerBranch?: Prisma.IntWithAggregatesFilter<"SubscriptionPlan"> | number
-  maxRolesPerOrg?: Prisma.IntWithAggregatesFilter<"SubscriptionPlan"> | number
-  maxRolesPerBranch?: Prisma.IntWithAggregatesFilter<"SubscriptionPlan"> | number
+  maxStudentsPerBranch?: Prisma.IntWithAggregatesFilter<"SubscriptionPlan"> | number
+  maxTeachersPerBranch?: Prisma.IntWithAggregatesFilter<"SubscriptionPlan"> | number
   features?: Prisma.JsonWithAggregatesFilter<"SubscriptionPlan">
   isActive?: Prisma.BoolWithAggregatesFilter<"SubscriptionPlan"> | boolean
   sortOrder?: Prisma.IntWithAggregatesFilter<"SubscriptionPlan"> | number
@@ -449,11 +417,9 @@ export type SubscriptionPlanCreateInput = {
   priceMonthly?: runtime.Decimal | runtime.DecimalJsLike | number | string
   priceYearly?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: string
-  maxBranches?: number
-  maxUsersPerOrg?: number
-  maxUsersPerBranch?: number
-  maxRolesPerOrg?: number
-  maxRolesPerBranch?: number
+  maxBranches: number
+  maxStudentsPerBranch: number
+  maxTeachersPerBranch: number
   features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   sortOrder?: number
@@ -470,11 +436,9 @@ export type SubscriptionPlanUncheckedCreateInput = {
   priceMonthly?: runtime.Decimal | runtime.DecimalJsLike | number | string
   priceYearly?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: string
-  maxBranches?: number
-  maxUsersPerOrg?: number
-  maxUsersPerBranch?: number
-  maxRolesPerOrg?: number
-  maxRolesPerBranch?: number
+  maxBranches: number
+  maxStudentsPerBranch: number
+  maxTeachersPerBranch: number
   features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   sortOrder?: number
@@ -492,10 +456,8 @@ export type SubscriptionPlanUpdateInput = {
   priceYearly?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   maxBranches?: Prisma.IntFieldUpdateOperationsInput | number
-  maxUsersPerOrg?: Prisma.IntFieldUpdateOperationsInput | number
-  maxUsersPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
-  maxRolesPerOrg?: Prisma.IntFieldUpdateOperationsInput | number
-  maxRolesPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStudentsPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
+  maxTeachersPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
   features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -513,10 +475,8 @@ export type SubscriptionPlanUncheckedUpdateInput = {
   priceYearly?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   maxBranches?: Prisma.IntFieldUpdateOperationsInput | number
-  maxUsersPerOrg?: Prisma.IntFieldUpdateOperationsInput | number
-  maxUsersPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
-  maxRolesPerOrg?: Prisma.IntFieldUpdateOperationsInput | number
-  maxRolesPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStudentsPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
+  maxTeachersPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
   features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -533,11 +493,9 @@ export type SubscriptionPlanCreateManyInput = {
   priceMonthly?: runtime.Decimal | runtime.DecimalJsLike | number | string
   priceYearly?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: string
-  maxBranches?: number
-  maxUsersPerOrg?: number
-  maxUsersPerBranch?: number
-  maxRolesPerOrg?: number
-  maxRolesPerBranch?: number
+  maxBranches: number
+  maxStudentsPerBranch: number
+  maxTeachersPerBranch: number
   features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   sortOrder?: number
@@ -554,10 +512,8 @@ export type SubscriptionPlanUpdateManyMutationInput = {
   priceYearly?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   maxBranches?: Prisma.IntFieldUpdateOperationsInput | number
-  maxUsersPerOrg?: Prisma.IntFieldUpdateOperationsInput | number
-  maxUsersPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
-  maxRolesPerOrg?: Prisma.IntFieldUpdateOperationsInput | number
-  maxRolesPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStudentsPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
+  maxTeachersPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
   features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -574,10 +530,8 @@ export type SubscriptionPlanUncheckedUpdateManyInput = {
   priceYearly?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   maxBranches?: Prisma.IntFieldUpdateOperationsInput | number
-  maxUsersPerOrg?: Prisma.IntFieldUpdateOperationsInput | number
-  maxUsersPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
-  maxRolesPerOrg?: Prisma.IntFieldUpdateOperationsInput | number
-  maxRolesPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStudentsPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
+  maxTeachersPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
   features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -594,10 +548,8 @@ export type SubscriptionPlanCountOrderByAggregateInput = {
   priceYearly?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   maxBranches?: Prisma.SortOrder
-  maxUsersPerOrg?: Prisma.SortOrder
-  maxUsersPerBranch?: Prisma.SortOrder
-  maxRolesPerOrg?: Prisma.SortOrder
-  maxRolesPerBranch?: Prisma.SortOrder
+  maxStudentsPerBranch?: Prisma.SortOrder
+  maxTeachersPerBranch?: Prisma.SortOrder
   features?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
@@ -609,10 +561,8 @@ export type SubscriptionPlanAvgOrderByAggregateInput = {
   priceMonthly?: Prisma.SortOrder
   priceYearly?: Prisma.SortOrder
   maxBranches?: Prisma.SortOrder
-  maxUsersPerOrg?: Prisma.SortOrder
-  maxUsersPerBranch?: Prisma.SortOrder
-  maxRolesPerOrg?: Prisma.SortOrder
-  maxRolesPerBranch?: Prisma.SortOrder
+  maxStudentsPerBranch?: Prisma.SortOrder
+  maxTeachersPerBranch?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
 }
 
@@ -625,10 +575,8 @@ export type SubscriptionPlanMaxOrderByAggregateInput = {
   priceYearly?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   maxBranches?: Prisma.SortOrder
-  maxUsersPerOrg?: Prisma.SortOrder
-  maxUsersPerBranch?: Prisma.SortOrder
-  maxRolesPerOrg?: Prisma.SortOrder
-  maxRolesPerBranch?: Prisma.SortOrder
+  maxStudentsPerBranch?: Prisma.SortOrder
+  maxTeachersPerBranch?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -644,10 +592,8 @@ export type SubscriptionPlanMinOrderByAggregateInput = {
   priceYearly?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   maxBranches?: Prisma.SortOrder
-  maxUsersPerOrg?: Prisma.SortOrder
-  maxUsersPerBranch?: Prisma.SortOrder
-  maxRolesPerOrg?: Prisma.SortOrder
-  maxRolesPerBranch?: Prisma.SortOrder
+  maxStudentsPerBranch?: Prisma.SortOrder
+  maxTeachersPerBranch?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -658,10 +604,8 @@ export type SubscriptionPlanSumOrderByAggregateInput = {
   priceMonthly?: Prisma.SortOrder
   priceYearly?: Prisma.SortOrder
   maxBranches?: Prisma.SortOrder
-  maxUsersPerOrg?: Prisma.SortOrder
-  maxUsersPerBranch?: Prisma.SortOrder
-  maxRolesPerOrg?: Prisma.SortOrder
-  maxRolesPerBranch?: Prisma.SortOrder
+  maxStudentsPerBranch?: Prisma.SortOrder
+  maxTeachersPerBranch?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
 }
 
@@ -712,11 +656,9 @@ export type SubscriptionPlanCreateWithoutSubscriptionsInput = {
   priceMonthly?: runtime.Decimal | runtime.DecimalJsLike | number | string
   priceYearly?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: string
-  maxBranches?: number
-  maxUsersPerOrg?: number
-  maxUsersPerBranch?: number
-  maxRolesPerOrg?: number
-  maxRolesPerBranch?: number
+  maxBranches: number
+  maxStudentsPerBranch: number
+  maxTeachersPerBranch: number
   features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   sortOrder?: number
@@ -732,11 +674,9 @@ export type SubscriptionPlanUncheckedCreateWithoutSubscriptionsInput = {
   priceMonthly?: runtime.Decimal | runtime.DecimalJsLike | number | string
   priceYearly?: runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: string
-  maxBranches?: number
-  maxUsersPerOrg?: number
-  maxUsersPerBranch?: number
-  maxRolesPerOrg?: number
-  maxRolesPerBranch?: number
+  maxBranches: number
+  maxStudentsPerBranch: number
+  maxTeachersPerBranch: number
   features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   sortOrder?: number
@@ -769,10 +709,8 @@ export type SubscriptionPlanUpdateWithoutSubscriptionsInput = {
   priceYearly?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   maxBranches?: Prisma.IntFieldUpdateOperationsInput | number
-  maxUsersPerOrg?: Prisma.IntFieldUpdateOperationsInput | number
-  maxUsersPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
-  maxRolesPerOrg?: Prisma.IntFieldUpdateOperationsInput | number
-  maxRolesPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStudentsPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
+  maxTeachersPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
   features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -789,10 +727,8 @@ export type SubscriptionPlanUncheckedUpdateWithoutSubscriptionsInput = {
   priceYearly?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   maxBranches?: Prisma.IntFieldUpdateOperationsInput | number
-  maxUsersPerOrg?: Prisma.IntFieldUpdateOperationsInput | number
-  maxUsersPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
-  maxRolesPerOrg?: Prisma.IntFieldUpdateOperationsInput | number
-  maxRolesPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStudentsPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
+  maxTeachersPerBranch?: Prisma.IntFieldUpdateOperationsInput | number
   features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -840,10 +776,8 @@ export type SubscriptionPlanSelect<ExtArgs extends runtime.Types.Extensions.Inte
   priceYearly?: boolean
   currency?: boolean
   maxBranches?: boolean
-  maxUsersPerOrg?: boolean
-  maxUsersPerBranch?: boolean
-  maxRolesPerOrg?: boolean
-  maxRolesPerBranch?: boolean
+  maxStudentsPerBranch?: boolean
+  maxTeachersPerBranch?: boolean
   features?: boolean
   isActive?: boolean
   sortOrder?: boolean
@@ -862,10 +796,8 @@ export type SubscriptionPlanSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   priceYearly?: boolean
   currency?: boolean
   maxBranches?: boolean
-  maxUsersPerOrg?: boolean
-  maxUsersPerBranch?: boolean
-  maxRolesPerOrg?: boolean
-  maxRolesPerBranch?: boolean
+  maxStudentsPerBranch?: boolean
+  maxTeachersPerBranch?: boolean
   features?: boolean
   isActive?: boolean
   sortOrder?: boolean
@@ -882,10 +814,8 @@ export type SubscriptionPlanSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   priceYearly?: boolean
   currency?: boolean
   maxBranches?: boolean
-  maxUsersPerOrg?: boolean
-  maxUsersPerBranch?: boolean
-  maxRolesPerOrg?: boolean
-  maxRolesPerBranch?: boolean
+  maxStudentsPerBranch?: boolean
+  maxTeachersPerBranch?: boolean
   features?: boolean
   isActive?: boolean
   sortOrder?: boolean
@@ -902,10 +832,8 @@ export type SubscriptionPlanSelectScalar = {
   priceYearly?: boolean
   currency?: boolean
   maxBranches?: boolean
-  maxUsersPerOrg?: boolean
-  maxUsersPerBranch?: boolean
-  maxRolesPerOrg?: boolean
-  maxRolesPerBranch?: boolean
+  maxStudentsPerBranch?: boolean
+  maxTeachersPerBranch?: boolean
   features?: boolean
   isActive?: boolean
   sortOrder?: boolean
@@ -913,7 +841,7 @@ export type SubscriptionPlanSelectScalar = {
   updatedAt?: boolean
 }
 
-export type SubscriptionPlanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "description" | "priceMonthly" | "priceYearly" | "currency" | "maxBranches" | "maxUsersPerOrg" | "maxUsersPerBranch" | "maxRolesPerOrg" | "maxRolesPerBranch" | "features" | "isActive" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["subscriptionPlan"]>
+export type SubscriptionPlanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "description" | "priceMonthly" | "priceYearly" | "currency" | "maxBranches" | "maxStudentsPerBranch" | "maxTeachersPerBranch" | "features" | "isActive" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["subscriptionPlan"]>
 export type SubscriptionPlanInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subscriptions?: boolean | Prisma.SubscriptionPlan$subscriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.SubscriptionPlanCountOutputTypeDefaultArgs<ExtArgs>
@@ -944,10 +872,8 @@ export type $SubscriptionPlanPayload<ExtArgs extends runtime.Types.Extensions.In
      * Feature Limits
      */
     maxBranches: number
-    maxUsersPerOrg: number
-    maxUsersPerBranch: number
-    maxRolesPerOrg: number
-    maxRolesPerBranch: number
+    maxStudentsPerBranch: number
+    maxTeachersPerBranch: number
     /**
      * *
      *    * Feature Flags
@@ -1394,10 +1320,8 @@ export interface SubscriptionPlanFieldRefs {
   readonly priceYearly: Prisma.FieldRef<"SubscriptionPlan", 'Decimal'>
   readonly currency: Prisma.FieldRef<"SubscriptionPlan", 'String'>
   readonly maxBranches: Prisma.FieldRef<"SubscriptionPlan", 'Int'>
-  readonly maxUsersPerOrg: Prisma.FieldRef<"SubscriptionPlan", 'Int'>
-  readonly maxUsersPerBranch: Prisma.FieldRef<"SubscriptionPlan", 'Int'>
-  readonly maxRolesPerOrg: Prisma.FieldRef<"SubscriptionPlan", 'Int'>
-  readonly maxRolesPerBranch: Prisma.FieldRef<"SubscriptionPlan", 'Int'>
+  readonly maxStudentsPerBranch: Prisma.FieldRef<"SubscriptionPlan", 'Int'>
+  readonly maxTeachersPerBranch: Prisma.FieldRef<"SubscriptionPlan", 'Int'>
   readonly features: Prisma.FieldRef<"SubscriptionPlan", 'Json'>
   readonly isActive: Prisma.FieldRef<"SubscriptionPlan", 'Boolean'>
   readonly sortOrder: Prisma.FieldRef<"SubscriptionPlan", 'Int'>

@@ -1,5 +1,4 @@
-import type { NextFunction, Request, Response } from "express";
-import { z, type ZodTypeAny } from "zod";
+import { z } from "zod";
 
 /**
  * Zod validation schema for platform admin login.
@@ -16,17 +15,3 @@ export const platformLoginSchema = z.object({
 });
 
 export type PlatformLoginInput = z.infer<typeof platformLoginSchema>;
-
-/**
- * Middleware factory to validate request body against a Zod schema.
- */
-export const validateBody =
-  (schema: ZodTypeAny) =>
-  async (req: Request, _res: Response, next: NextFunction): Promise<void> => {
-    try {
-      req.body = await schema.parseAsync(req.body);
-      next();
-    } catch (error) {
-      next(error);
-    }
-  };
