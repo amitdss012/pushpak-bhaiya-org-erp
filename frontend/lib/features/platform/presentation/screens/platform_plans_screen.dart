@@ -13,15 +13,19 @@ import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/app_card.dart';
 import '../../../../shared/widgets/app_text_field.dart';
 
-/// Platform Subscription Plans Management Screen.
-/// Fully responsive across Mobile, Tablet, Desktop, and Ultra-wide resolutions.
+/// Luxury, fully responsive Subscription Plans Management Catalog.
+/// Adapts gracefully across Mobile, Tablet, Desktop, and Ultra-wide screens.
 class PlatformPlansScreen extends HookWidget {
   const PlatformPlansScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final isDark = context.isDarkMode;
-    final isMobile = context.screenWidth < 700;
+    final screenWidth = context.screenWidth;
+    final isMobile = screenWidth < 700;
+
+    // Monthly vs Yearly billing cycle toggle
+    final isAnnualBilling = useState<bool>(false);
 
     final plansQuery = useSubscriptionPlansQuery();
     final deleteMutation = useDeleteSubscriptionPlanMutation(
@@ -49,136 +53,612 @@ class PlatformPlansScreen extends HookWidget {
     return SelectionArea(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(
-            horizontal: isMobile ? 16 : 24,
-            vertical: 20,
+        body: Align(
+          alignment: Alignment.topCenter,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 1400),
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(
+                horizontal: isMobile ? 16 : 28,
+                vertical: isMobile ? 16 : 24,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // 1. Header & Billing Switcher
+                  _buildCatalogHeader(
+                    context,
+                    isDark,
+                    isMobile,
+                    isAnnualBilling,
+                    () => showCreateOrEditPlanDialog(),
+                  ),
+                  AppSpacing.vLg,
+
+                  // 2. Content Area
+                  if (plansQuery.isPending)
+                    const Padding(
+                      padding: EdgeInsets.all(64),
+                      child: Center(child: CircularProgressIndicator()),
+                    )
+                  else if (plans.isEmpty)
+                    _buildEmptyState(
+                      context,
+                      isDark,
+                      () => showCreateOrEditPlanDialog(),
+                    )
+                  else
+                    _buildPlansGrid(
+                      context,
+                      isDark,
+                      plans,
+                      isAnnualBilling.value,
+                      onEdit: (plan) => showCreateOrEditPlanDialog(plan),
+                      onDelete: (planId) {
+                        showDialog(
+                          context: context,
+                          builder: (dialogCtx) => AlertDialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: AppRadius.lg,
+                            ),
+                            title: const Text('Delete Subscription Plan'),
+                            content: const Text(
+                              'Are you sure you want to delete this subscription plan tier? Organizations currently on this plan may require reassignment.',
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.of(dialogCtx).pop(),
+                                child: const Text('Cancel'),
+                              ),
+                              FilledButton(
+                                style: FilledButton.styleFrom(
+                                  backgroundColor: AppColors.error,
+                                ),
+                                onPressed: () {
+                                  Navigator.of(dialogCtx).pop();
+                                  deleteMutation.mutate(planId);
+                                },
+                                child: const Text('Delete Tier'),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                ],
+              ),
+            ),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        ),
+      ),
+    );
+  }
+
+  // ===========================================================================
+  // 1. Catalog Header & Billing Toggle Switch
+  // ===========================================================================
+  Widget _buildCatalogHeader(
+    BuildContext context,
+    bool isDark,
+    bool isMobile,
+    ValueNotifier<bool> isAnnualBilling,
+    VoidCallback onCreatePlan,
+  ) {
+    final titleBlock = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Subscription Plans',
+          style: (isMobile
+                  ? AppTypography.titleLarge
+                  : AppTypography.headlineMedium)
+              .copyWith(
+            fontWeight: FontWeight.w900,
+            letterSpacing: -0.5,
+            color: isDark
+                ? AppColors.textPrimaryDark
+                : AppColors.textPrimaryLight,
+          ),
+        ),
+        AppSpacing.vXs,
+        Text(
+          'Configure SaaS pricing tiers, campus quotas, and feature entitlements.',
+          style: AppTypography.bodySmall.copyWith(
+            color: isDark
+                ? AppColors.textSecondaryDark
+                : AppColors.textSecondaryLight,
+          ),
+        ),
+      ],
+    );
+
+    final billingToggle = Container(
+      padding: const EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF1E293B) : const Color(0xFFE2E8F0),
+        borderRadius: AppRadius.full,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          GestureDetector(
+            onTap: () => isAnnualBilling.value = false,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              decoration: BoxDecoration(
+                color: !isAnnualBilling.value
+                    ? (isDark ? const Color(0xFF0F172A) : Colors.white)
+                    : Colors.transparent,
+                borderRadius: AppRadius.full,
+                boxShadow: !isAnnualBilling.value
+                    ? [
+                        BoxShadow(
+                          color: Colors.black.withAlpha(isDark ? 50 : 15),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        )
+                      ]
+                    : null,
+              ),
+              child: Text(
+                'Monthly',
+                style: AppTypography.labelSmall.copyWith(
+                  fontWeight: !isAnnualBilling.value
+                      ? FontWeight.w800
+                      : FontWeight.w600,
+                  color: !isAnnualBilling.value
+                      ? AppColors.primary
+                      : (isDark
+                          ? AppColors.textMutedDark
+                          : AppColors.textSecondaryLight),
+                ),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () => isAnnualBilling.value = true,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              decoration: BoxDecoration(
+                color: isAnnualBilling.value
+                    ? (isDark ? const Color(0xFF0F172A) : Colors.white)
+                    : Colors.transparent,
+                borderRadius: AppRadius.full,
+                boxShadow: isAnnualBilling.value
+                    ? [
+                        BoxShadow(
+                          color: Colors.black.withAlpha(isDark ? 50 : 15),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        )
+                      ]
+                    : null,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Yearly',
+                    style: AppTypography.labelSmall.copyWith(
+                      fontWeight: isAnnualBilling.value
+                          ? FontWeight.w800
+                          : FontWeight.w600,
+                      color: isAnnualBilling.value
+                          ? AppColors.primary
+                          : (isDark
+                              ? AppColors.textMutedDark
+                              : AppColors.textSecondaryLight),
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: AppColors.success.withAlpha(isDark ? 35 : 20),
+                      borderRadius: AppRadius.full,
+                    ),
+                    child: Text(
+                      'SAVE 20%',
+                      style: AppTypography.labelSmall.copyWith(
+                        color: AppColors.success,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 9,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    if (isMobile) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          titleBlock,
+          AppSpacing.vMd,
+          Wrap(
+            spacing: 12,
+            runSpacing: 10,
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              // Header & Action Bar
-              if (isMobile)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      'Subscription Plans',
-                      style: AppTypography.headlineMedium.copyWith(
-                        fontWeight: FontWeight.w800,
-                        color: isDark
-                            ? AppColors.textPrimaryDark
-                            : AppColors.textPrimaryLight,
-                      ),
-                    ),
-                    AppSpacing.vXs,
-                    Text(
-                      'Create, configure and manage SaaS monetization tiers.',
-                      style: AppTypography.bodySmall.copyWith(
-                        color: isDark
-                            ? AppColors.textSecondaryDark
-                            : AppColors.textSecondaryLight,
-                      ),
-                    ),
-                    AppSpacing.vMd,
-                    AppButton(
-                      text: 'Create Plan',
-                      icon: Icons.add_rounded,
-                      onPressed: () => showCreateOrEditPlanDialog(),
-                      height: 42,
-                    ),
-                  ],
-                )
-              else
+              billingToggle,
+              AppButton(
+                text: 'New Tier',
+                icon: Icons.add_rounded,
+                onPressed: onCreatePlan,
+                height: 40,
+              ),
+            ],
+          ),
+        ],
+      );
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(child: titleBlock),
+        AppSpacing.hMd,
+        billingToggle,
+        AppSpacing.hMd,
+        AppButton(
+          text: 'Create Plan',
+          icon: Icons.add_rounded,
+          onPressed: onCreatePlan,
+          height: 42,
+        ),
+      ],
+    );
+  }
+
+  // ===========================================================================
+  // 2. Plans Grid (Adaptive 1 / 2 / 3 Columns)
+  // ===========================================================================
+  Widget _buildPlansGrid(
+    BuildContext context,
+    bool isDark,
+    List<SubscriptionPlanModel> plans,
+    bool isAnnual, {
+    required void Function(SubscriptionPlanModel) onEdit,
+    required void Function(String) onDelete,
+  }) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth;
+        final int columns;
+        if (width < 680) {
+          columns = 1;
+        } else if (width < 1120) {
+          columns = 2;
+        } else {
+          columns = 3;
+        }
+
+        final spacing = 18.0;
+        final itemWidth =
+            (constraints.maxWidth - (spacing * (columns - 1))) / columns;
+
+        return Wrap(
+          spacing: spacing,
+          runSpacing: spacing,
+          children: plans.map((plan) {
+            final isPopular = plan.name.toLowerCase().contains('growth') ||
+                plan.name.toLowerCase().contains('popular') ||
+                plan.name.toLowerCase().contains('standard');
+
+            return SizedBox(
+              width: itemWidth,
+              child: _buildLuxuryPlanCard(
+                context,
+                isDark,
+                plan,
+                isAnnual,
+                isPopular,
+                onEdit,
+                onDelete,
+              ),
+            );
+          }).toList(),
+        );
+      },
+    );
+  }
+
+  Widget _buildLuxuryPlanCard(
+    BuildContext context,
+    bool isDark,
+    SubscriptionPlanModel plan,
+    bool isAnnual,
+    bool isPopular,
+    void Function(SubscriptionPlanModel) onEdit,
+    void Function(String) onDelete,
+  ) {
+    final price = isAnnual
+        ? (plan.priceYearly > 0
+            ? plan.priceYearly.toInt()
+            : (plan.priceMonthly * 10).toInt())
+        : plan.priceMonthly.toInt();
+
+    final cadenceText = isAnnual ? '/ year' : '/ month';
+
+    return Container(
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF111827) : Colors.white,
+        borderRadius: AppRadius.lg,
+        border: Border.all(
+          color: isPopular
+              ? AppColors.primary
+              : (isDark ? const Color(0xFF1F2937) : const Color(0xFFE2E8F0)),
+          width: isPopular ? 2.0 : 1.0,
+        ),
+        boxShadow: [
+          if (isPopular)
+            BoxShadow(
+              color: AppColors.primary.withAlpha(isDark ? 40 : 25),
+              blurRadius: 20,
+              offset: const Offset(0, 8),
+            )
+          else
+            BoxShadow(
+              color: Colors.black.withAlpha(isDark ? 40 : 6),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+        ],
+      ),
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(22),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (isPopular) const SizedBox(height: 8),
+
+                // Tier Name & Status Pill
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Subscription Plans',
-                            style: AppTypography.headlineMedium.copyWith(
-                              fontWeight: FontWeight.w800,
-                              color: isDark
-                                  ? AppColors.textPrimaryDark
-                                  : AppColors.textPrimaryLight,
-                            ),
-                          ),
-                          AppSpacing.vXs,
-                          Text(
-                            'Create, configure and manage SaaS monetization tiers.',
-                            style: AppTypography.bodyMedium.copyWith(
-                              color: isDark
-                                  ? AppColors.textSecondaryDark
-                                  : AppColors.textSecondaryLight,
-                            ),
-                          ),
-                        ],
+                      child: Text(
+                        plan.name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTypography.titleMedium.copyWith(
+                          fontWeight: FontWeight.w800,
+                          color: isDark
+                              ? AppColors.textPrimaryDark
+                              : AppColors.textPrimaryLight,
+                        ),
                       ),
                     ),
-                    AppSpacing.hMd,
-                    AppButton(
-                      text: 'Create Plan',
-                      icon: Icons.add_rounded,
-                      onPressed: () => showCreateOrEditPlanDialog(),
-                      height: 44,
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
+                      decoration: BoxDecoration(
+                        color: plan.isActive
+                            ? AppColors.success.withAlpha(isDark ? 35 : 20)
+                            : AppColors.textMutedLight.withAlpha(30),
+                        borderRadius: AppRadius.full,
+                      ),
+                      child: Text(
+                        plan.isActive ? 'Active' : 'Archived',
+                        style: AppTypography.labelSmall.copyWith(
+                          color: plan.isActive
+                              ? AppColors.success
+                              : AppColors.textMutedLight,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 10,
+                        ),
+                      ),
                     ),
                   ],
                 ),
-              AppSpacing.vLg,
 
-              // Content Area
-              if (plansQuery.isPending)
-                const Padding(
-                  padding: EdgeInsets.all(64),
-                  child: Center(child: CircularProgressIndicator()),
-                )
-              else if (plans.isEmpty)
-                _buildEmptyState(
-                  context,
-                  isDark,
-                  () => showCreateOrEditPlanDialog(),
-                )
-              else
-                _buildPlansGrid(
-                  context,
-                  isDark,
-                  plans,
-                  onEdit: (plan) => showCreateOrEditPlanDialog(plan),
-                  onDelete: (planId) {
-                    showDialog(
-                      context: context,
-                      builder: (dialogCtx) => AlertDialog(
-                        title: const Text('Delete Plan'),
-                        content: const Text(
-                          'Are you sure you want to delete this subscription plan?',
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.of(dialogCtx).pop(),
-                            child: const Text('Cancel'),
-                          ),
-                          FilledButton(
-                            style: FilledButton.styleFrom(
-                              backgroundColor: AppColors.error,
-                            ),
-                            onPressed: () {
-                              Navigator.of(dialogCtx).pop();
-                              deleteMutation.mutate(planId);
-                            },
-                            child: const Text('Delete'),
-                          ),
-                        ],
+                if (plan.description != null &&
+                    plan.description!.isNotEmpty) ...[
+                  AppSpacing.vXs,
+                  Text(
+                    plan.description!,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTypography.bodySmall.copyWith(
+                      color: isDark
+                          ? AppColors.textSecondaryDark
+                          : AppColors.textSecondaryLight,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+                AppSpacing.vMd,
+
+                // Price Section
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
+                  children: [
+                    Text(
+                      '₹$price',
+                      style: AppTypography.headlineMedium.copyWith(
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: -0.5,
+                        color: isPopular
+                            ? AppColors.primary
+                            : (isDark
+                                ? AppColors.textPrimaryDark
+                                : AppColors.textPrimaryLight),
                       ),
-                    );
-                  },
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      cadenceText,
+                      style: AppTypography.bodySmall.copyWith(
+                        color: isDark
+                            ? AppColors.textMutedDark
+                            : AppColors.textMutedLight,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
                 ),
-            ],
+                if (isAnnual) ...[
+                  AppSpacing.vXs,
+                  Text(
+                    '₹${(price / 12).toStringAsFixed(0)} / mo equivalent',
+                    style: AppTypography.labelSmall.copyWith(
+                      color: AppColors.success,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+                AppSpacing.vMd,
+                const Divider(height: 1),
+                AppSpacing.vMd,
+
+                // Quota Entitlements
+                Text(
+                  'QUOTA ENTITLEMENTS',
+                  style: AppTypography.labelSmall.copyWith(
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 1.0,
+                    color: isDark
+                        ? AppColors.textMutedDark
+                        : AppColors.textMutedLight,
+                    fontSize: 10,
+                  ),
+                ),
+                AppSpacing.vSm,
+                _buildEntitlementRow(
+                  icon: Icons.domain_rounded,
+                  text: '${plan.maxBranches} Campus Branches Included',
+                  isDark: isDark,
+                ),
+                AppSpacing.vSm,
+                _buildEntitlementRow(
+                  icon: Icons.school_rounded,
+                  text:
+                      '${plan.maxStudentsPerBranch > 0 ? plan.maxStudentsPerBranch : 'Unlimited'} Students / Branch',
+                  isDark: isDark,
+                ),
+                AppSpacing.vSm,
+                _buildEntitlementRow(
+                  icon: Icons.badge_rounded,
+                  text:
+                      '${plan.maxTeachersPerBranch > 0 ? plan.maxTeachersPerBranch : 'Unlimited'} Staff / Branch',
+                  isDark: isDark,
+                ),
+                AppSpacing.vSm,
+                _buildEntitlementRow(
+                  icon: Icons.security_rounded,
+                  text: 'Role-Based Access Control & Audit Log',
+                  isDark: isDark,
+                ),
+                AppSpacing.vLg,
+
+                // Actions Footer
+                Row(
+                  children: [
+                    Expanded(
+                      child: OutlinedButton.icon(
+                        icon: const Icon(Icons.edit_outlined, size: 16),
+                        label: const Text('Edit Tier'),
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: AppRadius.md,
+                          ),
+                        ),
+                        onPressed: () => onEdit(plan),
+                      ),
+                    ),
+                    AppSpacing.hSm,
+                    IconButton(
+                      icon: const Icon(Icons.delete_outline_rounded, size: 18),
+                      color: AppColors.error,
+                      tooltip: 'Delete Plan',
+                      onPressed: () => onDelete(plan.id),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          // Most Popular Banner Tag
+          if (isPopular)
+            Positioned(
+              top: -11,
+              left: 20,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF6366F1), Color(0xFF8B5CF6)],
+                  ),
+                  borderRadius: AppRadius.full,
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.primary.withAlpha(80),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Text(
+                  'MOST POPULAR',
+                  style: AppTypography.labelSmall.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 9,
+                    letterSpacing: 0.8,
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEntitlementRow({
+    required IconData icon,
+    required String text,
+    required bool isDark,
+  }) {
+    return Row(
+      children: [
+        Icon(
+          Icons.check_circle_rounded,
+          size: 16,
+          color: AppColors.success,
+        ),
+        AppSpacing.hSm,
+        Expanded(
+          child: Text(
+            text,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: AppTypography.bodySmall.copyWith(
+              color: isDark
+                  ? AppColors.textPrimaryDark
+                  : AppColors.textPrimaryLight,
+              fontWeight: FontWeight.w500,
+              fontSize: 12,
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 
@@ -191,19 +671,19 @@ class PlatformPlansScreen extends HookWidget {
       child: Padding(
         padding: const EdgeInsets.all(32),
         child: AppCard(
-          padding: const EdgeInsets.all(28),
+          padding: const EdgeInsets.all(32),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(18),
                 decoration: BoxDecoration(
                   color: AppColors.primary.withAlpha(isDark ? 40 : 20),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
                   Icons.loyalty_rounded,
-                  size: 36,
+                  size: 40,
                   color: AppColors.primary,
                 ),
               ),
@@ -211,7 +691,7 @@ class PlatformPlansScreen extends HookWidget {
               Text(
                 'No Subscription Plans Found',
                 style: AppTypography.titleMedium.copyWith(
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w800,
                   color: isDark
                       ? AppColors.textPrimaryDark
                       : AppColors.textPrimaryLight,
@@ -219,7 +699,7 @@ class PlatformPlansScreen extends HookWidget {
               ),
               AppSpacing.vXs,
               Text(
-                'Get started by provisioning the first subscription plan tier.',
+                'Get started by creating your foundational SaaS subscription tiers.',
                 textAlign: TextAlign.center,
                 style: AppTypography.bodySmall.copyWith(
                   color: isDark
@@ -229,219 +709,21 @@ class PlatformPlansScreen extends HookWidget {
               ),
               AppSpacing.vLg,
               AppButton(
-                text: 'Create First Plan',
+                text: 'Create First Plan Tier',
                 icon: Icons.add_rounded,
                 onPressed: onCreate,
-                height: 40,
+                height: 42,
               ),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildPlansGrid(
-    BuildContext context,
-    bool isDark,
-    List<SubscriptionPlanModel> plans, {
-    required void Function(SubscriptionPlanModel) onEdit,
-    required void Function(String) onDelete,
-  }) {
-    final width = context.screenWidth;
-    final int columns;
-    if (width < 700) {
-      columns = 1;
-    } else if (width < 1150) {
-      columns = 2;
-    } else {
-      columns = 3;
-    }
-
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final spacing = 16.0;
-        final itemWidth =
-            (constraints.maxWidth - (spacing * (columns - 1))) / columns;
-
-        return Wrap(
-          spacing: spacing,
-          runSpacing: spacing,
-          children: plans.map((plan) {
-            return SizedBox(
-              width: itemWidth,
-              child: _buildPlanCard(context, isDark, plan, onEdit, onDelete),
-            );
-          }).toList(),
-        );
-      },
-    );
-  }
-
-  Widget _buildPlanCard(
-    BuildContext context,
-    bool isDark,
-    SubscriptionPlanModel plan,
-    void Function(SubscriptionPlanModel) onEdit,
-    void Function(String) onDelete,
-  ) {
-    return AppCard(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Header: Name & Status
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Text(
-                  plan.name,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: AppTypography.titleMedium.copyWith(
-                    fontWeight: FontWeight.w800,
-                    color: isDark
-                        ? AppColors.textPrimaryDark
-                        : AppColors.textPrimaryLight,
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                decoration: BoxDecoration(
-                  color: plan.isActive
-                      ? AppColors.success.withAlpha(isDark ? 40 : 20)
-                      : AppColors.textMutedLight.withAlpha(40),
-                  borderRadius: AppRadius.full,
-                ),
-                child: Text(
-                  plan.isActive ? 'Active' : 'Archived',
-                  style: AppTypography.labelSmall.copyWith(
-                    color: plan.isActive
-                        ? AppColors.success
-                        : AppColors.textMutedLight,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          if (plan.description != null && plan.description!.isNotEmpty) ...[
-            AppSpacing.vXs,
-            Text(
-              plan.description!,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: AppTypography.bodySmall.copyWith(
-                color: isDark
-                    ? AppColors.textSecondaryDark
-                    : AppColors.textSecondaryLight,
-              ),
-            ),
-          ],
-          AppSpacing.vMd,
-
-          // Pricing
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
-            children: [
-              Text(
-                '₹${plan.priceMonthly.toInt()}',
-                style: AppTypography.headlineMedium.copyWith(
-                  fontWeight: FontWeight.w900,
-                  color: AppColors.primary,
-                ),
-              ),
-              Text(
-                ' / month',
-                style: AppTypography.bodySmall.copyWith(
-                  color: isDark
-                      ? AppColors.textMutedDark
-                      : AppColors.textMutedLight,
-                ),
-              ),
-            ],
-          ),
-          Text(
-            '₹${plan.priceYearly.toInt()} billed annually',
-            style: AppTypography.labelSmall.copyWith(
-              color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
-            ),
-          ),
-          AppSpacing.vMd,
-          const Divider(height: 1),
-          AppSpacing.vMd,
-
-          // Quotas
-          _buildFeatureRow(
-            Icons.domain_rounded,
-            'Up to ${plan.maxBranches} Branches',
-            isDark,
-          ),
-          AppSpacing.vSm,
-          _buildFeatureRow(
-            Icons.school_rounded,
-            '${plan.maxStudentsPerBranch > 0 ? plan.maxStudentsPerBranch : 'Unlimited'} Students / Branch',
-            isDark,
-          ),
-          AppSpacing.vSm,
-          _buildFeatureRow(
-            Icons.badge_rounded,
-            '${plan.maxTeachersPerBranch > 0 ? plan.maxTeachersPerBranch : 'Unlimited'} Teachers / Branch',
-            isDark,
-          ),
-          AppSpacing.vLg,
-
-          // Actions
-          Row(
-            children: [
-              Expanded(
-                child: OutlinedButton.icon(
-                  icon: const Icon(Icons.edit_outlined, size: 16),
-                  label: const Text('Edit'),
-                  onPressed: () => onEdit(plan),
-                ),
-              ),
-              AppSpacing.hSm,
-              IconButton(
-                icon: const Icon(Icons.delete_outline_rounded, size: 20),
-                color: AppColors.error,
-                tooltip: 'Delete Plan',
-                onPressed: () => onDelete(plan.id),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFeatureRow(IconData icon, String text, bool isDark) {
-    return Row(
-      children: [
-        Icon(icon, size: 16, color: AppColors.primary),
-        AppSpacing.hSm,
-        Expanded(
-          child: Text(
-            text,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: AppTypography.bodySmall.copyWith(
-              color: isDark
-                  ? AppColors.textPrimaryDark
-                  : AppColors.textPrimaryLight,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
 
 /// Create or Edit Subscription Plan Form Dialog.
+/// Fully responsive across mobile, tablet, and desktop viewports.
 class _PlanFormDialog extends HookWidget {
   final SubscriptionPlanModel? existingPlan;
   final VoidCallback onSuccess;
@@ -689,6 +971,7 @@ class _PlanFormDialog extends HookWidget {
                 Flexible(
                   child: SingleChildScrollView(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AppTextField(
                           controller: nameController,

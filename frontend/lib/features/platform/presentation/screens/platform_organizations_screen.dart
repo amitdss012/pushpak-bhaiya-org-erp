@@ -14,15 +14,17 @@ import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/app_card.dart';
 import '../../../../shared/widgets/app_text_field.dart';
 
-/// Platform Multi-Tenant Organizations Management Screen.
-/// Fully responsive across Mobile, Tablet, Desktop, and Ultra-wide resolutions.
+/// Luxury, fully responsive Platform Multi-Tenant Organizations Management.
+/// Adapts gracefully across Mobile, Tablet, Desktop, and Ultra-wide viewports.
 class PlatformOrganizationsScreen extends HookWidget {
   const PlatformOrganizationsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final isDark = context.isDarkMode;
-    final isMobile = context.screenWidth < 700;
+    final screenWidth = context.screenWidth;
+    final isMobile = screenWidth < 700;
+    final isDesktop = screenWidth >= 980;
 
     final searchController = useTextEditingController();
     final searchQuery = useState<String>('');
@@ -66,92 +68,148 @@ class PlatformOrganizationsScreen extends HookWidget {
     return SelectionArea(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(
-            horizontal: isMobile ? 16 : 24,
-            vertical: 20,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // 1. Responsive Header & Action Bar
-              _buildHeader(context, isDark, isMobile, showOnboardOrgDialog),
-              AppSpacing.vLg,
-
-              // 2. Responsive Search & Filter Bar
-              _buildSearchFilterBar(
-                context,
-                isDark,
-                isMobile,
-                searchController,
-                searchQuery,
-                selectedStatus,
-                currentPage,
+        body: Align(
+          alignment: Alignment.topCenter,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 1400),
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(
+                horizontal: isMobile ? 16 : 28,
+                vertical: isMobile ? 16 : 24,
               ),
-              AppSpacing.vLg,
-
-              // 3. Content Area
-              if (orgsQuery.isPending)
-                const Padding(
-                  padding: EdgeInsets.all(64),
-                  child: Center(child: CircularProgressIndicator()),
-                )
-              else if (orgsList.isEmpty)
-                _buildEmptyState(context, isDark, showOnboardOrgDialog)
-              else ...[
-                _buildOrganizationsList(
-                  context,
-                  isDark,
-                  isMobile,
-                  orgsList,
-                  showOrgDetailsDialog,
-                ),
-                AppSpacing.vLg,
-
-                // 4. Pagination Controls
-                if (pagination != null && pagination.totalPages > 1)
-                  _buildPaginationControls(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // 1. Responsive Executive Header
+                  _buildExecutiveHeader(
                     context,
                     isDark,
-                    pagination,
-                    onPageChange: (newPage) => currentPage.value = newPage,
+                    isMobile,
+                    pagination?.total ?? orgsList.length,
+                    showOnboardOrgDialog,
                   ),
-              ],
-            ],
+                  AppSpacing.vLg,
+
+                  // 2. Responsive Search & Segmented Filter Bar
+                  _buildSearchFilterToolbar(
+                    context,
+                    isDark,
+                    isMobile,
+                    searchController,
+                    searchQuery,
+                    selectedStatus,
+                    currentPage,
+                  ),
+                  AppSpacing.vLg,
+
+                  // 3. Content Area
+                  if (orgsQuery.isPending)
+                    const Padding(
+                      padding: EdgeInsets.all(64),
+                      child: Center(child: CircularProgressIndicator()),
+                    )
+                  else if (orgsList.isEmpty)
+                    _buildEmptyState(context, isDark, showOnboardOrgDialog)
+                  else ...[
+                    if (isDesktop)
+                      _buildDesktopOrganizationsTable(
+                        context,
+                        isDark,
+                        orgsList,
+                        showOrgDetailsDialog,
+                      )
+                    else
+                      _buildMobileOrganizationsList(
+                        context,
+                        isDark,
+                        orgsList,
+                        showOrgDetailsDialog,
+                      ),
+                    AppSpacing.vLg,
+
+                    // 4. Pagination Controls
+                    if (pagination != null && pagination.totalPages > 1)
+                      _buildPaginationControls(
+                        context,
+                        isDark,
+                        pagination,
+                        onPageChange: (newPage) => currentPage.value = newPage,
+                      ),
+                  ],
+                ],
+              ),
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildHeader(
+  // ===========================================================================
+  // 1. Executive Header
+  // ===========================================================================
+  Widget _buildExecutiveHeader(
     BuildContext context,
     bool isDark,
     bool isMobile,
+    int totalCount,
     VoidCallback onOnboard,
   ) {
+    final titleBlock = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Flexible(
+              child: Text(
+                'Tenant Organizations',
+                style: (isMobile
+                        ? AppTypography.titleLarge
+                        : AppTypography.headlineMedium)
+                    .copyWith(
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: -0.5,
+                  color: isDark
+                      ? AppColors.textPrimaryDark
+                      : AppColors.textPrimaryLight,
+                ),
+              ),
+            ),
+            AppSpacing.hSm,
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+              decoration: BoxDecoration(
+                color: AppColors.primary.withAlpha(isDark ? 40 : 20),
+                borderRadius: AppRadius.full,
+              ),
+              child: Text(
+                '$totalCount Registered',
+                style: AppTypography.labelSmall.copyWith(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 11,
+                ),
+              ),
+            ),
+          ],
+        ),
+        AppSpacing.vXs,
+        Text(
+          'Manage multi-tenant educational institutions, subscription entitlements, and campus profiles.',
+          style: AppTypography.bodySmall.copyWith(
+            color: isDark
+                ? AppColors.textSecondaryDark
+                : AppColors.textSecondaryLight,
+          ),
+        ),
+      ],
+    );
+
     if (isMobile) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            'Organizations',
-            style: AppTypography.headlineMedium.copyWith(
-              fontWeight: FontWeight.w800,
-              color: isDark
-                  ? AppColors.textPrimaryDark
-                  : AppColors.textPrimaryLight,
-            ),
-          ),
-          AppSpacing.vXs,
-          Text(
-            'Manage tenant organizations, subscriptions, and instances.',
-            style: AppTypography.bodySmall.copyWith(
-              color: isDark
-                  ? AppColors.textSecondaryDark
-                  : AppColors.textSecondaryLight,
-            ),
-          ),
+          titleBlock,
           AppSpacing.vMd,
           AppButton(
             text: 'Onboard Organization',
@@ -167,31 +225,7 @@ class PlatformOrganizationsScreen extends HookWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Organizations',
-                style: AppTypography.headlineMedium.copyWith(
-                  fontWeight: FontWeight.w800,
-                  color: isDark
-                      ? AppColors.textPrimaryDark
-                      : AppColors.textPrimaryLight,
-                ),
-              ),
-              AppSpacing.vXs,
-              Text(
-                'Manage tenant organizations, subscriptions, and provision new instances.',
-                style: AppTypography.bodyMedium.copyWith(
-                  color: isDark
-                      ? AppColors.textSecondaryDark
-                      : AppColors.textSecondaryLight,
-                ),
-              ),
-            ],
-          ),
-        ),
+        Expanded(child: titleBlock),
         AppSpacing.hMd,
         AppButton(
           text: 'Onboard Organization',
@@ -203,7 +237,10 @@ class PlatformOrganizationsScreen extends HookWidget {
     );
   }
 
-  Widget _buildSearchFilterBar(
+  // ===========================================================================
+  // 2. Search & Segmented Filter Toolbar
+  // ===========================================================================
+  Widget _buildSearchFilterToolbar(
     BuildContext context,
     bool isDark,
     bool isMobile,
@@ -212,10 +249,13 @@ class PlatformOrganizationsScreen extends HookWidget {
     ValueNotifier<String?> selectedStatus,
     ValueNotifier<int> currentPage,
   ) {
-    final searchInput = TextField(
+    final searchField = TextField(
       controller: searchController,
       decoration: InputDecoration(
-        hintText: 'Search by organization name or email...',
+        hintText: 'Search by institution name, subdomain slug, or owner email...',
+        hintStyle: AppTypography.bodySmall.copyWith(
+          color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+        ),
         prefixIcon: const Icon(Icons.search_rounded, size: 20),
         suffixIcon: searchController.text.isNotEmpty
             ? IconButton(
@@ -223,13 +263,14 @@ class PlatformOrganizationsScreen extends HookWidget {
                 onPressed: () {
                   searchController.clear();
                   searchQuery.value = '';
+                  currentPage.value = 1;
                 },
               )
             : null,
         isDense: true,
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-        border: OutlineInputBorder(borderRadius: AppRadius.sm),
+        border: OutlineInputBorder(borderRadius: AppRadius.md),
       ),
       onSubmitted: (val) {
         searchQuery.value = val.trim();
@@ -237,117 +278,367 @@ class PlatformOrganizationsScreen extends HookWidget {
       },
     );
 
-    final statusDropdown = Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      decoration: BoxDecoration(
-        borderRadius: AppRadius.sm,
-        border: Border.all(
-          color: isDark ? AppColors.borderDark : AppColors.borderLight,
-        ),
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<String?>(
-          value: selectedStatus.value,
-          hint: const Text('All Statuses'),
-          isExpanded: isMobile,
-          items: const [
-            DropdownMenuItem(value: null, child: Text('All Statuses')),
-            DropdownMenuItem(value: 'ACTIVE', child: Text('Active Only')),
-            DropdownMenuItem(value: 'SUSPENDED', child: Text('Suspended')),
-            DropdownMenuItem(value: 'PENDING', child: Text('Pending')),
-          ],
-          onChanged: (val) {
-            selectedStatus.value = val;
-            currentPage.value = 1;
-          },
-        ),
+    // Segmented Status Filter Chips
+    final statusChips = [
+      {'label': 'All Statuses', 'value': null},
+      {'label': 'Active', 'value': 'ACTIVE'},
+      {'label': 'Suspended', 'value': 'SUSPENDED'},
+      {'label': 'Pending', 'value': 'PENDING'},
+    ];
+
+    final filterBar = SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: statusChips.map((chip) {
+          final isSelected = selectedStatus.value == chip['value'];
+          return Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: FilterChip(
+              label: Text(chip['label'] as String),
+              selected: isSelected,
+              showCheckmark: false,
+              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+              labelStyle: AppTypography.labelSmall.copyWith(
+                fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
+                color: isSelected
+                    ? Colors.white
+                    : (isDark
+                        ? AppColors.textSecondaryDark
+                        : AppColors.textSecondaryLight),
+              ),
+              backgroundColor: isDark
+                  ? const Color(0xFF1E293B)
+                  : const Color(0xFFF1F5F9),
+              selectedColor: AppColors.primary,
+              shape: RoundedRectangleBorder(borderRadius: AppRadius.full),
+              onSelected: (_) {
+                selectedStatus.value = chip['value'];
+                currentPage.value = 1;
+              },
+            ),
+          );
+        }).toList(),
       ),
     );
 
     return AppCard(
       padding: const EdgeInsets.all(16),
-      child: isMobile
-          ? Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                searchInput,
-                AppSpacing.vSm,
-                statusDropdown,
-              ],
-            )
-          : Row(
-              children: [
-                Expanded(child: searchInput),
-                AppSpacing.hMd,
-                statusDropdown,
-              ],
-            ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          searchField,
+          AppSpacing.vMd,
+          filterBar,
+        ],
+      ),
     );
   }
 
-  Widget _buildEmptyState(
+  // ===========================================================================
+  // 3A. Desktop Organizations Table (>= 980px)
+  // ===========================================================================
+  Widget _buildDesktopOrganizationsTable(
     BuildContext context,
     bool isDark,
-    VoidCallback onOnboard,
+    List<OrganizationListItemModel> orgs,
+    void Function(String) onViewDetails,
   ) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(32),
-        child: AppCard(
-          padding: const EdgeInsets.all(28),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
+    return Container(
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF111827) : Colors.white,
+        borderRadius: AppRadius.lg,
+        border: Border.all(
+          color: isDark ? const Color(0xFF1F2937) : const Color(0xFFE2E8F0),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withAlpha(isDark ? 40 : 6),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final tableWidth =
+              constraints.maxWidth > 960 ? constraints.maxWidth : 960.0;
+
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: SizedBox(
+              width: tableWidth,
+              child: Table(
+                columnWidths: const {
+                  0: FlexColumnWidth(2.8),
+                  1: FlexColumnWidth(2.2),
+                  2: FlexColumnWidth(1.8),
+                  3: FixedColumnWidth(125),
+                  4: FixedColumnWidth(110),
+                  5: FixedColumnWidth(135),
+                },
+                defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                children: [
+          // Table Header
+          TableRow(
+            decoration: BoxDecoration(
+              color: isDark
+                  ? const Color(0xFF1E293B).withAlpha(150)
+                  : const Color(0xFFF8FAFC),
+              border: Border(
+                bottom: BorderSide(
+                  color: isDark
+                      ? const Color(0xFF334155)
+                      : const Color(0xFFE2E8F0),
+                ),
+              ),
+            ),
             children: [
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: AppColors.primary.withAlpha(isDark ? 40 : 20),
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Icons.corporate_fare_rounded,
-                  size: 36,
-                  color: AppColors.primary,
-                ),
-              ),
-              AppSpacing.vMd,
-              Text(
-                'No Organizations Found',
-                style: AppTypography.titleMedium.copyWith(
-                  fontWeight: FontWeight.w700,
-                  color: isDark
-                      ? AppColors.textPrimaryDark
-                      : AppColors.textPrimaryLight,
-                ),
-              ),
-              AppSpacing.vXs,
-              Text(
-                'No tenant organizations match your search filter or criteria.',
-                textAlign: TextAlign.center,
-                style: AppTypography.bodySmall.copyWith(
-                  color: isDark
-                      ? AppColors.textSecondaryDark
-                      : AppColors.textSecondaryLight,
-                ),
-              ),
-              AppSpacing.vLg,
-              AppButton(
-                text: 'Onboard First Organization',
-                icon: Icons.add_business_rounded,
-                onPressed: onOnboard,
-                height: 40,
-              ),
+              _buildTableHeaderCell('INSTITUTION / TENANT', isDark),
+              _buildTableHeaderCell('PRIMARY OWNER', isDark),
+              _buildTableHeaderCell('SUBSCRIBED PLAN', isDark),
+              _buildTableHeaderCell('BRANCHES', isDark),
+              _buildTableHeaderCell('STATUS', isDark),
+              _buildTableHeaderCell('ACTIONS', isDark),
             ],
           ),
+
+          // Data Rows
+          ...orgs.map((org) {
+            final sub = org.activeSubscription;
+            final isActive = org.status == 'ACTIVE';
+
+            return TableRow(
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: isDark
+                        ? const Color(0xFF1E293B)
+                        : const Color(0xFFF1F5F9),
+                  ),
+                ),
+              ),
+              children: [
+                // Institution Name & Avatar
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 18,
+                        backgroundColor:
+                            AppColors.primary.withAlpha(isDark ? 50 : 25),
+                        child: Text(
+                          org.name.isNotEmpty ? org.name[0].toUpperCase() : 'O',
+                          style: const TextStyle(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                      AppSpacing.hSm,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              org.name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: AppTypography.bodySmall.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: isDark
+                                    ? AppColors.textPrimaryDark
+                                    : AppColors.textPrimaryLight,
+                              ),
+                            ),
+                            Text(
+                              org.slug,
+                              style: AppTypography.labelSmall.copyWith(
+                                fontFamily: 'monospace',
+                                color: isDark
+                                    ? AppColors.textMutedDark
+                                    : AppColors.textMutedLight,
+                                fontSize: 10,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Owner Info
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        org.owner?.fullName ?? 'N/A',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTypography.bodySmall.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: isDark
+                              ? AppColors.textPrimaryDark
+                              : AppColors.textPrimaryLight,
+                          fontSize: 12,
+                        ),
+                      ),
+                      Text(
+                        org.owner?.email ?? '',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTypography.bodySmall.copyWith(
+                          color: isDark
+                              ? AppColors.textMutedDark
+                              : AppColors.textMutedLight,
+                          fontSize: 11,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Plan Tier
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary.withAlpha(isDark ? 30 : 15),
+                      borderRadius: AppRadius.sm,
+                    ),
+                    child: Text(
+                      sub?.plan?.name ?? 'No Plan',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTypography.labelSmall.copyWith(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 11,
+                      ),
+                    ),
+                  ),
+                ),
+
+                // Branches Count
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  child: Text(
+                    '${org.branchesCount} campuses',
+                    style: AppTypography.bodySmall.copyWith(
+                      color: isDark
+                          ? AppColors.textSecondaryDark
+                          : AppColors.textSecondaryLight,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+
+                // Status Badge
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
+                      decoration: BoxDecoration(
+                        color: (isActive
+                                ? AppColors.success
+                                : AppColors.warning)
+                            .withAlpha(isDark ? 35 : 20),
+                        borderRadius: AppRadius.full,
+                        border: Border.all(
+                          color: (isActive
+                                  ? AppColors.success
+                                  : AppColors.warning)
+                              .withAlpha(isDark ? 90 : 60),
+                        ),
+                      ),
+                      child: Text(
+                        org.status,
+                        style: AppTypography.labelSmall.copyWith(
+                          color: isActive
+                              ? AppColors.success
+                              : AppColors.warning,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 10,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                // Actions
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+                  child: OutlinedButton.icon(
+                    icon: const Icon(Icons.visibility_outlined, size: 15),
+                    label: const Text(
+                      'Details',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0,
+                      ),
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
+                      visualDensity: VisualDensity.compact,
+                      shape: RoundedRectangleBorder(borderRadius: AppRadius.sm),
+                    ),
+                    onPressed: () => onViewDetails(org.id),
+                  ),
+                ),
+              ],
+            );
+          }),
+        ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildTableHeaderCell(String label, bool isDark) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      child: Text(
+        label,
+        style: AppTypography.labelSmall.copyWith(
+          fontWeight: FontWeight.w800,
+          letterSpacing: 1.0,
+          color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+          fontSize: 10,
         ),
       ),
     );
   }
 
-  Widget _buildOrganizationsList(
+  // ===========================================================================
+  // 3B. Mobile & Tablet Organizations Cards (< 980px)
+  // ===========================================================================
+  Widget _buildMobileOrganizationsList(
     BuildContext context,
     bool isDark,
-    bool isMobile,
     List<OrganizationListItemModel> orgs,
     void Function(String) onViewDetails,
   ) {
@@ -359,147 +650,157 @@ class PlatformOrganizationsScreen extends HookWidget {
       itemBuilder: (context, index) {
         final org = orgs[index];
         final sub = org.activeSubscription;
+        final isActive = org.status == 'ACTIVE';
 
         return AppCard(
           padding: const EdgeInsets.all(16),
-          child: InkWell(
-            onTap: () => onViewDetails(org.id),
-            borderRadius: AppRadius.md,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      radius: 20,
-                      backgroundColor:
-                          AppColors.primary.withAlpha(isDark ? 50 : 25),
-                      child: Text(
-                        org.name.isNotEmpty ? org.name[0].toUpperCase() : 'O',
-                        style: const TextStyle(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CircleAvatar(
+                    radius: 20,
+                    backgroundColor:
+                        AppColors.primary.withAlpha(isDark ? 50 : 25),
+                    child: Text(
+                      org.name.isNotEmpty ? org.name[0].toUpperCase() : 'O',
+                      style: const TextStyle(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
                       ),
                     ),
-                    AppSpacing.hSm,
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Wrap(
-                            spacing: 8,
-                            runSpacing: 4,
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            children: [
-                              Text(
-                                org.name,
-                                style: AppTypography.bodyLarge.copyWith(
-                                  fontWeight: FontWeight.w800,
-                                  color: isDark
-                                      ? AppColors.textPrimaryDark
-                                      : AppColors.textPrimaryLight,
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 6,
-                                  vertical: 1,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: isDark
-                                      ? const Color(0xFF334155)
-                                      : const Color(0xFFE2E8F0),
-                                  borderRadius: AppRadius.sm,
-                                ),
-                                child: Text(
-                                  org.slug,
-                                  style: AppTypography.labelSmall.copyWith(
-                                    fontFamily: 'monospace',
-                                    fontSize: 10,
-                                  ),
-                                ),
-                              ),
-                            ],
+                  ),
+                  AppSpacing.hSm,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          org.name,
+                          style: AppTypography.bodyLarge.copyWith(
+                            fontWeight: FontWeight.w800,
+                            color: isDark
+                                ? AppColors.textPrimaryDark
+                                : AppColors.textPrimaryLight,
                           ),
-                          AppSpacing.vXs,
-                          Text(
-                            'Owner: ${org.owner?.fullName ?? 'N/A'} • ${org.owner?.email ?? ''}',
-                            style: AppTypography.bodySmall.copyWith(
-                              color: isDark
-                                  ? AppColors.textSecondaryDark
-                                  : AppColors.textSecondaryLight,
-                              fontSize: 12,
+                        ),
+                        AppSpacing.vXs,
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 2,
+                              ),
+                              decoration: BoxDecoration(
+                                color: isDark
+                                    ? const Color(0xFF1E293B)
+                                    : const Color(0xFFE2E8F0),
+                                borderRadius: AppRadius.sm,
+                              ),
+                              child: Text(
+                                org.slug,
+                                style: AppTypography.labelSmall.copyWith(
+                                  fontFamily: 'monospace',
+                                  fontSize: 10,
+                                ),
+                              ),
                             ),
-                          ),
-                        ],
+                            AppSpacing.hSm,
+                            Text(
+                              '${org.branchesCount} campuses',
+                              style: AppTypography.bodySmall.copyWith(
+                                color: isDark
+                                    ? AppColors.textMutedDark
+                                    : AppColors.textMutedLight,
+                                fontSize: 11,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    decoration: BoxDecoration(
+                      color: (isActive ? AppColors.success : AppColors.warning)
+                          .withAlpha(isDark ? 35 : 20),
+                      borderRadius: AppRadius.full,
+                      border: Border.all(
+                        color: (isActive
+                                ? AppColors.success
+                                : AppColors.warning)
+                            .withAlpha(isDark ? 90 : 60),
                       ),
                     ),
-                    Container(
+                    child: Text(
+                      org.status,
+                      style: AppTypography.labelSmall.copyWith(
+                        color: isActive ? AppColors.success : AppColors.warning,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const Divider(height: 20),
+              Text(
+                'Owner: ${org.owner?.fullName ?? 'N/A'} • ${org.owner?.email ?? ''}',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppTypography.bodySmall.copyWith(
+                  color: isDark
+                      ? AppColors.textSecondaryDark
+                      : AppColors.textSecondaryLight,
+                  fontSize: 11,
+                ),
+              ),
+              AppSpacing.vSm,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      'Plan: ${sub?.plan?.name ?? 'No Plan'} (${sub?.billingCycle ?? 'N/A'})',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTypography.bodySmall.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.primary,
+                      ),
+                    ),
+                  ),
+                  OutlinedButton.icon(
+                    icon: const Icon(Icons.visibility_outlined, size: 14),
+                    label: const Text('View Details'),
+                    style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 3,
+                        horizontal: 10,
+                        vertical: 6,
                       ),
-                      decoration: BoxDecoration(
-                        color: org.status == 'ACTIVE'
-                            ? AppColors.success.withAlpha(isDark ? 40 : 20)
-                            : AppColors.warning.withAlpha(isDark ? 40 : 20),
-                        borderRadius: AppRadius.full,
-                        border: Border.all(
-                          color: org.status == 'ACTIVE'
-                              ? AppColors.success.withAlpha(100)
-                              : AppColors.warning.withAlpha(100),
-                        ),
-                      ),
-                      child: Text(
-                        org.status,
-                        style: AppTypography.labelSmall.copyWith(
-                          color: org.status == 'ACTIVE'
-                              ? AppColors.success
-                              : AppColors.warning,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 10,
-                        ),
-                      ),
+                      visualDensity: VisualDensity.compact,
+                      shape: RoundedRectangleBorder(borderRadius: AppRadius.sm),
                     ),
-                  ],
-                ),
-                const Divider(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'Plan: ${sub?.plan?.name ?? 'No Plan'} (${sub?.billingCycle ?? 'N/A'})',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: AppTypography.bodySmall.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.primary,
-                        ),
-                      ),
-                    ),
-                    TextButton.icon(
-                      icon: const Icon(Icons.visibility_outlined, size: 16),
-                      label: const Text('View Details'),
-                      style: TextButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        visualDensity: VisualDensity.compact,
-                      ),
-                      onPressed: () => onViewDetails(org.id),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                    onPressed: () => onViewDetails(org.id),
+                  ),
+                ],
+              ),
+            ],
           ),
         );
       },
     );
   }
 
+  // ===========================================================================
+  // 4. Pagination Controls
+  // ===========================================================================
   Widget _buildPaginationControls(
     BuildContext context,
     bool isDark,
@@ -513,7 +814,7 @@ class PlatformOrganizationsScreen extends HookWidget {
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         Text(
-          'Page ${meta.page} of ${meta.totalPages} (${meta.total} orgs)',
+          'Showing page ${meta.page} of ${meta.totalPages} (${meta.total} institutions)',
           style: AppTypography.bodySmall.copyWith(
             color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
           ),
@@ -523,7 +824,7 @@ class PlatformOrganizationsScreen extends HookWidget {
           children: [
             OutlinedButton.icon(
               icon: const Icon(Icons.chevron_left_rounded, size: 16),
-              label: const Text('Prev'),
+              label: const Text('Previous'),
               onPressed: meta.hasPrevPage
                   ? () => onPageChange(meta.page - 1)
                   : null,
@@ -539,6 +840,65 @@ class PlatformOrganizationsScreen extends HookWidget {
           ],
         ),
       ],
+    );
+  }
+
+  Widget _buildEmptyState(
+    BuildContext context,
+    bool isDark,
+    VoidCallback onOnboard,
+  ) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: AppCard(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(18),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withAlpha(isDark ? 40 : 20),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.corporate_fare_rounded,
+                  size: 40,
+                  color: AppColors.primary,
+                ),
+              ),
+              AppSpacing.vMd,
+              Text(
+                'No Tenant Organizations Found',
+                style: AppTypography.titleMedium.copyWith(
+                  fontWeight: FontWeight.w800,
+                  color: isDark
+                      ? AppColors.textPrimaryDark
+                      : AppColors.textPrimaryLight,
+                ),
+              ),
+              AppSpacing.vXs,
+              Text(
+                'No institutions match your search query or selected status filters.',
+                textAlign: TextAlign.center,
+                style: AppTypography.bodySmall.copyWith(
+                  color: isDark
+                      ? AppColors.textSecondaryDark
+                      : AppColors.textSecondaryLight,
+                ),
+              ),
+              AppSpacing.vLg,
+              AppButton(
+                text: 'Onboard First Organization',
+                icon: Icons.add_business_rounded,
+                onPressed: onOnboard,
+                height: 42,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -569,7 +929,7 @@ class _OrganizationDetailsDialog extends HookWidget {
       shape: RoundedRectangleBorder(borderRadius: AppRadius.lg),
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          maxWidth: 620,
+          maxWidth: 640,
           maxHeight: MediaQuery.sizeOf(context).height * 0.88,
         ),
         child: Padding(
@@ -583,7 +943,7 @@ class _OrganizationDetailsDialog extends HookWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      org?.name ?? 'Organization Details',
+                      org?.name ?? 'Institution Details',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: (isMobile
@@ -611,7 +971,9 @@ class _OrganizationDetailsDialog extends HookWidget {
                 )
               else if (org == null)
                 const Expanded(
-                  child: Center(child: Text('Organization details not found.')),
+                  child: Center(
+                    child: Text('Institution details not found.'),
+                  ),
                 )
               else
                 Expanded(
@@ -619,7 +981,7 @@ class _OrganizationDetailsDialog extends HookWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Status & Profile Overview
+                        // Overview Header
                         if (isMobile)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -646,7 +1008,7 @@ class _OrganizationDetailsDialog extends HookWidget {
                                     child: Text(
                                       org.name,
                                       style: AppTypography.titleSmall.copyWith(
-                                        fontWeight: FontWeight.w700,
+                                        fontWeight: FontWeight.w800,
                                         color: isDark
                                             ? AppColors.textPrimaryDark
                                             : AppColors.textPrimaryLight,
@@ -667,7 +1029,7 @@ class _OrganizationDetailsDialog extends HookWidget {
                                     ),
                                     decoration: BoxDecoration(
                                       color: isDark
-                                          ? const Color(0xFF334155)
+                                          ? const Color(0xFF1E293B)
                                           : const Color(0xFFE2E8F0),
                                       borderRadius: AppRadius.sm,
                                     ),
@@ -687,15 +1049,10 @@ class _OrganizationDetailsDialog extends HookWidget {
                                     decoration: BoxDecoration(
                                       color: org.status == 'ACTIVE'
                                           ? AppColors.success
-                                              .withAlpha(isDark ? 40 : 20)
+                                              .withAlpha(isDark ? 35 : 20)
                                           : AppColors.warning
-                                              .withAlpha(isDark ? 40 : 20),
+                                              .withAlpha(isDark ? 35 : 20),
                                       borderRadius: AppRadius.full,
-                                      border: Border.all(
-                                        color: org.status == 'ACTIVE'
-                                            ? AppColors.success.withAlpha(100)
-                                            : AppColors.warning.withAlpha(100),
-                                      ),
                                     ),
                                     child: Text(
                                       org.status,
@@ -737,14 +1094,14 @@ class _OrganizationDetailsDialog extends HookWidget {
                                     Text(
                                       org.name,
                                       style: AppTypography.titleMedium.copyWith(
-                                        fontWeight: FontWeight.w700,
+                                        fontWeight: FontWeight.w800,
                                         color: isDark
                                             ? AppColors.textPrimaryDark
                                             : AppColors.textPrimaryLight,
                                       ),
                                     ),
                                     Text(
-                                      'Slug: ${org.slug} • Onboarded: ${_formatDate(org.createdAt)}',
+                                      'Subdomain Slug: ${org.slug} • Onboarded: ${_formatDate(org.createdAt)}',
                                       style: AppTypography.bodySmall.copyWith(
                                         color: isDark
                                             ? AppColors.textMutedDark
@@ -762,15 +1119,10 @@ class _OrganizationDetailsDialog extends HookWidget {
                                 decoration: BoxDecoration(
                                   color: org.status == 'ACTIVE'
                                       ? AppColors.success
-                                          .withAlpha(isDark ? 40 : 20)
+                                          .withAlpha(isDark ? 35 : 20)
                                       : AppColors.warning
-                                          .withAlpha(isDark ? 40 : 20),
+                                          .withAlpha(isDark ? 35 : 20),
                                   borderRadius: AppRadius.full,
-                                  border: Border.all(
-                                    color: org.status == 'ACTIVE'
-                                        ? AppColors.success.withAlpha(100)
-                                        : AppColors.warning.withAlpha(100),
-                                  ),
                                 ),
                                 child: Text(
                                   org.status,
@@ -786,9 +1138,9 @@ class _OrganizationDetailsDialog extends HookWidget {
                           ),
                         AppSpacing.vLg,
 
-                        // 1. Subscription Details Card
+                        // 1. Subscription & Billing Details
                         _buildSectionHeader(
-                          'SUBSCRIPTION & BILLING DETAILS',
+                          'SUBSCRIPTION & BILLING ENTITLEMENTS',
                           Icons.loyalty_rounded,
                         ),
                         AppSpacing.vSm,
@@ -832,24 +1184,15 @@ class _OrganizationDetailsDialog extends HookWidget {
                               isDark: isDark,
                               isMobile: isMobile,
                             ),
-                            if (org.activeSubscription?.trialEndsAt != null)
-                              _buildDetailRow(
-                                'Trial Ends At',
-                                _formatDate(
-                                  org.activeSubscription?.trialEndsAt,
-                                ),
-                                isDark: isDark,
-                                isMobile: isMobile,
-                              ),
                             if (org.activeSubscription?.plan != null) ...[
                               _buildDetailRow(
-                                'Plan Branch Limit',
-                                'Up to ${org.activeSubscription!.plan!.maxBranches} Branches',
+                                'Campus Branch Quota',
+                                'Up to ${org.activeSubscription!.plan!.maxBranches} Campuses',
                                 isDark: isDark,
                                 isMobile: isMobile,
                               ),
                               _buildDetailRow(
-                                'Student Quota',
+                                'Student Capacity',
                                 '${org.activeSubscription!.plan!.maxStudentsPerBranch} Students / Branch',
                                 isDark: isDark,
                                 isMobile: isMobile,
@@ -859,7 +1202,7 @@ class _OrganizationDetailsDialog extends HookWidget {
                         ),
                         AppSpacing.vLg,
 
-                        // 2. Primary Owner Details Card
+                        // 2. Primary Owner Account Details
                         _buildSectionHeader(
                           'PRIMARY OWNER ACCOUNT',
                           Icons.person_rounded,
@@ -896,9 +1239,9 @@ class _OrganizationDetailsDialog extends HookWidget {
                         ),
                         AppSpacing.vLg,
 
-                        // 3. Organization Contacts
+                        // 3. Institution Details
                         _buildSectionHeader(
-                          'ORGANIZATION CONTACT & INFO',
+                          'INSTITUTION PROFILE & LOCATION',
                           Icons.business_rounded,
                         ),
                         AppSpacing.vSm,
@@ -932,14 +1275,14 @@ class _OrganizationDetailsDialog extends HookWidget {
                               isMobile: isMobile,
                             ),
                             _buildDetailRow(
-                              'Branches Count',
-                              '${org.branchesCount} Active Branches',
+                              'Active Campuses',
+                              '${org.branchesCount} Branches',
                               isDark: isDark,
                               isMobile: isMobile,
                             ),
                             _buildDetailRow(
-                              'Users Count',
-                              '${org.usersCount} Registered Users',
+                              'Registered Users',
+                              '${org.usersCount} Accounts',
                               isDark: isDark,
                               isMobile: isMobile,
                             ),
@@ -997,9 +1340,7 @@ class _OrganizationDetailsDialog extends HookWidget {
           color: isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0),
         ),
       ),
-      child: Column(
-        children: children,
-      ),
+      child: Column(children: children),
     );
   }
 
@@ -1110,7 +1451,6 @@ class _OnboardOrgDialog extends HookWidget {
     final selectedPlanId = useState<String?>(null);
     final selectedBillingCycle = useState<String>('MONTHLY');
 
-    // Auto-select first plan if available
     useEffect(() {
       if (plans.isNotEmpty && selectedPlanId.value == null) {
         selectedPlanId.value = plans.first.id;
@@ -1159,21 +1499,21 @@ class _OnboardOrgDialog extends HookWidget {
     final orgProfileFields = [
       AppTextField(
         controller: orgNameController,
-        label: 'Organization Name *',
-        hint: 'e.g. Apex Academy',
+        label: 'Institution Name *',
+        hint: 'e.g. Apex Public School',
         validator: (v) => v == null || v.trim().isEmpty ? 'Required' : null,
       ),
       AppSpacing.vSm,
       if (isMobile) ...[
         AppTextField(
           controller: orgEmailController,
-          label: 'Org Contact Email',
-          hint: 'contact@apex.com',
+          label: 'Contact Email',
+          hint: 'contact@apex.edu.in',
         ),
         AppSpacing.vSm,
         AppTextField(
           controller: orgPhoneController,
-          label: 'Org Contact Phone',
+          label: 'Contact Phone',
           hint: '+91 9876543210',
         ),
       ] else
@@ -1182,15 +1522,15 @@ class _OnboardOrgDialog extends HookWidget {
             Expanded(
               child: AppTextField(
                 controller: orgEmailController,
-                label: 'Org Contact Email',
-                hint: 'contact@apex.com',
+                label: 'Contact Email',
+                hint: 'contact@apex.edu.in',
               ),
             ),
             AppSpacing.hMd,
             Expanded(
               child: AppTextField(
                 controller: orgPhoneController,
-                label: 'Org Contact Phone',
+                label: 'Contact Phone',
                 hint: '+91 9876543210',
               ),
             ),
@@ -1202,7 +1542,7 @@ class _OnboardOrgDialog extends HookWidget {
       initialValue: selectedPlanId.value,
       isExpanded: true,
       decoration: const InputDecoration(
-        labelText: 'Select Plan Tier *',
+        labelText: 'Select Subscription Tier *',
         isDense: true,
       ),
       items: plans.map((p) {
@@ -1225,14 +1565,8 @@ class _OnboardOrgDialog extends HookWidget {
         isDense: true,
       ),
       items: const [
-        DropdownMenuItem(
-          value: 'MONTHLY',
-          child: Text('Monthly'),
-        ),
-        DropdownMenuItem(
-          value: 'YEARLY',
-          child: Text('Yearly'),
-        ),
+        DropdownMenuItem(value: 'MONTHLY', child: Text('Monthly')),
+        DropdownMenuItem(value: 'YEARLY', child: Text('Yearly')),
       ],
       onChanged: (v) => selectedBillingCycle.value = v ?? 'MONTHLY',
     );
@@ -1241,7 +1575,7 @@ class _OnboardOrgDialog extends HookWidget {
       if (isMobile) ...[
         AppTextField(
           controller: ownerFirstNameController,
-          label: 'First Name *',
+          label: 'Principal / Admin First Name *',
           hint: 'John',
           validator: (v) => v == null || v.trim().isEmpty ? 'Required' : null,
         ),
@@ -1257,7 +1591,7 @@ class _OnboardOrgDialog extends HookWidget {
             Expanded(
               child: AppTextField(
                 controller: ownerFirstNameController,
-                label: 'First Name *',
+                label: 'Principal / Admin First Name *',
                 hint: 'John',
                 validator: (v) =>
                     v == null || v.trim().isEmpty ? 'Required' : null,
@@ -1277,7 +1611,7 @@ class _OnboardOrgDialog extends HookWidget {
       AppTextField(
         controller: ownerEmailController,
         label: 'Owner Login Email *',
-        hint: 'john.doe@apex.com',
+        hint: 'principal@apex.edu.in',
         keyboardType: TextInputType.emailAddress,
         validator: (v) => v == null || v.trim().isEmpty ? 'Required' : null,
       ),
@@ -1319,7 +1653,7 @@ class _OnboardOrgDialog extends HookWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        'Onboard New Organization',
+                        'Onboard Institution',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: (isMobile
@@ -1345,9 +1679,8 @@ class _OnboardOrgDialog extends HookWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Section 1: Organization Details
                         Text(
-                          'ORGANIZATION PROFILE',
+                          'INSTITUTION PROFILE',
                           style: AppTypography.labelSmall.copyWith(
                             fontWeight: FontWeight.w700,
                             letterSpacing: 1.1,
@@ -1358,9 +1691,8 @@ class _OnboardOrgDialog extends HookWidget {
                         ...orgProfileFields,
                         AppSpacing.vLg,
 
-                        // Section 2: Subscription Plan
                         Text(
-                          'SUBSCRIPTION PLAN',
+                          'SUBSCRIPTION TIER',
                           style: AppTypography.labelSmall.copyWith(
                             fontWeight: FontWeight.w700,
                             letterSpacing: 1.1,
@@ -1382,9 +1714,8 @@ class _OnboardOrgDialog extends HookWidget {
                           ),
                         AppSpacing.vLg,
 
-                        // Section 3: Owner Account
                         Text(
-                          'PRIMARY OWNER ACCOUNT',
+                          'PRIMARY OWNER / PRINCIPAL CREDENTIALS',
                           style: AppTypography.labelSmall.copyWith(
                             fontWeight: FontWeight.w700,
                             letterSpacing: 1.1,
@@ -1407,7 +1738,7 @@ class _OnboardOrgDialog extends HookWidget {
                     ),
                     AppSpacing.hSm,
                     AppButton(
-                      text: 'Provision Organization',
+                      text: 'Provision Institution',
                       isLoading: onboardMutation.isPending,
                       onPressed: handleSubmit,
                       height: 42,
