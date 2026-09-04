@@ -1,0 +1,81 @@
+/**
+ * Parent & Guardian
+ *
+ * Domain entity representing parents or legal guardians of students.
+ * Links 1:1 with User for authentication, credentials, and parent portal access.
+ * Belongs directly to Branch (which belongs to Organization).
+ *
+ * Includes:
+ * - Direct authentication via linked User account
+ * - Branch isolation
+ * - Many-to-Many StudentParentRelation mapping
+ * - Support for multi-child households (1 parent -> multiple enrolled siblings in branch)
+ * - Support for dual-parent access (Mother and Father can each have separate logins)
+ */
+
+/// Relationship type of the guardian to the student.
+enum ParentRelationship {
+  FATHER
+  MOTHER
+  GUARDIAN
+  OTHER
+}
+
+model Parent {
+  id              String                  @id @default(uuid()) @db.Uuid
+  branchId        String                  @db.Uuid
+  userId          String                  @unique @db.Uuid                 // 1:1 link to User credentials
+
+  /* Profile Details */
+  occupation      String?
+  annualIncome    Decimal?                @db.Decimal(12, 2)
+  altPhone        String?
+
+  /* Address */
+  address         String?
+  city            String?
+  state           String?
+  pincode         String?                 @db.VarChar(10)
+
+  /* Timestamps */
+  createdAt       DateTime                @default(now())
+  updatedAt       DateTime                @updatedAt
+  deletedAt       DateTime?                                              // Soft delete
+
+  /* Relations */
+  user            User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  branch          Branch                  @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  students        StudentParentRelation[]
+
+  @@index([branchId])
+  @@index([userId])
+  @@index([deletedAt])
+  @@map("parents")
+}
+
+/**
+ * Student ↔ Parent Join Entity (M:N Mapping)
+ *
+ * Maps parents to students with relationship metadata.
+ * Prevents duplicate assignments via @@unique([studentId, parentId]).
+ */
+model StudentParentRelation {
+  id                String             @id @default(uuid()) @db.Uuid
+  studentId         String             @db.Uuid
+  parentId          String             @db.Uuid
+
+  relationship      ParentRelationship @default(GUARDIAN)
+  isPrimaryContact  Boolean            @default(false)                   // Primary emergency / SMS recipient
+
+  /* Timestamps */
+  createdAt         DateTime           @default(now())
+
+  /* Relations */
+  student           Student            @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  parent            Parent             @relation(fields: [parentId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, parentId])                                      // No duplicate links
+  @@index([studentId])
+  @@index([parentId])
+  @@map("student_parents")
+}

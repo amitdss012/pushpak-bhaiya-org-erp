@@ -42,6 +42,7 @@ class _LoginFormState extends State<LoginForm> {
     final success = await widget.controller.login(
       email: _emailController.text,
       password: _passwordController.text,
+      portal: _selectedPortal,
       rememberMe: _rememberMe,
     );
 
@@ -120,10 +121,9 @@ class _LoginFormState extends State<LoginForm> {
                 enabled: !state.isLoading,
                 validator: (val) {
                   if (val == null || val.trim().isEmpty) {
-                    return 'Please enter your ${_selectedPortal.title.toLowerCase()} email or ID.';
+                    return 'Please enter your ${_selectedPortal.title.toLowerCase()} email.';
                   }
-                  if (_selectedPortal == LoginPortalType.organization &&
-                      !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                  if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
                           .hasMatch(val.trim())) {
                     return 'Please enter a valid email address.';
                   }

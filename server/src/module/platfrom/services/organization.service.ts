@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import { hashPassword } from "../../../utils/password.js";
 import { prisma } from "../../../lib/prisma.js";
 import type {
   BillingCycle,
@@ -134,7 +134,7 @@ export class OrganizationService {
       : calculatedEnd;
 
     // 5. Hash owner password
-    const passwordHash = await bcrypt.hash(input.owner.password, 10);
+    const passwordHash = await hashPassword(input.owner.password);
 
     // 6. Execute ACID transaction
     const result = await prisma.$transaction(async (tx) => {

@@ -26,8 +26,14 @@ class RouteNames {
   static const String branchDashboard = 'branchDashboard';
   static const String branchDashboardPath = '/branch/dashboard';
 
+  static const String teacherDashboard = 'teacherDashboard';
+  static const String teacherDashboardPath = '/teacher/dashboard';
+
   static const String studentDashboard = 'studentDashboard';
   static const String studentDashboardPath = '/student/dashboard';
+
+  static const String parentDashboard = 'parentDashboard';
+  static const String parentDashboardPath = '/parent/dashboard';
 
   // Organization Dashboard
   static const String dashboard = 'dashboard';

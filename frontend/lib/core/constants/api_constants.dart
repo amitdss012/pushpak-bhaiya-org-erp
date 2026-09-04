@@ -6,7 +6,7 @@ class ApiConstants {
   /// Can be overridden at build/runtime using `--dart-define=API_BASE_URL=...`
   static const String baseUrl = String.fromEnvironment(
     'API_BASE_URL',
-    defaultValue: 'http://localhost:3000/api/v1',
+    defaultValue: 'http://localhost:4000/api/v1',
   );
 
   /// Default timeout durations for HTTP requests.

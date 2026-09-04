@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    final dataSource = MockAuthRemoteDataSource();
+    final dataSource = AuthRemoteDataSourceImpl();
     final repository = AuthRepositoryImpl(remoteDataSource: dataSource);
     final loginUseCase = LoginUseCase(repository);
     _authController = AuthController(loginUseCase: loginUseCase);
@@ -210,8 +210,14 @@ class _LoginScreenState extends State<LoginScreen> {
                             case LoginPortalType.branch:
                               context.goNamed(RouteNames.branchDashboard);
                               break;
+                            case LoginPortalType.teacher:
+                              context.goNamed(RouteNames.teacherDashboard);
+                              break;
                             case LoginPortalType.student:
                               context.goNamed(RouteNames.studentDashboard);
+                              break;
+                            case LoginPortalType.parent:
+                              context.goNamed(RouteNames.parentDashboard);
                               break;
                           }
                         },

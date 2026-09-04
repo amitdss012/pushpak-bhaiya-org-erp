@@ -1,5 +1,5 @@
-import 'package:frontend/core/errors/failures.dart';
-
+import '../../../../core/errors/failures.dart';
+import '../entities/login_portal_type.dart';
 import '../entities/user_entity.dart';
 import '../repositories/auth_repository.dart';
 
@@ -12,6 +12,7 @@ class LoginUseCase {
   Future<UserEntity> call({
     required String email,
     required String password,
+    required LoginPortalType portal,
     bool rememberMe = false,
   }) async {
     final trimmedEmail = email.trim().toLowerCase();
@@ -28,6 +29,7 @@ class LoginUseCase {
     return repository.login(
       email: trimmedEmail,
       password: password,
+      portal: portal,
       rememberMe: rememberMe,
     );
   }

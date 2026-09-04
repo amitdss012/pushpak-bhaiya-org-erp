@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
 import { asyncHandler } from "../../../middlewares/error.middleware.js";
 import { statusCode } from "../../../types/types.js";
+import { verifyToken } from "../../../utils/jwt.js";
 import { ErrorResponse } from "../../../utils/response.util.js";
 import { platformRepo } from "../repos/platform.repo.js";
 import type { PlatformAdminTokenPayload } from "../types/platform.types.js";
@@ -29,11 +29,9 @@ export const platformAuthMiddleware = asyncHandler(
       );
     }
 
-    const secret = (process.env.JWT_SECRET || "platform_super_secret_jwt_key") as jwt.Secret;
-
     let decoded: PlatformAdminTokenPayload;
     try {
-      decoded = jwt.verify(token, secret) as PlatformAdminTokenPayload;
+      decoded = verifyToken<PlatformAdminTokenPayload>(token);
     } catch (err: any) {
       if (err.name === "TokenExpiredError") {
         throw new ErrorResponse(

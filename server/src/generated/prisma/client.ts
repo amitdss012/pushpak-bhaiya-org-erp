@@ -52,6 +52,20 @@ export type Branch = Prisma.BranchModel
  */
 export type Organization = Prisma.OrganizationModel
 /**
+ * Model Parent
+ * 
+ */
+export type Parent = Prisma.ParentModel
+/**
+ * Model StudentParentRelation
+ * *
+ *  * Student ↔ Parent Join Entity (M:N Mapping)
+ *  *
+ *  * Maps parents to students with relationship metadata.
+ *  * Prevents duplicate assignments via @@unique([studentId, parentId]).
+ */
+export type StudentParentRelation = Prisma.StudentParentRelationModel
+/**
  * Model SubscriptionPlan
  * *
  *  * Subscription Plan
@@ -94,6 +108,16 @@ export type Subscription = Prisma.SubscriptionModel
  *  * entity separate from organization/branch users.
  */
 export type PlatformAdmin = Prisma.PlatformAdminModel
+/**
+ * Model Student
+ * 
+ */
+export type Student = Prisma.StudentModel
+/**
+ * Model Teacher
+ * 
+ */
+export type Teacher = Prisma.TeacherModel
 /**
  * Model User
  * *

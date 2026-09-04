@@ -16,12 +16,26 @@ enum LoginPortalType {
     emailHint: 'manager@branch.com',
     targetPath: '/branch/dashboard',
   ),
+  teacher(
+    title: 'Teacher',
+    subtitle: 'Faculty Portal',
+    icon: Icons.co_present_rounded,
+    emailHint: 'teacher@school.com',
+    targetPath: '/teacher/dashboard',
+  ),
   student(
     title: 'Student',
     subtitle: 'Student Portal',
     icon: Icons.school_rounded,
     emailHint: 'student@school.com',
     targetPath: '/student/dashboard',
+  ),
+  parent(
+    title: 'Parent',
+    subtitle: 'Guardian Portal',
+    icon: Icons.family_restroom_rounded,
+    emailHint: 'parent@school.com',
+    targetPath: '/parent/dashboard',
   );
 
   final String title;

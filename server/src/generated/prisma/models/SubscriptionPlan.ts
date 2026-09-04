@@ -630,10 +630,6 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type SubscriptionPlanCreateNestedOneWithoutSubscriptionsInput = {
   create?: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutSubscriptionsInput, Prisma.SubscriptionPlanUncheckedCreateWithoutSubscriptionsInput>
   connectOrCreate?: Prisma.SubscriptionPlanCreateOrConnectWithoutSubscriptionsInput

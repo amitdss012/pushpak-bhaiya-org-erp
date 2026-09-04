@@ -5,6 +5,7 @@ import 'api/api_client.dart';
 import 'app/app.dart';
 import 'core/auth/platform_auth_service.dart';
 import 'core/auth/token_storage.dart';
+import 'core/auth/user_auth_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,16 +18,24 @@ void main() async {
     // 2. Attach 401 callback to auto-logout on session expiration
     ApiClient().setOnUnauthorizedCallback(() {
       PlatformAuthService.instance.logout();
+      UserAuthService.instance.logout();
     });
 
-    // 3. Pre-load auth token into ApiClient immediately
-    final existingToken = TokenStorage.getPlatformToken();
-    if (existingToken != null && existingToken.isNotEmpty) {
-      ApiClient().setAuthToken(existingToken);
+    // 3. Pre-load auth tokens into ApiClient
+    final existingPlatformToken = TokenStorage.getPlatformToken();
+    if (existingPlatformToken != null && existingPlatformToken.isNotEmpty) {
+      ApiClient().setAuthToken(existingPlatformToken);
+    }
+    final existingUserToken = TokenStorage.getUserToken();
+    if (existingUserToken != null && existingUserToken.isNotEmpty) {
+      ApiClient().setAuthToken(existingUserToken);
     }
 
-    // 4. Validate session and fetch current admin profile
-    await PlatformAuthService.instance.initialize();
+    // 4. Validate sessions and fetch current user/admin profiles
+    await Future.wait([
+      PlatformAuthService.instance.initialize(),
+      UserAuthService.instance.initialize(),
+    ]);
   } catch (e) {
     debugPrint('[Main] Startup initialization error: $e');
   }

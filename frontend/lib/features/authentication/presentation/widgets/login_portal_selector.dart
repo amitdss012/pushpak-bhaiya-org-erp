@@ -42,12 +42,12 @@ class LoginPortalSelector extends StatelessWidget {
                 duration: const Duration(milliseconds: 200),
                 curve: Curves.easeInOut,
                 padding: const EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 4,
+                  vertical: 8,
+                  horizontal: 2,
                 ),
                 decoration: BoxDecoration(
                   color: isSelected
-                      ? (isDark ? AppColors.primary : AppColors.primary)
+                      ? AppColors.primary
                       : Colors.transparent,
                   borderRadius: AppRadius.sm,
                   boxShadow: isSelected
@@ -67,7 +67,7 @@ class LoginPortalSelector extends StatelessWidget {
                   children: [
                     Icon(
                       portal.icon,
-                      size: 18,
+                      size: 17,
                       color: isSelected
                           ? Colors.white
                           : (isDark
@@ -81,7 +81,7 @@ class LoginPortalSelector extends StatelessWidget {
                         fontWeight: isSelected
                             ? FontWeight.w700
                             : FontWeight.w500,
-                        fontSize: 12,
+                        fontSize: 11,
                         color: isSelected
                             ? Colors.white
                             : (isDark

@@ -1,5 +1,6 @@
 // export { Prisma } from "../generated/prisma/client.js";
 export * from "../generated/prisma/client.js";
+export * from "./permission.types.js";
 
 export enum statusCode {
     // status code start with 200

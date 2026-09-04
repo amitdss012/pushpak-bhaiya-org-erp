@@ -1,11 +1,11 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import type { PlatformAdmin } from "../../../types/types.js";
 import type {
   PlatformAdminTokenPayload,
   SanitizedPlatformAdmin,
 } from "../types/platform.types.js";
 import { statusCode } from "../../../types/types.js";
+import { generateToken } from "../../../utils/jwt.js";
+import { comparePassword } from "../../../utils/password.js";
 import { ErrorResponse } from "../../../utils/response.util.js";
 import { platformRepo, type PlatformRepo } from "../repos/platform.repo.js";
 import type { PlatformLoginInput } from "../validators/platform.validator.js";
@@ -31,10 +31,7 @@ export class PlatformService {
       role: "PLATFORM_ADMIN",
     };
 
-    const secret = (process.env.JWT_SECRET || "platform_super_secret_jwt_key") as jwt.Secret;
-    const expiresIn = (process.env.JWT_EXPIRES_IN || "7d") as any;
-
-    return jwt.sign(payload as object, secret, { expiresIn });
+    return generateToken(payload, "7d");
   }
 
   /**
@@ -59,7 +56,7 @@ export class PlatformService {
       );
     }
 
-    const isPasswordValid = await bcrypt.compare(
+    const isPasswordValid = await comparePassword(
       input.password,
       admin.passwordHash
     );

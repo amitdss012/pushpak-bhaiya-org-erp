@@ -1,3 +1,4 @@
+import '../../domain/entities/login_portal_type.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../datasources/auth_remote_datasource.dart';
@@ -13,11 +14,13 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<UserEntity> login({
     required String email,
     required String password,
+    required LoginPortalType portal,
     bool rememberMe = false,
   }) async {
     final user = await remoteDataSource.login(
       email: email,
       password: password,
+      portal: portal,
       rememberMe: rememberMe,
     );
     _cachedUser = user;

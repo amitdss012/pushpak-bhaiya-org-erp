@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/auth/platform_auth_service.dart';
 import '../../core/auth/token_storage.dart';
+import '../../core/auth/user_auth_service.dart';
+import '../../features/authentication/domain/entities/login_portal_type.dart';
 import '../../features/authentication/presentation/screens/login_screen.dart';
 import '../../features/branch/presentation/screens/branch_dashboard_screen.dart';
 import '../../features/landing/presentation/screens/landing_screen.dart';
@@ -72,12 +74,14 @@ import '../../features/organization/presentation/screens/user/all_users/index.da
 import '../../features/organization/presentation/screens/user/user_roles/index.dart';
 import '../../features/organization/presentation/screens/student/online_admission_list/index.dart';
 import '../../features/organization/presentation/screens/student/view_students/index.dart';
+import '../../features/parent/presentation/screens/parent_dashboard_screen.dart';
 import '../../features/platform/presentation/screens/platform_dashboard_screen.dart';
 import '../../features/platform/presentation/screens/platform_login_screen.dart';
 import '../../features/platform/presentation/screens/platform_organizations_screen.dart';
 import '../../features/platform/presentation/screens/platform_plans_screen.dart';
 import '../../features/platform/presentation/widgets/platform_shell.dart';
 import '../../features/student/presentation/screens/student_dashboard_screen.dart';
+import '../../features/teacher/presentation/screens/teacher_dashboard_screen.dart';
 import 'route_names.dart';
 
 class AppRouter {
@@ -87,15 +91,54 @@ class AppRouter {
   static final shellNavigatorKey = GlobalKey<NavigatorState>();
   static final platformShellNavigatorKey = GlobalKey<NavigatorState>();
 
+  /// Helper to determine if a route belongs to the Organization Panel.
+  static bool _isOrgRoute(String location) {
+    if (location == RouteNames.dashboardPath) return true;
+    if (location.startsWith('/reception')) return true;
+    if (location.startsWith('/enquiry')) return true;
+    if (location.startsWith('/course')) return true;
+    if (location.startsWith('/fee')) return true;
+    if (location.startsWith('/exam')) return true;
+    if (location.startsWith('/online-exam')) return true;
+    if (location.startsWith('/live-class')) return true;
+    if (location.startsWith('/cards')) return true;
+    if (location.startsWith('/certificate')) return true;
+    if (location.startsWith('/marksheet')) return true;
+    if (location.startsWith('/settings')) return true;
+    if (location.startsWith('/partners')) return true;
+    if (location.startsWith('/expense')) return true;
+    if (location.startsWith('/attendance')) return true;
+    if (location.startsWith('/user')) return true;
+    if (location.startsWith('/session')) return true;
+    if (location.startsWith('/branch') &&
+        location != RouteNames.branchDashboardPath) {
+      return true;
+    }
+    if (location.startsWith('/student') &&
+        location != RouteNames.studentDashboardPath) {
+      return true;
+    }
+    if (location.startsWith('/teacher')) {
+      return false;
+    }
+    if (location.startsWith('/parent')) {
+      return false;
+    }
+    return false;
+  }
+
   static final GoRouter router = GoRouter(
     navigatorKey: rootNavigatorKey,
     initialLocation: RouteNames.dashboardPath,
-    refreshListenable: PlatformAuthService.instance,
+    refreshListenable: Listenable.merge([
+      PlatformAuthService.instance,
+      UserAuthService.instance,
+    ]),
     redirect: (BuildContext context, GoRouterState state) {
       final authService = PlatformAuthService.instance;
       final location = state.matchedLocation;
 
-      // Platform Route Protection
+      // 1. Platform Route Protection
       final isPlatformRoute =
           location.startsWith('/platform') || location.startsWith('/platfrom');
       if (isPlatformRoute) {
@@ -131,6 +174,124 @@ class AppRouter {
         // If NOT authenticated and trying to access protected platform routes, redirect to login
         if (!isAuthenticated && !isPlatformLogin) {
           return RouteNames.platformLoginPath;
+        }
+      }
+
+      // 2. User & Multi-Portal Route Protection (Organization, Branch, Teacher, Student, Parent)
+      final userAuth = UserAuthService.instance;
+      final isLoginRoute = location == RouteNames.loginPath ||
+          location == '/login/' ||
+          location == '/login';
+      final isOrgPanelRoute = _isOrgRoute(location);
+      final isBranchPanelRoute = location == RouteNames.branchDashboardPath;
+      final isTeacherPanelRoute = location == RouteNames.teacherDashboardPath;
+      final isStudentPanelRoute = location == RouteNames.studentDashboardPath;
+      final isParentPanelRoute = location == RouteNames.parentDashboardPath;
+
+      // Helper to determine the proper target dashboard for current auth/saved portal state
+      String resolveUserDashboard() {
+        switch (userAuth.activePortal) {
+          case LoginPortalType.teacher:
+            return RouteNames.teacherDashboardPath;
+          case LoginPortalType.student:
+            return RouteNames.studentDashboardPath;
+          case LoginPortalType.parent:
+            return RouteNames.parentDashboardPath;
+          case LoginPortalType.branch:
+            return RouteNames.branchDashboardPath;
+          case LoginPortalType.organization:
+            return RouteNames.dashboardPath;
+          default:
+            if (userAuth.isTeacherUser) return RouteNames.teacherDashboardPath;
+            if (userAuth.isStudentUser) return RouteNames.studentDashboardPath;
+            if (userAuth.isParentUser) return RouteNames.parentDashboardPath;
+            if (userAuth.isBranchUser) return RouteNames.branchDashboardPath;
+            return RouteNames.dashboardPath;
+        }
+      }
+
+      // Startup check while initializing user auth
+      if (userAuth.isInitializing) {
+        final hasUserToken = TokenStorage.getUserToken()?.isNotEmpty == true;
+        if (hasUserToken) {
+          if (isLoginRoute) {
+            final savedPortal = TokenStorage.getUserPortal();
+            if (savedPortal == LoginPortalType.teacher.name) {
+              return RouteNames.teacherDashboardPath;
+            }
+            if (savedPortal == LoginPortalType.student.name) {
+              return RouteNames.studentDashboardPath;
+            }
+            if (savedPortal == LoginPortalType.parent.name) {
+              return RouteNames.parentDashboardPath;
+            }
+            if (savedPortal == LoginPortalType.branch.name) {
+              return RouteNames.branchDashboardPath;
+            }
+            return RouteNames.dashboardPath;
+          }
+          return null;
+        } else {
+          if (isOrgPanelRoute ||
+              isBranchPanelRoute ||
+              isTeacherPanelRoute ||
+              isStudentPanelRoute ||
+              isParentPanelRoute) {
+            return RouteNames.loginPath;
+          }
+          return null;
+        }
+      }
+
+      final isAuthenticated = userAuth.isAuthenticated;
+
+      // A. If user is authenticated and attempts to access the login page:
+      // Redirect to their active portal dashboard
+      if (isAuthenticated && isLoginRoute) {
+        return resolveUserDashboard();
+      }
+
+      // B. If user is NOT authenticated and attempts to access ANY protected panel:
+      if (!isAuthenticated &&
+          (isOrgPanelRoute ||
+              isBranchPanelRoute ||
+              isTeacherPanelRoute ||
+              isStudentPanelRoute ||
+              isParentPanelRoute)) {
+        return RouteNames.loginPath;
+      }
+
+      // C. If user is authenticated, enforce strict cross-portal access controls:
+      if (isAuthenticated) {
+        // 1. Teacher accounts can ONLY access Teacher Portal
+        if (userAuth.isTeacherUser) {
+          if (!isTeacherPanelRoute) {
+            return RouteNames.teacherDashboardPath;
+          }
+        }
+        // 2. Student accounts can ONLY access Student Portal
+        else if (userAuth.isStudentUser) {
+          if (!isStudentPanelRoute) {
+            return RouteNames.studentDashboardPath;
+          }
+        }
+        // 3. Parent accounts can ONLY access Parent Portal
+        else if (userAuth.isParentUser) {
+          if (!isParentPanelRoute) {
+            return RouteNames.parentDashboardPath;
+          }
+        }
+        // 4. Branch staff/admin accounts can ONLY access Branch Panel
+        else if (userAuth.isBranchUser) {
+          if (!isBranchPanelRoute) {
+            return RouteNames.branchDashboardPath;
+          }
+        }
+        // 5. Organization accounts can ONLY access Organization Panel
+        else if (userAuth.isOrgUser) {
+          if (!isOrgPanelRoute) {
+            return RouteNames.dashboardPath;
+          }
         }
       }
 
@@ -206,11 +367,25 @@ class AppRouter {
         builder: (context, state) => const BranchDashboardScreen(),
       ),
 
+      // Teacher Portal Route (Standalone)
+      GoRoute(
+        path: RouteNames.teacherDashboardPath,
+        name: RouteNames.teacherDashboard,
+        builder: (context, state) => const TeacherDashboardScreen(),
+      ),
+
       // Student Portal Route (Standalone)
       GoRoute(
         path: RouteNames.studentDashboardPath,
         name: RouteNames.studentDashboard,
         builder: (context, state) => const StudentDashboardScreen(),
+      ),
+
+      // Parent Portal Route (Standalone)
+      GoRoute(
+        path: RouteNames.parentDashboardPath,
+        name: RouteNames.parentDashboard,
+        builder: (context, state) => const ParentDashboardScreen(),
       ),
 
       // Organization Authenticated Shell Routes

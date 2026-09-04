@@ -1,0 +1,57 @@
+/**
+ * Teacher
+ *
+ * Domain entity representing faculty and instructional staff in a school branch.
+ * Links 1:1 with User for authentication, credentials, and profile management.
+ * Belongs directly to Branch (which belongs to Organization).
+ *
+ * Supports:
+ * - Direct authentication via linked User account
+ * - Branch isolation
+ * - Unique employee / staff code per branch
+ * - Professional designation & qualification tracking
+ */
+
+/// Lifecycle states for teaching staff.
+enum TeacherStatus {
+  ACTIVE
+  INACTIVE
+  ON_LEAVE
+  RESIGNED
+  TERMINATED
+}
+
+model Teacher {
+  id              String        @id @default(uuid()) @db.Uuid
+  branchId        String        @db.Uuid
+  userId          String        @unique @db.Uuid                 // 1:1 link to User credentials
+
+  /* Staff Identifiers */
+  employeeCode    String                                         // e.g. "EMP-001"
+  designation     String                                         // e.g. "Mathematics Teacher"
+  department      String?                                        // e.g. "Science", "Humanities"
+
+  /* Professional Profile */
+  qualification   String?                                        // e.g. "M.Sc., B.Ed."
+  experienceYears Int?          @default(0)
+  joiningDate     DateTime      @default(now())
+  bio             String?
+
+  status          TeacherStatus @default(ACTIVE)
+
+  /* Timestamps */
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  deletedAt       DateTime?                                     // Soft delete
+
+  /* Relations */
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  branch          Branch        @relation(fields: [branchId], references: [id], onDelete: Cascade)
+
+  @@unique([branchId, employeeCode])                             // Unique staff code per branch
+  @@index([branchId])
+  @@index([userId])
+  @@index([status])
+  @@index([deletedAt])
+  @@map("teachers")
+}

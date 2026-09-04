@@ -53,9 +53,13 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Branch: 'Branch',
   Organization: 'Organization',
+  Parent: 'Parent',
+  StudentParentRelation: 'StudentParentRelation',
   SubscriptionPlan: 'SubscriptionPlan',
   Subscription: 'Subscription',
   PlatformAdmin: 'PlatformAdmin',
+  Student: 'Student',
+  Teacher: 'Teacher',
   User: 'User',
   Permission: 'Permission',
   Role: 'Role',
@@ -124,6 +128,37 @@ export const OrganizationScalarFieldEnum = {
 export type OrganizationScalarFieldEnum = (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum]
 
 
+export const ParentScalarFieldEnum = {
+  id: 'id',
+  branchId: 'branchId',
+  userId: 'userId',
+  occupation: 'occupation',
+  annualIncome: 'annualIncome',
+  altPhone: 'altPhone',
+  address: 'address',
+  city: 'city',
+  state: 'state',
+  pincode: 'pincode',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type ParentScalarFieldEnum = (typeof ParentScalarFieldEnum)[keyof typeof ParentScalarFieldEnum]
+
+
+export const StudentParentRelationScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  parentId: 'parentId',
+  relationship: 'relationship',
+  isPrimaryContact: 'isPrimaryContact',
+  createdAt: 'createdAt'
+} as const
+
+export type StudentParentRelationScalarFieldEnum = (typeof StudentParentRelationScalarFieldEnum)[keyof typeof StudentParentRelationScalarFieldEnum]
+
+
 export const SubscriptionPlanScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -178,6 +213,98 @@ export const PlatformAdminScalarFieldEnum = {
 } as const
 
 export type PlatformAdminScalarFieldEnum = (typeof PlatformAdminScalarFieldEnum)[keyof typeof PlatformAdminScalarFieldEnum]
+
+
+export const StudentScalarFieldEnum = {
+  id: 'id',
+  branchId: 'branchId',
+  userId: 'userId',
+  enrollmentNo: 'enrollmentNo',
+  applicationNo: 'applicationNo',
+  firstName: 'firstName',
+  middleName: 'middleName',
+  lastName: 'lastName',
+  dateOfBirth: 'dateOfBirth',
+  gender: 'gender',
+  bloodGroup: 'bloodGroup',
+  category: 'category',
+  religion: 'religion',
+  nationality: 'nationality',
+  aadharNumber: 'aadharNumber',
+  apaarNumber: 'apaarNumber',
+  phone: 'phone',
+  altPhone: 'altPhone',
+  whatsappNumber: 'whatsappNumber',
+  email: 'email',
+  streetAddress: 'streetAddress',
+  city: 'city',
+  state: 'state',
+  district: 'district',
+  pincode: 'pincode',
+  country: 'country',
+  admissionDate: 'admissionDate',
+  academicYear: 'academicYear',
+  tenthSchoolName: 'tenthSchoolName',
+  tenthBoard: 'tenthBoard',
+  tenthYearOfPassing: 'tenthYearOfPassing',
+  tenthPercentage: 'tenthPercentage',
+  tenthRollNo: 'tenthRollNo',
+  tenthSubjects: 'tenthSubjects',
+  twelfthSchoolName: 'twelfthSchoolName',
+  twelfthBoard: 'twelfthBoard',
+  twelfthYearOfPassing: 'twelfthYearOfPassing',
+  twelfthPercentage: 'twelfthPercentage',
+  twelfthStream: 'twelfthStream',
+  twelfthSubjects: 'twelfthSubjects',
+  fatherName: 'fatherName',
+  fatherOccupation: 'fatherOccupation',
+  fatherPhone: 'fatherPhone',
+  fatherEmail: 'fatherEmail',
+  fatherAnnualIncome: 'fatherAnnualIncome',
+  motherName: 'motherName',
+  motherOccupation: 'motherOccupation',
+  motherPhone: 'motherPhone',
+  localGuardianName: 'localGuardianName',
+  localGuardianRelation: 'localGuardianRelation',
+  localGuardianPhone: 'localGuardianPhone',
+  localGuardianAddress: 'localGuardianAddress',
+  photo: 'photo',
+  aadharFront: 'aadharFront',
+  aadharBack: 'aadharBack',
+  tenthMarksheet: 'tenthMarksheet',
+  twelfthMarksheet: 'twelfthMarksheet',
+  transferCertificate: 'transferCertificate',
+  apaarCard: 'apaarCard',
+  casteCertificate: 'casteCertificate',
+  admissionForm: 'admissionForm',
+  admissionStatus: 'admissionStatus',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type StudentScalarFieldEnum = (typeof StudentScalarFieldEnum)[keyof typeof StudentScalarFieldEnum]
+
+
+export const TeacherScalarFieldEnum = {
+  id: 'id',
+  branchId: 'branchId',
+  userId: 'userId',
+  employeeCode: 'employeeCode',
+  designation: 'designation',
+  department: 'department',
+  qualification: 'qualification',
+  experienceYears: 'experienceYears',
+  joiningDate: 'joiningDate',
+  bio: 'bio',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type TeacherScalarFieldEnum = (typeof TeacherScalarFieldEnum)[keyof typeof TeacherScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

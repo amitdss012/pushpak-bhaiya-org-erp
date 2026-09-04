@@ -27,6 +27,16 @@ export const OrgStatus = {
 export type OrgStatus = (typeof OrgStatus)[keyof typeof OrgStatus]
 
 
+export const ParentRelationship = {
+  FATHER: 'FATHER',
+  MOTHER: 'MOTHER',
+  GUARDIAN: 'GUARDIAN',
+  OTHER: 'OTHER'
+} as const
+
+export type ParentRelationship = (typeof ParentRelationship)[keyof typeof ParentRelationship]
+
+
 export const SubscriptionStatus = {
   ACTIVE: 'ACTIVE',
   PAST_DUE: 'PAST_DUE',
@@ -45,6 +55,37 @@ export const BillingCycle = {
 } as const
 
 export type BillingCycle = (typeof BillingCycle)[keyof typeof BillingCycle]
+
+
+export const Gender = {
+  MALE: 'MALE',
+  FEMALE: 'FEMALE',
+  OTHER: 'OTHER'
+} as const
+
+export type Gender = (typeof Gender)[keyof typeof Gender]
+
+
+export const AdmissionStatus = {
+  DRAFT: 'DRAFT',
+  SUBMITTED: 'SUBMITTED',
+  PENDING_PAYMENT: 'PENDING_PAYMENT',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type AdmissionStatus = (typeof AdmissionStatus)[keyof typeof AdmissionStatus]
+
+
+export const TeacherStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  ON_LEAVE: 'ON_LEAVE',
+  RESIGNED: 'RESIGNED',
+  TERMINATED: 'TERMINATED'
+} as const
+
+export type TeacherStatus = (typeof TeacherStatus)[keyof typeof TeacherStatus]
 
 
 export const Scope = {

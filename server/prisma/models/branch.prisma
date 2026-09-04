@@ -47,6 +47,9 @@ model Branch {
   users           User[]
   roles           Role[]
   auditLogs       AuditLog[]
+  students        Student[]
+  teachers        Teacher[]
+  parents         Parent[]
 
   @@unique([organizationId, slug])                        // slug unique per org
   @@index([organizationId])

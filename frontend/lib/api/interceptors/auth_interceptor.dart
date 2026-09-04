@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 
+import '../../core/auth/token_storage.dart';
+
 /// Interceptor that automatically attaches Bearer authentication token
 /// to outgoing HTTP requests and handles unauthorized responses.
 class AuthInterceptor extends QueuedInterceptor {
@@ -26,8 +28,16 @@ class AuthInterceptor extends QueuedInterceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    if (_authToken != null && _authToken!.isNotEmpty) {
-      options.headers['Authorization'] = 'Bearer $_authToken';
+    if (options.headers['Authorization'] == null) {
+      final isPlatformEndpoint = options.path.startsWith('/platfrom') ||
+          options.path.startsWith('/platform');
+      final token = isPlatformEndpoint
+          ? TokenStorage.getPlatformToken()
+          : (TokenStorage.getUserToken() ?? _authToken);
+
+      if (token != null && token.isNotEmpty) {
+        options.headers['Authorization'] = 'Bearer $token';
+      }
     }
     handler.next(options);
   }

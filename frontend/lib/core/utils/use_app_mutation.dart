@@ -33,7 +33,15 @@ MutationSnapshot<TData, Object, TVariables> useAppMutation<TData, TVariables>(
     (variables, _) => mutationFn(variables),
     onSuccess: (data, variables, onMutateResult, context) {
       if (showSuccessToast) {
-        final message = successMessageBuilder?.call(data) ?? successMessage;
+        String? message;
+        try {
+          final dynamic d = data;
+          if (d?.message is String && (d.message as String).trim().isNotEmpty) {
+            message = (d.message as String).trim();
+          }
+        } catch (_) {}
+
+        message ??= successMessageBuilder?.call(data) ?? successMessage;
         if (message != null && message.isNotEmpty) {
           AppToast.showSuccess(message);
         }

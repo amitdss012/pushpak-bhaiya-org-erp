@@ -6,6 +6,7 @@ import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_radius.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/theme/app_typography.dart';
+import '../../../../core/auth/user_auth_service.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/extensions/context_extensions.dart';
 import '../../configuration/sidebar_menu_config.dart';
@@ -291,67 +292,86 @@ class _AppSidebarState extends State<AppSidebar> {
   }
 
   Widget _buildUserFooter(bool isDark) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 16,
-            backgroundColor: AppColors.primary.withAlpha(isDark ? 50 : 30),
-            child: Text(
-              'SA',
-              style: AppTypography.labelMedium.copyWith(
-                color: AppColors.primary,
-                fontWeight: FontWeight.w700,
-                fontSize: 11,
-              ),
-            ),
-          ),
-          AppSpacing.hSm,
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Super Admin',
+    return ListenableBuilder(
+      listenable: UserAuthService.instance,
+      builder: (context, _) {
+        final user = UserAuthService.instance.currentUser;
+        final name = (user?.fullName.isNotEmpty == true)
+            ? user!.fullName
+            : (user?.scope == 'ORGANIZATION'
+                ? 'Organization Admin'
+                : 'Super Admin');
+        final email = user?.email ?? 'admin@apexgroup.org';
+        final initials = name.trim().split(' ').map((s) => s.isNotEmpty ? s[0] : '').take(2).join().toUpperCase();
+
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 16,
+                backgroundColor: AppColors.primary.withAlpha(isDark ? 50 : 30),
+                child: Text(
+                  initials.isNotEmpty ? initials : 'OA',
                   style: AppTypography.labelMedium.copyWith(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 12.5,
-                    color: isDark
-                        ? AppColors.textPrimaryDark
-                        : AppColors.textPrimaryLight,
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 11,
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
                 ),
-                Text(
-                  'admin@apexgroup.org',
-                  style: AppTypography.bodySmall.copyWith(
-                    fontSize: 10.5,
-                    color: isDark
-                        ? AppColors.textMutedDark
-                        : AppColors.textMutedLight,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+              ),
+              AppSpacing.hSm,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      name,
+                      style: AppTypography.labelMedium.copyWith(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12.5,
+                        color: isDark
+                            ? AppColors.textPrimaryDark
+                            : AppColors.textPrimaryLight,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      email,
+                      style: AppTypography.bodySmall.copyWith(
+                        fontSize: 10.5,
+                        color: isDark
+                            ? AppColors.textMutedDark
+                            : AppColors.textMutedLight,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.logout_rounded,
+                  size: 18,
+                  color: isDark
+                      ? AppColors.textMutedDark
+                      : AppColors.textMutedLight,
+                ),
+                tooltip: 'Sign Out',
+                onPressed: () async {
+                  await UserAuthService.instance.logout();
+                  if (context.mounted) {
+                    context.goNamed(RouteNames.login);
+                  }
+                },
+              ),
+            ],
           ),
-          IconButton(
-            icon: Icon(
-              Icons.logout_rounded,
-              size: 18,
-              color: isDark
-                  ? AppColors.textMutedDark
-                  : AppColors.textMutedLight,
-            ),
-            tooltip: 'Sign Out',
-            onPressed: () => context.goNamed(RouteNames.login),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

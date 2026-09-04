@@ -103,6 +103,11 @@ model User {
   refreshTokens   RefreshToken[]
   auditLogs       AuditLog[]
 
+  /* Persona Profiles */
+  student         Student?
+  teacher         Teacher?
+  parent          Parent?
+
   // Email unique per organization (not globally)
   @@unique([organizationId, email])
   @@index([organizationId, scope])
@@ -131,13 +136,13 @@ model Permission {
   id            String   @id @default(uuid()) @db.Uuid
 
   /* Hierarchical Key */
-  key           String   @unique                          // "user:create", "branch:read"
+  key           String   @unique                          // "USER_CREATE", "BRANCH_READ"
   name          String                                    // Human-readable: "Create User"
   description   String?
 
   /* Grouping */
-  module        String                                    // "user", "branch", "role", "dashboard"
-  action        String                                    // "create", "read", "update", "delete"
+  module        String                                    // "USER", "BRANCH", "ROLE", "DASHBOARD"
+  action        String                                    // "CREATE", "READ", "UPDATE", "DELETE"
 
   /**
    * Scope Applicability
