@@ -44,14 +44,24 @@ class UserRepo {
 
   /// Terminate current device session and clear stored token.
   static Future<void> logout() async {
-    await ApiClient().post<Map<String, dynamic>>('/user/auth/logout');
-    ApiClient().clearAuthToken();
+    try {
+      await ApiClient().post<Map<String, dynamic>>('/user/auth/logout');
+    } catch (_) {
+      // Gracefully ignore network/backend errors during session termination
+    } finally {
+      ApiClient().clearAuthToken();
+    }
   }
 
   /// Terminate all active device sessions for authenticated user.
   static Future<void> logoutAll() async {
-    await ApiClient().post<Map<String, dynamic>>('/user/auth/logout-all');
-    ApiClient().clearAuthToken();
+    try {
+      await ApiClient().post<Map<String, dynamic>>('/user/auth/logout-all');
+    } catch (_) {
+      // Gracefully ignore network/backend errors during session termination
+    } finally {
+      ApiClient().clearAuthToken();
+    }
   }
 
   /* ==========================================================================

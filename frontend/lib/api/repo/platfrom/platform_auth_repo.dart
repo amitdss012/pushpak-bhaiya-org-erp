@@ -31,7 +31,12 @@ class PlatformAuthRepo {
 
   /// Logout platform admin and clear stored token.
   static Future<void> logout() async {
-    await ApiClient().post<Map<String, dynamic>>('/platform/logout');
-    ApiClient().clearAuthToken();
+    try {
+      await ApiClient().post<Map<String, dynamic>>('/platform/logout');
+    } catch (_) {
+      // Gracefully ignore network/backend errors during session termination
+    } finally {
+      ApiClient().clearAuthToken();
+    }
   }
 }

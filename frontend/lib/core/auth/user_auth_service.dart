@@ -124,16 +124,28 @@ class UserAuthService extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Handle logout event.
+  bool _isLoggingOut = false;
+
+  /// Handle logout event safely and idempotently.
   Future<void> logout() async {
+    if (_isLoggingOut) return;
+    _isLoggingOut = true;
+
     try {
-      await UserRepo.logout();
-    } catch (_) {}
-    await TokenStorage.clearAllUserTokens();
-    ApiClient().clearAuthToken();
-    _currentUser = null;
-    _activePortal = null;
-    _isInitializing = false;
-    notifyListeners();
+      final token = TokenStorage.getUserToken();
+      if (token != null && token.isNotEmpty) {
+        await UserRepo.logout();
+      }
+    } catch (e) {
+      debugPrint('[UserAuthService] Logout request exception ignored: $e');
+    } finally {
+      await TokenStorage.clearAllUserTokens();
+      ApiClient().clearAuthToken();
+      _currentUser = null;
+      _activePortal = null;
+      _isInitializing = false;
+      _isLoggingOut = false;
+      notifyListeners();
+    }
   }
 }

@@ -45,7 +45,18 @@ class AuthInterceptor extends QueuedInterceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     if (err.response?.statusCode == 401) {
-      onUnauthorized?.call();
+      final path = err.requestOptions.path.toLowerCase();
+      // Never trigger auto-logout if the failing request is itself an authentication,
+      // session termination, login, or token refresh endpoint.
+      final isAuthEndpoint = path.contains('/auth/login') ||
+          path.contains('/auth/logout') ||
+          path.contains('/auth/refresh-token') ||
+          path.contains('/platform/login') ||
+          path.contains('/platform/logout');
+
+      if (!isAuthEndpoint) {
+        onUnauthorized?.call();
+      }
     }
     handler.next(err);
   }

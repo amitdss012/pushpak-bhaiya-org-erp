@@ -17,8 +17,12 @@ void main() async {
 
     // 2. Attach 401 callback to auto-logout on session expiration
     ApiClient().setOnUnauthorizedCallback(() {
-      PlatformAuthService.instance.logout();
-      UserAuthService.instance.logout();
+      if (PlatformAuthService.instance.isAuthenticated) {
+        PlatformAuthService.instance.logout();
+      }
+      if (UserAuthService.instance.isAuthenticated) {
+        UserAuthService.instance.logout();
+      }
     });
 
     // 3. Pre-load auth tokens into ApiClient

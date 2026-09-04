@@ -58,12 +58,27 @@ class PlatformAuthService extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Handle logout event.
+  bool _isLoggingOut = false;
+
+  /// Handle logout event safely and idempotently.
   Future<void> logout() async {
-    await TokenStorage.clearPlatformToken();
-    ApiClient().clearAuthToken();
-    _currentAdmin = null;
-    _isInitializing = false;
-    notifyListeners();
+    if (_isLoggingOut) return;
+    _isLoggingOut = true;
+
+    try {
+      final token = TokenStorage.getPlatformToken();
+      if (token != null && token.isNotEmpty) {
+        await PlatformAuthRepo.logout();
+      }
+    } catch (e) {
+      debugPrint('[PlatformAuthService] Logout request exception ignored: $e');
+    } finally {
+      await TokenStorage.clearPlatformToken();
+      ApiClient().clearAuthToken();
+      _currentAdmin = null;
+      _isInitializing = false;
+      _isLoggingOut = false;
+      notifyListeners();
+    }
   }
 }

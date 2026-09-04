@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors"
+import morgan from "morgan"
 import errorMiddleware from "./middlewares/error.middleware.js";
 import { platformRouter } from "./module/platfrom/index.js";
 import  {userRouter}  from "./module/user/index.js";
@@ -10,6 +11,7 @@ const app = express();
 // Global Middlewares
 app.use(cors())
 app.use(express.json());
+app.use(morgan('dev'))
 app.use(express.urlencoded({ extended: true }));
 
 // Health check route
