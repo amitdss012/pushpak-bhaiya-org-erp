@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../api/hooks/hooks.dart';
+import '../../../../../../api/models/models.dart';
 import '../../../../../../app/router/route_names.dart';
 import '../../../../../../app/theme/app_colors.dart';
 import '../../../../../../app/theme/app_radius.dart';
@@ -10,101 +13,22 @@ import '../../../../../../core/extensions/context_extensions.dart';
 import '../../../../../../shared/widgets/app_button.dart';
 import '../../../../../../shared/widgets/app_card.dart';
 import '../../../../../../shared/widgets/app_status_badge.dart';
+import '../../../../../../shared/widgets/no_data_found_template.dart';
 import '../../../widgets/org_stats_card.dart';
 
-class ViewBranchScreen extends StatefulWidget {
+class ViewBranchScreen extends HookWidget {
   const ViewBranchScreen({super.key});
 
-  @override
-  State<ViewBranchScreen> createState() => _ViewBranchScreenState();
-}
-
-class _ViewBranchScreenState extends State<ViewBranchScreen> {
-  String _searchQuery = '';
-
-  final List<Map<String, dynamic>> _branchesData = [
-    {
-      'id': '1',
-      'name': 'Main Campus',
-      'code': 'BR001',
-      'type': 'Main Branch',
-      'instituteType': 'Computer Institute',
-      'city': 'Mumbai',
-      'state': 'Maharashtra',
-      'students': 1200,
-      'staff': 85,
-      'revenue': 2500000,
-      'status': 'active',
-      'expiryDate': '2025-12-31',
-    },
-    {
-      'id': '2',
-      'name': 'North Campus',
-      'code': 'BR002',
-      'type': 'Sub Branch',
-      'instituteType': 'Typing Institute',
-      'city': 'Delhi',
-      'state': 'Delhi',
-      'students': 850,
-      'staff': 60,
-      'revenue': 1800000,
-      'status': 'active',
-      'expiryDate': '2025-06-30',
-    },
-    {
-      'id': '3',
-      'name': 'South Campus',
-      'code': 'BR003',
-      'type': 'Sub Branch',
-      'instituteType': 'Computer Institute',
-      'city': 'Bangalore',
-      'state': 'Karnataka',
-      'students': 650,
-      'staff': 45,
-      'revenue': 1400000,
-      'status': 'active',
-      'expiryDate': '2025-09-15',
-    },
-    {
-      'id': '4',
-      'name': 'East Campus',
-      'code': 'BR004',
-      'type': 'Franchise',
-      'instituteType': 'Paramedical Institute',
-      'city': 'Kolkata',
-      'state': 'West Bengal',
-      'students': 420,
-      'staff': 32,
-      'revenue': 950000,
-      'status': 'active',
-      'expiryDate': '2025-03-31',
-    },
-    {
-      'id': '5',
-      'name': 'West Campus',
-      'code': 'BR005',
-      'type': 'Sub Branch',
-      'instituteType': 'Other',
-      'city': 'Ahmedabad',
-      'state': 'Gujarat',
-      'students': 380,
-      'staff': 28,
-      'revenue': 820000,
-      'status': 'inactive',
-      'expiryDate': '2024-12-31',
-    },
-  ];
-
-  void _showBranchDetails(Map<String, dynamic> branch) {
+  void _showBranchDetails(BuildContext context, BranchModel branch) {
     final isDark = context.isDarkMode;
     showDialog(
       context: context,
       builder: (context) => Dialog(
         backgroundColor: isDark ? AppColors.surfaceCardDark : AppColors.surfaceLight,
-        shape: RoundedRectangleBorder(borderRadius: AppRadius.lg),
+        shape: const RoundedRectangleBorder(borderRadius: AppRadius.lg),
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 500),
-          child: Padding(
+          constraints: const BoxConstraints(maxWidth: 560),
+          child: SingleChildScrollView(
             padding: const EdgeInsets.all(24),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -136,13 +60,22 @@ class _ViewBranchScreenState extends State<ViewBranchScreen> {
                   child: Row(
                     children: [
                       Container(
-                        width: 44,
-                        height: 44,
+                        width: 48,
+                        height: 48,
                         decoration: BoxDecoration(
                           color: AppColors.primary.withAlpha(30),
                           borderRadius: AppRadius.sm,
                         ),
-                        child: const Center(child: Icon(Icons.business_rounded, color: AppColors.primary)),
+                        child: branch.logo != null && branch.logo!.isNotEmpty
+                            ? ClipRRect(
+                                borderRadius: AppRadius.sm,
+                                child: Image.network(
+                                  branch.logo!,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (ctx, err, stack) => const Icon(Icons.business_rounded, color: AppColors.primary),
+                                ),
+                              )
+                            : const Center(child: Icon(Icons.business_rounded, color: AppColors.primary)),
                       ),
                       AppSpacing.hMd,
                       Expanded(
@@ -150,11 +83,11 @@ class _ViewBranchScreenState extends State<ViewBranchScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              branch['name'] as String,
+                              branch.name,
                               style: AppTypography.titleMedium.copyWith(fontWeight: FontWeight.w700),
                             ),
                             Text(
-                              '${branch['code']} • ${branch['instituteType']}',
+                              '${branch.code ?? 'No Code'} • ${branch.branchType.toUpperCase()} • ${branch.instituteType}',
                               style: AppTypography.bodySmall.copyWith(
                                 color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
                               ),
@@ -163,8 +96,8 @@ class _ViewBranchScreenState extends State<ViewBranchScreen> {
                         ),
                       ),
                       AppStatusBadge(
-                        status: branch['status'] == 'active' ? AppBadgeStatus.active : AppBadgeStatus.pending,
-                        customLabel: branch['status'] == 'active' ? 'Active' : 'Inactive',
+                        status: branch.isActive ? AppBadgeStatus.active : AppBadgeStatus.pending,
+                        customLabel: branch.status,
                       ),
                     ],
                   ),
@@ -172,25 +105,63 @@ class _ViewBranchScreenState extends State<ViewBranchScreen> {
                 AppSpacing.vLg,
                 Row(
                   children: [
-                    Expanded(child: _buildDetailItem('Type', branch['type'] as String, isDark)),
+                    Expanded(child: _buildDetailItem('Type', branch.branchType.toUpperCase(), isDark)),
                     AppSpacing.hMd,
-                    Expanded(child: _buildDetailItem('Location', '${branch['city']}, ${branch['state']}', isDark)),
+                    Expanded(
+                      child: _buildDetailItem(
+                        'Location',
+                        [branch.city, branch.state].where((e) => e != null && e.isNotEmpty).join(', ').isEmpty
+                            ? 'Not specified'
+                            : [branch.city, branch.state].where((e) => e != null && e.isNotEmpty).join(', '),
+                        isDark,
+                      ),
+                    ),
                   ],
                 ),
                 AppSpacing.vMd,
                 Row(
                   children: [
-                    Expanded(child: _buildDetailItem('Students', branch['students'].toString(), isDark)),
+                    Expanded(child: _buildDetailItem('Students', branch.studentsCount.toString(), isDark)),
                     AppSpacing.hMd,
-                    Expanded(child: _buildDetailItem('Staff', branch['staff'].toString(), isDark)),
+                    Expanded(child: _buildDetailItem('Staff', branch.staffCount.toString(), isDark)),
                   ],
                 ),
                 AppSpacing.vMd,
                 Row(
                   children: [
-                    Expanded(child: _buildDetailItem('Monthly Revenue', '₹${((branch['revenue'] as int) / 100000).toFixed(1)}L', isDark)),
+                    Expanded(child: _buildDetailItem('Contact Phone', branch.phone ?? 'N/A', isDark)),
                     AppSpacing.hMd,
-                    Expanded(child: _buildDetailItem('Expiry Date', branch['expiryDate'] as String, isDark)),
+                    Expanded(child: _buildDetailItem('Email', branch.email ?? 'N/A', isDark)),
+                  ],
+                ),
+                if (branch.directorName != null && branch.directorName!.isNotEmpty) ...[
+                  AppSpacing.vMd,
+                  Row(
+                    children: [
+                      Expanded(child: _buildDetailItem('Director', branch.directorName!, isDark)),
+                      AppSpacing.hMd,
+                      Expanded(child: _buildDetailItem('Blood Group', branch.directorBloodGroup ?? 'N/A', isDark)),
+                    ],
+                  ),
+                ],
+                AppSpacing.vMd,
+                Row(
+                  children: [
+                    Expanded(
+                      child: _buildDetailItem(
+                        'Registration Date',
+                        branch.registrationDate != null ? branch.registrationDate!.toLocal().toString().split(' ')[0] : 'N/A',
+                        isDark,
+                      ),
+                    ),
+                    AppSpacing.hMd,
+                    Expanded(
+                      child: _buildDetailItem(
+                        'Expiry Date',
+                        branch.expiryDate != null ? branch.expiryDate!.toLocal().toString().split(' ')[0] : 'N/A',
+                        isDark,
+                      ),
+                    ),
                   ],
                 ),
                 AppSpacing.vLg,
@@ -207,28 +178,6 @@ class _ViewBranchScreenState extends State<ViewBranchScreen> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  void _showCertificateDialog(Map<String, dynamic> branch) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Generating Center Certificate for ${branch['name']}...'),
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
-  }
-
-  void _handleDelete(Map<String, dynamic> branch) {
-    setState(() {
-      _branchesData.removeWhere((b) => b['id'] == branch['id']);
-    });
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Branch ${branch['name']} removed.'),
-        backgroundColor: AppColors.error,
-        behavior: SnackBarBehavior.floating,
       ),
     );
   }
@@ -265,48 +214,52 @@ class _ViewBranchScreenState extends State<ViewBranchScreen> {
     final isDesktop = context.isDesktop || context.isUltraWide;
     final isTablet = context.isTablet;
 
-    final filteredBranches = _branchesData.where((b) {
-      if (_searchQuery.isEmpty) return true;
-      final q = _searchQuery.toLowerCase();
-      final name = (b['name'] as String).toLowerCase();
-      final code = (b['code'] as String).toLowerCase();
-      final city = (b['city'] as String).toLowerCase();
-      final type = (b['type'] as String).toLowerCase();
-      return name.contains(q) || code.contains(q) || city.contains(q) || type.contains(q);
-    }).toList();
+    final searchController = useTextEditingController();
+    final searchQuery = useState<String>('');
+    final selectedStatus = useState<String?>(null);
 
-    final totalStudents = _branchesData.fold<int>(0, (sum, b) => sum + (b['students'] as int));
-    final totalStaff = _branchesData.fold<int>(0, (sum, b) => sum + (b['staff'] as int));
-    final totalRevenue = _branchesData.fold<int>(0, (sum, b) => sum + (b['revenue'] as int));
-    final activeBranches = _branchesData.where((b) => b['status'] == 'active').length;
+    final branchesQuery = useBranchesQuery(
+      search: searchQuery.value.isEmpty ? null : searchQuery.value,
+      status: selectedStatus.value,
+    );
 
-    // Stat Cards
+    final response = branchesQuery.dataOrNull;
+    final branchList = response?.branches ?? [];
+    final stats = response?.stats;
+
+    // Stat Cards from backend metrics
+    final totalBranchesCount = stats?.totalBranches ?? branchList.length;
+    final activeBranchesCount = stats?.activeBranches ?? branchList.where((b) => b.isActive).length;
+    final inactiveBranchesCount = stats?.inactiveBranches ?? branchList.where((b) => !b.isActive).length;
+    final totalStudentsCount = stats?.totalStudents ?? branchList.fold<int>(0, (sum, b) => sum + b.studentsCount);
+    final totalStaffCount = stats?.totalStaff ?? branchList.fold<int>(0, (sum, b) => sum + b.staffCount);
+
     final card1 = OrgStatsCard(
       title: 'Total Branches',
-      value: _branchesData.length.toString(),
-      subtitle: '$activeBranches active',
+      value: totalBranchesCount.toString(),
+      subtitle: '$activeBranchesCount active',
       icon: Icons.business_rounded,
       variant: OrgStatsCardVariant.primary,
     );
     final card2 = OrgStatsCard(
       title: 'Total Students',
-      value: totalStudents.toString(),
+      value: totalStudentsCount.toString(),
       subtitle: 'Across all branches',
       icon: Icons.school_rounded,
       variant: OrgStatsCardVariant.info,
     );
     final card3 = OrgStatsCard(
       title: 'Total Staff',
-      value: totalStaff.toString(),
+      value: totalStaffCount.toString(),
       subtitle: 'Teaching & non-teaching',
       icon: Icons.people_outline_rounded,
       variant: OrgStatsCardVariant.success,
     );
     final card4 = OrgStatsCard(
-      title: 'Total Revenue',
-      value: '₹${(totalRevenue / 100000).toStringAsFixed(1)}L',
-      subtitle: 'This month',
-      icon: Icons.currency_rupee_rounded,
+      title: 'Inactive Branches',
+      value: inactiveBranchesCount.toString(),
+      subtitle: '$activeBranchesCount operating smoothly',
+      icon: Icons.domain_disabled_rounded,
       variant: OrgStatsCardVariant.warning,
     );
 
@@ -319,7 +272,7 @@ class _ViewBranchScreenState extends State<ViewBranchScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // Header
-          _buildHeader(isDark, isMobile),
+          _buildHeader(context, isDark, isMobile),
           AppSpacing.vXl,
 
           // Stats Grid
@@ -369,12 +322,23 @@ class _ViewBranchScreenState extends State<ViewBranchScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'All Branches',
-                        style: AppTypography.titleMedium.copyWith(
-                          fontWeight: FontWeight.w700,
-                          color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            'All Branches',
+                            style: AppTypography.titleMedium.copyWith(
+                              fontWeight: FontWeight.w700,
+                              color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+                            ),
+                          ),
+                          AppSpacing.hSm,
+                          if (branchesQuery.isFetching)
+                            const SizedBox(
+                              width: 14,
+                              height: 14,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            ),
+                        ],
                       ),
                       ConstrainedBox(
                         constraints: const BoxConstraints(maxWidth: 300),
@@ -388,7 +352,8 @@ class _ViewBranchScreenState extends State<ViewBranchScreen> {
                             ),
                           ),
                           child: TextField(
-                            onChanged: (val) => setState(() => _searchQuery = val.trim()),
+                            controller: searchController,
+                            onChanged: (val) => searchQuery.value = val.trim(),
                             style: AppTypography.bodySmall.copyWith(
                               color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
                             ),
@@ -403,6 +368,15 @@ class _ViewBranchScreenState extends State<ViewBranchScreen> {
                                 size: 16,
                                 color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
                               ),
+                              suffixIcon: searchQuery.value.isNotEmpty
+                                  ? IconButton(
+                                      icon: const Icon(Icons.clear_rounded, size: 14),
+                                      onPressed: () {
+                                        searchController.clear();
+                                        searchQuery.value = '';
+                                      },
+                                    )
+                                  : null,
                               isDense: true,
                               contentPadding: const EdgeInsets.symmetric(vertical: 8),
                               border: InputBorder.none,
@@ -414,239 +388,292 @@ class _ViewBranchScreenState extends State<ViewBranchScreen> {
                   ),
                 ),
                 const Divider(height: 1),
-                LayoutBuilder(
-                  builder: (context, constraints) {
-                    return SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(minWidth: constraints.maxWidth),
-                        child: DataTable(
-                          headingRowHeight: 44,
-                          dataRowMinHeight: 60,
-                          dataRowMaxHeight: 64,
-                          horizontalMargin: 20,
-                          columnSpacing: 24,
-                    headingRowColor: WidgetStateProperty.all(
-                      isDark ? AppColors.backgroundDark.withAlpha(80) : AppColors.backgroundLight.withAlpha(120),
+
+                // Query State Handlers
+                if (branchesQuery.isLoading)
+                  const Padding(
+                    padding: EdgeInsets.all(48.0),
+                    child: Center(
+                      child: CircularProgressIndicator(),
                     ),
-                    columns: [
-                      _buildDataColumn('BRANCH', isDark),
-                      _buildDataColumn('TYPE', isDark),
-                      _buildDataColumn('LOCATION', isDark),
-                      _buildDataColumn('STUDENTS', isDark),
-                      _buildDataColumn('STAFF', isDark),
-                      _buildDataColumn('REVENUE', isDark),
-                      _buildDataColumn('EXPIRY', isDark),
-                      _buildDataColumn('STATUS', isDark),
-                      _buildDataColumn('ACTIONS', isDark),
-                    ],
-                    rows: filteredBranches.map((branch) {
-                      final name = branch['name'] as String;
-                      final code = branch['code'] as String;
-                      final type = branch['type'] as String;
-                      final instituteType = branch['instituteType'] as String;
-                      final city = branch['city'] as String;
-                      final state = branch['state'] as String;
-                      final students = branch['students'] as int;
-                      final staff = branch['staff'] as int;
-                      final revenue = branch['revenue'] as int;
-                      final expiryDate = branch['expiryDate'] as String;
-                      final status = branch['status'] as String;
+                  )
+                else if (branchesQuery.failureReason != null)
+                  Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: NoDataFoundTemplate.error(
+                      message: 'Failed to load branches: ${branchesQuery.failureReason}',
+                      onRetry: () => branchesQuery.refetch(),
+                      cardWrapper: false,
+                    ),
+                  )
+                else if (branchList.isEmpty)
+                  Padding(
+                    padding: const EdgeInsets.all(32.0),
+                    child: searchQuery.value.isNotEmpty
+                        ? NoDataFoundTemplate(
+                            icon: Icons.search_off_rounded,
+                            title: 'No Matching Branches',
+                            message: 'No branches matched "${searchQuery.value}".',
+                            actionText: 'Clear Search',
+                            onAction: () {
+                              searchController.clear();
+                              searchQuery.value = '';
+                            },
+                            cardWrapper: false,
+                          )
+                        : NoDataFoundTemplate(
+                            icon: Icons.business_rounded,
+                            title: 'No Branches Registered',
+                            message: 'Get started by creating your first branch in the system.',
+                            actionText: 'Add Branch',
+                            actionIcon: Icons.add_rounded,
+                            onAction: () => context.go(RouteNames.branchCreatePath),
+                            cardWrapper: false,
+                          ),
+                  )
+                else
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      return SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(minWidth: constraints.maxWidth),
+                          child: DataTable(
+                            headingRowHeight: 44,
+                            dataRowMinHeight: 60,
+                            dataRowMaxHeight: 64,
+                            horizontalMargin: 20,
+                            columnSpacing: 24,
+                            headingRowColor: WidgetStateProperty.all(
+                              isDark
+                                  ? AppColors.backgroundDark.withAlpha(80)
+                                  : AppColors.backgroundLight.withAlpha(120),
+                            ),
+                            columns: [
+                              _buildDataColumn('BRANCH', isDark),
+                              _buildDataColumn('TYPE', isDark),
+                              _buildDataColumn('LOCATION', isDark),
+                              _buildDataColumn('STUDENTS', isDark),
+                              _buildDataColumn('STAFF', isDark),
+                              _buildDataColumn('EXPIRY', isDark),
+                              _buildDataColumn('STATUS', isDark),
+                              _buildDataColumn('ACTIONS', isDark),
+                            ],
+                            rows: branchList.map((branch) {
+                              final name = branch.name;
+                              final code = branch.code ?? '-';
+                              final type = branch.branchType.toUpperCase();
+                              final instituteType = branch.instituteType;
+                              final location = [branch.city, branch.state]
+                                  .where((e) => e != null && e.isNotEmpty)
+                                  .join(', ');
+                              final students = branch.studentsCount;
+                              final staff = branch.staffCount;
+                              final expiryDate = branch.expiryDate != null
+                                  ? branch.expiryDate!.toLocal().toString().split(' ')[0]
+                                  : 'Permanent';
 
-                      final expiry = DateTime.tryParse(expiryDate) ?? DateTime(2025);
-                      final today = DateTime.now();
-                      final isExpired = expiry.isBefore(today);
-                      final isExpiringSoon = !isExpired && expiry.difference(today).inDays <= 30;
+                              final expiry = branch.expiryDate;
+                              final today = DateTime.now();
+                              final isExpired = expiry != null && expiry.isBefore(today);
+                              final isExpiringSoon = expiry != null &&
+                                  !isExpired &&
+                                  expiry.difference(today).inDays <= 30;
 
-                      final expiryColor = isExpired
-                          ? AppColors.error
-                          : isExpiringSoon
-                              ? AppColors.warning
-                              : (isDark ? AppColors.textMutedDark : AppColors.textMutedLight);
+                              final expiryColor = isExpired
+                                  ? AppColors.error
+                                  : isExpiringSoon
+                                      ? AppColors.warning
+                                      : (isDark ? AppColors.textMutedDark : AppColors.textMutedLight);
 
-                      return DataRow(
-                        cells: [
-                          // Branch Name & Code
-                          DataCell(
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(
-                                  width: 36,
-                                  height: 36,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.primary.withAlpha(30),
-                                    borderRadius: AppRadius.sm,
+                              return DataRow(
+                                cells: [
+                                  // Branch Name, Logo & Code
+                                  DataCell(
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Container(
+                                          width: 36,
+                                          height: 36,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.primary.withAlpha(30),
+                                            borderRadius: AppRadius.sm,
+                                          ),
+                                          child: branch.logo != null && branch.logo!.isNotEmpty
+                                              ? ClipRRect(
+                                                  borderRadius: AppRadius.sm,
+                                                  child: Image.network(
+                                                    branch.logo!,
+                                                    width: 36,
+                                                    height: 36,
+                                                    fit: BoxFit.cover,
+                                                    errorBuilder: (ctx, err, stack) => const Icon(
+                                                      Icons.business_rounded,
+                                                      color: AppColors.primary,
+                                                      size: 18,
+                                                    ),
+                                                  ),
+                                                )
+                                              : const Center(
+                                                  child: Icon(
+                                                    Icons.business_rounded,
+                                                    color: AppColors.primary,
+                                                    size: 18,
+                                                  ),
+                                                ),
+                                        ),
+                                        AppSpacing.hSm,
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              name,
+                                              style: AppTypography.bodySmall.copyWith(
+                                                fontWeight: FontWeight.w600,
+                                                color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+                                              ),
+                                            ),
+                                            Text(
+                                              code,
+                                              style: AppTypography.bodySmall.copyWith(
+                                                fontSize: 10.5,
+                                                color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  child: const Center(
-                                    child: Icon(Icons.business_rounded, color: AppColors.primary, size: 18),
+
+                                  // Type & Institute
+                                  DataCell(
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                          decoration: BoxDecoration(
+                                            color: isDark ? AppColors.surfaceDark : AppColors.backgroundLight,
+                                            borderRadius: AppRadius.full,
+                                            border: Border.all(
+                                              color: isDark ? AppColors.borderDark : AppColors.borderLight,
+                                            ),
+                                          ),
+                                          child: Text(
+                                            type,
+                                            style: AppTypography.bodySmall.copyWith(
+                                              fontSize: 10.5,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                        AppSpacing.vXs,
+                                        Text(
+                                          instituteType,
+                                          style: AppTypography.bodySmall.copyWith(
+                                            fontSize: 10.5,
+                                            color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                AppSpacing.hSm,
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
+
+                                  // Location
+                                  DataCell(
                                     Text(
-                                      name,
+                                      location.isEmpty ? '-' : location,
                                       style: AppTypography.bodySmall.copyWith(
-                                        fontWeight: FontWeight.w600,
-                                        color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+                                        color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
                                       ),
                                     ),
+                                  ),
+
+                                  // Students
+                                  DataCell(
                                     Text(
-                                      code,
-                                      style: AppTypography.bodySmall.copyWith(
-                                        fontSize: 10.5,
+                                      students.toString(),
+                                      style: AppTypography.bodySmall.copyWith(fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+
+                                  // Staff
+                                  DataCell(
+                                    Text(
+                                      staff.toString(),
+                                      style: AppTypography.bodySmall.copyWith(fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+
+                                  // Expiry Date
+                                  DataCell(
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(Icons.event_available_rounded, size: 14, color: expiryColor),
+                                        AppSpacing.hXs,
+                                        Text(
+                                          expiryDate,
+                                          style: AppTypography.bodySmall.copyWith(
+                                            color: expiryColor,
+                                            fontWeight: isExpired || isExpiringSoon ? FontWeight.w600 : FontWeight.w400,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  // Status
+                                  DataCell(
+                                    AppStatusBadge(
+                                      status: branch.isActive ? AppBadgeStatus.active : AppBadgeStatus.pending,
+                                      customLabel: branch.status,
+                                    ),
+                                  ),
+
+                                  // Action Menu
+                                  DataCell(
+                                    PopupMenuButton<String>(
+                                      icon: Icon(
+                                        Icons.more_horiz_rounded,
+                                        size: 18,
                                         color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
                                       ),
+                                      onSelected: (action) {
+                                        if (action == 'view') _showBranchDetails(context, branch);
+                                        if (action == 'edit') context.go(RouteNames.branchCreatePath);
+                                      },
+                                      itemBuilder: (context) => [
+                                        const PopupMenuItem(
+                                          value: 'view',
+                                          child: Row(
+                                            children: [
+                                              Icon(Icons.visibility_outlined, size: 16),
+                                              SizedBox(width: 8),
+                                              Text('View Details'),
+                                            ],
+                                          ),
+                                        ),
+                                        const PopupMenuItem(
+                                          value: 'edit',
+                                          child: Row(
+                                            children: [
+                                              Icon(Icons.edit_outlined, size: 16),
+                                              SizedBox(width: 8),
+                                              Text('Edit Branch'),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-
-                          // Type & Institute
-                          DataCell(
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                                  decoration: BoxDecoration(
-                                    color: isDark ? AppColors.surfaceDark : AppColors.backgroundLight,
-                                    borderRadius: AppRadius.full,
-                                    border: Border.all(color: isDark ? AppColors.borderDark : AppColors.borderLight),
                                   ),
-                                  child: Text(
-                                    type,
-                                    style: AppTypography.bodySmall.copyWith(fontSize: 10.5, fontWeight: FontWeight.w600),
-                                  ),
-                                ),
-                                AppSpacing.vXs,
-                                Text(
-                                  instituteType,
-                                  style: AppTypography.bodySmall.copyWith(
-                                    fontSize: 10.5,
-                                    color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-
-                          // Location
-                          DataCell(
-                            Text(
-                              '$city, $state',
-                              style: AppTypography.bodySmall.copyWith(
-                                color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
-                              ),
-                            ),
-                          ),
-
-                          // Students
-                          DataCell(
-                            Text(
-                              students.toString(),
-                              style: AppTypography.bodySmall.copyWith(fontWeight: FontWeight.w600),
-                            ),
-                          ),
-
-                          // Staff
-                          DataCell(
-                            Text(
-                              staff.toString(),
-                              style: AppTypography.bodySmall.copyWith(fontWeight: FontWeight.w500),
-                            ),
-                          ),
-
-                          // Revenue
-                          DataCell(
-                            Text(
-                              '₹${(revenue / 100000).toStringAsFixed(1)}L',
-                              style: AppTypography.bodySmall.copyWith(
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.success,
-                              ),
-                            ),
-                          ),
-
-                          // Expiry Date
-                          DataCell(
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(Icons.event_available_rounded, size: 14, color: expiryColor),
-                                AppSpacing.hXs,
-                                Text(
-                                  expiryDate,
-                                  style: AppTypography.bodySmall.copyWith(
-                                    color: expiryColor,
-                                    fontWeight: isExpired || isExpiringSoon ? FontWeight.w600 : FontWeight.w400,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-
-                          // Status
-                          DataCell(
-                            AppStatusBadge(
-                              status: status == 'active' ? AppBadgeStatus.active : AppBadgeStatus.pending,
-                              customLabel: status == 'active' ? 'Active' : 'Inactive',
-                            ),
-                          ),
-
-                          // Action Menu
-                          DataCell(
-                            PopupMenuButton<String>(
-                              icon: Icon(
-                                Icons.more_horiz_rounded,
-                                size: 18,
-                                color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
-                              ),
-                              onSelected: (action) {
-                                if (action == 'view') _showBranchDetails(branch);
-                                if (action == 'edit') context.go(RouteNames.branchCreatePath);
-                                if (action == 'cert') _showCertificateDialog(branch);
-                                if (action == 'staff') context.go(RouteNames.branchViewPath);
-                                if (action == 'reports') context.go(RouteNames.branchTransactionsPath);
-                                if (action == 'delete') _handleDelete(branch);
-                              },
-                              itemBuilder: (context) => [
-                                const PopupMenuItem(
-                                  value: 'view',
-                                  child: Row(children: [Icon(Icons.visibility_outlined, size: 16), SizedBox(width: 8), Text('View Details')]),
-                                ),
-                                const PopupMenuItem(
-                                  value: 'edit',
-                                  child: Row(children: [Icon(Icons.edit_outlined, size: 16), SizedBox(width: 8), Text('Edit Branch')]),
-                                ),
-                                const PopupMenuItem(
-                                  value: 'cert',
-                                  child: Row(children: [Icon(Icons.card_membership_outlined, size: 16), SizedBox(width: 8), Text('Center Certificate')]),
-                                ),
-                                const PopupMenuItem(
-                                  value: 'staff',
-                                  child: Row(children: [Icon(Icons.people_outline, size: 16), SizedBox(width: 8), Text('Manage Staff')]),
-                                ),
-                                const PopupMenuItem(
-                                  value: 'reports',
-                                  child: Row(children: [Icon(Icons.bar_chart_rounded, size: 16), SizedBox(width: 8), Text('View Reports')]),
-                                ),
-                                const PopupMenuItem(
-                                  value: 'delete',
-                                  child: Row(children: [Icon(Icons.delete_outline_rounded, size: 16, color: AppColors.error), SizedBox(width: 8), Text('Delete', style: TextStyle(color: AppColors.error))]),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      );
-                    }).toList(),
+                                ],
+                              );
+                            }).toList(),
                           ),
                         ),
                       );
@@ -660,7 +687,7 @@ class _ViewBranchScreenState extends State<ViewBranchScreen> {
     );
   }
 
-  Widget _buildHeader(bool isDark, bool isMobile) {
+  Widget _buildHeader(BuildContext context, bool isDark, bool isMobile) {
     final headerTexts = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -749,8 +776,4 @@ class _ViewBranchScreenState extends State<ViewBranchScreen> {
       ),
     );
   }
-}
-
-extension DoubleExt on double {
-  String toFixed(int fractionDigits) => toStringAsFixed(fractionDigits);
 }

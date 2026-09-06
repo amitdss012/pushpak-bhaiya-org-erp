@@ -204,27 +204,35 @@ export type UpdateUserStatusInput = z.infer<typeof updateUserStatusValidator>;
 /**
  * Validator for Creating a Role
  */
-export const createRoleValidator = z.object({
-  name: z
-    .string({ message: "Role name is required" })
-    .trim()
-    .min(2, { message: "Role name must be at least 2 characters" })
-    .max(50, { message: "Role name cannot exceed 50 characters" }),
-  description: z
-    .string()
-    .trim()
-    .max(255, { message: "Description cannot exceed 255 characters" })
-    .optional(),
-  scope: z.enum(["ORGANIZATION", "BRANCH"]).optional(),
-  branchId: z
-    .string()
-    .uuid({ message: "Invalid branch ID format" })
-    .nullable()
-    .optional(),
-  permissionKeys: z
-    .array(z.string().trim().min(1, { message: "Permission key cannot be empty" }))
-    .optional(),
-});
+export const createRoleValidator = z
+  .object({
+    name: z
+      .string({ message: "Role name is required" })
+      .trim()
+      .min(2, { message: "Role name must be at least 2 characters" })
+      .max(50, { message: "Role name cannot exceed 50 characters" }),
+    description: z
+      .string()
+      .trim()
+      .max(255, { message: "Description cannot exceed 255 characters" })
+      .optional(),
+    scope: z.enum(["ORGANIZATION", "BRANCH"]).optional(),
+    branchId: z
+      .string()
+      .uuid({ message: "Invalid branch ID format" })
+      .nullable()
+      .optional(),
+    permissionKeys: z
+      .array(z.string().trim().min(1, { message: "Permission key cannot be empty" }))
+      .optional(),
+    permissions: z
+      .array(z.string().trim().min(1, { message: "Permission key cannot be empty" }))
+      .optional(),
+  })
+  .transform((data) => ({
+    ...data,
+    permissionKeys: data.permissionKeys ?? data.permissions,
+  }));
 
 export type CreateRoleInput = z.infer<typeof createRoleValidator>;
 
@@ -244,12 +252,32 @@ export type ListRolesInput = z.infer<typeof listRolesValidator>;
 /**
  * Validator for Assigning/Syncing Permissions to a Role
  */
-export const assignPermissionsToRoleValidator = z.object({
-  permissionKeys: z.array(
-    z.string().trim().min(1, { message: "Permission key cannot be empty" }),
-    { message: "permissionKeys array is required" }
-  ),
-});
+export const assignPermissionsToRoleValidator = z
+  .object({
+    permissionKeys: z
+      .array(
+        z.string().trim().min(1, { message: "Permission key cannot be empty" })
+      )
+      .optional(),
+    permissions: z
+      .array(
+        z.string().trim().min(1, { message: "Permission key cannot be empty" })
+      )
+      .optional(),
+  })
+  .superRefine((data, ctx) => {
+    const keys = data.permissionKeys ?? data.permissions;
+    if (!keys || !Array.isArray(keys)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "permissionKeys array is required",
+        path: ["permissionKeys"],
+      });
+    }
+  })
+  .transform((data) => ({
+    permissionKeys: (data.permissionKeys ?? data.permissions) as string[],
+  }));
 
 export type AssignPermissionsToRoleInput = z.infer<
   typeof assignPermissionsToRoleValidator

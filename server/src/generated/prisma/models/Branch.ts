@@ -20,8 +20,28 @@ export type BranchModel = runtime.Types.Result.DefaultSelection<Prisma.$BranchPa
 
 export type AggregateBranch = {
   _count: BranchCountAggregateOutputType | null
+  _avg: BranchAvgAggregateOutputType | null
+  _sum: BranchSumAggregateOutputType | null
   _min: BranchMinAggregateOutputType | null
   _max: BranchMaxAggregateOutputType | null
+}
+
+export type BranchAvgAggregateOutputType = {
+  latitude: number | null
+  longitude: number | null
+  numComputers: number | null
+  numFaculty: number | null
+  numRooms: number | null
+  numFees: runtime.Decimal | null
+}
+
+export type BranchSumAggregateOutputType = {
+  latitude: number | null
+  longitude: number | null
+  numComputers: number | null
+  numFaculty: number | null
+  numRooms: number | null
+  numFees: runtime.Decimal | null
 }
 
 export type BranchMinAggregateOutputType = {
@@ -32,12 +52,41 @@ export type BranchMinAggregateOutputType = {
   code: string | null
   email: string | null
   phone: string | null
+  altPhone: string | null
+  whatsapp: string | null
+  logo: string | null
+  branchType: string | null
+  instituteType: string | null
+  establishedYear: string | null
+  website: string | null
+  description: string | null
   address: string | null
   city: string | null
+  district: string | null
+  block: string | null
   state: string | null
   country: string | null
   pincode: string | null
+  latitude: number | null
+  longitude: number | null
+  directorName: string | null
+  directorGender: string | null
+  directorDob: Date | null
+  directorBloodGroup: string | null
+  numComputers: number | null
+  numFaculty: number | null
+  numRooms: number | null
+  numFees: runtime.Decimal | null
+  registrationDate: Date | null
+  validDate: Date | null
+  expiryDate: Date | null
+  renewalDate: Date | null
+  referralCode: string | null
+  onlineEnrollment: boolean | null
+  smsNotifications: boolean | null
+  emailNotifications: boolean | null
   status: $Enums.BranchStatus | null
+  createdById: string | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
@@ -51,12 +100,41 @@ export type BranchMaxAggregateOutputType = {
   code: string | null
   email: string | null
   phone: string | null
+  altPhone: string | null
+  whatsapp: string | null
+  logo: string | null
+  branchType: string | null
+  instituteType: string | null
+  establishedYear: string | null
+  website: string | null
+  description: string | null
   address: string | null
   city: string | null
+  district: string | null
+  block: string | null
   state: string | null
   country: string | null
   pincode: string | null
+  latitude: number | null
+  longitude: number | null
+  directorName: string | null
+  directorGender: string | null
+  directorDob: Date | null
+  directorBloodGroup: string | null
+  numComputers: number | null
+  numFaculty: number | null
+  numRooms: number | null
+  numFees: runtime.Decimal | null
+  registrationDate: Date | null
+  validDate: Date | null
+  expiryDate: Date | null
+  renewalDate: Date | null
+  referralCode: string | null
+  onlineEnrollment: boolean | null
+  smsNotifications: boolean | null
+  emailNotifications: boolean | null
   status: $Enums.BranchStatus | null
+  createdById: string | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
@@ -70,18 +148,65 @@ export type BranchCountAggregateOutputType = {
   code: number
   email: number
   phone: number
+  altPhone: number
+  whatsapp: number
+  logo: number
+  branchType: number
+  instituteType: number
+  establishedYear: number
+  website: number
+  description: number
   address: number
   city: number
+  district: number
+  block: number
   state: number
   country: number
   pincode: number
+  latitude: number
+  longitude: number
+  directorName: number
+  directorGender: number
+  directorDob: number
+  directorBloodGroup: number
+  numComputers: number
+  numFaculty: number
+  numRooms: number
+  numFees: number
+  registrationDate: number
+  validDate: number
+  expiryDate: number
+  renewalDate: number
+  referralCode: number
+  onlineEnrollment: number
+  smsNotifications: number
+  emailNotifications: number
   status: number
+  createdById: number
   createdAt: number
   updatedAt: number
   deletedAt: number
   _all: number
 }
 
+
+export type BranchAvgAggregateInputType = {
+  latitude?: true
+  longitude?: true
+  numComputers?: true
+  numFaculty?: true
+  numRooms?: true
+  numFees?: true
+}
+
+export type BranchSumAggregateInputType = {
+  latitude?: true
+  longitude?: true
+  numComputers?: true
+  numFaculty?: true
+  numRooms?: true
+  numFees?: true
+}
 
 export type BranchMinAggregateInputType = {
   id?: true
@@ -91,12 +216,41 @@ export type BranchMinAggregateInputType = {
   code?: true
   email?: true
   phone?: true
+  altPhone?: true
+  whatsapp?: true
+  logo?: true
+  branchType?: true
+  instituteType?: true
+  establishedYear?: true
+  website?: true
+  description?: true
   address?: true
   city?: true
+  district?: true
+  block?: true
   state?: true
   country?: true
   pincode?: true
+  latitude?: true
+  longitude?: true
+  directorName?: true
+  directorGender?: true
+  directorDob?: true
+  directorBloodGroup?: true
+  numComputers?: true
+  numFaculty?: true
+  numRooms?: true
+  numFees?: true
+  registrationDate?: true
+  validDate?: true
+  expiryDate?: true
+  renewalDate?: true
+  referralCode?: true
+  onlineEnrollment?: true
+  smsNotifications?: true
+  emailNotifications?: true
   status?: true
+  createdById?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -110,12 +264,41 @@ export type BranchMaxAggregateInputType = {
   code?: true
   email?: true
   phone?: true
+  altPhone?: true
+  whatsapp?: true
+  logo?: true
+  branchType?: true
+  instituteType?: true
+  establishedYear?: true
+  website?: true
+  description?: true
   address?: true
   city?: true
+  district?: true
+  block?: true
   state?: true
   country?: true
   pincode?: true
+  latitude?: true
+  longitude?: true
+  directorName?: true
+  directorGender?: true
+  directorDob?: true
+  directorBloodGroup?: true
+  numComputers?: true
+  numFaculty?: true
+  numRooms?: true
+  numFees?: true
+  registrationDate?: true
+  validDate?: true
+  expiryDate?: true
+  renewalDate?: true
+  referralCode?: true
+  onlineEnrollment?: true
+  smsNotifications?: true
+  emailNotifications?: true
   status?: true
+  createdById?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -129,12 +312,41 @@ export type BranchCountAggregateInputType = {
   code?: true
   email?: true
   phone?: true
+  altPhone?: true
+  whatsapp?: true
+  logo?: true
+  branchType?: true
+  instituteType?: true
+  establishedYear?: true
+  website?: true
+  description?: true
   address?: true
   city?: true
+  district?: true
+  block?: true
   state?: true
   country?: true
   pincode?: true
+  latitude?: true
+  longitude?: true
+  directorName?: true
+  directorGender?: true
+  directorDob?: true
+  directorBloodGroup?: true
+  numComputers?: true
+  numFaculty?: true
+  numRooms?: true
+  numFees?: true
+  registrationDate?: true
+  validDate?: true
+  expiryDate?: true
+  renewalDate?: true
+  referralCode?: true
+  onlineEnrollment?: true
+  smsNotifications?: true
+  emailNotifications?: true
   status?: true
+  createdById?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -179,6 +391,18 @@ export type BranchAggregateArgs<ExtArgs extends runtime.Types.Extensions.Interna
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: BranchAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: BranchSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: BranchMinAggregateInputType
@@ -209,6 +433,8 @@ export type BranchGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   _count?: BranchCountAggregateInputType | true
+  _avg?: BranchAvgAggregateInputType
+  _sum?: BranchSumAggregateInputType
   _min?: BranchMinAggregateInputType
   _max?: BranchMaxAggregateInputType
 }
@@ -221,16 +447,47 @@ export type BranchGroupByOutputType = {
   code: string | null
   email: string | null
   phone: string | null
+  altPhone: string | null
+  whatsapp: string | null
+  logo: string | null
+  branchType: string | null
+  instituteType: string | null
+  establishedYear: string | null
+  website: string | null
+  description: string | null
   address: string | null
   city: string | null
+  district: string | null
+  block: string | null
   state: string | null
   country: string | null
   pincode: string | null
+  latitude: number | null
+  longitude: number | null
+  directorName: string | null
+  directorGender: string | null
+  directorDob: Date | null
+  directorBloodGroup: string | null
+  numComputers: number | null
+  numFaculty: number | null
+  numRooms: number | null
+  numFees: runtime.Decimal | null
+  registrationDate: Date | null
+  validDate: Date | null
+  expiryDate: Date | null
+  renewalDate: Date | null
+  referralCode: string | null
+  onlineEnrollment: boolean
+  smsNotifications: boolean
+  emailNotifications: boolean
   status: $Enums.BranchStatus
+  createdById: string | null
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
   _count: BranchCountAggregateOutputType | null
+  _avg: BranchAvgAggregateOutputType | null
+  _sum: BranchSumAggregateOutputType | null
   _min: BranchMinAggregateOutputType | null
   _max: BranchMaxAggregateOutputType | null
 }
@@ -261,15 +518,45 @@ export type BranchWhereInput = {
   code?: Prisma.StringNullableFilter<"Branch"> | string | null
   email?: Prisma.StringNullableFilter<"Branch"> | string | null
   phone?: Prisma.StringNullableFilter<"Branch"> | string | null
+  altPhone?: Prisma.StringNullableFilter<"Branch"> | string | null
+  whatsapp?: Prisma.StringNullableFilter<"Branch"> | string | null
+  logo?: Prisma.StringNullableFilter<"Branch"> | string | null
+  branchType?: Prisma.StringNullableFilter<"Branch"> | string | null
+  instituteType?: Prisma.StringNullableFilter<"Branch"> | string | null
+  establishedYear?: Prisma.StringNullableFilter<"Branch"> | string | null
+  website?: Prisma.StringNullableFilter<"Branch"> | string | null
+  description?: Prisma.StringNullableFilter<"Branch"> | string | null
   address?: Prisma.StringNullableFilter<"Branch"> | string | null
   city?: Prisma.StringNullableFilter<"Branch"> | string | null
+  district?: Prisma.StringNullableFilter<"Branch"> | string | null
+  block?: Prisma.StringNullableFilter<"Branch"> | string | null
   state?: Prisma.StringNullableFilter<"Branch"> | string | null
   country?: Prisma.StringNullableFilter<"Branch"> | string | null
   pincode?: Prisma.StringNullableFilter<"Branch"> | string | null
+  latitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
+  longitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
+  directorName?: Prisma.StringNullableFilter<"Branch"> | string | null
+  directorGender?: Prisma.StringNullableFilter<"Branch"> | string | null
+  directorDob?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
+  directorBloodGroup?: Prisma.StringNullableFilter<"Branch"> | string | null
+  numComputers?: Prisma.IntNullableFilter<"Branch"> | number | null
+  numFaculty?: Prisma.IntNullableFilter<"Branch"> | number | null
+  numRooms?: Prisma.IntNullableFilter<"Branch"> | number | null
+  numFees?: Prisma.DecimalNullableFilter<"Branch"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
+  validDate?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
+  expiryDate?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
+  renewalDate?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
+  referralCode?: Prisma.StringNullableFilter<"Branch"> | string | null
+  onlineEnrollment?: Prisma.BoolFilter<"Branch"> | boolean
+  smsNotifications?: Prisma.BoolFilter<"Branch"> | boolean
+  emailNotifications?: Prisma.BoolFilter<"Branch"> | boolean
   status?: Prisma.EnumBranchStatusFilter<"Branch"> | $Enums.BranchStatus
+  createdById?: Prisma.UuidNullableFilter<"Branch"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
+  createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
   users?: Prisma.UserListRelationFilter
   roles?: Prisma.RoleListRelationFilter
@@ -277,6 +564,7 @@ export type BranchWhereInput = {
   students?: Prisma.StudentListRelationFilter
   teachers?: Prisma.TeacherListRelationFilter
   parents?: Prisma.ParentListRelationFilter
+  sessionMappings?: Prisma.BranchAcademicSessionListRelationFilter
 }
 
 export type BranchOrderByWithRelationInput = {
@@ -287,15 +575,45 @@ export type BranchOrderByWithRelationInput = {
   code?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  altPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  whatsapp?: Prisma.SortOrderInput | Prisma.SortOrder
+  logo?: Prisma.SortOrderInput | Prisma.SortOrder
+  branchType?: Prisma.SortOrderInput | Prisma.SortOrder
+  instituteType?: Prisma.SortOrderInput | Prisma.SortOrder
+  establishedYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  website?: Prisma.SortOrderInput | Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   city?: Prisma.SortOrderInput | Prisma.SortOrder
+  district?: Prisma.SortOrderInput | Prisma.SortOrder
+  block?: Prisma.SortOrderInput | Prisma.SortOrder
   state?: Prisma.SortOrderInput | Prisma.SortOrder
   country?: Prisma.SortOrderInput | Prisma.SortOrder
   pincode?: Prisma.SortOrderInput | Prisma.SortOrder
+  latitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  longitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  directorName?: Prisma.SortOrderInput | Prisma.SortOrder
+  directorGender?: Prisma.SortOrderInput | Prisma.SortOrder
+  directorDob?: Prisma.SortOrderInput | Prisma.SortOrder
+  directorBloodGroup?: Prisma.SortOrderInput | Prisma.SortOrder
+  numComputers?: Prisma.SortOrderInput | Prisma.SortOrder
+  numFaculty?: Prisma.SortOrderInput | Prisma.SortOrder
+  numRooms?: Prisma.SortOrderInput | Prisma.SortOrder
+  numFees?: Prisma.SortOrderInput | Prisma.SortOrder
+  registrationDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  validDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  expiryDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  renewalDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  referralCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  onlineEnrollment?: Prisma.SortOrder
+  smsNotifications?: Prisma.SortOrder
+  emailNotifications?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdBy?: Prisma.UserOrderByWithRelationInput
   organization?: Prisma.OrganizationOrderByWithRelationInput
   users?: Prisma.UserOrderByRelationAggregateInput
   roles?: Prisma.RoleOrderByRelationAggregateInput
@@ -303,6 +621,7 @@ export type BranchOrderByWithRelationInput = {
   students?: Prisma.StudentOrderByRelationAggregateInput
   teachers?: Prisma.TeacherOrderByRelationAggregateInput
   parents?: Prisma.ParentOrderByRelationAggregateInput
+  sessionMappings?: Prisma.BranchAcademicSessionOrderByRelationAggregateInput
 }
 
 export type BranchWhereUniqueInput = Prisma.AtLeast<{
@@ -317,15 +636,45 @@ export type BranchWhereUniqueInput = Prisma.AtLeast<{
   code?: Prisma.StringNullableFilter<"Branch"> | string | null
   email?: Prisma.StringNullableFilter<"Branch"> | string | null
   phone?: Prisma.StringNullableFilter<"Branch"> | string | null
+  altPhone?: Prisma.StringNullableFilter<"Branch"> | string | null
+  whatsapp?: Prisma.StringNullableFilter<"Branch"> | string | null
+  logo?: Prisma.StringNullableFilter<"Branch"> | string | null
+  branchType?: Prisma.StringNullableFilter<"Branch"> | string | null
+  instituteType?: Prisma.StringNullableFilter<"Branch"> | string | null
+  establishedYear?: Prisma.StringNullableFilter<"Branch"> | string | null
+  website?: Prisma.StringNullableFilter<"Branch"> | string | null
+  description?: Prisma.StringNullableFilter<"Branch"> | string | null
   address?: Prisma.StringNullableFilter<"Branch"> | string | null
   city?: Prisma.StringNullableFilter<"Branch"> | string | null
+  district?: Prisma.StringNullableFilter<"Branch"> | string | null
+  block?: Prisma.StringNullableFilter<"Branch"> | string | null
   state?: Prisma.StringNullableFilter<"Branch"> | string | null
   country?: Prisma.StringNullableFilter<"Branch"> | string | null
   pincode?: Prisma.StringNullableFilter<"Branch"> | string | null
+  latitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
+  longitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
+  directorName?: Prisma.StringNullableFilter<"Branch"> | string | null
+  directorGender?: Prisma.StringNullableFilter<"Branch"> | string | null
+  directorDob?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
+  directorBloodGroup?: Prisma.StringNullableFilter<"Branch"> | string | null
+  numComputers?: Prisma.IntNullableFilter<"Branch"> | number | null
+  numFaculty?: Prisma.IntNullableFilter<"Branch"> | number | null
+  numRooms?: Prisma.IntNullableFilter<"Branch"> | number | null
+  numFees?: Prisma.DecimalNullableFilter<"Branch"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
+  validDate?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
+  expiryDate?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
+  renewalDate?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
+  referralCode?: Prisma.StringNullableFilter<"Branch"> | string | null
+  onlineEnrollment?: Prisma.BoolFilter<"Branch"> | boolean
+  smsNotifications?: Prisma.BoolFilter<"Branch"> | boolean
+  emailNotifications?: Prisma.BoolFilter<"Branch"> | boolean
   status?: Prisma.EnumBranchStatusFilter<"Branch"> | $Enums.BranchStatus
+  createdById?: Prisma.UuidNullableFilter<"Branch"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
+  createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
   users?: Prisma.UserListRelationFilter
   roles?: Prisma.RoleListRelationFilter
@@ -333,6 +682,7 @@ export type BranchWhereUniqueInput = Prisma.AtLeast<{
   students?: Prisma.StudentListRelationFilter
   teachers?: Prisma.TeacherListRelationFilter
   parents?: Prisma.ParentListRelationFilter
+  sessionMappings?: Prisma.BranchAcademicSessionListRelationFilter
 }, "id" | "organizationId_slug">
 
 export type BranchOrderByWithAggregationInput = {
@@ -343,18 +693,49 @@ export type BranchOrderByWithAggregationInput = {
   code?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  altPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  whatsapp?: Prisma.SortOrderInput | Prisma.SortOrder
+  logo?: Prisma.SortOrderInput | Prisma.SortOrder
+  branchType?: Prisma.SortOrderInput | Prisma.SortOrder
+  instituteType?: Prisma.SortOrderInput | Prisma.SortOrder
+  establishedYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  website?: Prisma.SortOrderInput | Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   city?: Prisma.SortOrderInput | Prisma.SortOrder
+  district?: Prisma.SortOrderInput | Prisma.SortOrder
+  block?: Prisma.SortOrderInput | Prisma.SortOrder
   state?: Prisma.SortOrderInput | Prisma.SortOrder
   country?: Prisma.SortOrderInput | Prisma.SortOrder
   pincode?: Prisma.SortOrderInput | Prisma.SortOrder
+  latitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  longitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  directorName?: Prisma.SortOrderInput | Prisma.SortOrder
+  directorGender?: Prisma.SortOrderInput | Prisma.SortOrder
+  directorDob?: Prisma.SortOrderInput | Prisma.SortOrder
+  directorBloodGroup?: Prisma.SortOrderInput | Prisma.SortOrder
+  numComputers?: Prisma.SortOrderInput | Prisma.SortOrder
+  numFaculty?: Prisma.SortOrderInput | Prisma.SortOrder
+  numRooms?: Prisma.SortOrderInput | Prisma.SortOrder
+  numFees?: Prisma.SortOrderInput | Prisma.SortOrder
+  registrationDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  validDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  expiryDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  renewalDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  referralCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  onlineEnrollment?: Prisma.SortOrder
+  smsNotifications?: Prisma.SortOrder
+  emailNotifications?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.BranchCountOrderByAggregateInput
+  _avg?: Prisma.BranchAvgOrderByAggregateInput
   _max?: Prisma.BranchMaxOrderByAggregateInput
   _min?: Prisma.BranchMinOrderByAggregateInput
+  _sum?: Prisma.BranchSumOrderByAggregateInput
 }
 
 export type BranchScalarWhereWithAggregatesInput = {
@@ -368,12 +749,41 @@ export type BranchScalarWhereWithAggregatesInput = {
   code?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
   email?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
+  altPhone?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
+  whatsapp?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
+  logo?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
+  branchType?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
+  instituteType?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
+  establishedYear?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
+  website?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
+  description?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
   address?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
   city?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
+  district?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
+  block?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
   state?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
   country?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
   pincode?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
+  latitude?: Prisma.FloatNullableWithAggregatesFilter<"Branch"> | number | null
+  longitude?: Prisma.FloatNullableWithAggregatesFilter<"Branch"> | number | null
+  directorName?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
+  directorGender?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
+  directorDob?: Prisma.DateTimeNullableWithAggregatesFilter<"Branch"> | Date | string | null
+  directorBloodGroup?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
+  numComputers?: Prisma.IntNullableWithAggregatesFilter<"Branch"> | number | null
+  numFaculty?: Prisma.IntNullableWithAggregatesFilter<"Branch"> | number | null
+  numRooms?: Prisma.IntNullableWithAggregatesFilter<"Branch"> | number | null
+  numFees?: Prisma.DecimalNullableWithAggregatesFilter<"Branch"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Branch"> | Date | string | null
+  validDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Branch"> | Date | string | null
+  expiryDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Branch"> | Date | string | null
+  renewalDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Branch"> | Date | string | null
+  referralCode?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
+  onlineEnrollment?: Prisma.BoolWithAggregatesFilter<"Branch"> | boolean
+  smsNotifications?: Prisma.BoolWithAggregatesFilter<"Branch"> | boolean
+  emailNotifications?: Prisma.BoolWithAggregatesFilter<"Branch"> | boolean
   status?: Prisma.EnumBranchStatusWithAggregatesFilter<"Branch"> | $Enums.BranchStatus
+  createdById?: Prisma.UuidNullableWithAggregatesFilter<"Branch"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Branch"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Branch"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Branch"> | Date | string | null
@@ -386,15 +796,44 @@ export type BranchCreateInput = {
   code?: string | null
   email?: string | null
   phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
   address?: string | null
   city?: string | null
+  district?: string | null
+  block?: string | null
   state?: string | null
   country?: string | null
   pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: $Enums.BranchStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedBranchesInput
   organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
   users?: Prisma.UserCreateNestedManyWithoutBranchInput
   roles?: Prisma.RoleCreateNestedManyWithoutBranchInput
@@ -402,6 +841,7 @@ export type BranchCreateInput = {
   students?: Prisma.StudentCreateNestedManyWithoutBranchInput
   teachers?: Prisma.TeacherCreateNestedManyWithoutBranchInput
   parents?: Prisma.ParentCreateNestedManyWithoutBranchInput
+  sessionMappings?: Prisma.BranchAcademicSessionCreateNestedManyWithoutBranchInput
 }
 
 export type BranchUncheckedCreateInput = {
@@ -412,12 +852,41 @@ export type BranchUncheckedCreateInput = {
   code?: string | null
   email?: string | null
   phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
   address?: string | null
   city?: string | null
+  district?: string | null
+  block?: string | null
   state?: string | null
   country?: string | null
   pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: $Enums.BranchStatus
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -427,6 +896,7 @@ export type BranchUncheckedCreateInput = {
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
   teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutBranchInput
   parents?: Prisma.ParentUncheckedCreateNestedManyWithoutBranchInput
+  sessionMappings?: Prisma.BranchAcademicSessionUncheckedCreateNestedManyWithoutBranchInput
 }
 
 export type BranchUpdateInput = {
@@ -436,15 +906,44 @@ export type BranchUpdateInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedBranchesNestedInput
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
   users?: Prisma.UserUpdateManyWithoutBranchNestedInput
   roles?: Prisma.RoleUpdateManyWithoutBranchNestedInput
@@ -452,6 +951,7 @@ export type BranchUpdateInput = {
   students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
   teachers?: Prisma.TeacherUpdateManyWithoutBranchNestedInput
   parents?: Prisma.ParentUpdateManyWithoutBranchNestedInput
+  sessionMappings?: Prisma.BranchAcademicSessionUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchUncheckedUpdateInput = {
@@ -462,12 +962,41 @@ export type BranchUncheckedUpdateInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -477,6 +1006,7 @@ export type BranchUncheckedUpdateInput = {
   students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
   teachers?: Prisma.TeacherUncheckedUpdateManyWithoutBranchNestedInput
   parents?: Prisma.ParentUncheckedUpdateManyWithoutBranchNestedInput
+  sessionMappings?: Prisma.BranchAcademicSessionUncheckedUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchCreateManyInput = {
@@ -487,12 +1017,41 @@ export type BranchCreateManyInput = {
   code?: string | null
   email?: string | null
   phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
   address?: string | null
   city?: string | null
+  district?: string | null
+  block?: string | null
   state?: string | null
   country?: string | null
   pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: $Enums.BranchStatus
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -505,11 +1064,39 @@ export type BranchUpdateManyMutationInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -524,12 +1111,41 @@ export type BranchUncheckedUpdateManyInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -548,15 +1164,53 @@ export type BranchCountOrderByAggregateInput = {
   code?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  altPhone?: Prisma.SortOrder
+  whatsapp?: Prisma.SortOrder
+  logo?: Prisma.SortOrder
+  branchType?: Prisma.SortOrder
+  instituteType?: Prisma.SortOrder
+  establishedYear?: Prisma.SortOrder
+  website?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   address?: Prisma.SortOrder
   city?: Prisma.SortOrder
+  district?: Prisma.SortOrder
+  block?: Prisma.SortOrder
   state?: Prisma.SortOrder
   country?: Prisma.SortOrder
   pincode?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  directorName?: Prisma.SortOrder
+  directorGender?: Prisma.SortOrder
+  directorDob?: Prisma.SortOrder
+  directorBloodGroup?: Prisma.SortOrder
+  numComputers?: Prisma.SortOrder
+  numFaculty?: Prisma.SortOrder
+  numRooms?: Prisma.SortOrder
+  numFees?: Prisma.SortOrder
+  registrationDate?: Prisma.SortOrder
+  validDate?: Prisma.SortOrder
+  expiryDate?: Prisma.SortOrder
+  renewalDate?: Prisma.SortOrder
+  referralCode?: Prisma.SortOrder
+  onlineEnrollment?: Prisma.SortOrder
+  smsNotifications?: Prisma.SortOrder
+  emailNotifications?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+}
+
+export type BranchAvgOrderByAggregateInput = {
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  numComputers?: Prisma.SortOrder
+  numFaculty?: Prisma.SortOrder
+  numRooms?: Prisma.SortOrder
+  numFees?: Prisma.SortOrder
 }
 
 export type BranchMaxOrderByAggregateInput = {
@@ -567,12 +1221,41 @@ export type BranchMaxOrderByAggregateInput = {
   code?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  altPhone?: Prisma.SortOrder
+  whatsapp?: Prisma.SortOrder
+  logo?: Prisma.SortOrder
+  branchType?: Prisma.SortOrder
+  instituteType?: Prisma.SortOrder
+  establishedYear?: Prisma.SortOrder
+  website?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   address?: Prisma.SortOrder
   city?: Prisma.SortOrder
+  district?: Prisma.SortOrder
+  block?: Prisma.SortOrder
   state?: Prisma.SortOrder
   country?: Prisma.SortOrder
   pincode?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  directorName?: Prisma.SortOrder
+  directorGender?: Prisma.SortOrder
+  directorDob?: Prisma.SortOrder
+  directorBloodGroup?: Prisma.SortOrder
+  numComputers?: Prisma.SortOrder
+  numFaculty?: Prisma.SortOrder
+  numRooms?: Prisma.SortOrder
+  numFees?: Prisma.SortOrder
+  registrationDate?: Prisma.SortOrder
+  validDate?: Prisma.SortOrder
+  expiryDate?: Prisma.SortOrder
+  renewalDate?: Prisma.SortOrder
+  referralCode?: Prisma.SortOrder
+  onlineEnrollment?: Prisma.SortOrder
+  smsNotifications?: Prisma.SortOrder
+  emailNotifications?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -586,15 +1269,53 @@ export type BranchMinOrderByAggregateInput = {
   code?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  altPhone?: Prisma.SortOrder
+  whatsapp?: Prisma.SortOrder
+  logo?: Prisma.SortOrder
+  branchType?: Prisma.SortOrder
+  instituteType?: Prisma.SortOrder
+  establishedYear?: Prisma.SortOrder
+  website?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   address?: Prisma.SortOrder
   city?: Prisma.SortOrder
+  district?: Prisma.SortOrder
+  block?: Prisma.SortOrder
   state?: Prisma.SortOrder
   country?: Prisma.SortOrder
   pincode?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  directorName?: Prisma.SortOrder
+  directorGender?: Prisma.SortOrder
+  directorDob?: Prisma.SortOrder
+  directorBloodGroup?: Prisma.SortOrder
+  numComputers?: Prisma.SortOrder
+  numFaculty?: Prisma.SortOrder
+  numRooms?: Prisma.SortOrder
+  numFees?: Prisma.SortOrder
+  registrationDate?: Prisma.SortOrder
+  validDate?: Prisma.SortOrder
+  expiryDate?: Prisma.SortOrder
+  renewalDate?: Prisma.SortOrder
+  referralCode?: Prisma.SortOrder
+  onlineEnrollment?: Prisma.SortOrder
+  smsNotifications?: Prisma.SortOrder
+  emailNotifications?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+}
+
+export type BranchSumOrderByAggregateInput = {
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  numComputers?: Prisma.SortOrder
+  numFaculty?: Prisma.SortOrder
+  numRooms?: Prisma.SortOrder
+  numFees?: Prisma.SortOrder
 }
 
 export type BranchListRelationFilter = {
@@ -625,16 +1346,44 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type EnumBranchStatusFieldUpdateOperationsInput = {
   set?: $Enums.BranchStatus
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
-}
-
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
 }
 
 export type BranchCreateNestedManyWithoutOrganizationInput = {
@@ -677,6 +1426,20 @@ export type BranchUncheckedUpdateManyWithoutOrganizationNestedInput = {
   update?: Prisma.BranchUpdateWithWhereUniqueWithoutOrganizationInput | Prisma.BranchUpdateWithWhereUniqueWithoutOrganizationInput[]
   updateMany?: Prisma.BranchUpdateManyWithWhereWithoutOrganizationInput | Prisma.BranchUpdateManyWithWhereWithoutOrganizationInput[]
   deleteMany?: Prisma.BranchScalarWhereInput | Prisma.BranchScalarWhereInput[]
+}
+
+export type BranchCreateNestedOneWithoutSessionMappingsInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutSessionMappingsInput, Prisma.BranchUncheckedCreateWithoutSessionMappingsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutSessionMappingsInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutSessionMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutSessionMappingsInput, Prisma.BranchUncheckedCreateWithoutSessionMappingsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutSessionMappingsInput
+  upsert?: Prisma.BranchUpsertWithoutSessionMappingsInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutSessionMappingsInput, Prisma.BranchUpdateWithoutSessionMappingsInput>, Prisma.BranchUncheckedUpdateWithoutSessionMappingsInput>
 }
 
 export type BranchCreateNestedOneWithoutParentsInput = {
@@ -727,6 +1490,20 @@ export type BranchCreateNestedOneWithoutUsersInput = {
   connect?: Prisma.BranchWhereUniqueInput
 }
 
+export type BranchCreateNestedManyWithoutCreatedByInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutCreatedByInput, Prisma.BranchUncheckedCreateWithoutCreatedByInput> | Prisma.BranchCreateWithoutCreatedByInput[] | Prisma.BranchUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutCreatedByInput | Prisma.BranchCreateOrConnectWithoutCreatedByInput[]
+  createMany?: Prisma.BranchCreateManyCreatedByInputEnvelope
+  connect?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+}
+
+export type BranchUncheckedCreateNestedManyWithoutCreatedByInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutCreatedByInput, Prisma.BranchUncheckedCreateWithoutCreatedByInput> | Prisma.BranchCreateWithoutCreatedByInput[] | Prisma.BranchUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutCreatedByInput | Prisma.BranchCreateOrConnectWithoutCreatedByInput[]
+  createMany?: Prisma.BranchCreateManyCreatedByInputEnvelope
+  connect?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+}
+
 export type BranchUpdateOneWithoutUsersNestedInput = {
   create?: Prisma.XOR<Prisma.BranchCreateWithoutUsersInput, Prisma.BranchUncheckedCreateWithoutUsersInput>
   connectOrCreate?: Prisma.BranchCreateOrConnectWithoutUsersInput
@@ -735,6 +1512,34 @@ export type BranchUpdateOneWithoutUsersNestedInput = {
   delete?: Prisma.BranchWhereInput | boolean
   connect?: Prisma.BranchWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutUsersInput, Prisma.BranchUpdateWithoutUsersInput>, Prisma.BranchUncheckedUpdateWithoutUsersInput>
+}
+
+export type BranchUpdateManyWithoutCreatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutCreatedByInput, Prisma.BranchUncheckedCreateWithoutCreatedByInput> | Prisma.BranchCreateWithoutCreatedByInput[] | Prisma.BranchUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutCreatedByInput | Prisma.BranchCreateOrConnectWithoutCreatedByInput[]
+  upsert?: Prisma.BranchUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.BranchUpsertWithWhereUniqueWithoutCreatedByInput[]
+  createMany?: Prisma.BranchCreateManyCreatedByInputEnvelope
+  set?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+  disconnect?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+  delete?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+  connect?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+  update?: Prisma.BranchUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.BranchUpdateWithWhereUniqueWithoutCreatedByInput[]
+  updateMany?: Prisma.BranchUpdateManyWithWhereWithoutCreatedByInput | Prisma.BranchUpdateManyWithWhereWithoutCreatedByInput[]
+  deleteMany?: Prisma.BranchScalarWhereInput | Prisma.BranchScalarWhereInput[]
+}
+
+export type BranchUncheckedUpdateManyWithoutCreatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutCreatedByInput, Prisma.BranchUncheckedCreateWithoutCreatedByInput> | Prisma.BranchCreateWithoutCreatedByInput[] | Prisma.BranchUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutCreatedByInput | Prisma.BranchCreateOrConnectWithoutCreatedByInput[]
+  upsert?: Prisma.BranchUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.BranchUpsertWithWhereUniqueWithoutCreatedByInput[]
+  createMany?: Prisma.BranchCreateManyCreatedByInputEnvelope
+  set?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+  disconnect?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+  delete?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+  connect?: Prisma.BranchWhereUniqueInput | Prisma.BranchWhereUniqueInput[]
+  update?: Prisma.BranchUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.BranchUpdateWithWhereUniqueWithoutCreatedByInput[]
+  updateMany?: Prisma.BranchUpdateManyWithWhereWithoutCreatedByInput | Prisma.BranchUpdateManyWithWhereWithoutCreatedByInput[]
+  deleteMany?: Prisma.BranchScalarWhereInput | Prisma.BranchScalarWhereInput[]
 }
 
 export type BranchCreateNestedOneWithoutRolesInput = {
@@ -776,21 +1581,51 @@ export type BranchCreateWithoutOrganizationInput = {
   code?: string | null
   email?: string | null
   phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
   address?: string | null
   city?: string | null
+  district?: string | null
+  block?: string | null
   state?: string | null
   country?: string | null
   pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: $Enums.BranchStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedBranchesInput
   users?: Prisma.UserCreateNestedManyWithoutBranchInput
   roles?: Prisma.RoleCreateNestedManyWithoutBranchInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBranchInput
   students?: Prisma.StudentCreateNestedManyWithoutBranchInput
   teachers?: Prisma.TeacherCreateNestedManyWithoutBranchInput
   parents?: Prisma.ParentCreateNestedManyWithoutBranchInput
+  sessionMappings?: Prisma.BranchAcademicSessionCreateNestedManyWithoutBranchInput
 }
 
 export type BranchUncheckedCreateWithoutOrganizationInput = {
@@ -800,12 +1635,41 @@ export type BranchUncheckedCreateWithoutOrganizationInput = {
   code?: string | null
   email?: string | null
   phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
   address?: string | null
   city?: string | null
+  district?: string | null
+  block?: string | null
   state?: string | null
   country?: string | null
   pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: $Enums.BranchStatus
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -815,6 +1679,7 @@ export type BranchUncheckedCreateWithoutOrganizationInput = {
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
   teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutBranchInput
   parents?: Prisma.ParentUncheckedCreateNestedManyWithoutBranchInput
+  sessionMappings?: Prisma.BranchAcademicSessionUncheckedCreateNestedManyWithoutBranchInput
 }
 
 export type BranchCreateOrConnectWithoutOrganizationInput = {
@@ -854,15 +1719,276 @@ export type BranchScalarWhereInput = {
   code?: Prisma.StringNullableFilter<"Branch"> | string | null
   email?: Prisma.StringNullableFilter<"Branch"> | string | null
   phone?: Prisma.StringNullableFilter<"Branch"> | string | null
+  altPhone?: Prisma.StringNullableFilter<"Branch"> | string | null
+  whatsapp?: Prisma.StringNullableFilter<"Branch"> | string | null
+  logo?: Prisma.StringNullableFilter<"Branch"> | string | null
+  branchType?: Prisma.StringNullableFilter<"Branch"> | string | null
+  instituteType?: Prisma.StringNullableFilter<"Branch"> | string | null
+  establishedYear?: Prisma.StringNullableFilter<"Branch"> | string | null
+  website?: Prisma.StringNullableFilter<"Branch"> | string | null
+  description?: Prisma.StringNullableFilter<"Branch"> | string | null
   address?: Prisma.StringNullableFilter<"Branch"> | string | null
   city?: Prisma.StringNullableFilter<"Branch"> | string | null
+  district?: Prisma.StringNullableFilter<"Branch"> | string | null
+  block?: Prisma.StringNullableFilter<"Branch"> | string | null
   state?: Prisma.StringNullableFilter<"Branch"> | string | null
   country?: Prisma.StringNullableFilter<"Branch"> | string | null
   pincode?: Prisma.StringNullableFilter<"Branch"> | string | null
+  latitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
+  longitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
+  directorName?: Prisma.StringNullableFilter<"Branch"> | string | null
+  directorGender?: Prisma.StringNullableFilter<"Branch"> | string | null
+  directorDob?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
+  directorBloodGroup?: Prisma.StringNullableFilter<"Branch"> | string | null
+  numComputers?: Prisma.IntNullableFilter<"Branch"> | number | null
+  numFaculty?: Prisma.IntNullableFilter<"Branch"> | number | null
+  numRooms?: Prisma.IntNullableFilter<"Branch"> | number | null
+  numFees?: Prisma.DecimalNullableFilter<"Branch"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
+  validDate?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
+  expiryDate?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
+  renewalDate?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
+  referralCode?: Prisma.StringNullableFilter<"Branch"> | string | null
+  onlineEnrollment?: Prisma.BoolFilter<"Branch"> | boolean
+  smsNotifications?: Prisma.BoolFilter<"Branch"> | boolean
+  emailNotifications?: Prisma.BoolFilter<"Branch"> | boolean
   status?: Prisma.EnumBranchStatusFilter<"Branch"> | $Enums.BranchStatus
+  createdById?: Prisma.UuidNullableFilter<"Branch"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Branch"> | Date | string | null
+}
+
+export type BranchCreateWithoutSessionMappingsInput = {
+  id?: string
+  name: string
+  slug: string
+  code?: string | null
+  email?: string | null
+  phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
+  address?: string | null
+  city?: string | null
+  district?: string | null
+  block?: string | null
+  state?: string | null
+  country?: string | null
+  pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  status?: $Enums.BranchStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedBranchesInput
+  organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
+  users?: Prisma.UserCreateNestedManyWithoutBranchInput
+  roles?: Prisma.RoleCreateNestedManyWithoutBranchInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBranchInput
+  students?: Prisma.StudentCreateNestedManyWithoutBranchInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutBranchInput
+  parents?: Prisma.ParentCreateNestedManyWithoutBranchInput
+}
+
+export type BranchUncheckedCreateWithoutSessionMappingsInput = {
+  id?: string
+  organizationId: string
+  name: string
+  slug: string
+  code?: string | null
+  email?: string | null
+  phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
+  address?: string | null
+  city?: string | null
+  district?: string | null
+  block?: string | null
+  state?: string | null
+  country?: string | null
+  pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  status?: $Enums.BranchStatus
+  createdById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutBranchInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutBranchInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBranchInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutBranchInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutSessionMappingsInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutSessionMappingsInput, Prisma.BranchUncheckedCreateWithoutSessionMappingsInput>
+}
+
+export type BranchUpsertWithoutSessionMappingsInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutSessionMappingsInput, Prisma.BranchUncheckedUpdateWithoutSessionMappingsInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutSessionMappingsInput, Prisma.BranchUncheckedCreateWithoutSessionMappingsInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutSessionMappingsInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutSessionMappingsInput, Prisma.BranchUncheckedUpdateWithoutSessionMappingsInput>
+}
+
+export type BranchUpdateWithoutSessionMappingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedBranchesNestedInput
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
+  users?: Prisma.UserUpdateManyWithoutBranchNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutBranchNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBranchNestedInput
+  students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutBranchNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutSessionMappingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  users?: Prisma.UserUncheckedUpdateManyWithoutBranchNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutBranchNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBranchNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutBranchNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchCreateWithoutParentsInput = {
@@ -872,21 +1998,51 @@ export type BranchCreateWithoutParentsInput = {
   code?: string | null
   email?: string | null
   phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
   address?: string | null
   city?: string | null
+  district?: string | null
+  block?: string | null
   state?: string | null
   country?: string | null
   pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: $Enums.BranchStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedBranchesInput
   organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
   users?: Prisma.UserCreateNestedManyWithoutBranchInput
   roles?: Prisma.RoleCreateNestedManyWithoutBranchInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBranchInput
   students?: Prisma.StudentCreateNestedManyWithoutBranchInput
   teachers?: Prisma.TeacherCreateNestedManyWithoutBranchInput
+  sessionMappings?: Prisma.BranchAcademicSessionCreateNestedManyWithoutBranchInput
 }
 
 export type BranchUncheckedCreateWithoutParentsInput = {
@@ -897,12 +2053,41 @@ export type BranchUncheckedCreateWithoutParentsInput = {
   code?: string | null
   email?: string | null
   phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
   address?: string | null
   city?: string | null
+  district?: string | null
+  block?: string | null
   state?: string | null
   country?: string | null
   pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: $Enums.BranchStatus
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -911,6 +2096,7 @@ export type BranchUncheckedCreateWithoutParentsInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBranchInput
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
   teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutBranchInput
+  sessionMappings?: Prisma.BranchAcademicSessionUncheckedCreateNestedManyWithoutBranchInput
 }
 
 export type BranchCreateOrConnectWithoutParentsInput = {
@@ -936,21 +2122,51 @@ export type BranchUpdateWithoutParentsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedBranchesNestedInput
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
   users?: Prisma.UserUpdateManyWithoutBranchNestedInput
   roles?: Prisma.RoleUpdateManyWithoutBranchNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutBranchNestedInput
   students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
   teachers?: Prisma.TeacherUpdateManyWithoutBranchNestedInput
+  sessionMappings?: Prisma.BranchAcademicSessionUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchUncheckedUpdateWithoutParentsInput = {
@@ -961,12 +2177,41 @@ export type BranchUncheckedUpdateWithoutParentsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -975,6 +2220,7 @@ export type BranchUncheckedUpdateWithoutParentsInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBranchNestedInput
   students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
   teachers?: Prisma.TeacherUncheckedUpdateManyWithoutBranchNestedInput
+  sessionMappings?: Prisma.BranchAcademicSessionUncheckedUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchCreateWithoutStudentsInput = {
@@ -984,21 +2230,51 @@ export type BranchCreateWithoutStudentsInput = {
   code?: string | null
   email?: string | null
   phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
   address?: string | null
   city?: string | null
+  district?: string | null
+  block?: string | null
   state?: string | null
   country?: string | null
   pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: $Enums.BranchStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedBranchesInput
   organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
   users?: Prisma.UserCreateNestedManyWithoutBranchInput
   roles?: Prisma.RoleCreateNestedManyWithoutBranchInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBranchInput
   teachers?: Prisma.TeacherCreateNestedManyWithoutBranchInput
   parents?: Prisma.ParentCreateNestedManyWithoutBranchInput
+  sessionMappings?: Prisma.BranchAcademicSessionCreateNestedManyWithoutBranchInput
 }
 
 export type BranchUncheckedCreateWithoutStudentsInput = {
@@ -1009,12 +2285,41 @@ export type BranchUncheckedCreateWithoutStudentsInput = {
   code?: string | null
   email?: string | null
   phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
   address?: string | null
   city?: string | null
+  district?: string | null
+  block?: string | null
   state?: string | null
   country?: string | null
   pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: $Enums.BranchStatus
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1023,6 +2328,7 @@ export type BranchUncheckedCreateWithoutStudentsInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBranchInput
   teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutBranchInput
   parents?: Prisma.ParentUncheckedCreateNestedManyWithoutBranchInput
+  sessionMappings?: Prisma.BranchAcademicSessionUncheckedCreateNestedManyWithoutBranchInput
 }
 
 export type BranchCreateOrConnectWithoutStudentsInput = {
@@ -1048,21 +2354,51 @@ export type BranchUpdateWithoutStudentsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedBranchesNestedInput
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
   users?: Prisma.UserUpdateManyWithoutBranchNestedInput
   roles?: Prisma.RoleUpdateManyWithoutBranchNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutBranchNestedInput
   teachers?: Prisma.TeacherUpdateManyWithoutBranchNestedInput
   parents?: Prisma.ParentUpdateManyWithoutBranchNestedInput
+  sessionMappings?: Prisma.BranchAcademicSessionUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchUncheckedUpdateWithoutStudentsInput = {
@@ -1073,12 +2409,41 @@ export type BranchUncheckedUpdateWithoutStudentsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1087,6 +2452,7 @@ export type BranchUncheckedUpdateWithoutStudentsInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBranchNestedInput
   teachers?: Prisma.TeacherUncheckedUpdateManyWithoutBranchNestedInput
   parents?: Prisma.ParentUncheckedUpdateManyWithoutBranchNestedInput
+  sessionMappings?: Prisma.BranchAcademicSessionUncheckedUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchCreateWithoutTeachersInput = {
@@ -1096,21 +2462,51 @@ export type BranchCreateWithoutTeachersInput = {
   code?: string | null
   email?: string | null
   phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
   address?: string | null
   city?: string | null
+  district?: string | null
+  block?: string | null
   state?: string | null
   country?: string | null
   pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: $Enums.BranchStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedBranchesInput
   organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
   users?: Prisma.UserCreateNestedManyWithoutBranchInput
   roles?: Prisma.RoleCreateNestedManyWithoutBranchInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBranchInput
   students?: Prisma.StudentCreateNestedManyWithoutBranchInput
   parents?: Prisma.ParentCreateNestedManyWithoutBranchInput
+  sessionMappings?: Prisma.BranchAcademicSessionCreateNestedManyWithoutBranchInput
 }
 
 export type BranchUncheckedCreateWithoutTeachersInput = {
@@ -1121,12 +2517,41 @@ export type BranchUncheckedCreateWithoutTeachersInput = {
   code?: string | null
   email?: string | null
   phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
   address?: string | null
   city?: string | null
+  district?: string | null
+  block?: string | null
   state?: string | null
   country?: string | null
   pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: $Enums.BranchStatus
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1135,6 +2560,7 @@ export type BranchUncheckedCreateWithoutTeachersInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBranchInput
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
   parents?: Prisma.ParentUncheckedCreateNestedManyWithoutBranchInput
+  sessionMappings?: Prisma.BranchAcademicSessionUncheckedCreateNestedManyWithoutBranchInput
 }
 
 export type BranchCreateOrConnectWithoutTeachersInput = {
@@ -1160,21 +2586,51 @@ export type BranchUpdateWithoutTeachersInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedBranchesNestedInput
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
   users?: Prisma.UserUpdateManyWithoutBranchNestedInput
   roles?: Prisma.RoleUpdateManyWithoutBranchNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutBranchNestedInput
   students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
   parents?: Prisma.ParentUpdateManyWithoutBranchNestedInput
+  sessionMappings?: Prisma.BranchAcademicSessionUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchUncheckedUpdateWithoutTeachersInput = {
@@ -1185,12 +2641,41 @@ export type BranchUncheckedUpdateWithoutTeachersInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1199,6 +2684,7 @@ export type BranchUncheckedUpdateWithoutTeachersInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBranchNestedInput
   students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
   parents?: Prisma.ParentUncheckedUpdateManyWithoutBranchNestedInput
+  sessionMappings?: Prisma.BranchAcademicSessionUncheckedUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchCreateWithoutUsersInput = {
@@ -1208,21 +2694,51 @@ export type BranchCreateWithoutUsersInput = {
   code?: string | null
   email?: string | null
   phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
   address?: string | null
   city?: string | null
+  district?: string | null
+  block?: string | null
   state?: string | null
   country?: string | null
   pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: $Enums.BranchStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedBranchesInput
   organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
   roles?: Prisma.RoleCreateNestedManyWithoutBranchInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBranchInput
   students?: Prisma.StudentCreateNestedManyWithoutBranchInput
   teachers?: Prisma.TeacherCreateNestedManyWithoutBranchInput
   parents?: Prisma.ParentCreateNestedManyWithoutBranchInput
+  sessionMappings?: Prisma.BranchAcademicSessionCreateNestedManyWithoutBranchInput
 }
 
 export type BranchUncheckedCreateWithoutUsersInput = {
@@ -1233,12 +2749,41 @@ export type BranchUncheckedCreateWithoutUsersInput = {
   code?: string | null
   email?: string | null
   phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
   address?: string | null
   city?: string | null
+  district?: string | null
+  block?: string | null
   state?: string | null
   country?: string | null
   pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: $Enums.BranchStatus
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1247,11 +2792,130 @@ export type BranchUncheckedCreateWithoutUsersInput = {
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
   teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutBranchInput
   parents?: Prisma.ParentUncheckedCreateNestedManyWithoutBranchInput
+  sessionMappings?: Prisma.BranchAcademicSessionUncheckedCreateNestedManyWithoutBranchInput
 }
 
 export type BranchCreateOrConnectWithoutUsersInput = {
   where: Prisma.BranchWhereUniqueInput
   create: Prisma.XOR<Prisma.BranchCreateWithoutUsersInput, Prisma.BranchUncheckedCreateWithoutUsersInput>
+}
+
+export type BranchCreateWithoutCreatedByInput = {
+  id?: string
+  name: string
+  slug: string
+  code?: string | null
+  email?: string | null
+  phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
+  address?: string | null
+  city?: string | null
+  district?: string | null
+  block?: string | null
+  state?: string | null
+  country?: string | null
+  pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  status?: $Enums.BranchStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
+  users?: Prisma.UserCreateNestedManyWithoutBranchInput
+  roles?: Prisma.RoleCreateNestedManyWithoutBranchInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBranchInput
+  students?: Prisma.StudentCreateNestedManyWithoutBranchInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutBranchInput
+  parents?: Prisma.ParentCreateNestedManyWithoutBranchInput
+  sessionMappings?: Prisma.BranchAcademicSessionCreateNestedManyWithoutBranchInput
+}
+
+export type BranchUncheckedCreateWithoutCreatedByInput = {
+  id?: string
+  organizationId: string
+  name: string
+  slug: string
+  code?: string | null
+  email?: string | null
+  phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
+  address?: string | null
+  city?: string | null
+  district?: string | null
+  block?: string | null
+  state?: string | null
+  country?: string | null
+  pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  status?: $Enums.BranchStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutBranchInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutBranchInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBranchInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutBranchInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutBranchInput
+  sessionMappings?: Prisma.BranchAcademicSessionUncheckedCreateNestedManyWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutCreatedByInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutCreatedByInput, Prisma.BranchUncheckedCreateWithoutCreatedByInput>
+}
+
+export type BranchCreateManyCreatedByInputEnvelope = {
+  data: Prisma.BranchCreateManyCreatedByInput | Prisma.BranchCreateManyCreatedByInput[]
+  skipDuplicates?: boolean
 }
 
 export type BranchUpsertWithoutUsersInput = {
@@ -1272,21 +2936,51 @@ export type BranchUpdateWithoutUsersInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedBranchesNestedInput
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
   roles?: Prisma.RoleUpdateManyWithoutBranchNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutBranchNestedInput
   students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
   teachers?: Prisma.TeacherUpdateManyWithoutBranchNestedInput
   parents?: Prisma.ParentUpdateManyWithoutBranchNestedInput
+  sessionMappings?: Prisma.BranchAcademicSessionUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchUncheckedUpdateWithoutUsersInput = {
@@ -1297,12 +2991,41 @@ export type BranchUncheckedUpdateWithoutUsersInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1311,6 +3034,23 @@ export type BranchUncheckedUpdateWithoutUsersInput = {
   students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
   teachers?: Prisma.TeacherUncheckedUpdateManyWithoutBranchNestedInput
   parents?: Prisma.ParentUncheckedUpdateManyWithoutBranchNestedInput
+  sessionMappings?: Prisma.BranchAcademicSessionUncheckedUpdateManyWithoutBranchNestedInput
+}
+
+export type BranchUpsertWithWhereUniqueWithoutCreatedByInput = {
+  where: Prisma.BranchWhereUniqueInput
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutCreatedByInput, Prisma.BranchUncheckedUpdateWithoutCreatedByInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutCreatedByInput, Prisma.BranchUncheckedCreateWithoutCreatedByInput>
+}
+
+export type BranchUpdateWithWhereUniqueWithoutCreatedByInput = {
+  where: Prisma.BranchWhereUniqueInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutCreatedByInput, Prisma.BranchUncheckedUpdateWithoutCreatedByInput>
+}
+
+export type BranchUpdateManyWithWhereWithoutCreatedByInput = {
+  where: Prisma.BranchScalarWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateManyMutationInput, Prisma.BranchUncheckedUpdateManyWithoutCreatedByInput>
 }
 
 export type BranchCreateWithoutRolesInput = {
@@ -1320,21 +3060,51 @@ export type BranchCreateWithoutRolesInput = {
   code?: string | null
   email?: string | null
   phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
   address?: string | null
   city?: string | null
+  district?: string | null
+  block?: string | null
   state?: string | null
   country?: string | null
   pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: $Enums.BranchStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedBranchesInput
   organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
   users?: Prisma.UserCreateNestedManyWithoutBranchInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBranchInput
   students?: Prisma.StudentCreateNestedManyWithoutBranchInput
   teachers?: Prisma.TeacherCreateNestedManyWithoutBranchInput
   parents?: Prisma.ParentCreateNestedManyWithoutBranchInput
+  sessionMappings?: Prisma.BranchAcademicSessionCreateNestedManyWithoutBranchInput
 }
 
 export type BranchUncheckedCreateWithoutRolesInput = {
@@ -1345,12 +3115,41 @@ export type BranchUncheckedCreateWithoutRolesInput = {
   code?: string | null
   email?: string | null
   phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
   address?: string | null
   city?: string | null
+  district?: string | null
+  block?: string | null
   state?: string | null
   country?: string | null
   pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: $Enums.BranchStatus
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1359,6 +3158,7 @@ export type BranchUncheckedCreateWithoutRolesInput = {
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
   teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutBranchInput
   parents?: Prisma.ParentUncheckedCreateNestedManyWithoutBranchInput
+  sessionMappings?: Prisma.BranchAcademicSessionUncheckedCreateNestedManyWithoutBranchInput
 }
 
 export type BranchCreateOrConnectWithoutRolesInput = {
@@ -1384,21 +3184,51 @@ export type BranchUpdateWithoutRolesInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedBranchesNestedInput
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
   users?: Prisma.UserUpdateManyWithoutBranchNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutBranchNestedInput
   students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
   teachers?: Prisma.TeacherUpdateManyWithoutBranchNestedInput
   parents?: Prisma.ParentUpdateManyWithoutBranchNestedInput
+  sessionMappings?: Prisma.BranchAcademicSessionUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchUncheckedUpdateWithoutRolesInput = {
@@ -1409,12 +3239,41 @@ export type BranchUncheckedUpdateWithoutRolesInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1423,6 +3282,7 @@ export type BranchUncheckedUpdateWithoutRolesInput = {
   students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
   teachers?: Prisma.TeacherUncheckedUpdateManyWithoutBranchNestedInput
   parents?: Prisma.ParentUncheckedUpdateManyWithoutBranchNestedInput
+  sessionMappings?: Prisma.BranchAcademicSessionUncheckedUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchCreateWithoutAuditLogsInput = {
@@ -1432,21 +3292,51 @@ export type BranchCreateWithoutAuditLogsInput = {
   code?: string | null
   email?: string | null
   phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
   address?: string | null
   city?: string | null
+  district?: string | null
+  block?: string | null
   state?: string | null
   country?: string | null
   pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: $Enums.BranchStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedBranchesInput
   organization: Prisma.OrganizationCreateNestedOneWithoutBranchesInput
   users?: Prisma.UserCreateNestedManyWithoutBranchInput
   roles?: Prisma.RoleCreateNestedManyWithoutBranchInput
   students?: Prisma.StudentCreateNestedManyWithoutBranchInput
   teachers?: Prisma.TeacherCreateNestedManyWithoutBranchInput
   parents?: Prisma.ParentCreateNestedManyWithoutBranchInput
+  sessionMappings?: Prisma.BranchAcademicSessionCreateNestedManyWithoutBranchInput
 }
 
 export type BranchUncheckedCreateWithoutAuditLogsInput = {
@@ -1457,12 +3347,41 @@ export type BranchUncheckedCreateWithoutAuditLogsInput = {
   code?: string | null
   email?: string | null
   phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
   address?: string | null
   city?: string | null
+  district?: string | null
+  block?: string | null
   state?: string | null
   country?: string | null
   pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: $Enums.BranchStatus
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1471,6 +3390,7 @@ export type BranchUncheckedCreateWithoutAuditLogsInput = {
   students?: Prisma.StudentUncheckedCreateNestedManyWithoutBranchInput
   teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutBranchInput
   parents?: Prisma.ParentUncheckedCreateNestedManyWithoutBranchInput
+  sessionMappings?: Prisma.BranchAcademicSessionUncheckedCreateNestedManyWithoutBranchInput
 }
 
 export type BranchCreateOrConnectWithoutAuditLogsInput = {
@@ -1496,21 +3416,51 @@ export type BranchUpdateWithoutAuditLogsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedBranchesNestedInput
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
   users?: Prisma.UserUpdateManyWithoutBranchNestedInput
   roles?: Prisma.RoleUpdateManyWithoutBranchNestedInput
   students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
   teachers?: Prisma.TeacherUpdateManyWithoutBranchNestedInput
   parents?: Prisma.ParentUpdateManyWithoutBranchNestedInput
+  sessionMappings?: Prisma.BranchAcademicSessionUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchUncheckedUpdateWithoutAuditLogsInput = {
@@ -1521,12 +3471,41 @@ export type BranchUncheckedUpdateWithoutAuditLogsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1535,6 +3514,7 @@ export type BranchUncheckedUpdateWithoutAuditLogsInput = {
   students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
   teachers?: Prisma.TeacherUncheckedUpdateManyWithoutBranchNestedInput
   parents?: Prisma.ParentUncheckedUpdateManyWithoutBranchNestedInput
+  sessionMappings?: Prisma.BranchAcademicSessionUncheckedUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchCreateManyOrganizationInput = {
@@ -1544,12 +3524,41 @@ export type BranchCreateManyOrganizationInput = {
   code?: string | null
   email?: string | null
   phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
   address?: string | null
   city?: string | null
+  district?: string | null
+  block?: string | null
   state?: string | null
   country?: string | null
   pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: $Enums.BranchStatus
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1562,21 +3571,51 @@ export type BranchUpdateWithoutOrganizationInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedBranchesNestedInput
   users?: Prisma.UserUpdateManyWithoutBranchNestedInput
   roles?: Prisma.RoleUpdateManyWithoutBranchNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutBranchNestedInput
   students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
   teachers?: Prisma.TeacherUpdateManyWithoutBranchNestedInput
   parents?: Prisma.ParentUpdateManyWithoutBranchNestedInput
+  sessionMappings?: Prisma.BranchAcademicSessionUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchUncheckedUpdateWithoutOrganizationInput = {
@@ -1586,11 +3625,242 @@ export type BranchUncheckedUpdateWithoutOrganizationInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  users?: Prisma.UserUncheckedUpdateManyWithoutBranchNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutBranchNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBranchNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutBranchNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutBranchNestedInput
+  sessionMappings?: Prisma.BranchAcademicSessionUncheckedUpdateManyWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateManyWithoutOrganizationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type BranchCreateManyCreatedByInput = {
+  id?: string
+  organizationId: string
+  name: string
+  slug: string
+  code?: string | null
+  email?: string | null
+  phone?: string | null
+  altPhone?: string | null
+  whatsapp?: string | null
+  logo?: string | null
+  branchType?: string | null
+  instituteType?: string | null
+  establishedYear?: string | null
+  website?: string | null
+  description?: string | null
+  address?: string | null
+  city?: string | null
+  district?: string | null
+  block?: string | null
+  state?: string | null
+  country?: string | null
+  pincode?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  directorName?: string | null
+  directorGender?: string | null
+  directorDob?: Date | string | null
+  directorBloodGroup?: string | null
+  numComputers?: number | null
+  numFaculty?: number | null
+  numRooms?: number | null
+  numFees?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Date | string | null
+  validDate?: Date | string | null
+  expiryDate?: Date | string | null
+  renewalDate?: Date | string | null
+  referralCode?: string | null
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
+  status?: $Enums.BranchStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+}
+
+export type BranchUpdateWithoutCreatedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutBranchesNestedInput
+  users?: Prisma.UserUpdateManyWithoutBranchNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutBranchNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBranchNestedInput
+  students?: Prisma.StudentUpdateManyWithoutBranchNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutBranchNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutBranchNestedInput
+  sessionMappings?: Prisma.BranchAcademicSessionUpdateManyWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutCreatedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1601,20 +3871,50 @@ export type BranchUncheckedUpdateWithoutOrganizationInput = {
   students?: Prisma.StudentUncheckedUpdateManyWithoutBranchNestedInput
   teachers?: Prisma.TeacherUncheckedUpdateManyWithoutBranchNestedInput
   parents?: Prisma.ParentUncheckedUpdateManyWithoutBranchNestedInput
+  sessionMappings?: Prisma.BranchAcademicSessionUncheckedUpdateManyWithoutBranchNestedInput
 }
 
-export type BranchUncheckedUpdateManyWithoutOrganizationInput = {
+export type BranchUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  altPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branchType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instituteType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  establishedYear?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  block?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  directorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorGender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  directorDob?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  directorBloodGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numComputers?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFaculty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numRooms?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numFees?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  registrationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  renewalDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referralCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onlineEnrollment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  smsNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1633,6 +3933,7 @@ export type BranchCountOutputType = {
   students: number
   teachers: number
   parents: number
+  sessionMappings: number
 }
 
 export type BranchCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1642,6 +3943,7 @@ export type BranchCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   students?: boolean | BranchCountOutputTypeCountStudentsArgs
   teachers?: boolean | BranchCountOutputTypeCountTeachersArgs
   parents?: boolean | BranchCountOutputTypeCountParentsArgs
+  sessionMappings?: boolean | BranchCountOutputTypeCountSessionMappingsArgs
 }
 
 /**
@@ -1696,6 +3998,13 @@ export type BranchCountOutputTypeCountParentsArgs<ExtArgs extends runtime.Types.
   where?: Prisma.ParentWhereInput
 }
 
+/**
+ * BranchCountOutputType without action
+ */
+export type BranchCountOutputTypeCountSessionMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BranchAcademicSessionWhereInput
+}
+
 
 export type BranchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1705,15 +4014,45 @@ export type BranchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   code?: boolean
   email?: boolean
   phone?: boolean
+  altPhone?: boolean
+  whatsapp?: boolean
+  logo?: boolean
+  branchType?: boolean
+  instituteType?: boolean
+  establishedYear?: boolean
+  website?: boolean
+  description?: boolean
   address?: boolean
   city?: boolean
+  district?: boolean
+  block?: boolean
   state?: boolean
   country?: boolean
   pincode?: boolean
+  latitude?: boolean
+  longitude?: boolean
+  directorName?: boolean
+  directorGender?: boolean
+  directorDob?: boolean
+  directorBloodGroup?: boolean
+  numComputers?: boolean
+  numFaculty?: boolean
+  numRooms?: boolean
+  numFees?: boolean
+  registrationDate?: boolean
+  validDate?: boolean
+  expiryDate?: boolean
+  renewalDate?: boolean
+  referralCode?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: boolean
+  createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
+  createdBy?: boolean | Prisma.Branch$createdByArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   users?: boolean | Prisma.Branch$usersArgs<ExtArgs>
   roles?: boolean | Prisma.Branch$rolesArgs<ExtArgs>
@@ -1721,6 +4060,7 @@ export type BranchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   students?: boolean | Prisma.Branch$studentsArgs<ExtArgs>
   teachers?: boolean | Prisma.Branch$teachersArgs<ExtArgs>
   parents?: boolean | Prisma.Branch$parentsArgs<ExtArgs>
+  sessionMappings?: boolean | Prisma.Branch$sessionMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.BranchCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["branch"]>
 
@@ -1732,15 +4072,45 @@ export type BranchSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   code?: boolean
   email?: boolean
   phone?: boolean
+  altPhone?: boolean
+  whatsapp?: boolean
+  logo?: boolean
+  branchType?: boolean
+  instituteType?: boolean
+  establishedYear?: boolean
+  website?: boolean
+  description?: boolean
   address?: boolean
   city?: boolean
+  district?: boolean
+  block?: boolean
   state?: boolean
   country?: boolean
   pincode?: boolean
+  latitude?: boolean
+  longitude?: boolean
+  directorName?: boolean
+  directorGender?: boolean
+  directorDob?: boolean
+  directorBloodGroup?: boolean
+  numComputers?: boolean
+  numFaculty?: boolean
+  numRooms?: boolean
+  numFees?: boolean
+  registrationDate?: boolean
+  validDate?: boolean
+  expiryDate?: boolean
+  renewalDate?: boolean
+  referralCode?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: boolean
+  createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
+  createdBy?: boolean | Prisma.Branch$createdByArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["branch"]>
 
@@ -1752,15 +4122,45 @@ export type BranchSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   code?: boolean
   email?: boolean
   phone?: boolean
+  altPhone?: boolean
+  whatsapp?: boolean
+  logo?: boolean
+  branchType?: boolean
+  instituteType?: boolean
+  establishedYear?: boolean
+  website?: boolean
+  description?: boolean
   address?: boolean
   city?: boolean
+  district?: boolean
+  block?: boolean
   state?: boolean
   country?: boolean
   pincode?: boolean
+  latitude?: boolean
+  longitude?: boolean
+  directorName?: boolean
+  directorGender?: boolean
+  directorDob?: boolean
+  directorBloodGroup?: boolean
+  numComputers?: boolean
+  numFaculty?: boolean
+  numRooms?: boolean
+  numFees?: boolean
+  registrationDate?: boolean
+  validDate?: boolean
+  expiryDate?: boolean
+  renewalDate?: boolean
+  referralCode?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: boolean
+  createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
+  createdBy?: boolean | Prisma.Branch$createdByArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["branch"]>
 
@@ -1772,19 +4172,49 @@ export type BranchSelectScalar = {
   code?: boolean
   email?: boolean
   phone?: boolean
+  altPhone?: boolean
+  whatsapp?: boolean
+  logo?: boolean
+  branchType?: boolean
+  instituteType?: boolean
+  establishedYear?: boolean
+  website?: boolean
+  description?: boolean
   address?: boolean
   city?: boolean
+  district?: boolean
+  block?: boolean
   state?: boolean
   country?: boolean
   pincode?: boolean
+  latitude?: boolean
+  longitude?: boolean
+  directorName?: boolean
+  directorGender?: boolean
+  directorDob?: boolean
+  directorBloodGroup?: boolean
+  numComputers?: boolean
+  numFaculty?: boolean
+  numRooms?: boolean
+  numFees?: boolean
+  registrationDate?: boolean
+  validDate?: boolean
+  expiryDate?: boolean
+  renewalDate?: boolean
+  referralCode?: boolean
+  onlineEnrollment?: boolean
+  smsNotifications?: boolean
+  emailNotifications?: boolean
   status?: boolean
+  createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
 }
 
-export type BranchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "name" | "slug" | "code" | "email" | "phone" | "address" | "city" | "state" | "country" | "pincode" | "status" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["branch"]>
+export type BranchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "name" | "slug" | "code" | "email" | "phone" | "altPhone" | "whatsapp" | "logo" | "branchType" | "instituteType" | "establishedYear" | "website" | "description" | "address" | "city" | "district" | "block" | "state" | "country" | "pincode" | "latitude" | "longitude" | "directorName" | "directorGender" | "directorDob" | "directorBloodGroup" | "numComputers" | "numFaculty" | "numRooms" | "numFees" | "registrationDate" | "validDate" | "expiryDate" | "renewalDate" | "referralCode" | "onlineEnrollment" | "smsNotifications" | "emailNotifications" | "status" | "createdById" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["branch"]>
 export type BranchInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  createdBy?: boolean | Prisma.Branch$createdByArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   users?: boolean | Prisma.Branch$usersArgs<ExtArgs>
   roles?: boolean | Prisma.Branch$rolesArgs<ExtArgs>
@@ -1792,18 +4222,22 @@ export type BranchInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   students?: boolean | Prisma.Branch$studentsArgs<ExtArgs>
   teachers?: boolean | Prisma.Branch$teachersArgs<ExtArgs>
   parents?: boolean | Prisma.Branch$parentsArgs<ExtArgs>
+  sessionMappings?: boolean | Prisma.Branch$sessionMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.BranchCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BranchIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  createdBy?: boolean | Prisma.Branch$createdByArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
 }
 export type BranchIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  createdBy?: boolean | Prisma.Branch$createdByArgs<ExtArgs>
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
 }
 
 export type $BranchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Branch"
   objects: {
+    createdBy: Prisma.$UserPayload<ExtArgs> | null
     /**
      * Relations
      */
@@ -1814,6 +4248,7 @@ export type $BranchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     students: Prisma.$StudentPayload<ExtArgs>[]
     teachers: Prisma.$TeacherPayload<ExtArgs>[]
     parents: Prisma.$ParentPayload<ExtArgs>[]
+    sessionMappings: Prisma.$BranchAcademicSessionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1823,15 +4258,65 @@ export type $BranchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     code: string | null
     email: string | null
     phone: string | null
+    altPhone: string | null
+    whatsapp: string | null
+    /**
+     * Branding & Media
+     */
+    logo: string | null
+    /**
+     * Classification & Institute Info
+     */
+    branchType: string | null
+    instituteType: string | null
+    establishedYear: string | null
+    website: string | null
+    description: string | null
     /**
      * Address
      */
     address: string | null
     city: string | null
+    district: string | null
+    block: string | null
     state: string | null
     country: string | null
     pincode: string | null
+    latitude: number | null
+    longitude: number | null
+    /**
+     * Director Info
+     */
+    directorName: string | null
+    directorGender: string | null
+    directorDob: Date | null
+    directorBloodGroup: string | null
+    /**
+     * Space & Facilities
+     */
+    numComputers: number | null
+    numFaculty: number | null
+    numRooms: number | null
+    numFees: runtime.Decimal | null
+    /**
+     * Validity & Registration Dates
+     */
+    registrationDate: Date | null
+    validDate: Date | null
+    expiryDate: Date | null
+    renewalDate: Date | null
+    referralCode: string | null
+    /**
+     * Settings & Switches
+     */
+    onlineEnrollment: boolean
+    smsNotifications: boolean
+    emailNotifications: boolean
     status: $Enums.BranchStatus
+    /**
+     * Creator Audit
+     */
+    createdById: string | null
     /**
      * Timestamps
      */
@@ -2232,6 +4717,7 @@ readonly fields: BranchFieldRefs;
  */
 export interface Prisma__BranchClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  createdBy<T extends Prisma.Branch$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   organization<T extends Prisma.OrganizationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   users<T extends Prisma.Branch$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   roles<T extends Prisma.Branch$rolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2239,6 +4725,7 @@ export interface Prisma__BranchClient<T, Null = never, ExtArgs extends runtime.T
   students<T extends Prisma.Branch$studentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$studentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StudentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   teachers<T extends Prisma.Branch$teachersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$teachersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeacherPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   parents<T extends Prisma.Branch$parentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$parentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ParentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sessionMappings<T extends Prisma.Branch$sessionMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$sessionMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BranchAcademicSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2275,12 +4762,41 @@ export interface BranchFieldRefs {
   readonly code: Prisma.FieldRef<"Branch", 'String'>
   readonly email: Prisma.FieldRef<"Branch", 'String'>
   readonly phone: Prisma.FieldRef<"Branch", 'String'>
+  readonly altPhone: Prisma.FieldRef<"Branch", 'String'>
+  readonly whatsapp: Prisma.FieldRef<"Branch", 'String'>
+  readonly logo: Prisma.FieldRef<"Branch", 'String'>
+  readonly branchType: Prisma.FieldRef<"Branch", 'String'>
+  readonly instituteType: Prisma.FieldRef<"Branch", 'String'>
+  readonly establishedYear: Prisma.FieldRef<"Branch", 'String'>
+  readonly website: Prisma.FieldRef<"Branch", 'String'>
+  readonly description: Prisma.FieldRef<"Branch", 'String'>
   readonly address: Prisma.FieldRef<"Branch", 'String'>
   readonly city: Prisma.FieldRef<"Branch", 'String'>
+  readonly district: Prisma.FieldRef<"Branch", 'String'>
+  readonly block: Prisma.FieldRef<"Branch", 'String'>
   readonly state: Prisma.FieldRef<"Branch", 'String'>
   readonly country: Prisma.FieldRef<"Branch", 'String'>
   readonly pincode: Prisma.FieldRef<"Branch", 'String'>
+  readonly latitude: Prisma.FieldRef<"Branch", 'Float'>
+  readonly longitude: Prisma.FieldRef<"Branch", 'Float'>
+  readonly directorName: Prisma.FieldRef<"Branch", 'String'>
+  readonly directorGender: Prisma.FieldRef<"Branch", 'String'>
+  readonly directorDob: Prisma.FieldRef<"Branch", 'DateTime'>
+  readonly directorBloodGroup: Prisma.FieldRef<"Branch", 'String'>
+  readonly numComputers: Prisma.FieldRef<"Branch", 'Int'>
+  readonly numFaculty: Prisma.FieldRef<"Branch", 'Int'>
+  readonly numRooms: Prisma.FieldRef<"Branch", 'Int'>
+  readonly numFees: Prisma.FieldRef<"Branch", 'Decimal'>
+  readonly registrationDate: Prisma.FieldRef<"Branch", 'DateTime'>
+  readonly validDate: Prisma.FieldRef<"Branch", 'DateTime'>
+  readonly expiryDate: Prisma.FieldRef<"Branch", 'DateTime'>
+  readonly renewalDate: Prisma.FieldRef<"Branch", 'DateTime'>
+  readonly referralCode: Prisma.FieldRef<"Branch", 'String'>
+  readonly onlineEnrollment: Prisma.FieldRef<"Branch", 'Boolean'>
+  readonly smsNotifications: Prisma.FieldRef<"Branch", 'Boolean'>
+  readonly emailNotifications: Prisma.FieldRef<"Branch", 'Boolean'>
   readonly status: Prisma.FieldRef<"Branch", 'BranchStatus'>
+  readonly createdById: Prisma.FieldRef<"Branch", 'String'>
   readonly createdAt: Prisma.FieldRef<"Branch", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Branch", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"Branch", 'DateTime'>
@@ -2685,6 +5201,25 @@ export type BranchDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
+ * Branch.createdBy
+ */
+export type Branch$createdByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
  * Branch.users
  */
 export type Branch$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2826,6 +5361,30 @@ export type Branch$parentsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.ParentScalarFieldEnum | Prisma.ParentScalarFieldEnum[]
+}
+
+/**
+ * Branch.sessionMappings
+ */
+export type Branch$sessionMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BranchAcademicSession
+   */
+  select?: Prisma.BranchAcademicSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BranchAcademicSession
+   */
+  omit?: Prisma.BranchAcademicSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BranchAcademicSessionInclude<ExtArgs> | null
+  where?: Prisma.BranchAcademicSessionWhereInput
+  orderBy?: Prisma.BranchAcademicSessionOrderByWithRelationInput | Prisma.BranchAcademicSessionOrderByWithRelationInput[]
+  cursor?: Prisma.BranchAcademicSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BranchAcademicSessionScalarFieldEnum | Prisma.BranchAcademicSessionScalarFieldEnum[]
 }
 
 /**

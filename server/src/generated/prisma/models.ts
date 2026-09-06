@@ -10,6 +10,8 @@
  */
 export type * from './models/Branch.js'
 export type * from './models/Organization.js'
+export type * from './models/AcademicSession.js'
+export type * from './models/BranchAcademicSession.js'
 export type * from './models/Parent.js'
 export type * from './models/StudentParentRelation.js'
 export type * from './models/SubscriptionPlan.js'

@@ -134,10 +134,13 @@ model Student {
   deletedAt           DateTime?                                     // Soft delete
 
   /* Relations */
-  parents             StudentParentRelation[]
+  parents                 StudentParentRelation[]
+  branchAcademicSessionId String?                 @db.Uuid
+  branchAcademicSession   BranchAcademicSession?  @relation(fields: [branchAcademicSessionId], references: [id], onDelete: SetNull)
 
   @@index([branchId])
   @@index([userId])
+  @@index([branchAcademicSessionId])
   @@index([admissionStatus])
   @@index([isActive])
   @@index([deletedAt])

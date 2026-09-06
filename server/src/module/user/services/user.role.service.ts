@@ -34,6 +34,21 @@ export class UserRoleService {
   }
 
   /**
+   * Helper to append a flat permissions array of keys to role responses.
+   */
+  private formatRoleWithPermissions<T extends Record<string, any>>(role: T) {
+    if (!role) return role;
+    const roleWithPerms = role as T & { rolePermissions?: any[] };
+    const permissions = (roleWithPerms.rolePermissions || [])
+      .map((rp: any) => rp.permission?.key || rp.permissionKey || rp.permissionId)
+      .filter(Boolean);
+    return {
+      ...role,
+      permissions,
+    };
+  }
+
+  /**
    * Create a new role with scope-based multi-tenant enforcement.
    * - Organization user can create org-wide or branch-specific roles.
    * - Branch user can only create roles for their own branch.
@@ -125,7 +140,7 @@ export class UserRoleService {
       },
     });
 
-    return createdRole;
+    return this.formatRoleWithPermissions(createdRole);
   }
 
   /**
@@ -160,8 +175,12 @@ export class UserRoleService {
       }),
     ]);
 
+    const formattedRoles = roles.map((role) =>
+      this.formatRoleWithPermissions(role)
+    );
+
     return {
-      data: roles,
+      data: formattedRoles,
       meta: {
         total,
         page: input.page,
@@ -177,7 +196,7 @@ export class UserRoleService {
   async getRoleById(caller: SanitizedUserWithDetails, roleId: string) {
     const role = await this.roles.findById(roleId, caller.organizationId);
     this.scope.assertEntityAccess(caller, role, "Role");
-    return role!;
+    return this.formatRoleWithPermissions(role!);
   }
 
   /**
@@ -236,7 +255,7 @@ export class UserRoleService {
       },
     });
 
-    return updatedRole;
+    return this.formatRoleWithPermissions(updatedRole!);
   }
 
   /**

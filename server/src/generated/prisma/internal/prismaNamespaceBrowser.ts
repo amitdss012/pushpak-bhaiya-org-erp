@@ -53,6 +53,8 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Branch: 'Branch',
   Organization: 'Organization',
+  AcademicSession: 'AcademicSession',
+  BranchAcademicSession: 'BranchAcademicSession',
   Parent: 'Parent',
   StudentParentRelation: 'StudentParentRelation',
   SubscriptionPlan: 'SubscriptionPlan',
@@ -93,12 +95,41 @@ export const BranchScalarFieldEnum = {
   code: 'code',
   email: 'email',
   phone: 'phone',
+  altPhone: 'altPhone',
+  whatsapp: 'whatsapp',
+  logo: 'logo',
+  branchType: 'branchType',
+  instituteType: 'instituteType',
+  establishedYear: 'establishedYear',
+  website: 'website',
+  description: 'description',
   address: 'address',
   city: 'city',
+  district: 'district',
+  block: 'block',
   state: 'state',
   country: 'country',
   pincode: 'pincode',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  directorName: 'directorName',
+  directorGender: 'directorGender',
+  directorDob: 'directorDob',
+  directorBloodGroup: 'directorBloodGroup',
+  numComputers: 'numComputers',
+  numFaculty: 'numFaculty',
+  numRooms: 'numRooms',
+  numFees: 'numFees',
+  registrationDate: 'registrationDate',
+  validDate: 'validDate',
+  expiryDate: 'expiryDate',
+  renewalDate: 'renewalDate',
+  referralCode: 'referralCode',
+  onlineEnrollment: 'onlineEnrollment',
+  smsNotifications: 'smsNotifications',
+  emailNotifications: 'emailNotifications',
   status: 'status',
+  createdById: 'createdById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
@@ -126,6 +157,39 @@ export const OrganizationScalarFieldEnum = {
 } as const
 
 export type OrganizationScalarFieldEnum = (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum]
+
+
+export const AcademicSessionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  code: 'code',
+  startYear: 'startYear',
+  endYear: 'endYear',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  description: 'description',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type AcademicSessionScalarFieldEnum = (typeof AcademicSessionScalarFieldEnum)[keyof typeof AcademicSessionScalarFieldEnum]
+
+
+export const BranchAcademicSessionScalarFieldEnum = {
+  id: 'id',
+  academicSessionId: 'academicSessionId',
+  branchId: 'branchId',
+  isCurrent: 'isCurrent',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type BranchAcademicSessionScalarFieldEnum = (typeof BranchAcademicSessionScalarFieldEnum)[keyof typeof BranchAcademicSessionScalarFieldEnum]
 
 
 export const ParentScalarFieldEnum = {
@@ -281,7 +345,8 @@ export const StudentScalarFieldEnum = {
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  deletedAt: 'deletedAt'
+  deletedAt: 'deletedAt',
+  branchAcademicSessionId: 'branchAcademicSessionId'
 } as const
 
 export type StudentScalarFieldEnum = (typeof StudentScalarFieldEnum)[keyof typeof StudentScalarFieldEnum]

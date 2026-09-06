@@ -397,10 +397,6 @@ export type EnumParentRelationshipFieldUpdateOperationsInput = {
   set?: $Enums.ParentRelationship
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type StudentParentRelationCreateNestedManyWithoutStudentInput = {
   create?: Prisma.XOR<Prisma.StudentParentRelationCreateWithoutStudentInput, Prisma.StudentParentRelationUncheckedCreateWithoutStudentInput> | Prisma.StudentParentRelationCreateWithoutStudentInput[] | Prisma.StudentParentRelationUncheckedCreateWithoutStudentInput[]
   connectOrCreate?: Prisma.StudentParentRelationCreateOrConnectWithoutStudentInput | Prisma.StudentParentRelationCreateOrConnectWithoutStudentInput[]

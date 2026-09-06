@@ -386,6 +386,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   Branch: 'Branch',
   Organization: 'Organization',
+  AcademicSession: 'AcademicSession',
+  BranchAcademicSession: 'BranchAcademicSession',
   Parent: 'Parent',
   StudentParentRelation: 'StudentParentRelation',
   SubscriptionPlan: 'SubscriptionPlan',
@@ -415,7 +417,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "branch" | "organization" | "parent" | "studentParentRelation" | "subscriptionPlan" | "subscription" | "platformAdmin" | "student" | "teacher" | "user" | "permission" | "role" | "rolePermission" | "userRole" | "refreshToken" | "auditLog"
+    modelProps: "branch" | "organization" | "academicSession" | "branchAcademicSession" | "parent" | "studentParentRelation" | "subscriptionPlan" | "subscription" | "platformAdmin" | "student" | "teacher" | "user" | "permission" | "role" | "rolePermission" | "userRole" | "refreshToken" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -564,6 +566,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.OrganizationCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.OrganizationCountAggregateOutputType> | number
+        }
+      }
+    }
+    AcademicSession: {
+      payload: Prisma.$AcademicSessionPayload<ExtArgs>
+      fields: Prisma.AcademicSessionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AcademicSessionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AcademicSessionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AcademicSessionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AcademicSessionPayload>
+        }
+        findFirst: {
+          args: Prisma.AcademicSessionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AcademicSessionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AcademicSessionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AcademicSessionPayload>
+        }
+        findMany: {
+          args: Prisma.AcademicSessionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AcademicSessionPayload>[]
+        }
+        create: {
+          args: Prisma.AcademicSessionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AcademicSessionPayload>
+        }
+        createMany: {
+          args: Prisma.AcademicSessionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AcademicSessionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AcademicSessionPayload>[]
+        }
+        delete: {
+          args: Prisma.AcademicSessionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AcademicSessionPayload>
+        }
+        update: {
+          args: Prisma.AcademicSessionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AcademicSessionPayload>
+        }
+        deleteMany: {
+          args: Prisma.AcademicSessionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AcademicSessionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AcademicSessionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AcademicSessionPayload>[]
+        }
+        upsert: {
+          args: Prisma.AcademicSessionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AcademicSessionPayload>
+        }
+        aggregate: {
+          args: Prisma.AcademicSessionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAcademicSession>
+        }
+        groupBy: {
+          args: Prisma.AcademicSessionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AcademicSessionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AcademicSessionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AcademicSessionCountAggregateOutputType> | number
+        }
+      }
+    }
+    BranchAcademicSession: {
+      payload: Prisma.$BranchAcademicSessionPayload<ExtArgs>
+      fields: Prisma.BranchAcademicSessionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BranchAcademicSessionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BranchAcademicSessionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BranchAcademicSessionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BranchAcademicSessionPayload>
+        }
+        findFirst: {
+          args: Prisma.BranchAcademicSessionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BranchAcademicSessionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BranchAcademicSessionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BranchAcademicSessionPayload>
+        }
+        findMany: {
+          args: Prisma.BranchAcademicSessionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BranchAcademicSessionPayload>[]
+        }
+        create: {
+          args: Prisma.BranchAcademicSessionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BranchAcademicSessionPayload>
+        }
+        createMany: {
+          args: Prisma.BranchAcademicSessionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BranchAcademicSessionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BranchAcademicSessionPayload>[]
+        }
+        delete: {
+          args: Prisma.BranchAcademicSessionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BranchAcademicSessionPayload>
+        }
+        update: {
+          args: Prisma.BranchAcademicSessionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BranchAcademicSessionPayload>
+        }
+        deleteMany: {
+          args: Prisma.BranchAcademicSessionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BranchAcademicSessionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BranchAcademicSessionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BranchAcademicSessionPayload>[]
+        }
+        upsert: {
+          args: Prisma.BranchAcademicSessionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BranchAcademicSessionPayload>
+        }
+        aggregate: {
+          args: Prisma.BranchAcademicSessionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBranchAcademicSession>
+        }
+        groupBy: {
+          args: Prisma.BranchAcademicSessionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BranchAcademicSessionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BranchAcademicSessionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BranchAcademicSessionCountAggregateOutputType> | number
         }
       }
     }
@@ -1650,12 +1800,41 @@ export const BranchScalarFieldEnum = {
   code: 'code',
   email: 'email',
   phone: 'phone',
+  altPhone: 'altPhone',
+  whatsapp: 'whatsapp',
+  logo: 'logo',
+  branchType: 'branchType',
+  instituteType: 'instituteType',
+  establishedYear: 'establishedYear',
+  website: 'website',
+  description: 'description',
   address: 'address',
   city: 'city',
+  district: 'district',
+  block: 'block',
   state: 'state',
   country: 'country',
   pincode: 'pincode',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  directorName: 'directorName',
+  directorGender: 'directorGender',
+  directorDob: 'directorDob',
+  directorBloodGroup: 'directorBloodGroup',
+  numComputers: 'numComputers',
+  numFaculty: 'numFaculty',
+  numRooms: 'numRooms',
+  numFees: 'numFees',
+  registrationDate: 'registrationDate',
+  validDate: 'validDate',
+  expiryDate: 'expiryDate',
+  renewalDate: 'renewalDate',
+  referralCode: 'referralCode',
+  onlineEnrollment: 'onlineEnrollment',
+  smsNotifications: 'smsNotifications',
+  emailNotifications: 'emailNotifications',
   status: 'status',
+  createdById: 'createdById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
@@ -1683,6 +1862,39 @@ export const OrganizationScalarFieldEnum = {
 } as const
 
 export type OrganizationScalarFieldEnum = (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum]
+
+
+export const AcademicSessionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  code: 'code',
+  startYear: 'startYear',
+  endYear: 'endYear',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  description: 'description',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type AcademicSessionScalarFieldEnum = (typeof AcademicSessionScalarFieldEnum)[keyof typeof AcademicSessionScalarFieldEnum]
+
+
+export const BranchAcademicSessionScalarFieldEnum = {
+  id: 'id',
+  academicSessionId: 'academicSessionId',
+  branchId: 'branchId',
+  isCurrent: 'isCurrent',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type BranchAcademicSessionScalarFieldEnum = (typeof BranchAcademicSessionScalarFieldEnum)[keyof typeof BranchAcademicSessionScalarFieldEnum]
 
 
 export const ParentScalarFieldEnum = {
@@ -1838,7 +2050,8 @@ export const StudentScalarFieldEnum = {
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  deletedAt: 'deletedAt'
+  deletedAt: 'deletedAt',
+  branchAcademicSessionId: 'branchAcademicSessionId'
 } as const
 
 export type StudentScalarFieldEnum = (typeof StudentScalarFieldEnum)[keyof typeof StudentScalarFieldEnum]
@@ -2052,16 +2265,16 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
- * Reference to a field of type 'BranchStatus'
+ * Reference to a field of type 'Float'
  */
-export type EnumBranchStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BranchStatus'>
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
 /**
- * Reference to a field of type 'BranchStatus[]'
+ * Reference to a field of type 'Float[]'
  */
-export type ListEnumBranchStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BranchStatus[]'>
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 
@@ -2080,16 +2293,16 @@ export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
 
 
 /**
- * Reference to a field of type 'OrgStatus'
+ * Reference to a field of type 'Int'
  */
-export type EnumOrgStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrgStatus'>
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
 /**
- * Reference to a field of type 'OrgStatus[]'
+ * Reference to a field of type 'Int[]'
  */
-export type ListEnumOrgStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrgStatus[]'>
+export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -2108,6 +2321,41 @@ export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMo
 
 
 /**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
+ * Reference to a field of type 'BranchStatus'
+ */
+export type EnumBranchStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BranchStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'BranchStatus[]'
+ */
+export type ListEnumBranchStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BranchStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'OrgStatus'
+ */
+export type EnumOrgStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrgStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'OrgStatus[]'
+ */
+export type ListEnumOrgStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrgStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'ParentRelationship'
  */
 export type EnumParentRelationshipFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ParentRelationship'>
@@ -2118,27 +2366,6 @@ export type EnumParentRelationshipFieldRefInput<$PrismaModel> = FieldRefInputTyp
  * Reference to a field of type 'ParentRelationship[]'
  */
 export type ListEnumParentRelationshipFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ParentRelationship[]'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-/**
- * Reference to a field of type 'Int'
- */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-/**
- * Reference to a field of type 'Int[]'
- */
-export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -2295,20 +2522,6 @@ export type EnumAuditActionFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
 export type ListEnumAuditActionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AuditAction[]'>
     
 
-
-/**
- * Reference to a field of type 'Float'
- */
-export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-/**
- * Reference to a field of type 'Float[]'
- */
-export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
-
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -2421,6 +2634,8 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   branch?: Prisma.BranchOmit
   organization?: Prisma.OrganizationOmit
+  academicSession?: Prisma.AcademicSessionOmit
+  branchAcademicSession?: Prisma.BranchAcademicSessionOmit
   parent?: Prisma.ParentOmit
   studentParentRelation?: Prisma.StudentParentRelationOmit
   subscriptionPlan?: Prisma.SubscriptionPlanOmit

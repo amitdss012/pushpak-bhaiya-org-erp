@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../api/hooks/hooks.dart';
+import '../../../../../../api/models/models.dart';
 import '../../../../../../app/router/route_names.dart';
 import '../../../../../../app/theme/app_colors.dart';
 import '../../../../../../app/theme/app_radius.dart';
@@ -10,392 +13,391 @@ import '../../../../../../core/extensions/context_extensions.dart';
 import '../../../../../../shared/widgets/app_button.dart';
 import '../../../../../../shared/widgets/app_card.dart';
 import '../../../../../../shared/widgets/app_text_field.dart';
+import '../../../../../../shared/widgets/no_data_found_template.dart';
+import '../../../widgets/org_stats_card.dart';
 
-class AllSessionYearsScreen extends StatefulWidget {
+/// Screen displaying all Academic Sessions / Session Years for the Organization
+/// with branch mappings, active session toggling, and full CRUD.
+class AllSessionYearsScreen extends HookWidget {
   const AllSessionYearsScreen({super.key});
 
-  @override
-  State<AllSessionYearsScreen> createState() => _AllSessionYearsScreenState();
-}
+  void _openViewDialog(BuildContext context, AcademicSessionModel session) {
+    final isDark = context.isDarkMode;
 
-class _AllSessionYearsScreenState extends State<AllSessionYearsScreen> {
-  String _searchQuery = '';
-
-  final List<Map<String, dynamic>> _sessionYears = [
-    {
-      'id': '1',
-      'sessionName': 'Session 2024-2025',
-      'startYear': '2024',
-      'endYear': '2025',
-      'startDate': '2024-04-01',
-      'endDate': '2025-03-31',
-      'status': 'active',
-      'description': 'Current academic session for the year 2024-25',
-      'createdDate': '2024-01-15',
-    },
-    {
-      'id': '2',
-      'sessionName': 'Session 2023-2024',
-      'startYear': '2023',
-      'endYear': '2024',
-      'startDate': '2023-04-01',
-      'endDate': '2024-03-31',
-      'status': 'closed',
-      'description': 'Previous academic session completed',
-      'createdDate': '2023-01-10',
-    },
-  ];
-
-  Widget _getStatusBadge(String status) {
-    Color bg;
-    Color fg;
-    IconData icon;
-    String label;
-
-    switch (status) {
-      case 'active':
-        bg = AppColors.success.withAlpha(20);
-        fg = AppColors.success;
-        icon = Icons.check_circle_rounded;
-        label = 'Active';
-        break;
-      case 'closed':
-        bg = AppColors.error.withAlpha(20);
-        fg = AppColors.error;
-        icon = Icons.lock_clock_rounded;
-        label = 'Closed';
-        break;
-      case 'upcoming':
-        bg = AppColors.info.withAlpha(20);
-        fg = AppColors.info;
-        icon = Icons.event_rounded;
-        label = 'Upcoming';
-        break;
-      default:
-        bg = Colors.grey.withAlpha(20);
-        fg = Colors.grey;
-        icon = Icons.help_outline_rounded;
-        label = status;
-    }
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-      decoration: BoxDecoration(
-        color: bg,
-        borderRadius: AppRadius.sm,
-        border: Border.all(color: fg.withAlpha(50)),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 12, color: fg),
-          const SizedBox(width: 4),
-          Text(label, style: AppTypography.bodySmall.copyWith(fontSize: 10, fontWeight: FontWeight.w700, color: fg)),
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: const RoundedRectangleBorder(borderRadius: AppRadius.lg),
+        title: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(AppSpacing.xs),
+              decoration: BoxDecoration(
+                color: AppColors.primary.withAlpha(25),
+                borderRadius: AppRadius.sm,
+              ),
+              child: const Icon(Icons.calendar_month_rounded, color: AppColors.primary, size: 20),
+            ),
+            AppSpacing.hSm,
+            Expanded(
+              child: Text(
+                session.name,
+                style: AppTypography.titleMedium.copyWith(fontWeight: FontWeight.w700),
+              ),
+            ),
+          ],
+        ),
+        content: SizedBox(
+          width: 480,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _buildDetailRow('Session Name', session.name, isDark),
+                if (session.code != null && session.code!.isNotEmpty)
+                  _buildDetailRow('Session Code', session.code!, isDark),
+                _buildDetailRow('Academic Years', '${session.startYear} - ${session.endYear}', isDark),
+                _buildDetailRow('Start Date', session.startDate.toLocal().toString().split(' ')[0], isDark),
+                _buildDetailRow('End Date', session.endDate.toLocal().toString().split(' ')[0], isDark),
+                if (session.createdBy != null)
+                  _buildDetailRow('Created By', '${session.createdBy!.fullName} (${session.createdBy!.email})', isDark),
+                if (session.description != null && session.description!.isNotEmpty) ...[
+                  AppSpacing.vSm,
+                  Text(
+                    'Description',
+                    style: AppTypography.labelSmall.copyWith(
+                      color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                    ),
+                  ),
+                  AppSpacing.vXs,
+                  Text(session.description!, style: AppTypography.bodySmall),
+                ],
+                AppSpacing.vMd,
+                Text(
+                  'Branch Mappings (${session.branchMappings.length})',
+                  style: AppTypography.labelMedium.copyWith(fontWeight: FontWeight.w700),
+                ),
+                AppSpacing.vXs,
+                if (session.branchMappings.isEmpty)
+                  Text(
+                    'No branches mapped to this master session yet.',
+                    style: AppTypography.bodySmall.copyWith(
+                      fontStyle: FontStyle.italic,
+                      color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                    ),
+                  )
+                else
+                  ...session.branchMappings.map(
+                    (m) => Container(
+                      margin: const EdgeInsets.only(bottom: 6),
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
+                        borderRadius: AppRadius.sm,
+                        border: Border.all(
+                          color: m.isCurrent
+                              ? AppColors.success.withAlpha(80)
+                              : (isDark ? AppColors.borderDark : AppColors.borderLight),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  m.branch?.name ?? 'Branch ${m.branchId.substring(0, 8)}',
+                                  style: AppTypography.bodySmall.copyWith(fontWeight: FontWeight.w600),
+                                ),
+                                if (m.createdBy != null)
+                                  Text(
+                                    'Mapped by ${m.createdBy!.fullName}',
+                                    style: AppTypography.labelSmall.copyWith(
+                                      fontSize: 10,
+                                      color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                          if (m.isCurrent)
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: AppColors.success.withAlpha(25),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Text(
+                                'ACTIVE FOR BRANCH',
+                                style: AppTypography.labelSmall.copyWith(
+                                  color: AppColors.success,
+                                  fontSize: 9,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text('Close'),
+          ),
         ],
       ),
     );
   }
 
-  void _openViewDialog(Map<String, dynamic> session) {
+  Widget _buildDetailRow(String label, String value, bool isDark) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style: AppTypography.bodySmall.copyWith(
+              color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+            ),
+          ),
+          Text(
+            value,
+            style: AppTypography.bodySmall.copyWith(fontWeight: FontWeight.w600),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _openEditDialog(
+    BuildContext context,
+    AcademicSessionModel session,
+    void Function(UpdateSessionParams params) onUpdate,
+  ) {
+    final nameCtrl = TextEditingController(text: session.name);
+    final codeCtrl = TextEditingController(text: session.code ?? '');
+    final startYearCtrl = TextEditingController(text: session.startYear.toString());
+    final endYearCtrl = TextEditingController(text: session.endYear.toString());
+    final descCtrl = TextEditingController(text: session.description ?? '');
+
+    DateTime startDate = session.startDate;
+    DateTime endDate = session.endDate;
+
     showDialog(
       context: context,
-      builder: (ctx) {
-        final isDark = ctx.isDarkMode;
-
-        return AlertDialog(
-          title: Text('Session Details', style: AppTypography.titleLarge.copyWith(fontWeight: FontWeight.w700)),
+      builder: (dialogCtx) => StatefulBuilder(
+        builder: (ctx, setDialogState) => AlertDialog(
+          shape: const RoundedRectangleBorder(borderRadius: AppRadius.lg),
+          title: Text(
+            'Edit Academic Session',
+            style: AppTypography.titleMedium.copyWith(fontWeight: FontWeight.w700),
+          ),
           content: SizedBox(
-            width: 480,
+            width: 460,
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
+                  AppTextField(
+                    controller: nameCtrl,
+                    label: 'Session Name *',
+                    hint: 'e.g. 2025-2026',
+                  ),
+                  AppSpacing.vMd,
+                  AppTextField(
+                    controller: codeCtrl,
+                    label: 'Session Code',
+                    hint: 'e.g. AY-2025-26',
+                  ),
+                  AppSpacing.vMd,
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(session['sessionName'] as String, style: AppTypography.titleMedium.copyWith(fontWeight: FontWeight.w800)),
-                      _getStatusBadge(session['status'] as String),
+                      Expanded(
+                        child: AppTextField(
+                          controller: startYearCtrl,
+                          label: 'Start Year *',
+                          keyboardType: TextInputType.number,
+                        ),
+                      ),
+                      AppSpacing.hMd,
+                      Expanded(
+                        child: AppTextField(
+                          controller: endYearCtrl,
+                          label: 'End Year *',
+                          keyboardType: TextInputType.number,
+                        ),
+                      ),
                     ],
                   ),
-                  AppSpacing.vLg,
-                  const Divider(height: 1),
                   AppSpacing.vMd,
-                  _buildDetailRow('Year Range:', '${session['startYear']} - ${session['endYear']}', isDark),
-                  _buildDetailRow('Start Date:', session['startDate'] as String, isDark),
-                  _buildDetailRow('End Date:', session['endDate'] as String, isDark),
-                  _buildDetailRow('Created Date:', session['createdDate'] as String, isDark),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Start Date', style: AppTypography.labelSmall),
+                            AppSpacing.vXs,
+                            OutlinedButton.icon(
+                              icon: const Icon(Icons.calendar_today, size: 14),
+                              label: Text(startDate.toLocal().toString().split(' ')[0]),
+                              onPressed: () async {
+                                final picked = await showDatePicker(
+                                  context: ctx,
+                                  initialDate: startDate,
+                                  firstDate: DateTime(2000),
+                                  lastDate: DateTime(2100),
+                                );
+                                if (picked != null) {
+                                  setDialogState(() => startDate = picked);
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      AppSpacing.hMd,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('End Date', style: AppTypography.labelSmall),
+                            AppSpacing.vXs,
+                            OutlinedButton.icon(
+                              icon: const Icon(Icons.calendar_today, size: 14),
+                              label: Text(endDate.toLocal().toString().split(' ')[0]),
+                              onPressed: () async {
+                                final picked = await showDatePicker(
+                                  context: ctx,
+                                  initialDate: endDate,
+                                  firstDate: DateTime(2000),
+                                  lastDate: DateTime(2100),
+                                );
+                                if (picked != null) {
+                                  setDialogState(() => endDate = picked);
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                   AppSpacing.vMd,
-                  const Divider(height: 1),
-                  AppSpacing.vMd,
-                  Text('DESCRIPTION', style: AppTypography.labelMedium.copyWith(fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 0.5)),
-                  AppSpacing.vXs,
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: isDark ? AppColors.surfaceDark : AppColors.backgroundLight,
-                      borderRadius: AppRadius.sm,
-                      border: Border.all(color: isDark ? AppColors.borderDark : AppColors.borderLight),
-                    ),
-                    child: Text(session['description'] ?? 'No description provided.', style: AppTypography.bodySmall),
+                  AppTextField(
+                    controller: descCtrl,
+                    label: 'Description',
+                    maxLines: 2,
                   ),
                 ],
               ),
             ),
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const Text('Close')),
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(),
+              child: const Text('Cancel'),
+            ),
             AppButton(
-              text: 'Edit Session',
-              icon: Icons.edit_outlined,
+              text: 'Save Changes',
               onPressed: () {
+                final sYear = int.tryParse(startYearCtrl.text.trim());
+                final eYear = int.tryParse(endYearCtrl.text.trim());
+                if (nameCtrl.text.trim().isEmpty || sYear == null || eYear == null) {
+                  return;
+                }
+
+                onUpdate(
+                  UpdateSessionParams(
+                    sessionId: session.id,
+                    data: UpdateSessionInput(
+                      name: nameCtrl.text.trim(),
+                      code: codeCtrl.text.trim().isEmpty ? null : codeCtrl.text.trim(),
+                      startYear: sYear,
+                      endYear: eYear,
+                      startDate: startDate,
+                      endDate: endDate,
+                      description: descCtrl.text.trim().isEmpty ? null : descCtrl.text.trim(),
+                    ),
+                  ),
+                );
                 Navigator.of(ctx).pop();
-                _openFormDialog(session: session);
               },
             ),
           ],
-        );
-      },
+        ),
+      ),
     );
   }
 
-  Widget _buildDetailRow(String label, String value, bool isDark) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(label, style: AppTypography.bodySmall.copyWith(color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight)),
-          Text(value, style: AppTypography.bodySmall.copyWith(fontWeight: FontWeight.w600)),
+  void _confirmDelete(
+    BuildContext context,
+    AcademicSessionModel session,
+    void Function(String id) onDelete,
+  ) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: const RoundedRectangleBorder(borderRadius: AppRadius.lg),
+        title: Text(
+          'Delete Academic Session?',
+          style: AppTypography.titleMedium.copyWith(fontWeight: FontWeight.w700),
+        ),
+        content: Text(
+          'Are you sure you want to delete "${session.name}"? All branch mappings will also be archived.',
+          style: AppTypography.bodySmall,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text('Cancel'),
+          ),
+          OutlinedButton(
+            style: OutlinedButton.styleFrom(foregroundColor: AppColors.error),
+            onPressed: () {
+              onDelete(session.id);
+              Navigator.of(ctx).pop();
+            },
+            child: const Text('Delete'),
+          ),
         ],
       ),
     );
   }
 
-  void _openFormDialog({Map<String, dynamic>? session}) {
-    final isEditing = session != null;
-    final nameController = TextEditingController(text: session?['sessionName'] ?? 'Session 2024-2025');
-    final startYearController = TextEditingController(text: session?['startYear'] ?? '2024');
-    final endYearController = TextEditingController(text: session?['endYear'] ?? '2025');
-    final startDateController = TextEditingController(text: session?['startDate'] ?? '2024-04-01');
-    final endDateController = TextEditingController(text: session?['endDate'] ?? '2025-03-31');
-    final descController = TextEditingController(text: session?['description'] ?? '');
-    String status = session?['status'] ?? 'upcoming';
+  Widget _buildErrorOrAccessDenied(Object? error, VoidCallback onRetry) {
+    final errStr = error?.toString().toLowerCase() ?? '';
+    final isAccessDenied = errStr.contains('403') ||
+        errStr.contains('denied') ||
+        errStr.contains('unauthorized') ||
+        errStr.contains('forbidden') ||
+        errStr.contains('permission');
 
-    showDialog(
-      context: context,
-      builder: (dialogCtx) => StatefulBuilder(
-        builder: (ctx, setDialogState) {
-          return AlertDialog(
-            title: Text(
-              isEditing ? 'Update Session' : 'New Session Year',
-              style: AppTypography.titleLarge.copyWith(fontWeight: FontWeight.w700),
-            ),
-            content: SizedBox(
-              width: 520,
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    AppTextField(controller: nameController, label: 'Session Name *', hint: 'e.g. Session 2024-2025'),
-                    AppSpacing.vMd,
-                    Row(
-                      children: [
-                        Expanded(child: AppTextField(controller: startYearController, label: 'Start Year', hint: '2024')),
-                        AppSpacing.hMd,
-                        Expanded(child: AppTextField(controller: endYearController, label: 'End Year', hint: '2025')),
-                      ],
-                    ),
-                    AppSpacing.vMd,
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Start Date *', style: AppTypography.labelMedium.copyWith(fontWeight: FontWeight.w600)),
-                              AppSpacing.vXs,
-                              TextField(
-                                readOnly: true,
-                                controller: startDateController,
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                                  suffixIcon: const Icon(Icons.calendar_today_rounded, size: 16),
-                                  border: OutlineInputBorder(borderRadius: AppRadius.sm),
-                                ),
-                                onTap: () async {
-                                  final picked = await showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime(2020),
-                                    lastDate: DateTime(2035),
-                                  );
-                                  if (picked != null) {
-                                    startDateController.text = picked.toString().split(' ')[0];
-                                    setDialogState(() {});
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                        AppSpacing.hMd,
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('End Date *', style: AppTypography.labelMedium.copyWith(fontWeight: FontWeight.w600)),
-                              AppSpacing.vXs,
-                              TextField(
-                                readOnly: true,
-                                controller: endDateController,
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                                  suffixIcon: const Icon(Icons.calendar_today_rounded, size: 16),
-                                  border: OutlineInputBorder(borderRadius: AppRadius.sm),
-                                ),
-                                onTap: () async {
-                                  final picked = await showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now().add(const Duration(days: 365)),
-                                    firstDate: DateTime(2020),
-                                    lastDate: DateTime(2035),
-                                  );
-                                  if (picked != null) {
-                                    endDateController.text = picked.toString().split(' ')[0];
-                                    setDialogState(() {});
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    AppSpacing.vMd,
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Status', style: AppTypography.labelMedium.copyWith(fontWeight: FontWeight.w600)),
-                        AppSpacing.vXs,
-                        DropdownButtonFormField<String>(
-                          initialValue: status,
-                          isExpanded: true,
-                          decoration: const InputDecoration(isDense: true, contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8)),
-                          items: const [
-                            DropdownMenuItem(value: 'active', child: Text('Active')),
-                            DropdownMenuItem(value: 'upcoming', child: Text('Upcoming')),
-                            DropdownMenuItem(value: 'closed', child: Text('Closed')),
-                          ],
-                          onChanged: (v) => setDialogState(() => status = v!),
-                        ),
-                      ],
-                    ),
-                    AppSpacing.vMd,
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Description', style: AppTypography.labelMedium.copyWith(fontWeight: FontWeight.w600)),
-                        AppSpacing.vXs,
-                        TextFormField(
-                          controller: descController,
-                          maxLines: 2,
-                          decoration: const InputDecoration(hintText: 'Academic details...'),
-                        ),
-                      ],
-                    ),
-                    if (status == 'active') ...[
-                      AppSpacing.vMd,
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: AppColors.warning.withAlpha(15),
-                          borderRadius: AppRadius.sm,
-                          border: Border.all(color: AppColors.warning.withAlpha(50)),
-                        ),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.warning_amber_rounded, size: 16, color: AppColors.warning),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: Text(
-                                'Note: Setting this as Active will automatically mark other active sessions as Closed.',
-                                style: AppTypography.bodySmall.copyWith(fontSize: 11, color: AppColors.warning),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
-              ),
-            ),
-            actions: [
-              TextButton(onPressed: () => Navigator.of(dialogCtx).pop(), child: const Text('Cancel')),
-              AppButton(
-                text: isEditing ? 'Save Changes' : 'Create Session',
-                icon: Icons.check_rounded,
-                onPressed: () {
-                  if (nameController.text.trim().isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please enter a session name.')));
-                    return;
-                  }
-                  setState(() {
-                    if (status == 'active') {
-                      for (var s in _sessionYears) {
-                        if (s['status'] == 'active') s['status'] = 'closed';
-                      }
-                    }
-                    if (isEditing) {
-                      session['sessionName'] = nameController.text.trim();
-                      session['startYear'] = startYearController.text.trim();
-                      session['endYear'] = endYearController.text.trim();
-                      session['startDate'] = startDateController.text.trim();
-                      session['endDate'] = endDateController.text.trim();
-                      session['status'] = status;
-                      session['description'] = descController.text.trim();
-                    } else {
-                      _sessionYears.insert(0, {
-                        'id': '${DateTime.now().millisecondsSinceEpoch}',
-                        'sessionName': nameController.text.trim(),
-                        'startYear': startYearController.text.trim(),
-                        'endYear': endYearController.text.trim(),
-                        'startDate': startDateController.text.trim(),
-                        'endDate': endDateController.text.trim(),
-                        'status': status,
-                        'description': descController.text.trim(),
-                        'createdDate': DateTime.now().toString().split(' ')[0],
-                      });
-                    }
-                  });
-                  Navigator.of(dialogCtx).pop();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(isEditing ? 'Session updated!' : 'New session created!'), backgroundColor: AppColors.success),
-                  );
-                },
-              ),
-            ],
-          );
-        },
-      ),
-    );
-  }
+    if (isAccessDenied) {
+      return NoDataFoundTemplate.accessDenied(
+        message:
+            'You do not have permission to manage academic sessions. Please contact your administrator.',
+        actionText: 'Retry',
+        actionIcon: Icons.refresh_rounded,
+        onAction: onRetry,
+        cardWrapper: false,
+      );
+    }
 
-  void _handleMakeCurrent(String id) {
-    setState(() {
-      for (var s in _sessionYears) {
-        if (s['id'] == id) {
-          s['status'] = 'active';
-        } else if (s['status'] == 'active') {
-          s['status'] = 'closed';
-        }
-      }
-    });
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Selected session is now set as Active!'), backgroundColor: AppColors.success),
+    return NoDataFoundTemplate.error(
+      message:
+          'Failed to retrieve academic sessions from the server. Please check your connection or try again.',
+      onRetry: onRetry,
+      cardWrapper: false,
     );
   }
 
@@ -404,356 +406,377 @@ class _AllSessionYearsScreenState extends State<AllSessionYearsScreen> {
     final isDark = context.isDarkMode;
     final isMobile = context.isMobile;
 
-    final filtered = _sessionYears.where((s) {
-      if (_searchQuery.isNotEmpty) {
-        final q = _searchQuery.toLowerCase();
-        final name = (s['sessionName'] as String).toLowerCase();
-        final sYear = (s['startYear'] as String).toLowerCase();
-        final eYear = (s['endYear'] as String).toLowerCase();
-        return name.contains(q) || sYear.contains(q) || eYear.contains(q);
-      }
-      return true;
-    }).toList();
+    final searchController = useTextEditingController();
+    final searchQuery = useState<String>('');
+    final selectedBranchId = useState<String?>(null);
 
-    final activeSession = _sessionYears.firstWhere(
-      (s) => s['status'] == 'active',
-      orElse: () => {'sessionName': 'None'},
+    final sessionsQuery = useSessionsQuery(
+      params: GetSessionsParams(
+        search: searchQuery.value.isEmpty ? null : searchQuery.value,
+        branchId: selectedBranchId.value,
+      ),
     );
 
-    return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 16 : 28,
-        vertical: 24,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // Header
-          _buildHeader(isDark, isMobile),
-          AppSpacing.vXl,
+    final updateSessionMutation = useUpdateSessionMutation(
+      onSuccess: (_) => sessionsQuery.refetch(),
+    );
 
-          // 2 Summary Cards
-          Row(
-            children: [
-              Expanded(
-                child: AppCard(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: AppColors.primary.withAlpha(20),
-                          borderRadius: AppRadius.md,
-                        ),
-                        child: Icon(Icons.calendar_month_rounded, size: 24, color: AppColors.primary),
-                      ),
-                      AppSpacing.hMd,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Total Sessions', style: AppTypography.bodySmall.copyWith(color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight)),
-                          Text('${_sessionYears.length}', style: AppTypography.headlineMedium.copyWith(fontWeight: FontWeight.w900)),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              AppSpacing.hMd,
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
-                    borderRadius: AppRadius.md,
-                    border: Border.all(color: AppColors.success.withAlpha(80), width: 1.5),
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: AppColors.success.withAlpha(20),
-                          borderRadius: AppRadius.md,
-                        ),
-                        child: const Icon(Icons.check_circle_rounded, size: 24, color: AppColors.success),
-                      ),
-                      AppSpacing.hMd,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Active Session', style: AppTypography.bodySmall.copyWith(color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight)),
-                          Text(activeSession['sessionName'] as String, style: AppTypography.titleMedium.copyWith(fontWeight: FontWeight.w900, color: AppColors.success)),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          AppSpacing.vXl,
+    final setBranchCurrentMutation = useSetBranchCurrentSessionMutation(
+      onSuccess: (_) => sessionsQuery.refetch(),
+    );
 
-          // Full-width Table Card
-          AppCard(
-            padding: EdgeInsets.zero,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+    final deleteSessionMutation = useDeleteSessionMutation(
+      onSuccess: (_) => sessionsQuery.refetch(),
+    );
+
+    final sessionList = sessionsQuery.dataOrNull?.sessions ?? [];
+    final totalSessions = sessionList.length;
+
+    // Collect all branches from mappings for the filter dropdown
+    final branchMap = <String, String>{};
+    for (final s in sessionList) {
+      for (final m in s.branchMappings) {
+        if (m.branch != null) {
+          branchMap[m.branchId] = m.branch!.name;
+        }
+      }
+    }
+
+    final activeAcrossBranches = sessionList
+        .where((s) => s.branchMappings.any((m) => m.isCurrent))
+        .length;
+
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(AppSpacing.lg),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header Row
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'All Session Years',
-                        style: AppTypography.titleMedium.copyWith(
-                          fontWeight: FontWeight.w700,
-                          color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
-                        ),
+                        'Academic Sessions',
+                        style: AppTypography.headlineMedium.copyWith(fontWeight: FontWeight.w800),
                       ),
-                      ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 260),
-                        child: Container(
-                          height: 38,
-                          decoration: BoxDecoration(
-                            color: isDark ? AppColors.backgroundDark : AppColors.backgroundLight,
-                            borderRadius: AppRadius.sm,
-                            border: Border.all(color: isDark ? AppColors.borderDark : AppColors.borderLight),
-                          ),
-                          child: TextField(
-                            onChanged: (val) => setState(() => _searchQuery = val.trim()),
-                            style: AppTypography.bodySmall.copyWith(
-                              color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
-                            ),
-                            decoration: InputDecoration(
-                              hintText: 'Search sessions...',
-                              hintStyle: AppTypography.bodySmall.copyWith(
-                                color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
-                                fontSize: 12,
-                              ),
-                              prefixIcon: Icon(
-                                Icons.search_rounded,
-                                size: 16,
-                                color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
-                              ),
-                              isDense: true,
-                              contentPadding: const EdgeInsets.symmetric(vertical: 8),
-                              border: InputBorder.none,
-                            ),
-                          ),
+                      AppSpacing.vXs,
+                      Text(
+                        'Manage school academic years, start & end dates, and active branch sessions.',
+                        style: AppTypography.bodySmall.copyWith(
+                          color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
                         ),
                       ),
                     ],
                   ),
                 ),
-                const Divider(height: 1),
+                AppButton(
+                  text: 'Add Session Year',
+                  icon: Icons.add_rounded,
+                  onPressed: () => context.goNamed(RouteNames.sessionAdd),
+                ),
+              ],
+            ),
+            AppSpacing.vLg,
 
-                LayoutBuilder(
-                  builder: (context, constraints) {
-                    return SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(minWidth: constraints.maxWidth),
-                        child: DataTable(
-                          headingRowHeight: 44,
-                          dataRowMinHeight: 56,
-                          dataRowMaxHeight: 64,
-                          horizontalMargin: 20,
-                          columnSpacing: 20,
-                          headingRowColor: WidgetStateProperty.all(
-                            isDark ? AppColors.backgroundDark.withAlpha(80) : AppColors.backgroundLight.withAlpha(120),
-                          ),
-                          columns: [
-                            _buildDataColumn('SESSION NAME', isDark),
-                            _buildDataColumn('RANGE', isDark),
-                            _buildDataColumn('START DATE', isDark),
-                            _buildDataColumn('END DATE', isDark),
-                            _buildDataColumn('STATUS', isDark),
-                            _buildDataColumn('ACTIONS', isDark),
+            // KPI Stats Row
+            Wrap(
+              spacing: AppSpacing.md,
+              runSpacing: AppSpacing.md,
+              children: [
+                SizedBox(
+                  width: isMobile ? double.infinity : 240,
+                  child: OrgStatsCard(
+                    title: 'Total Sessions',
+                    value: totalSessions.toString(),
+                    icon: Icons.calendar_today_rounded,
+                    variant: OrgStatsCardVariant.primary,
+                  ),
+                ),
+                SizedBox(
+                  width: isMobile ? double.infinity : 240,
+                  child: OrgStatsCard(
+                    title: 'Active in Branches',
+                    value: activeAcrossBranches.toString(),
+                    icon: Icons.check_circle_outline_rounded,
+                    variant: OrgStatsCardVariant.success,
+                  ),
+                ),
+                SizedBox(
+                  width: isMobile ? double.infinity : 240,
+                  child: OrgStatsCard(
+                    title: 'Mapped Branches',
+                    value: branchMap.length.toString(),
+                    icon: Icons.account_tree_outlined,
+                    variant: OrgStatsCardVariant.info,
+                  ),
+                ),
+              ],
+            ),
+            AppSpacing.vLg,
+
+            // Filter & Search Toolbar
+            AppCard(
+              child: Wrap(
+                spacing: AppSpacing.md,
+                runSpacing: AppSpacing.md,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                alignment: WrapAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: isMobile ? double.infinity : 300,
+                    child: TextField(
+                      controller: searchController,
+                      decoration: InputDecoration(
+                        hintText: 'Search by session name or code...',
+                        prefixIcon: const Icon(Icons.search_rounded, size: 20),
+                        isDense: true,
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                        border: OutlineInputBorder(borderRadius: AppRadius.sm),
+                      ),
+                      onChanged: (val) => searchQuery.value = val,
+                    ),
+                  ),
+                  if (branchMap.isNotEmpty)
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: isDark ? AppColors.borderDark : AppColors.borderLight,
+                        ),
+                        borderRadius: AppRadius.sm,
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String?>(
+                          value: selectedBranchId.value,
+                          hint: const Text('All Branches'),
+                          items: [
+                            const DropdownMenuItem(value: null, child: Text('All Branches')),
+                            ...branchMap.entries.map(
+                              (e) => DropdownMenuItem(value: e.key, child: Text(e.value)),
+                            ),
                           ],
-                          rows: filtered.map((session) {
-                            final name = session['sessionName'] as String;
-                            final sYear = session['startYear'] as String;
-                            final eYear = session['endYear'] as String;
-                            final sDate = session['startDate'] as String;
-                            final eDate = session['endDate'] as String;
-                            final status = session['status'] as String;
+                          onChanged: (val) => selectedBranchId.value = val,
+                        ),
+                      ),
+                    ),
+                  AppButton(
+                    text: 'Refresh',
+                    variant: AppButtonVariant.secondary,
+                    icon: Icons.refresh_rounded,
+                    onPressed: () => sessionsQuery.refetch(),
+                  ),
+                ],
+              ),
+            ),
+            AppSpacing.vLg,
 
-                            return DataRow(
-                              cells: [
-                                DataCell(Text(name, style: AppTypography.bodySmall.copyWith(fontWeight: FontWeight.w700))),
-                                DataCell(Text('$sYear - $eYear', style: AppTypography.bodySmall.copyWith(fontFamily: 'monospace'))),
-                                DataCell(Text(sDate, style: AppTypography.bodySmall)),
-                                DataCell(Text(eDate, style: AppTypography.bodySmall)),
-                                DataCell(_getStatusBadge(status)),
-                                DataCell(
-                                  PopupMenuButton<String>(
-                                    icon: Icon(Icons.more_vert_rounded, size: 18, color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight),
-                                    onSelected: (val) {
-                                      if (val == 'view') {
-                                        _openViewDialog(session);
-                                      } else if (val == 'edit') {
-                                        _openFormDialog(session: session);
-                                      } else if (val == 'make_current') {
-                                        _handleMakeCurrent(session['id'] as String);
-                                      } else if (val == 'delete') {
-                                        setState(() => _sessionYears.remove(session));
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text('Removed ${session['sessionName']}.'), backgroundColor: AppColors.error),
-                                        );
-                                      }
-                                    },
-                                    itemBuilder: (ctx) => [
-                                      const PopupMenuItem(
-                                        value: 'view',
-                                        child: Row(
-                                          children: [
-                                            Icon(Icons.visibility_outlined, size: 16),
-                                            SizedBox(width: 8),
-                                            Text('View Details'),
-                                          ],
-                                        ),
+            // Main Content Area
+            if (sessionsQuery.isLoading)
+              const Center(
+                child: Padding(
+                  padding: EdgeInsets.all(AppSpacing.xxl),
+                  child: CircularProgressIndicator(),
+                ),
+              )
+            else if (sessionsQuery.failureReason != null)
+              _buildErrorOrAccessDenied(
+                sessionsQuery.failureReason,
+                () => sessionsQuery.refetch(),
+              )
+            else if (sessionList.isEmpty)
+              NoDataFoundTemplate(
+                title: 'No Academic Sessions Found',
+                message: searchQuery.value.isNotEmpty
+                    ? 'No academic session matched "${searchQuery.value}".'
+                    : 'Get started by creating your school organization\'s first academic session year.',
+                actionText: 'Create Session Year',
+                actionIcon: Icons.add_rounded,
+                onAction: () => context.goNamed(RouteNames.sessionAdd),
+                cardWrapper: true,
+              )
+            else
+              AppCard(
+                padding: EdgeInsets.zero,
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: sessionList.length,
+                  separatorBuilder: (_, _) => Divider(
+                    height: 1,
+                    color: isDark ? AppColors.borderDark : AppColors.borderLight,
+                  ),
+                  itemBuilder: (ctx, idx) {
+                    final session = sessionList[idx];
+                    final hasCurrent = session.branchMappings.any((m) => m.isCurrent);
+
+                    return ListTile(
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      leading: CircleAvatar(
+                        radius: 20,
+                        backgroundColor: hasCurrent
+                            ? AppColors.success.withAlpha(25)
+                            : AppColors.primary.withAlpha(25),
+                        child: Icon(
+                          Icons.calendar_month_rounded,
+                          color: hasCurrent ? AppColors.success : AppColors.primary,
+                          size: 22,
+                        ),
+                      ),
+                      title: Row(
+                        children: [
+                          Text(
+                            session.name,
+                            style: AppTypography.titleSmall.copyWith(fontWeight: FontWeight.w700),
+                          ),
+                          if (session.code != null && session.code!.isNotEmpty) ...[
+                            AppSpacing.hSm,
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: (isDark ? Colors.white : Colors.black).withAlpha(15),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Text(
+                                session.code!,
+                                style: AppTypography.labelSmall.copyWith(fontSize: 10),
+                              ),
+                            ),
+                          ],
+                          if (hasCurrent) ...[
+                            AppSpacing.hSm,
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: AppColors.success.withAlpha(25),
+                                borderRadius: BorderRadius.circular(4),
+                                border: Border.all(color: AppColors.success.withAlpha(50)),
+                              ),
+                              child: Text(
+                                'ACTIVE',
+                                style: AppTypography.labelSmall.copyWith(
+                                  color: AppColors.success,
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AppSpacing.vXs,
+                          Text(
+                            'Years: ${session.startYear} - ${session.endYear}  •  ${session.startDate.toLocal().toString().split(' ')[0]} to ${session.endDate.toLocal().toString().split(' ')[0]}',
+                            style: AppTypography.bodySmall.copyWith(
+                              color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                            ),
+                          ),
+                          if (session.createdBy != null) ...[
+                            AppSpacing.vXs,
+                            Text(
+                              'Created by ${session.createdBy!.fullName}',
+                              style: AppTypography.labelSmall.copyWith(
+                                color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                                fontSize: 11,
+                              ),
+                            ),
+                          ],
+                          if (session.branchMappings.isNotEmpty) ...[
+                            AppSpacing.vXs,
+                            Wrap(
+                              spacing: 6,
+                              runSpacing: 4,
+                              children: session.branchMappings.map((m) {
+                                return InkWell(
+                                  onTap: () {
+                                    setBranchCurrentMutation.mutate(
+                                      SetBranchCurrentSessionParams(
+                                        branchId: m.branchId,
+                                        branchAcademicSessionId: m.id,
                                       ),
-                                      const PopupMenuItem(
-                                        value: 'edit',
-                                        child: Row(
-                                          children: [
-                                            Icon(Icons.edit_outlined, size: 16),
-                                            SizedBox(width: 8),
-                                            Text('Edit Session'),
-                                          ],
-                                        ),
+                                    );
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                    decoration: BoxDecoration(
+                                      color: m.isCurrent
+                                          ? AppColors.success.withAlpha(30)
+                                          : (isDark ? AppColors.surfaceDark : AppColors.surfaceLight),
+                                      borderRadius: BorderRadius.circular(4),
+                                      border: Border.all(
+                                        color: m.isCurrent
+                                            ? AppColors.success
+                                            : (isDark ? AppColors.borderDark : AppColors.borderLight),
                                       ),
-                                      if (status != 'active')
-                                        const PopupMenuItem(
-                                          value: 'make_current',
-                                          child: Row(
-                                            children: [
-                                              Icon(Icons.check_circle_outline_rounded, size: 16, color: AppColors.success),
-                                              SizedBox(width: 8),
-                                              Text('Make Current', style: TextStyle(color: AppColors.success)),
-                                            ],
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(
+                                          m.isCurrent ? Icons.check_circle : Icons.radio_button_unchecked,
+                                          size: 12,
+                                          color: m.isCurrent ? AppColors.success : Colors.grey,
+                                        ),
+                                        const SizedBox(width: 4),
+                                        Text(
+                                          m.branch?.name ?? 'Branch',
+                                          style: AppTypography.labelSmall.copyWith(
+                                            fontSize: 10,
+                                            fontWeight: m.isCurrent ? FontWeight.w700 : FontWeight.w500,
+                                            color: m.isCurrent ? AppColors.success : null,
                                           ),
                                         ),
-                                      const PopupMenuItem(
-                                        value: 'delete',
-                                        child: Row(
-                                          children: [
-                                            Icon(Icons.delete_outline_rounded, size: 16, color: AppColors.error),
-                                            SizedBox(width: 8),
-                                            Text('Delete', style: TextStyle(color: AppColors.error)),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
-                            );
-                          }).toList(),
-                        ),
+                                );
+                              }).toList(),
+                            ),
+                          ],
+                        ],
+                      ),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.visibility_outlined, size: 20),
+                            tooltip: 'View Details',
+                            onPressed: () => _openViewDialog(context, session),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.edit_outlined, size: 20),
+                            tooltip: 'Edit Session',
+                            onPressed: () => _openEditDialog(
+                              context,
+                              session,
+                              (params) => updateSessionMutation.mutate(params),
+                            ),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.delete_outline, size: 20, color: AppColors.error),
+                            tooltip: 'Delete Session',
+                            onPressed: () => _confirmDelete(
+                              context,
+                              session,
+                              (id) => deleteSessionMutation.mutate(id),
+                            ),
+                          ),
+                        ],
                       ),
                     );
                   },
                 ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildHeader(bool isDark, bool isMobile) {
-    final headerTexts = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            InkWell(
-              onTap: () => context.go(RouteNames.sessionAllPath),
-              child: Text(
-                'Session Year',
-                style: AppTypography.bodySmall.copyWith(
-                  color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
-                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6),
-              child: Text(
-                '/',
-                style: AppTypography.bodySmall.copyWith(
-                  color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
-                ),
-              ),
-            ),
-            Text(
-              'All Sessions',
-              style: AppTypography.bodySmall.copyWith(
-                color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
           ],
-        ),
-        AppSpacing.vSm,
-        Text(
-          'Session Management',
-          style: AppTypography.headlineMedium.copyWith(
-            fontWeight: FontWeight.w800,
-            color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
-          ),
-        ),
-        AppSpacing.vXs,
-        Text(
-          'Manage and view academic session years',
-          style: AppTypography.bodyMedium.copyWith(
-            color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
-          ),
-        ),
-      ],
-    );
-
-    final actionBtn = AppButton(
-      text: 'Add New Session',
-      icon: Icons.add_rounded,
-      onPressed: () => _openFormDialog(),
-      height: 38,
-    );
-
-    if (isMobile) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          headerTexts,
-          AppSpacing.vMd,
-          actionBtn,
-        ],
-      );
-    }
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        Expanded(child: headerTexts),
-        actionBtn,
-      ],
-    );
-  }
-
-  DataColumn _buildDataColumn(String title, bool isDark) {
-    return DataColumn(
-      label: Text(
-        title,
-        style: AppTypography.labelMedium.copyWith(
-          fontSize: 10.5,
-          fontWeight: FontWeight.w700,
-          letterSpacing: 0.5,
-          color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
         ),
       ),
     );

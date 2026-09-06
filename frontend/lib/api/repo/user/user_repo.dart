@@ -160,4 +160,125 @@ class UserRepo {
     final rawData = response.data?['data'] as Map<String, dynamic>? ?? {};
     return PaginatedAuditLogsResponse.fromJson(rawData);
   }
+
+  // ==========================================================================
+  // 5. User Management & Provisioning (/user/users/*)
+  // ==========================================================================
+
+  /// List paginated users with branch, role, and search filters.
+  static Future<PaginatedUsersResponse> getUsers([
+    GetUsersParams params = const GetUsersParams(),
+  ]) async {
+    final response = await ApiClient().get<Map<String, dynamic>>(
+      '/user/users',
+      queryParameters: params.toQueryParameters(),
+    );
+    final rawData = response.data ?? {};
+    return PaginatedUsersResponse.fromJson(rawData);
+  }
+
+  /// Retrieve user details with assigned roles and relations by ID.
+  static Future<UserModel> getUserById(String userId) async {
+    final response =
+        await ApiClient().get<Map<String, dynamic>>('/user/users/$userId');
+    final rawData = response.data?['data'] as Map<String, dynamic>? ?? {};
+    return UserModel.fromJson(rawData);
+  }
+
+  /// Create new user with credentials, scope, and initial roles.
+  static Future<UserModel> createUser(CreateUserInput input) async {
+    final response = await ApiClient().post<Map<String, dynamic>>(
+      '/user/users',
+      data: input.toJson(),
+    );
+    final rawData = response.data?['data'] as Map<String, dynamic>? ?? {};
+    return UserModel.fromJson(rawData);
+  }
+
+  /// Update user status (ACTIVE, INACTIVE, SUSPENDED, INVITED).
+  static Future<UserModel> updateUserStatus(
+    String userId,
+    UpdateUserStatusInput input,
+  ) async {
+    final response = await ApiClient().patch<Map<String, dynamic>>(
+      '/user/users/$userId/status',
+      data: input.toJson(),
+    );
+    final rawData = response.data?['data'] as Map<String, dynamic>? ?? {};
+    return UserModel.fromJson(rawData);
+  }
+
+  /// Assign/sync roles to a user.
+  static Future<UserModel> assignRolesToUser(
+    String userId,
+    AssignRolesToUserInput input,
+  ) async {
+    final response = await ApiClient().post<Map<String, dynamic>>(
+      '/user/users/$userId/roles',
+      data: input.toJson(),
+    );
+    final rawData = response.data?['data'] as Map<String, dynamic>? ?? {};
+    return UserModel.fromJson(rawData);
+  }
+
+  // ==========================================================================
+  // 6. Role Management & RBAC (/user/roles/*)
+  // ==========================================================================
+
+  /// List paginated roles for organization / branch.
+  static Future<PaginatedRolesResponse> getRoles([
+    GetRolesParams params = const GetRolesParams(),
+  ]) async {
+    final response = await ApiClient().get<Map<String, dynamic>>(
+      '/user/roles',
+      queryParameters: params.toQueryParameters(),
+    );
+    final rawData = response.data ?? {};
+    return PaginatedRolesResponse.fromJson(rawData);
+  }
+
+  /// Retrieve role details with assigned permissions by ID.
+  static Future<UserRoleItem> getRoleById(String roleId) async {
+    final response =
+        await ApiClient().get<Map<String, dynamic>>('/user/roles/$roleId');
+    final rawData = response.data?['data'] as Map<String, dynamic>? ?? {};
+    return UserRoleItem.fromJson(rawData);
+  }
+
+  /// Create new custom role with scope enforcement and initial permissions.
+  static Future<UserRoleItem> createRole(CreateRoleInput input) async {
+    final response = await ApiClient().post<Map<String, dynamic>>(
+      '/user/roles',
+      data: input.toJson(),
+    );
+    final rawData = response.data?['data'] as Map<String, dynamic>? ?? {};
+    return UserRoleItem.fromJson(rawData);
+  }
+
+  /// Assign/sync atomic permissions to a role.
+  static Future<UserRoleItem> assignPermissionsToRole(
+    String roleId,
+    AssignPermissionsToRoleInput input,
+  ) async {
+    final response = await ApiClient().put<Map<String, dynamic>>(
+      '/user/roles/$roleId/permissions',
+      data: input.toJson(),
+    );
+    final rawData = response.data?['data'] as Map<String, dynamic>? ?? {};
+    return UserRoleItem.fromJson(rawData);
+  }
+
+  // ==========================================================================
+  // 7. System Permissions Catalog (/user/permissions/*)
+  // ==========================================================================
+
+  /// List all atomic system permissions for UI selectors.
+  static Future<List<SystemPermissionModel>> getPermissions() async {
+    final response =
+        await ApiClient().get<Map<String, dynamic>>('/user/permissions');
+    final rawList = response.data?['data'] as List? ?? [];
+    return rawList
+        .map((p) => SystemPermissionModel.fromJson(p as Map<String, dynamic>))
+        .toList();
+  }
 }

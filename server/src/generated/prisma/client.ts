@@ -52,6 +52,26 @@ export type Branch = Prisma.BranchModel
  */
 export type Organization = Prisma.OrganizationModel
 /**
+ * Model AcademicSession
+ * *
+ *  * AcademicSession
+ *  *
+ *  * Master academic session defined at Organization level.
+ *  * Single source of truth for session duration, naming, and years.
+ *  * Can be created by Organization users or Branch users (tracked via createdBy).
+ */
+export type AcademicSession = Prisma.AcademicSessionModel
+/**
+ * Model BranchAcademicSession
+ * *
+ *  * BranchAcademicSession
+ *  *
+ *  * Normalized mapping connecting an AcademicSession with a Branch.
+ *  * Contains isCurrent to track which session is active for this branch.
+ *  * Stores createdBy to track which user created/mapped this session for the branch.
+ */
+export type BranchAcademicSession = Prisma.BranchAcademicSessionModel
+/**
  * Model Parent
  * 
  */

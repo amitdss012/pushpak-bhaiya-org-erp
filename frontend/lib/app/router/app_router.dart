@@ -749,7 +749,10 @@ class AppRouter {
           GoRoute(
             path: RouteNames.userAccessControlPath,
             name: RouteNames.userAccessControl,
-            builder: (context, state) => const AccessControlScreen(),
+            builder: (context, state) {
+              final roleId = state.uri.queryParameters['roleId'] ?? state.extra as String?;
+              return AccessControlScreen(initialRoleId: roleId);
+            },
           ),
 
           // 17. Session Year

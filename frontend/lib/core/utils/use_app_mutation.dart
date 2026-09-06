@@ -7,6 +7,12 @@ import 'toast_utils.dart';
 /// Extension on [MutationSnapshot] to provide convenient UI helper getters.
 extension AppMutationSnapshotX<TData, TError, TVariables>
     on MutationSnapshot<TData, TError, TVariables> {
+  /// Returns true if mutation is currently executing.
+  bool get isLoading =>
+      this is! MutationIdle<TData, TError, TVariables> &&
+      this is! MutationSuccess<TData, TError, TVariables> &&
+      this is! MutationError<TData, TError, TVariables>;
+
   /// Returns a cleaned, user-friendly error message if mutation failed, or null.
   String? get errorMessage {
     if (this is MutationError<TData, TError, TVariables>) {

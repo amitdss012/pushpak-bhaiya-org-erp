@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../core/utils/image_picker_helper.dart';
+
 import '../../../../../../app/router/route_names.dart';
 import '../../../../../../app/theme/app_colors.dart';
 import '../../../../../../app/theme/app_radius.dart';
@@ -20,6 +22,7 @@ class BranchWebsiteSettingsScreen extends StatefulWidget {
 
 class _BranchWebsiteSettingsScreenState extends State<BranchWebsiteSettingsScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  final Map<String, CompressedImageResult> _uploadedFiles = {};
 
   // General Tab Controllers
   final _siteNameController = TextEditingController(text: 'ABC School - Main Campus');
@@ -609,7 +612,38 @@ class _BranchWebsiteSettingsScreenState extends State<BranchWebsiteSettingsScree
     );
   }
 
+  Future<void> _pickFile(String label) async {
+    try {
+      final result = await ImagePickerHelper.pickAndCompressImage();
+      if (result != null) {
+        setState(() {
+          _uploadedFiles[label] = result;
+        });
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('$label uploaded (${result.formattedSize}, under 100 KB)'),
+              backgroundColor: AppColors.success,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to pick file: $e'),
+            backgroundColor: AppColors.error,
+          ),
+        );
+      }
+    }
+  }
+
   Widget _buildUploadBox(String label, String hint, bool isDark) {
+    final uploaded = _uploadedFiles[label];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -619,32 +653,90 @@ class _BranchWebsiteSettingsScreenState extends State<BranchWebsiteSettingsScree
           width: double.infinity,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: isDark ? AppColors.backgroundDark.withAlpha(80) : AppColors.backgroundLight,
+            color: uploaded != null
+                ? AppColors.success.withAlpha(isDark ? 30 : 15)
+                : (isDark ? AppColors.backgroundDark.withAlpha(80) : AppColors.backgroundLight),
             borderRadius: AppRadius.md,
             border: Border.all(
-              color: isDark ? AppColors.borderDark : AppColors.borderLight,
+              color: uploaded != null
+                  ? AppColors.success
+                  : (isDark ? AppColors.borderDark : AppColors.borderLight),
             ),
           ),
-          child: Column(
-            children: [
-              Icon(Icons.cloud_upload_outlined, size: 28, color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight),
-              AppSpacing.vXs,
-              Text(
-                hint,
-                style: AppTypography.bodySmall.copyWith(
-                  fontSize: 11,
-                  color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+          child: uploaded != null
+              ? Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.memory(
+                        uploaded.bytes,
+                        width: 56,
+                        height: 56,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    AppSpacing.vXs,
+                    Text(
+                      uploaded.fileName,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTypography.bodySmall.copyWith(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+                      ),
+                    ),
+                    Text(
+                      '${uploaded.formattedSize} (under 100 KB)',
+                      style: AppTypography.bodySmall.copyWith(
+                        fontSize: 10,
+                        color: AppColors.success,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    AppSpacing.vSm,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AppButton(
+                          text: 'Change',
+                          variant: AppButtonVariant.outline,
+                          height: 26,
+                          onPressed: () => _pickFile(label),
+                        ),
+                        AppSpacing.hSm,
+                        AppButton(
+                          text: 'Remove',
+                          variant: AppButtonVariant.text,
+                          height: 26,
+                          onPressed: () => setState(() => _uploadedFiles.remove(label)),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              : Column(
+                  children: [
+                    Icon(Icons.cloud_upload_outlined,
+                        size: 28,
+                        color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight),
+                    AppSpacing.vXs,
+                    Text(
+                      hint,
+                      style: AppTypography.bodySmall.copyWith(
+                        fontSize: 11,
+                        color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                      ),
+                    ),
+                    AppSpacing.vSm,
+                    AppButton(
+                      text: 'Choose File',
+                      variant: AppButtonVariant.outline,
+                      height: 28,
+                      onPressed: () => _pickFile(label),
+                    ),
+                  ],
                 ),
-              ),
-              AppSpacing.vSm,
-              AppButton(
-                text: 'Choose File',
-                variant: AppButtonVariant.outline,
-                height: 28,
-                onPressed: () {},
-              ),
-            ],
-          ),
         ),
       ],
     );

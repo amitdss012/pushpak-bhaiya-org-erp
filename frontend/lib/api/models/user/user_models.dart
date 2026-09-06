@@ -1,3 +1,5 @@
+import '../pagination_model.dart';
+
 /// Organization summary attached to a user profile.
 class UserOrganizationInfo {
   final String id;
@@ -658,6 +660,248 @@ class PaginatedAuditLogsResponse {
       total: json['total'] as int? ?? 0,
       page: json['page'] as int? ?? 1,
       totalPages: json['totalPages'] as int? ?? 1,
+    );
+  }
+}
+
+// ==========================================================================
+// 5. User Management Models & Payloads (/user/users/*)
+// ==========================================================================
+
+/// Parameters for listing users with filters.
+class GetUsersParams {
+  final int page;
+  final int limit;
+  final String? search;
+  final String? scope;
+  final String? branchId;
+  final String? status;
+  final String? roleId;
+
+  const GetUsersParams({
+    this.page = 1,
+    this.limit = 20,
+    this.search,
+    this.scope,
+    this.branchId,
+    this.status,
+    this.roleId,
+  });
+
+  Map<String, dynamic> toQueryParameters() => {
+        'page': page,
+        'limit': limit,
+        if (search != null && search!.trim().isNotEmpty) 'search': search!.trim(),
+        if (scope != null && scope!.isNotEmpty) 'scope': scope,
+        if (branchId != null && branchId!.isNotEmpty) 'branchId': branchId,
+        if (status != null && status!.isNotEmpty) 'status': status,
+        if (roleId != null && roleId!.isNotEmpty) 'roleId': roleId,
+      };
+}
+
+/// Paginated Users Response matching the backend /user/users response.
+class PaginatedUsersResponse {
+  final List<UserModel> data;
+  final PaginationMeta meta;
+
+  const PaginatedUsersResponse({
+    required this.data,
+    required this.meta,
+  });
+
+  factory PaginatedUsersResponse.fromJson(Map<String, dynamic> json) {
+    final rawData = json['data'] as List? ?? [];
+    final users = rawData
+        .map((u) => UserModel.fromJson(u as Map<String, dynamic>))
+        .toList();
+
+    final metaJson = json['meta'] as Map<String, dynamic>? ?? {};
+    final meta = PaginationMeta.fromJson(metaJson);
+
+    return PaginatedUsersResponse(
+      data: users,
+      meta: meta,
+    );
+  }
+}
+
+/// Request payload to create a new user.
+class CreateUserInput {
+  final String email;
+  final String password;
+  final String firstName;
+  final String? lastName;
+  final String? phone;
+  final String? scope;
+  final String? branchId;
+  final List<String>? roleIds;
+
+  const CreateUserInput({
+    required this.email,
+    required this.password,
+    required this.firstName,
+    this.lastName,
+    this.phone,
+    this.scope,
+    this.branchId,
+    this.roleIds,
+  });
+
+  Map<String, dynamic> toJson() => {
+        'email': email.trim().toLowerCase(),
+        'password': password,
+        'firstName': firstName.trim(),
+        if (lastName != null && lastName!.trim().isNotEmpty)
+          'lastName': lastName!.trim(),
+        if (phone != null && phone!.trim().isNotEmpty) 'phone': phone!.trim(),
+        if (scope != null && scope!.isNotEmpty) 'scope': scope,
+        if (branchId != null && branchId!.isNotEmpty) 'branchId': branchId,
+        if (roleIds != null && roleIds!.isNotEmpty) 'roleIds': roleIds,
+      };
+}
+
+/// Request payload to update user status (ACTIVE, INACTIVE, SUSPENDED, INVITED).
+class UpdateUserStatusInput {
+  final String status;
+
+  const UpdateUserStatusInput({required this.status});
+
+  Map<String, dynamic> toJson() => {'status': status};
+}
+
+/// Request payload to assign roles to a user.
+class AssignRolesToUserInput {
+  final List<String> roleIds;
+
+  const AssignRolesToUserInput({required this.roleIds});
+
+  Map<String, dynamic> toJson() => {'roleIds': roleIds};
+}
+
+// ==========================================================================
+// 6. Role & Permission Models & Payloads (/user/roles/* & /user/permissions/*)
+// ==========================================================================
+
+/// Parameters for listing roles.
+class GetRolesParams {
+  final int page;
+  final int limit;
+  final String? search;
+  final String? scope;
+  final String? branchId;
+
+  const GetRolesParams({
+    this.page = 1,
+    this.limit = 50,
+    this.search,
+    this.scope,
+    this.branchId,
+  });
+
+  Map<String, dynamic> toQueryParameters() => {
+        'page': page,
+        'limit': limit,
+        if (search != null && search!.trim().isNotEmpty) 'search': search!.trim(),
+        if (scope != null && scope!.isNotEmpty) 'scope': scope,
+        if (branchId != null && branchId!.isNotEmpty) 'branchId': branchId,
+      };
+}
+
+/// Paginated Roles Response matching backend /user/roles response.
+class PaginatedRolesResponse {
+  final List<UserRoleItem> data;
+  final PaginationMeta meta;
+
+  const PaginatedRolesResponse({
+    required this.data,
+    required this.meta,
+  });
+
+  factory PaginatedRolesResponse.fromJson(Map<String, dynamic> json) {
+    final rawList = json['data'] as List? ?? [];
+    final roles = rawList
+        .map((r) => UserRoleItem.fromJson(r as Map<String, dynamic>))
+        .toList();
+
+    final metaJson = json['meta'] as Map<String, dynamic>? ?? {};
+    final meta = PaginationMeta.fromJson(metaJson);
+
+    return PaginatedRolesResponse(
+      data: roles,
+      meta: meta,
+    );
+  }
+}
+
+/// Request payload to create a custom role.
+class CreateRoleInput {
+  final String name;
+  final String? description;
+  final String? scope;
+  final String? branchId;
+  final List<String>? permissionKeys;
+
+  const CreateRoleInput({
+    required this.name,
+    this.description,
+    this.scope,
+    this.branchId,
+    this.permissionKeys,
+  });
+
+  Map<String, dynamic> toJson() => {
+        'name': name.trim(),
+        if (description != null && description!.trim().isNotEmpty)
+          'description': description!.trim(),
+        if (scope != null && scope!.isNotEmpty) 'scope': scope,
+        if (branchId != null && branchId!.isNotEmpty) 'branchId': branchId,
+        if (permissionKeys != null && permissionKeys!.isNotEmpty)
+          'permissionKeys': permissionKeys,
+      };
+}
+
+/// Request payload to assign/sync permissions to a role.
+class AssignPermissionsToRoleInput {
+  final List<String> permissionKeys;
+
+  const AssignPermissionsToRoleInput({required this.permissionKeys});
+
+  Map<String, dynamic> toJson() => {'permissionKeys': permissionKeys};
+}
+
+/// Full System Permission entity from /user/permissions.
+class SystemPermissionModel {
+  final String id;
+  final String key;
+  final String name;
+  final String module;
+  final String action;
+  final String? description;
+  final bool isSystem;
+  final List<String> allowedScopes;
+
+  const SystemPermissionModel({
+    required this.id,
+    required this.key,
+    required this.name,
+    required this.module,
+    required this.action,
+    this.description,
+    this.isSystem = true,
+    this.allowedScopes = const ['ORGANIZATION', 'BRANCH'],
+  });
+
+  factory SystemPermissionModel.fromJson(Map<String, dynamic> json) {
+    final rawScopes = json['allowedScopes'] as List? ?? [];
+    return SystemPermissionModel(
+      id: json['id'] as String? ?? '',
+      key: json['key'] as String? ?? '',
+      name: json['name'] as String? ?? json['key'] as String? ?? '',
+      module: json['module'] as String? ?? 'General',
+      action: json['action'] as String? ?? 'ACCESS',
+      description: json['description'] as String?,
+      isSystem: json['isSystem'] as bool? ?? true,
+      allowedScopes: rawScopes.map((s) => s.toString()).toList(),
     );
   }
 }

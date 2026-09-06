@@ -1,6 +1,11 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../core/utils/image_picker_helper.dart';
+
+import '../../../../../../api/models/models.dart';
+import '../../../../../../api/repo/branch/branch_repo.dart';
 import '../../../../../../app/router/route_names.dart';
 import '../../../../../../app/theme/app_colors.dart';
 import '../../../../../../app/theme/app_radius.dart';
@@ -20,6 +25,12 @@ class CreateBranchScreen extends StatefulWidget {
 
 class _CreateBranchScreenState extends State<CreateBranchScreen> {
   final _formKey = GlobalKey<FormState>();
+
+  Uint8List? _logoBytes;
+  String? _logoFileName;
+  String? _logoSizeFormatted;
+  final Map<String, CompressedImageResult> _uploadedDocuments = {};
+  bool _isSubmitting = false;
 
   // 1. Branch Info
   final _branchNameController = TextEditingController();
@@ -128,7 +139,67 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
     }
   }
 
-  void _handleSubmit() {
+  Future<void> _pickLogo() async {
+    try {
+      final result = await ImagePickerHelper.pickAndCompressImage();
+      if (result != null) {
+        setState(() {
+          _logoBytes = result.bytes;
+          _logoFileName = result.fileName;
+          _logoSizeFormatted = result.formattedSize;
+        });
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Logo compressed to ${result.formattedSize} (under 100 KB limit)'),
+              backgroundColor: AppColors.success,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to pick logo file: $e'),
+            backgroundColor: AppColors.error,
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _pickDocument(String label) async {
+    try {
+      final result = await ImagePickerHelper.pickAndCompressImage();
+      if (result != null) {
+        setState(() {
+          _uploadedDocuments[label] = result;
+        });
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('$label uploaded (${result.formattedSize}, under 100 KB)'),
+              backgroundColor: AppColors.success,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to pick file: $e'),
+            backgroundColor: AppColors.error,
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _handleSubmit() async {
     if (!_formKey.currentState!.validate()) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -140,14 +211,82 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
       return;
     }
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Branch "${_branchNameController.text}" created successfully!'),
-        backgroundColor: AppColors.success,
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
-    context.go(RouteNames.branchViewPath);
+    setState(() => _isSubmitting = true);
+    try {
+      final req = CreateBranchRequest(
+        name: _branchNameController.text.trim(),
+        code: _branchCodeController.text.trim(),
+        branchType: _branchType ?? 'main',
+        instituteType: _instituteType ?? 'computer',
+        establishedYear: _establishedYearController.text.trim(),
+        website: _websiteController.text.trim(),
+        description: _descriptionController.text.trim(),
+        address: _streetAddressController.text.trim(),
+        city: _cityController.text.trim(),
+        district: _districtController.text.trim(),
+        block: _blockController.text.trim(),
+        state: _state,
+        country: _country ?? 'IN',
+        pincode: _pincodeController.text.trim(),
+        latitude: double.tryParse(_latitudeController.text.trim()),
+        longitude: double.tryParse(_longitudeController.text.trim()),
+        phone: _phoneController.text.trim(),
+        altPhone: _altPhoneController.text.trim(),
+        whatsapp: _whatsappController.text.trim(),
+        email: _emailController.text.trim(),
+        directorName: _directorNameController.text.trim(),
+        directorGender: _directorGender,
+        directorDob: _directorDobController.text.trim(),
+        directorBloodGroup: _directorBloodGroup,
+        numComputers: int.tryParse(_numComputersController.text.trim()) ?? 0,
+        numFaculty: int.tryParse(_numFacultyController.text.trim()) ?? 0,
+        numRooms: int.tryParse(_numRoomsController.text.trim()) ?? 0,
+        numFees: double.tryParse(_numFeesController.text.trim()),
+        registrationDate: _registrationDateController.text.trim(),
+        validDate: _validDateController.text.trim(),
+        expiryDate: _expiryDateController.text.trim(),
+        renewalDate: _renewalDateController.text.trim(),
+        referralCode: _referralCodeController.text.trim(),
+        activeStatus: _activeStatus,
+        onlineEnrollment: _onlineEnrollment,
+        smsNotifications: _smsNotifications,
+        emailNotifications: _emailNotifications,
+        adminName: _adminNameController.text.trim(),
+        adminUsername: _adminUsernameController.text.trim(),
+        adminPassword: _adminPasswordController.text.trim(),
+        adminEmail: _adminEmailController.text.trim(),
+        adminPhone: _adminPhoneController.text.trim(),
+      );
+
+      final newBranch = await BranchRepo.createBranch(
+        req,
+        logoBytes: _logoBytes,
+        logoFileName: _logoFileName,
+      );
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Branch "${newBranch.name}" created successfully!'),
+            backgroundColor: AppColors.success,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        context.go(RouteNames.branchViewPath);
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString().replaceAll('Exception:', '').trim()),
+            backgroundColor: AppColors.error,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isSubmitting = false);
+    }
   }
 
   @override
@@ -252,7 +391,8 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
                 AppButton(
                   text: 'Create Branch',
                   icon: Icons.add_business_rounded,
-                  onPressed: _handleSubmit,
+                  isLoading: _isSubmitting,
+                  onPressed: _isSubmitting ? null : _handleSubmit,
                 ),
               ],
             ),
@@ -940,7 +1080,7 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
           AppSpacing.vMd,
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: isDark ? AppColors.backgroundDark.withAlpha(80) : AppColors.backgroundLight,
               borderRadius: AppRadius.md,
@@ -949,33 +1089,91 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
                 style: BorderStyle.solid,
               ),
             ),
-            child: Column(
-              children: [
-                Icon(Icons.cloud_upload_outlined, size: 36, color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight),
-                AppSpacing.vSm,
-                Text(
-                  'Upload branch logo',
-                  style: AppTypography.bodySmall.copyWith(
-                    color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+            child: _logoBytes != null
+                ? Column(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.memory(
+                          _logoBytes!,
+                          width: 96,
+                          height: 96,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      AppSpacing.vSm,
+                      Text(
+                        _logoFileName ?? 'Selected Logo',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTypography.bodySmall.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+                        ),
+                      ),
+                      if (_logoSizeFormatted != null)
+                        Text(
+                          'Size: $_logoSizeFormatted (under 100 KB)',
+                          style: AppTypography.bodySmall.copyWith(
+                            fontSize: 10.5,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.success,
+                          ),
+                        ),
+                      AppSpacing.vSm,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AppButton(
+                            text: 'Change',
+                            variant: AppButtonVariant.outline,
+                            height: 30,
+                            onPressed: _pickLogo,
+                          ),
+                          AppSpacing.hSm,
+                          AppButton(
+                            text: 'Remove',
+                            variant: AppButtonVariant.text,
+                            height: 30,
+                            onPressed: () {
+                              setState(() {
+                                _logoBytes = null;
+                                _logoFileName = null;
+                                _logoSizeFormatted = null;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
+                : Column(
+                    children: [
+                      Icon(Icons.cloud_upload_outlined, size: 36, color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight),
+                      AppSpacing.vSm,
+                      Text(
+                        'Upload branch logo',
+                        style: AppTypography.bodySmall.copyWith(
+                          color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                        ),
+                      ),
+                      AppSpacing.vSm,
+                      AppButton(
+                        text: 'Choose File',
+                        variant: AppButtonVariant.outline,
+                        height: 32,
+                        onPressed: _pickLogo,
+                      ),
+                      AppSpacing.vXs,
+                      Text(
+                        'PNG, JPG up to 5MB',
+                        style: AppTypography.bodySmall.copyWith(
+                          fontSize: 10.5,
+                          color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                AppSpacing.vSm,
-                AppButton(
-                  text: 'Choose File',
-                  variant: AppButtonVariant.outline,
-                  height: 32,
-                  onPressed: () {},
-                ),
-                AppSpacing.vXs,
-                Text(
-                  'PNG, JPG up to 2MB',
-                  style: AppTypography.bodySmall.copyWith(
-                    fontSize: 10.5,
-                    color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
-                  ),
-                ),
-              ],
-            ),
           ),
         ],
       ),
@@ -1120,6 +1318,8 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
   }
 
   Widget _buildUploadBox(String label, String hint, bool isDark) {
+    final uploaded = _uploadedDocuments[label];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -1129,32 +1329,90 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
           width: double.infinity,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: isDark ? AppColors.backgroundDark.withAlpha(80) : AppColors.backgroundLight,
+            color: uploaded != null
+                ? AppColors.success.withAlpha(isDark ? 30 : 15)
+                : (isDark ? AppColors.backgroundDark.withAlpha(80) : AppColors.backgroundLight),
             borderRadius: AppRadius.md,
             border: Border.all(
-              color: isDark ? AppColors.borderDark : AppColors.borderLight,
+              color: uploaded != null
+                  ? AppColors.success
+                  : (isDark ? AppColors.borderDark : AppColors.borderLight),
             ),
           ),
-          child: Column(
-            children: [
-              Icon(Icons.cloud_upload_outlined, size: 28, color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight),
-              AppSpacing.vXs,
-              Text(
-                hint,
-                style: AppTypography.bodySmall.copyWith(
-                  fontSize: 11,
-                  color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+          child: uploaded != null
+              ? Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.memory(
+                        uploaded.bytes,
+                        width: 56,
+                        height: 56,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    AppSpacing.vXs,
+                    Text(
+                      uploaded.fileName,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTypography.bodySmall.copyWith(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+                      ),
+                    ),
+                    Text(
+                      '${uploaded.formattedSize} (under 100 KB)',
+                      style: AppTypography.bodySmall.copyWith(
+                        fontSize: 10,
+                        color: AppColors.success,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    AppSpacing.vSm,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AppButton(
+                          text: 'Change',
+                          variant: AppButtonVariant.outline,
+                          height: 26,
+                          onPressed: () => _pickDocument(label),
+                        ),
+                        AppSpacing.hSm,
+                        AppButton(
+                          text: 'Remove',
+                          variant: AppButtonVariant.text,
+                          height: 26,
+                          onPressed: () => setState(() => _uploadedDocuments.remove(label)),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              : Column(
+                  children: [
+                    Icon(Icons.cloud_upload_outlined,
+                        size: 28,
+                        color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight),
+                    AppSpacing.vXs,
+                    Text(
+                      hint,
+                      style: AppTypography.bodySmall.copyWith(
+                        fontSize: 11,
+                        color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                      ),
+                    ),
+                    AppSpacing.vSm,
+                    AppButton(
+                      text: 'Choose File',
+                      variant: AppButtonVariant.outline,
+                      height: 28,
+                      onPressed: () => _pickDocument(label),
+                    ),
+                  ],
                 ),
-              ),
-              AppSpacing.vSm,
-              AppButton(
-                text: 'Choose File',
-                variant: AppButtonVariant.outline,
-                height: 28,
-                onPressed: () {},
-              ),
-            ],
-          ),
         ),
       ],
     );

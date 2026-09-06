@@ -1,551 +1,472 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../api/hooks/hooks.dart';
+import '../../../../../../api/models/models.dart';
 import '../../../../../../app/router/route_names.dart';
 import '../../../../../../app/theme/app_colors.dart';
 import '../../../../../../app/theme/app_radius.dart';
 import '../../../../../../app/theme/app_spacing.dart';
 import '../../../../../../app/theme/app_typography.dart';
 import '../../../../../../core/extensions/context_extensions.dart';
+import '../../../../../../core/utils/use_app_mutation.dart';
 import '../../../../../../shared/widgets/app_button.dart';
 import '../../../../../../shared/widgets/app_card.dart';
 import '../../../../../../shared/widgets/app_text_field.dart';
+import '../../../../../../shared/widgets/no_data_found_template.dart';
 
-class AddSessionYearScreen extends StatefulWidget {
+/// Screen for creating a new master Academic Session Year and configuring initial properties.
+class AddSessionYearScreen extends HookWidget {
   const AddSessionYearScreen({super.key});
-
-  @override
-  State<AddSessionYearScreen> createState() => _AddSessionYearScreenState();
-}
-
-class _AddSessionYearScreenState extends State<AddSessionYearScreen> {
-  String _searchQuery = '';
-
-  final List<Map<String, dynamic>> _sessions = [
-    {
-      'id': '1',
-      'sessionName': 'Session 2024-2025',
-      'startYear': '2024',
-      'endYear': '2025',
-      'startDate': '2024-04-01',
-      'endDate': '2025-03-31',
-      'status': 'active',
-      'description': 'Current active session',
-    },
-  ];
-
-  void _openSessionDialog({Map<String, dynamic>? session}) {
-    final isEditing = session != null;
-    final nameController = TextEditingController(text: session?['sessionName'] ?? 'Session 2024-2025');
-    final startYearController = TextEditingController(text: session?['startYear'] ?? '2024');
-    final endYearController = TextEditingController(text: session?['endYear'] ?? '2025');
-    final startDateController = TextEditingController(text: session?['startDate'] ?? '2024-04-01');
-    final endDateController = TextEditingController(text: session?['endDate'] ?? '2025-03-31');
-    final descController = TextEditingController(text: session?['description'] ?? '');
-    String status = session?['status'] ?? 'active';
-
-    void updateSessionName() {
-      final s = startYearController.text.trim();
-      final e = endYearController.text.trim();
-      if (s.isNotEmpty && e.isNotEmpty) {
-        nameController.text = 'Session $s-$e';
-      }
-    }
-
-    showDialog(
-      context: context,
-      builder: (dialogCtx) => StatefulBuilder(
-        builder: (ctx, setDialogState) {
-          return AlertDialog(
-            title: Text(
-              isEditing ? 'Edit Session Year' : 'Create Session Year',
-              style: AppTypography.titleLarge.copyWith(fontWeight: FontWeight.w700),
-            ),
-            content: SizedBox(
-              width: 500,
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    AppTextField(controller: nameController, label: 'Session Name *', hint: 'e.g. Session 2024-2025'),
-                    AppSpacing.vMd,
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Start Year', style: AppTypography.labelMedium.copyWith(fontWeight: FontWeight.w600)),
-                              AppSpacing.vXs,
-                              TextField(
-                                controller: startYearController,
-                                keyboardType: TextInputType.number,
-                                onChanged: (v) {
-                                  updateSessionName();
-                                  setDialogState(() {});
-                                },
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                                  border: OutlineInputBorder(borderRadius: AppRadius.sm),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        AppSpacing.hMd,
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('End Year', style: AppTypography.labelMedium.copyWith(fontWeight: FontWeight.w600)),
-                              AppSpacing.vXs,
-                              TextField(
-                                controller: endYearController,
-                                keyboardType: TextInputType.number,
-                                onChanged: (v) {
-                                  updateSessionName();
-                                  setDialogState(() {});
-                                },
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                                  border: OutlineInputBorder(borderRadius: AppRadius.sm),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    AppSpacing.vMd,
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Start Date *', style: AppTypography.labelMedium.copyWith(fontWeight: FontWeight.w600)),
-                              AppSpacing.vXs,
-                              TextField(
-                                readOnly: true,
-                                controller: startDateController,
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                                  suffixIcon: const Icon(Icons.calendar_today_rounded, size: 16),
-                                  border: OutlineInputBorder(borderRadius: AppRadius.sm),
-                                ),
-                                onTap: () async {
-                                  final picked = await showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime(2020),
-                                    lastDate: DateTime(2035),
-                                  );
-                                  if (picked != null) {
-                                    startDateController.text = picked.toString().split(' ')[0];
-                                    setDialogState(() {});
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                        AppSpacing.hMd,
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('End Date *', style: AppTypography.labelMedium.copyWith(fontWeight: FontWeight.w600)),
-                              AppSpacing.vXs,
-                              TextField(
-                                readOnly: true,
-                                controller: endDateController,
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                                  suffixIcon: const Icon(Icons.calendar_today_rounded, size: 16),
-                                  border: OutlineInputBorder(borderRadius: AppRadius.sm),
-                                ),
-                                onTap: () async {
-                                  final picked = await showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now().add(const Duration(days: 365)),
-                                    firstDate: DateTime(2020),
-                                    lastDate: DateTime(2035),
-                                  );
-                                  if (picked != null) {
-                                    endDateController.text = picked.toString().split(' ')[0];
-                                    setDialogState(() {});
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    AppSpacing.vMd,
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Status', style: AppTypography.labelMedium.copyWith(fontWeight: FontWeight.w600)),
-                        AppSpacing.vXs,
-                        DropdownButtonFormField<String>(
-                          initialValue: status,
-                          isExpanded: true,
-                          decoration: const InputDecoration(isDense: true, contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8)),
-                          items: const [
-                            DropdownMenuItem(value: 'active', child: Text('Active')),
-                            DropdownMenuItem(value: 'upcoming', child: Text('Upcoming')),
-                            DropdownMenuItem(value: 'closed', child: Text('Closed')),
-                          ],
-                          onChanged: (v) => setDialogState(() => status = v!),
-                        ),
-                      ],
-                    ),
-                    AppSpacing.vMd,
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Description', style: AppTypography.labelMedium.copyWith(fontWeight: FontWeight.w600)),
-                        AppSpacing.vXs,
-                        TextFormField(
-                          controller: descController,
-                          maxLines: 2,
-                          decoration: const InputDecoration(hintText: 'Academic session details...'),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            actions: [
-              TextButton(onPressed: () => Navigator.of(dialogCtx).pop(), child: const Text('Cancel')),
-              AppButton(
-                text: isEditing ? 'Save Changes' : 'Create Session',
-                icon: Icons.check_rounded,
-                onPressed: () {
-                  if (nameController.text.trim().isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please enter a session name.')));
-                    return;
-                  }
-                  setState(() {
-                    if (isEditing) {
-                      session['sessionName'] = nameController.text.trim();
-                      session['startYear'] = startYearController.text.trim();
-                      session['endYear'] = endYearController.text.trim();
-                      session['startDate'] = startDateController.text.trim();
-                      session['endDate'] = endDateController.text.trim();
-                      session['status'] = status;
-                      session['description'] = descController.text.trim();
-                    } else {
-                      _sessions.insert(0, {
-                        'id': '${DateTime.now().millisecondsSinceEpoch}',
-                        'sessionName': nameController.text.trim(),
-                        'startYear': startYearController.text.trim(),
-                        'endYear': endYearController.text.trim(),
-                        'startDate': startDateController.text.trim(),
-                        'endDate': endDateController.text.trim(),
-                        'status': status,
-                        'description': descController.text.trim(),
-                      });
-                    }
-                  });
-                  Navigator.of(dialogCtx).pop();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(isEditing ? 'Session updated!' : 'New session created!'), backgroundColor: AppColors.success),
-                  );
-                },
-              ),
-            ],
-          );
-        },
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     final isDark = context.isDarkMode;
     final isMobile = context.isMobile;
 
-    final filtered = _sessions.where((s) {
-      if (_searchQuery.isNotEmpty) {
-        final q = _searchQuery.toLowerCase();
-        final name = (s['sessionName'] as String).toLowerCase();
-        return name.contains(q);
+    final nameController = useTextEditingController(text: 'Session 2025-2026');
+    final codeController = useTextEditingController(text: 'AY-2025-26');
+    final startYearController = useTextEditingController(text: '2025');
+    final endYearController = useTextEditingController(text: '2026');
+    final descController = useTextEditingController();
+
+    final startDateState = useState<DateTime>(DateTime(2025, 4, 1));
+    final endDateState = useState<DateTime>(DateTime(2026, 3, 31));
+    final isCurrentForBranches = useState<bool>(false);
+    final errorMessage = useState<String?>(null);
+
+    final sessionsQuery = useSessionsQuery(
+      params: const GetSessionsParams(limit: 5),
+    );
+
+    final createMutation = useCreateSessionMutation(
+      onSuccess: (_) {
+        sessionsQuery.refetch();
+        context.goNamed(RouteNames.sessionAll);
+      },
+      onError: (err) {
+        errorMessage.value = err.toString();
+      },
+    );
+
+    void updateSessionName() {
+      final s = startYearController.text.trim();
+      final e = endYearController.text.trim();
+      if (s.isNotEmpty && e.isNotEmpty) {
+        nameController.text = 'Session $s-$e';
+        codeController.text = 'AY-$s-${e.length >= 2 ? e.substring(e.length - 2) : e}';
       }
-      return true;
-    }).toList();
+    }
 
-    return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 16 : 28,
-        vertical: 24,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // Header
-          _buildHeader(isDark, isMobile),
-          AppSpacing.vXl,
+    void submitForm() {
+      errorMessage.value = null;
+      final name = nameController.text.trim();
+      final startYear = int.tryParse(startYearController.text.trim());
+      final endYear = int.tryParse(endYearController.text.trim());
 
-          // Full-width Table Card
-          AppCard(
-            padding: EdgeInsets.zero,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+      if (name.isEmpty) {
+        errorMessage.value = 'Please enter a session name.';
+        return;
+      }
+      if (startYear == null || startYear < 2000 || startYear > 2100) {
+        errorMessage.value = 'Please enter a valid 4-digit start year (2000-2100).';
+        return;
+      }
+      if (endYear == null || endYear < startYear) {
+        errorMessage.value = 'End year must be greater than or equal to start year.';
+        return;
+      }
+      if (endDateState.value.isBefore(startDateState.value)) {
+        errorMessage.value = 'End date must be after start date.';
+        return;
+      }
+
+      createMutation.mutate(
+        CreateSessionInput(
+          name: name,
+          code: codeController.text.trim().isEmpty ? null : codeController.text.trim(),
+          startYear: startYear,
+          endYear: endYear,
+          startDate: startDateState.value,
+          endDate: endDateState.value,
+          description: descController.text.trim().isEmpty ? null : descController.text.trim(),
+          isCurrentForBranches: isCurrentForBranches.value,
+        ),
+      );
+    }
+
+    final recentSessions = sessionsQuery.dataOrNull?.sessions ?? [];
+
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(AppSpacing.lg),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Top Navigation & Title
+            Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                IconButton(
+                  icon: const Icon(Icons.arrow_back_rounded),
+                  onPressed: () => context.goNamed(RouteNames.sessionAll),
+                ),
+                AppSpacing.hSm,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Academic Sessions',
-                        style: AppTypography.titleMedium.copyWith(
-                          fontWeight: FontWeight.w700,
-                          color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
-                        ),
+                        'Create Academic Session',
+                        style: AppTypography.headlineMedium.copyWith(fontWeight: FontWeight.w800),
                       ),
-                      ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 260),
-                        child: Container(
-                          height: 38,
-                          decoration: BoxDecoration(
-                            color: isDark ? AppColors.backgroundDark : AppColors.backgroundLight,
-                            borderRadius: AppRadius.sm,
-                            border: Border.all(color: isDark ? AppColors.borderDark : AppColors.borderLight),
-                          ),
-                          child: TextField(
-                            onChanged: (val) => setState(() => _searchQuery = val.trim()),
-                            style: AppTypography.bodySmall.copyWith(
-                              color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
-                            ),
-                            decoration: InputDecoration(
-                              hintText: 'Search sessions...',
-                              hintStyle: AppTypography.bodySmall.copyWith(
-                                color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
-                                fontSize: 12,
-                              ),
-                              prefixIcon: Icon(
-                                Icons.search_rounded,
-                                size: 16,
-                                color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
-                              ),
-                              isDense: true,
-                              contentPadding: const EdgeInsets.symmetric(vertical: 8),
-                              border: InputBorder.none,
-                            ),
-                          ),
+                      AppSpacing.vXs,
+                      Text(
+                        'Configure master academic session year duration and date parameters.',
+                        style: AppTypography.bodySmall.copyWith(
+                          color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
                         ),
                       ),
                     ],
                   ),
                 ),
-                const Divider(height: 1),
+              ],
+            ),
+            AppSpacing.vLg,
 
-                LayoutBuilder(
-                  builder: (context, constraints) {
-                    return SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(minWidth: constraints.maxWidth),
-                        child: DataTable(
-                          headingRowHeight: 44,
-                          dataRowMinHeight: 56,
-                          dataRowMaxHeight: 64,
-                          horizontalMargin: 20,
-                          columnSpacing: 20,
-                          headingRowColor: WidgetStateProperty.all(
-                            isDark ? AppColors.backgroundDark.withAlpha(80) : AppColors.backgroundLight.withAlpha(120),
+            if (errorMessage.value != null) ...[
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(AppSpacing.md),
+                decoration: BoxDecoration(
+                  color: AppColors.error.withAlpha(25),
+                  borderRadius: AppRadius.sm,
+                  border: Border.all(color: AppColors.error.withAlpha(70)),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.error_outline_rounded, color: AppColors.error),
+                    AppSpacing.hSm,
+                    Expanded(
+                      child: Text(
+                        errorMessage.value!,
+                        style: AppTypography.bodySmall.copyWith(color: AppColors.error),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              AppSpacing.vLg,
+            ],
+
+            // Main Two-Column Layout
+            Flex(
+              direction: isMobile ? Axis.vertical : Axis.horizontal,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Left Column: Form
+                Expanded(
+                  flex: isMobile ? 0 : 3,
+                  child: AppCard(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Session Details',
+                          style: AppTypography.titleMedium.copyWith(fontWeight: FontWeight.w700),
+                        ),
+                        AppSpacing.vSm,
+                        Text(
+                          'Master academic session metadata inherited across branches.',
+                          style: AppTypography.bodySmall.copyWith(
+                            color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
                           ),
-                          columns: [
-                            _buildDataColumn('SESSION NAME', isDark),
-                            _buildDataColumn('RANGE', isDark),
-                            _buildDataColumn('START DATE', isDark),
-                            _buildDataColumn('STATUS', isDark),
-                            _buildDataColumn('ACTIONS', isDark),
+                        ),
+                        AppSpacing.vLg,
+
+                        // Name & Code
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: AppTextField(
+                                controller: nameController,
+                                label: 'Session Name *',
+                                hint: 'e.g. Session 2025-2026',
+                              ),
+                            ),
+                            AppSpacing.hMd,
+                            Expanded(
+                              child: AppTextField(
+                                controller: codeController,
+                                label: 'Code',
+                                hint: 'e.g. AY-2025-26',
+                              ),
+                            ),
                           ],
-                          rows: filtered.map((session) {
-                            final name = session['sessionName'] as String;
-                            final sYear = session['startYear'] as String;
-                            final eYear = session['endYear'] as String;
-                            final sDate = session['startDate'] as String;
-                            final status = session['status'] as String;
+                        ),
+                        AppSpacing.vLg,
 
-                            Color statusColor;
-                            if (status == 'active') {
-                              statusColor = AppColors.success;
-                            } else if (status == 'upcoming') {
-                              statusColor = AppColors.info;
-                            } else {
-                              statusColor = isDark ? AppColors.textMutedDark : AppColors.textMutedLight;
-                            }
-
-                            return DataRow(
-                              cells: [
-                                DataCell(Text(name, style: AppTypography.bodySmall.copyWith(fontWeight: FontWeight.w700))),
-                                DataCell(Text('$sYear - $eYear', style: AppTypography.bodySmall.copyWith(fontFamily: 'monospace'))),
-                                DataCell(Text(sDate, style: AppTypography.bodySmall)),
-                                DataCell(
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                                    decoration: BoxDecoration(
-                                      color: statusColor.withAlpha(20),
-                                      borderRadius: AppRadius.sm,
-                                      border: Border.all(color: statusColor.withAlpha(60)),
-                                    ),
-                                    child: Text(
-                                      status.toUpperCase(),
-                                      style: AppTypography.bodySmall.copyWith(fontSize: 10, fontWeight: FontWeight.w700, color: statusColor),
-                                    ),
-                                  ),
+                        // Years
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                controller: startYearController,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  labelText: 'Start Year *',
+                                  hintText: '2025',
+                                  isDense: true,
+                                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                                  border: OutlineInputBorder(borderRadius: AppRadius.sm),
                                 ),
-                                DataCell(
-                                  PopupMenuButton<String>(
-                                    icon: Icon(Icons.more_vert_rounded, size: 18, color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight),
-                                    onSelected: (val) {
-                                      if (val == 'edit') {
-                                        _openSessionDialog(session: session);
-                                      } else if (val == 'delete') {
-                                        setState(() => _sessions.remove(session));
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text('Removed ${session['sessionName']}.'), backgroundColor: AppColors.error),
-                                        );
+                                onChanged: (_) => updateSessionName(),
+                              ),
+                            ),
+                            AppSpacing.hMd,
+                            Expanded(
+                              child: TextField(
+                                controller: endYearController,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  labelText: 'End Year *',
+                                  hintText: '2026',
+                                  isDense: true,
+                                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                                  border: OutlineInputBorder(borderRadius: AppRadius.sm),
+                                ),
+                                onChanged: (_) => updateSessionName(),
+                              ),
+                            ),
+                          ],
+                        ),
+                        AppSpacing.vLg,
+
+                        // Dates Pickers
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Start Date *',
+                                    style: AppTypography.labelSmall.copyWith(fontWeight: FontWeight.w600),
+                                  ),
+                                  AppSpacing.vXs,
+                                  InkWell(
+                                    onTap: () async {
+                                      final picked = await showDatePicker(
+                                        context: context,
+                                        initialDate: startDateState.value,
+                                        firstDate: DateTime(2000),
+                                        lastDate: DateTime(2100),
+                                      );
+                                      if (picked != null) {
+                                        startDateState.value = picked;
                                       }
                                     },
-                                    itemBuilder: (ctx) => [
-                                      const PopupMenuItem(
-                                        value: 'edit',
-                                        child: Row(
-                                          children: [
-                                            Icon(Icons.edit_outlined, size: 16),
-                                            SizedBox(width: 8),
-                                            Text('Edit Session'),
-                                          ],
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: isDark ? AppColors.borderDark : AppColors.borderLight,
                                         ),
+                                        borderRadius: AppRadius.sm,
                                       ),
-                                      const PopupMenuItem(
-                                        value: 'delete',
-                                        child: Row(
-                                          children: [
-                                            Icon(Icons.delete_outline_rounded, size: 16, color: AppColors.error),
-                                            SizedBox(width: 8),
-                                            Text('Delete', style: TextStyle(color: AppColors.error)),
-                                          ],
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            startDateState.value.toLocal().toString().split(' ')[0],
+                                            style: AppTypography.bodySmall,
+                                          ),
+                                          const Icon(Icons.calendar_today_rounded, size: 16),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            AppSpacing.hMd,
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'End Date *',
+                                    style: AppTypography.labelSmall.copyWith(fontWeight: FontWeight.w600),
+                                  ),
+                                  AppSpacing.vXs,
+                                  InkWell(
+                                    onTap: () async {
+                                      final picked = await showDatePicker(
+                                        context: context,
+                                        initialDate: endDateState.value,
+                                        firstDate: DateTime(2000),
+                                        lastDate: DateTime(2100),
+                                      );
+                                      if (picked != null) {
+                                        endDateState.value = picked;
+                                      }
+                                    },
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: isDark ? AppColors.borderDark : AppColors.borderLight,
                                         ),
+                                        borderRadius: AppRadius.sm,
                                       ),
-                                    ],
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            endDateState.value.toLocal().toString().split(' ')[0],
+                                            style: AppTypography.bodySmall,
+                                          ),
+                                          const Icon(Icons.calendar_today_rounded, size: 16),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        AppSpacing.vLg,
+
+                        // Description
+                        AppTextField(
+                          controller: descController,
+                          label: 'Description',
+                          hint: 'Optional notes or guidelines for this academic session...',
+                          maxLines: 3,
+                        ),
+                        AppSpacing.vLg,
+
+                        // Make Current Toggle
+                        SwitchListTile(
+                          contentPadding: EdgeInsets.zero,
+                          title: Text(
+                            'Set as Active Session Immediately',
+                            style: AppTypography.titleSmall.copyWith(fontWeight: FontWeight.w600),
+                          ),
+                          subtitle: Text(
+                            'If enabled, this session will become the active session for mapped branches.',
+                            style: AppTypography.bodySmall.copyWith(
+                              color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                            ),
+                          ),
+                          value: isCurrentForBranches.value,
+                          onChanged: (val) => isCurrentForBranches.value = val,
+                        ),
+                        AppSpacing.vXl,
+
+                        // Submit Buttons
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            AppButton(
+                              text: 'Cancel',
+                              variant: AppButtonVariant.secondary,
+                              onPressed: () => context.goNamed(RouteNames.sessionAll),
+                            ),
+                            AppSpacing.hMd,
+                            AppButton(
+                              text: 'Create Session',
+                              icon: Icons.check_circle_outline_rounded,
+                              isLoading: createMutation.isLoading,
+                              onPressed: submitForm,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                if (!isMobile) AppSpacing.hLg,
+
+                // Right Column: Recent Sessions Preview
+                Expanded(
+                  flex: isMobile ? 0 : 2,
+                  child: AppCard(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Existing Sessions',
+                              style: AppTypography.titleMedium.copyWith(fontWeight: FontWeight.w700),
+                            ),
+                            TextButton(
+                              onPressed: () => context.goNamed(RouteNames.sessionAll),
+                              child: const Text('View All'),
+                            ),
+                          ],
+                        ),
+                        AppSpacing.vMd,
+                        if (sessionsQuery.isLoading)
+                          const Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(AppSpacing.lg),
+                              child: CircularProgressIndicator(),
+                            ),
+                          )
+                        else if (recentSessions.isEmpty)
+                          const Padding(
+                            padding: EdgeInsets.all(AppSpacing.md),
+                            child: NoDataFoundTemplate(
+                              title: 'No Sessions Configured',
+                              message: 'This will be the first academic session in the organization.',
+                              cardWrapper: false,
+                            ),
+                          )
+                        else
+                          ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: recentSessions.length,
+                            separatorBuilder: (_, _) => Divider(
+                              height: 1,
+                              color: isDark ? AppColors.borderDark : AppColors.borderLight,
+                            ),
+                            itemBuilder: (ctx, i) {
+                              final s = recentSessions[i];
+                              final isCurrent = s.branchMappings.any((m) => m.isCurrent);
+
+                              return ListTile(
+                                dense: true,
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+                                leading: Icon(
+                                  isCurrent ? Icons.check_circle : Icons.calendar_today_outlined,
+                                  color: isCurrent ? AppColors.success : AppColors.primary,
+                                  size: 18,
+                                ),
+                                title: Text(s.name, style: AppTypography.bodySmall.copyWith(fontWeight: FontWeight.w700)),
+                                subtitle: Text(
+                                  '${s.startYear} - ${s.endYear}  •  ${s.branchMappings.length} branch(es)',
+                                  style: AppTypography.labelSmall.copyWith(
+                                    color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
                                   ),
                                 ),
-                              ],
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    );
-                  },
+                              );
+                            },
+                          ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildHeader(bool isDark, bool isMobile) {
-    final headerTexts = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            InkWell(
-              onTap: () => context.go(RouteNames.sessionAllPath),
-              child: Text(
-                'Session Year',
-                style: AppTypography.bodySmall.copyWith(
-                  color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6),
-              child: Text(
-                '/',
-                style: AppTypography.bodySmall.copyWith(
-                  color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
-                ),
-              ),
-            ),
-            Text(
-              'Add & Manage',
-              style: AppTypography.bodySmall.copyWith(
-                color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
           ],
-        ),
-        AppSpacing.vSm,
-        Text(
-          'Session Management',
-          style: AppTypography.headlineMedium.copyWith(
-            fontWeight: FontWeight.w800,
-            color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
-          ),
-        ),
-        AppSpacing.vXs,
-        Text(
-          'Create and manage academic session years',
-          style: AppTypography.bodyMedium.copyWith(
-            color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
-          ),
-        ),
-      ],
-    );
-
-    final actionBtn = AppButton(
-      text: 'New Session Year',
-      icon: Icons.add_rounded,
-      onPressed: () => _openSessionDialog(),
-      height: 38,
-    );
-
-    if (isMobile) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          headerTexts,
-          AppSpacing.vMd,
-          actionBtn,
-        ],
-      );
-    }
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        Expanded(child: headerTexts),
-        actionBtn,
-      ],
-    );
-  }
-
-  DataColumn _buildDataColumn(String title, bool isDark) {
-    return DataColumn(
-      label: Text(
-        title,
-        style: AppTypography.labelMedium.copyWith(
-          fontSize: 10.5,
-          fontWeight: FontWeight.w700,
-          letterSpacing: 0.5,
-          color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
         ),
       ),
     );

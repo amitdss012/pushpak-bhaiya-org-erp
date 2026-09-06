@@ -27,15 +27,59 @@ model Branch {
   code            String?                                 // internal branch code (e.g., "BR-001")
   email           String?
   phone           String?
+  altPhone        String?
+  whatsapp        String?
+
+  /* Branding & Media */
+  logo            String?                                 // Cloudinary / Cloud Storage asset URL
+
+  /* Classification & Institute Info */
+  branchType      String?      @default("main")           // "main", "sub", "franchise"
+  instituteType   String?      @default("computer")       // "computer", "typing", "paramedical", "other"
+  establishedYear String?
+  website         String?
+  description     String?      @db.Text
 
   /* Address */
   address         String?
   city            String?
+  district        String?
+  block           String?
   state           String?
-  country         String?      @default("IN") @db.VarChar(2)
+  country         String?      @default("IN") @db.VarChar(10)
   pincode         String?      @db.VarChar(10)
+  latitude        Float?
+  longitude       Float?
+
+  /* Director Info */
+  directorName       String?
+  directorGender     String?
+  directorDob        DateTime?    @db.Date
+  directorBloodGroup String?
+
+  /* Space & Facilities */
+  numComputers    Int?         @default(0)
+  numFaculty      Int?         @default(0)
+  numRooms        Int?         @default(0)
+  numFees         Decimal?     @db.Decimal(12, 2)
+
+  /* Validity & Registration Dates */
+  registrationDate DateTime?   @db.Date
+  validDate        DateTime?   @db.Date
+  expiryDate       DateTime?   @db.Date
+  renewalDate      DateTime?   @db.Date
+  referralCode     String?
+
+  /* Settings & Switches */
+  onlineEnrollment   Boolean   @default(true)
+  smsNotifications   Boolean   @default(false)
+  emailNotifications Boolean   @default(true)
 
   status          BranchStatus @default(ACTIVE)
+
+  /* Creator Audit */
+  createdById     String?      @db.Uuid
+  createdBy       User?        @relation("BranchCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
 
   /* Timestamps */
   createdAt       DateTime     @default(now())
@@ -44,15 +88,17 @@ model Branch {
 
   /* Relations */
   organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  users           User[]
+  users           User[]       @relation("BranchUsers")
   roles           Role[]
   auditLogs       AuditLog[]
   students        Student[]
   teachers        Teacher[]
   parents         Parent[]
+  sessionMappings BranchAcademicSession[]
 
   @@unique([organizationId, slug])                        // slug unique per org
   @@index([organizationId])
+  @@index([createdById])
   @@index([status])
   @@index([deletedAt])
   @@map("branches")

@@ -98,10 +98,15 @@ model User {
 
   /* Relations */
   organization    Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  branch          Branch?        @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  branch          Branch?        @relation("BranchUsers", fields: [branchId], references: [id], onDelete: Cascade)
   userRoles       UserRole[]
   refreshTokens   RefreshToken[]
   auditLogs       AuditLog[]
+
+  /* Branches & Sessions Created */
+  createdBranches        Branch[]                @relation("BranchCreatedBy")
+  createdSessions        AcademicSession[]       @relation("SessionCreatedBy")
+  createdBranchSessions  BranchAcademicSession[] @relation("BranchSessionCreatedBy")
 
   /* Persona Profiles */
   student         Student?
