@@ -15,6 +15,7 @@ import '../../../../../../core/extensions/context_extensions.dart';
 import '../../../../../../shared/widgets/app_button.dart';
 import '../../../../../../shared/widgets/app_card.dart';
 import '../../../../../../shared/widgets/app_text_field.dart';
+import '../../../../../../shared/widgets/upload_progress_overlay.dart';
 
 class CreateBranchScreen extends StatefulWidget {
   const CreateBranchScreen({super.key});
@@ -32,7 +33,14 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
   final Map<String, CompressedImageResult> _uploadedDocuments = {};
   bool _isSubmitting = false;
 
+  // Fullscreen Upload / Processing Overlay State
+  bool _isOverlayVisible = false;
+  double? _overlayProgress;
+  String _overlayTitle = 'Uploading Image';
+  String _overlayStatus = 'Compressing image under 100 KB...';
+
   // 1. Branch Info
+  final _scrollController = ScrollController();
   final _branchNameController = TextEditingController();
   final _branchCodeController = TextEditingController();
   String? _branchType = 'main';
@@ -123,6 +131,7 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
     _adminPasswordController.dispose();
     _adminEmailController.dispose();
     _adminPhoneController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -141,7 +150,18 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
 
   Future<void> _pickLogo() async {
     try {
-      final result = await ImagePickerHelper.pickAndCompressImage();
+      final result = await ImagePickerHelper.pickAndCompressImage(
+        onProgress: (progress, status) {
+          if (mounted) {
+            setState(() {
+              _isOverlayVisible = progress < 1.0;
+              _overlayTitle = 'Optimizing Branch Logo';
+              _overlayProgress = progress;
+              _overlayStatus = status;
+            });
+          }
+        },
+      );
       if (result != null) {
         setState(() {
           _logoBytes = result.bytes;
@@ -167,12 +187,30 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
           ),
         );
       }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isOverlayVisible = false;
+          _overlayProgress = null;
+        });
+      }
     }
   }
 
   Future<void> _pickDocument(String label) async {
     try {
-      final result = await ImagePickerHelper.pickAndCompressImage();
+      final result = await ImagePickerHelper.pickAndCompressImage(
+        onProgress: (progress, status) {
+          if (mounted) {
+            setState(() {
+              _isOverlayVisible = progress < 1.0;
+              _overlayTitle = 'Optimizing $label';
+              _overlayProgress = progress;
+              _overlayStatus = status;
+            });
+          }
+        },
+      );
       if (result != null) {
         setState(() {
           _uploadedDocuments[label] = result;
@@ -196,6 +234,13 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
           ),
         );
       }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isOverlayVisible = false;
+          _overlayProgress = null;
+        });
+      }
     }
   }
 
@@ -211,7 +256,13 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
       return;
     }
 
-    setState(() => _isSubmitting = true);
+    setState(() {
+      _isSubmitting = true;
+      _isOverlayVisible = true;
+      _overlayTitle = _logoBytes != null ? 'Creating Branch & Uploading Logo' : 'Creating Branch';
+      _overlayProgress = 0.05;
+      _overlayStatus = 'Uploading data to server...';
+    });
     try {
       final req = CreateBranchRequest(
         name: _branchNameController.text.trim(),
@@ -262,6 +313,14 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
         req,
         logoBytes: _logoBytes,
         logoFileName: _logoFileName,
+        onSendProgress: (sent, total) {
+          if (total > 0 && mounted) {
+            setState(() {
+              _overlayProgress = (sent / total).clamp(0.0, 1.0);
+              _overlayStatus = 'Uploading: ${((sent / total) * 100).toInt()}% (${(sent / 1024).toStringAsFixed(0)} / ${(total / 1024).toStringAsFixed(0)} KB)';
+            });
+          }
+        },
       );
 
       if (mounted) {
@@ -285,7 +344,13 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
         );
       }
     } finally {
-      if (mounted) setState(() => _isSubmitting = false);
+      if (mounted) {
+        setState(() {
+          _isSubmitting = false;
+          _isOverlayVisible = false;
+          _overlayProgress = null;
+        });
+      }
     }
   }
 
@@ -295,12 +360,19 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
     final isDesktop = context.isDesktop || context.isUltraWide;
     final isMobile = context.isMobile;
 
-    return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 16 : 28,
-        vertical: 24,
-      ),
-      child: Form(
+    return UploadProgressOverlay(
+      isVisible: _isOverlayVisible,
+      progress: _overlayProgress,
+      title: _overlayTitle,
+      status: _overlayStatus,
+      child: SingleChildScrollView(
+        controller: _scrollController,
+        physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+        padding: EdgeInsets.symmetric(
+          horizontal: isMobile ? 16 : 28,
+          vertical: 24,
+        ),
+        child: Form(
         key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -399,7 +471,7 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
           ],
         ),
       ),
-    );
+    ));
   }
 
   Widget _buildPageHeader(bool isDark) {
@@ -1099,6 +1171,10 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
                           width: 96,
                           height: 96,
                           fit: BoxFit.cover,
+                          cacheWidth: 192,
+                          cacheHeight: 192,
+                          gaplessPlayback: true,
+                          filterQuality: FilterQuality.low,
                         ),
                       ),
                       AppSpacing.vSm,
@@ -1166,7 +1242,7 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
                       ),
                       AppSpacing.vXs,
                       Text(
-                        'PNG, JPG up to 5MB',
+                        'PNG, JPG up to 5MB (auto-compressed <100KB)',
                         style: AppTypography.bodySmall.copyWith(
                           fontSize: 10.5,
                           color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
@@ -1349,6 +1425,10 @@ class _CreateBranchScreenState extends State<CreateBranchScreen> {
                         width: 56,
                         height: 56,
                         fit: BoxFit.cover,
+                        cacheWidth: 112,
+                        cacheHeight: 112,
+                        gaplessPlayback: true,
+                        filterQuality: FilterQuality.low,
                       ),
                     ),
                     AppSpacing.vXs,

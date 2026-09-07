@@ -39,24 +39,9 @@ class _AppCardState extends State<AppCard> {
         ? AppColors.borderDark
         : AppColors.borderLight;
 
-    return MouseRegion(
-      onEnter: widget.enableHover
-          ? (_) => setState(() => _isHovered = true)
-          : null,
-      onExit: widget.enableHover
-          ? (_) => setState(() => _isHovered = false)
-          : null,
-      cursor: widget.onTap != null
-          ? SystemMouseCursors.click
-          : SystemMouseCursors.basic,
-      child: GestureDetector(
-        onTap: widget.onTap,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          curve: Curves.easeOut,
-          transform: _isHovered
-              ? Matrix4.translationValues(0, -4, 0)
-              : Matrix4.identity(),
+    if (!widget.enableHover && widget.onTap == null) {
+      return RepaintBoundary(
+        child: Container(
           padding: widget.padding,
           decoration: BoxDecoration(
             color: widget.color ?? defaultBg,
@@ -64,23 +49,82 @@ class _AppCardState extends State<AppCard> {
             border: Border.fromBorderSide(
               widget.borderSide ??
                   BorderSide(
-                    color: _isHovered
-                        ? AppColors.primary.withAlpha(150)
-                        : defaultBorderColor,
+                    color: defaultBorderColor,
                     width: 1,
                   ),
             ),
-            boxShadow: _isHovered
-                ? [
-                    BoxShadow(
-                      color: AppColors.primary.withAlpha(20),
-                      blurRadius: 20,
-                      offset: const Offset(0, 8),
-                    ),
-                  ]
-                : null,
           ),
           child: widget.child,
+        ),
+      );
+    }
+
+    if (!widget.enableHover && widget.onTap != null) {
+      return RepaintBoundary(
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: widget.onTap,
+            child: Container(
+              padding: widget.padding,
+              decoration: BoxDecoration(
+                color: widget.color ?? defaultBg,
+                borderRadius: AppRadius.md,
+                border: Border.fromBorderSide(
+                  widget.borderSide ??
+                      BorderSide(
+                        color: defaultBorderColor,
+                        width: 1,
+                      ),
+                ),
+              ),
+              child: widget.child,
+            ),
+          ),
+        ),
+      );
+    }
+
+    return RepaintBoundary(
+      child: MouseRegion(
+        onEnter: (_) => setState(() => _isHovered = true),
+        onExit: (_) => setState(() => _isHovered = false),
+        cursor: widget.onTap != null
+            ? SystemMouseCursors.click
+            : SystemMouseCursors.basic,
+        child: GestureDetector(
+          onTap: widget.onTap,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 150),
+            curve: Curves.easeOut,
+            transform: _isHovered
+                ? Matrix4.translationValues(0, -3, 0)
+                : Matrix4.identity(),
+            padding: widget.padding,
+            decoration: BoxDecoration(
+              color: widget.color ?? defaultBg,
+              borderRadius: AppRadius.md,
+              border: Border.fromBorderSide(
+                widget.borderSide ??
+                    BorderSide(
+                      color: _isHovered
+                          ? AppColors.primary.withAlpha(150)
+                          : defaultBorderColor,
+                      width: 1,
+                    ),
+              ),
+              boxShadow: _isHovered
+                  ? [
+                      BoxShadow(
+                        color: AppColors.primary.withAlpha(20),
+                        blurRadius: 16,
+                        offset: const Offset(0, 6),
+                      ),
+                    ]
+                  : null,
+            ),
+            child: widget.child,
+          ),
         ),
       ),
     );

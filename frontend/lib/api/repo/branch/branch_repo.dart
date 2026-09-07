@@ -11,6 +11,7 @@ class BranchRepo {
     CreateBranchRequest request, {
     List<int>? logoBytes,
     String? logoFileName,
+    ProgressCallback? onSendProgress,
   }) async {
     dynamic postData;
 
@@ -28,6 +29,7 @@ class BranchRepo {
     final response = await ApiClient().post<Map<String, dynamic>>(
       '/branch',
       data: postData,
+      onSendProgress: onSendProgress,
     );
 
     final rawData = response.data?['data'] as Map<String, dynamic>? ?? {};

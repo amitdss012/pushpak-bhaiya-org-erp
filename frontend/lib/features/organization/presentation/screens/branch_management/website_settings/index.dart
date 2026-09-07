@@ -12,6 +12,7 @@ import '../../../../../../core/extensions/context_extensions.dart';
 import '../../../../../../shared/widgets/app_button.dart';
 import '../../../../../../shared/widgets/app_card.dart';
 import '../../../../../../shared/widgets/app_text_field.dart';
+import '../../../../../../shared/widgets/upload_progress_overlay.dart';
 
 class BranchWebsiteSettingsScreen extends StatefulWidget {
   const BranchWebsiteSettingsScreen({super.key});
@@ -23,6 +24,12 @@ class BranchWebsiteSettingsScreen extends StatefulWidget {
 class _BranchWebsiteSettingsScreenState extends State<BranchWebsiteSettingsScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final Map<String, CompressedImageResult> _uploadedFiles = {};
+
+  // Fullscreen Upload / Processing Overlay State
+  bool _isOverlayVisible = false;
+  double? _overlayProgress;
+  String _overlayTitle = 'Uploading Image';
+  String _overlayStatus = 'Compressing image under 100 KB...';
 
   // General Tab Controllers
   final _siteNameController = TextEditingController(text: 'ABC School - Main Campus');
@@ -107,17 +114,22 @@ class _BranchWebsiteSettingsScreenState extends State<BranchWebsiteSettingsScree
     final isDark = context.isDarkMode;
     final isMobile = context.isMobile;
 
-    return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 16 : 28,
-        vertical: 24,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // Header
-          _buildHeader(isDark, isMobile),
-          AppSpacing.vXl,
+    return UploadProgressOverlay(
+      isVisible: _isOverlayVisible,
+      progress: _overlayProgress,
+      title: _overlayTitle,
+      status: _overlayStatus,
+      child: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(
+          horizontal: isMobile ? 16 : 28,
+          vertical: 24,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Header
+            _buildHeader(isDark, isMobile),
+            AppSpacing.vXl,
 
           // Tab Bar
           ConstrainedBox(
@@ -185,7 +197,7 @@ class _BranchWebsiteSettingsScreenState extends State<BranchWebsiteSettingsScree
           ),
         ],
       ),
-    );
+    ));
   }
 
   // 1. General Tab
@@ -614,7 +626,18 @@ class _BranchWebsiteSettingsScreenState extends State<BranchWebsiteSettingsScree
 
   Future<void> _pickFile(String label) async {
     try {
-      final result = await ImagePickerHelper.pickAndCompressImage();
+      final result = await ImagePickerHelper.pickAndCompressImage(
+        onProgress: (progress, status) {
+          if (mounted) {
+            setState(() {
+              _isOverlayVisible = progress < 1.0;
+              _overlayTitle = 'Optimizing $label';
+              _overlayProgress = progress;
+              _overlayStatus = status;
+            });
+          }
+        },
+      );
       if (result != null) {
         setState(() {
           _uploadedFiles[label] = result;
@@ -637,6 +660,13 @@ class _BranchWebsiteSettingsScreenState extends State<BranchWebsiteSettingsScree
             backgroundColor: AppColors.error,
           ),
         );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isOverlayVisible = false;
+          _overlayProgress = null;
+        });
       }
     }
   }
