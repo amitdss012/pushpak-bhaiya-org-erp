@@ -125,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               AppSpacing.hXs,
                               Text(
-                                'Enterprise Multi-Branch SaaS',
+                                'Enterprise Multi-Branch SaaS Platform',
                                 style: AppTypography.labelMedium.copyWith(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600,
